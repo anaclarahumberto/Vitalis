@@ -1,7 +1,0 @@
-version: '3.8'
-services:
-  web:
-    container_name: vitalis.cachoeiro.es
-    build: .
-    ports:
-      - "8202:8000"
