@@ -1,0 +1,58 @@
+{% extends "pages/base.html" %}
+{% block subtitulo %}Configuração{% endblock %}
+{% block conteudo %}
+
+
+<link rel="stylesheet" href="/static/css/estilo_configuracao.css">
+<body class="d-flex flex-column min-vh-100">
+    <div class="container">
+        <div class="row">
+            <main class="col-9 min-vh-100">
+                <div class="main-container">
+                    <img src="/static/img/vitalette.jpeg" alt="Mascote Vitalis" class="mascote">
+                    <h1 class="main-title">Configurações de sua conta</h1>
+                    <h2 class="main-subtitle">Gerencie suas experiências e configurações da sua conta</h2>
+                    <hr>
+                    <br>
+                    <h3 class="list-title">Sua experiência com a Vitalis</h3>
+                    <ul>
+                        <li>
+                            <i class="bi bi-card-checklist"></i>
+                            Feedback
+                        </li>
+                        <li>
+                            <i class="bi bi-megaphone-fill"></i>
+                            Anúncios
+                        </li>
+                        <li>
+                            <a class="text-black text-decoration-none my-2" href="/configuracoes/tempogasto">
+                            <i class="bi bi-clock "></i>
+                            Tempo gasto </a>
+            
+                        </li>
+                    </ul>
+                    <br>
+                    <hr>
+                    <h3 class="list-title">Perfil</h3>
+                    <ul>
+                        <li>
+                            <i class="bi bi-person-fill-gear"></i>
+                            Editar perfil
+                        </li>
+                        <li>
+                            <a class="text-black text-decoration-none my-2" href="/configuracoes/arquivados">
+                            <i class="bi bi-archive-fill"></i>
+                            Arquivados</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-eye-slash-fill"></i>
+                            Interações
+                        </li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+{% endblock %}

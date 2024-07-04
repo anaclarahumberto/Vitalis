@@ -1,0 +1,69 @@
+{% extends "pages/base.html" %}
+{% block subtitulo %}Tempo Gasto{% endblock %}
+{% block conteudo %}
+
+
+
+<link rel="stylesheet" href="/static/css/estilo_tempo_gasto.css">
+
+    
+
+
+    <div class="container">
+        <div class="row">
+            <main class="col-9 min-vh-100">
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="experiencia-vitalis">
+                                <i class="bi bi-caret-left-fill"></i> Sua experiência com a Vitalis
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1 class="titulo-grafico">Seu tempo gasto</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="grafico-barra">
+                                <div class="barra" style="height: 40%;" title="Seg">
+                                    <div class="barra-horas">6h31min</div>
+                                </div>
+                                <div class="barra" style="height: 62%;" title="Ter">
+                                    <div class="barra-horas">8h4min</div>
+                                </div>
+                                <div class="barra barra-maior" style="height: 90%;" title="Qua">
+                                    <div class="barra-horas">9h</div>
+                                </div>
+                                <div class="barra" style="height: 50%;" title="Qui">
+                                    <div class="barra-horas">7h30min</div>
+                                </div>
+                                <div class="barra" style="height: 70%;" title="Sex">
+                                    <div class="barra-horas">8h45min</div>
+                                </div>
+                                <div class="barra" style="height: 30%;" title="Sab">
+                                    <div class="barra-horas">6h</div>
+                                </div>
+                                <div class="barra" style="height: 20%;" title="Dom">
+                                    <div class="barra-horas">5h15min</div>
+                                </div>
+                            </div>
+                            <div class="barra-texto">
+                                <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sab</span><span>Dom</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <h4 class="modo-silencioso"><b>Modo Silencioso<i class="bi bi-caret-down-fill"></b></i></h4>
+                            <p class="modo-silencioso">Silencie notificações e responda automaticamente a mensagem quando precisar.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.js"></script>
+
+{% endblock %}

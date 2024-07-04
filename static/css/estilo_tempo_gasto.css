@@ -1,0 +1,75 @@
+.cor-menu {
+    background-color: #6B98BF !important;
+}
+
+.grafico-barra {
+    display: flex;
+    align-items: flex-end;
+    height: 400px; /* Altura do gráfico */
+    margin-top: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* Para posicionar o horário sobre a barra */
+}
+
+.barra {
+    flex: 1;
+    background-color: #98D5C1;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-right: 6px; /* Espaçamento entre as barras */
+    border-radius: 4px; /* Afinar as bordas das barras */
+}
+
+.barra-maior {
+    background-color: #148D81;
+}
+
+.barra-texto {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.barra-texto span {
+    width: 14.28%; /* Largura dividida igualmente para cada dia da semana */
+    text-align: center;
+}
+
+.barra-horas {
+    position: absolute;
+    bottom: calc(100% + 5px); /* Posição acima da barra */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #555;
+}
+
+.titulo-grafico {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.modo-silencioso {
+    color: #555;
+    margin-top: 20px;
+}
+
+.experiencia-vitalis {
+    color: #ccc;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.experiencia-vitalis i {
+    color: #ccc; /* Cor do ícone */
+    font-size: 1.2em; /* Tamanho proporcional ao texto */
+    margin-right: 5px;
+}

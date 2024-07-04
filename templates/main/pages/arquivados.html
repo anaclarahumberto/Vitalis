@@ -1,0 +1,49 @@
+{% extends "pages/base.html" %}
+{% block subtitulo %}Arquivados{% endblock %}
+{% block conteudo %}
+<link rel="stylesheet" href="/static/css/estilo_arquivados.css">
+
+<link rel="stylesheet" href="/static/css/estilos.css">
+
+
+    <div class="container">
+        <div class="row">
+            <main class="col-9 min-vh-100">
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="experiencia-vitalis">
+                                <i class="bi bi-caret-left-fill"></i> Sua experiência com a Vitalis
+                            </div>
+                            <h1 class="titulo-arquivados">Arquivados</h1><br><br>
+                            <div class="linha-colorida">
+                                <span class="publicacoes">Publicações</span>
+                                <span class="dailys">Dailys</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col">
+                            <div class="fileira-imagens">
+                                <img src="/static/img/gravida 1.jpg" alt="Imagem 1" class="imagem">
+                                <img src="/static/img/gravida2.jpg" alt="Imagem 2" class="imagem">
+                                <img src="/static/img/gravida3.png" alt="Imagem 3" class="imagem">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="fileira-imagens">
+                                <img src="/static/img/gravida4.jpg" alt="Imagem 4" class="imagem">
+                                <img src="/static/img/gravida5.png" alt="Imagem 5" class="imagem">
+                                <img src="/static/img/gravida6.jpg" alt="Imagem 6" class="imagem">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Arquivo JavaScript -->
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.js"></script>
+{% endblock %}
