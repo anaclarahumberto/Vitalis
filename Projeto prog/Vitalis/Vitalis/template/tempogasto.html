@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block subtitulo %}Tempo Gasto{% endblock %}
+{% block conteudo %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/css/estilo_tempo_gasto.css">
+    <link rel="stylesheet" href="estilo_tempo_gasto.css"> <!-- Adicionando o arquivo CSS externo -->
+    <title>Vitalis :: Seu tempo gasto</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <div class="container">
+        <div class="row">
+            <header class="col-3 cor-menu pe-0">
+                <div class="row">
+                    <div class="d-inline-block col-10 min-vh-100">
+                        <nav class="d-flex flex-column ps-2 min-vh-100">
+                            <a href="/" class="text-decoration-none">
+                                <img src="/static/img/logo.svg" alt="Logo" class="w-100">
+                            </a>
+                            <a class="text-white text-decoration-none my-2" href="/">
+                                <i class="bi bi-house fs-5"></i>
+                                Página Inicial</a>
+                            <a class="text-white text-decoration-none my-2" href="/perfil">
+                                <i class="bi bi-person fs-5"></i>
+                                Perfil</a>
+                            <a class="text-white text-decoration-none my-2" href="/mensagens">
+                                <i class="bi bi-envelope fs-5"></i>
+                                Mensagens</a>
+                            <a class="text-white text-decoration-none my-2" href="/notificacoes">
+                                <i class="bi bi-bell fs-5"></i>
+                                Notificações</a>
+                            <a class="text-white text-decoration-none my-2" href="/cupons">
+                                <i class="bi bi-tag fs-5"></i>
+                                Cupons</a>
+                            <a class="text-white text-decoration-none my-2" href="/nova_publicacao">
+                                <i class="bi bi-plus-circle fs-5"></i>
+                                Nova Publicação</a>
+                            <a class="text-white text-decoration-none my-2" href="/configuracoes">
+                                <i class="bi bi-gear fs-5"></i>
+                                Configurações</a>
+                            <a class="text-white text-decoration-none my-2 self-end" href="/configuracoes">
+                                <i class="bi bi-text-left fs-5"></i>
+                                Atividades</a>
+                        </nav>
+                    </div>
+                    <div class="d-inline-block col-2">
+                        <div class="row">
+                            <div class="col-6 min-vh-100 bg-black bg-opacity-10 rounded-5 rounded-end-0"></div>
+                            <div class="col-6 min-vh-100 bg-black bg-opacity-10 p-0">
+                                <div class="min-vh-100 bg-white rounded-5 rounded-end-0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="col-9 min-vh-100">
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="experiencia-vitalis">
+                                <i class="bi bi-caret-left-fill"></i> Sua experiência com a Vitalis
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1 class="titulo-grafico">Seu tempo gasto</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="grafico-barra">
+                                <div class="barra" style="height: 40%;" title="Seg">
+                                    <div class="barra-horas">6h31min</div>
+                                </div>
+                                <div class="barra" style="height: 62%;" title="Ter">
+                                    <div class="barra-horas">8h4min</div>
+                                </div>
+                                <div class="barra barra-maior" style="height: 90%;" title="Qua">
+                                    <div class="barra-horas">9h</div>
+                                </div>
+                                <div class="barra" style="height: 50%;" title="Qui">
+                                    <div class="barra-horas">7h30min</div>
+                                </div>
+                                <div class="barra" style="height: 70%;" title="Sex">
+                                    <div class="barra-horas">8h45min</div>
+                                </div>
+                                <div class="barra" style="height: 30%;" title="Sab">
+                                    <div class="barra-horas">6h</div>
+                                </div>
+                                <div class="barra" style="height: 20%;" title="Dom">
+                                    <div class="barra-horas">5h15min</div>
+                                </div>
+                            </div>
+                            <div class="barra-texto">
+                                <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sab</span><span>Dom</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <h4 class="modo-silencioso"><b>Modo Silencioso<i class="bi bi-caret-down-fill"></b></i></h4>
+                            <p class="modo-silencioso">Silencie notificações e responda automaticamente a mensagem quando precisar.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>
+{% endblock %}
