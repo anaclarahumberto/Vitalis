@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block subtitulo %}Notificação{% endblock %}
+{% block conteudo %}
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/css/estilos.css">
+    <link rel="stylesheet" href="/static/css/estilo.css">
+    <title>Vitalis :: Notificações</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <div class="container">
+        <div class="row">
+            <header class="col-3 cor-menu pe-0">
+                <div class="row">
+                    <div class="d-inline-block col-10 min-vh-100">
+                        <nav class="d-flex flex-column ps-2 min-vh-100">
+                            <a href="/" class="text-decoration-none">
+                                <img src="/static/img/logo.svg" alt="Logo" class="w-100">
+                            </a>
+                            <a class="text-white text-decoration-none my-2" href="/">
+                                <i class="bi bi-house fs-5"></i>
+                                Página Inicial</a>
+                            <a class="text-white text-decoration-none my-2" href="/perfil">
+                                <i class="bi bi-person fs-5"></i>
+                                Perfil</a>
+                            <a class="text-white text-decoration-none my-2" href="/mensagens">
+                                <i class="bi bi-envelope fs-5"></i>
+                                Mensagens</a>
+                            <a class="text-white text-decoration-none my-2" href="/notificacoes">
+                                <i class="bi bi-bell fs-5"></i>
+                                Notificações</a>
+                            <a class="text-white text-decoration-none my-2" href="/cupons">
+                                <i class="bi bi-tag fs-5"></i>
+                                Cupons</a>
+                            <a class="text-white text-decoration-none my-2" href="/nova_publicacao">
+                                <i class="bi bi-plus-circle fs-5"></i>
+                                Nova Publicação</a>
+                            <a class="text-white text-decoration-none my-2" href="/configuracoes">
+                                <i class="bi bi-gear fs-5"></i>
+                                Configurações</a>
+                            <a class="text-white text-decoration-none my-2 self-end" href="/configuracoes">
+                                <i class="bi bi-text-left fs-5"></i>
+                                Atividades</a>
+                        </nav>
+                    </div>
+                    <div class="d-inline-block col-2">
+                        <div class="row ">
+                            <div class="col-6 min-vh-100 bg-black bg-opacity-10 rounded-5 rounded-end-0"></div>
+                            <div class="col-6 min-vh-100 bg-black bg-opacity-10 p-0">
+                                <div class="min-vh-100 bg-white rounded-5 rounded-end-0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="col-9 min-vh-100">
+                <div class="container">
+                    <h1>Notificações</h1>
+                </div>
+                <div class="container">
+                    <h3>Hoje</h3>
+                </div>
+                    <div class="container">
+                        <img src="/static/img/dr.gabrielbelmonte.jpg" alt="gabrielbelmonte">
+                        <p><b>dr.gabrielbelmonte</b> <i class="bi bi-patch-plus"></i> curtiu seu Daily.<font color="gray">7 min</font></p>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <img src="/static/img/nutri_geovani.jpg" alt="nutrigeovani">
+                        <p><b>nutri_geovani</b> <i class="bi bi-patch-plus"></i> começou a seguir você.<font color="gray">3 h</font></p>
+                    </div>
+                    <hr>
+                    <h3>Esta semana</h3>
+                    <div class="container">
+                        <img src="/static/img/liviacampos.jpg" alt="liviacampos">
+                        <p><b>liviacampos</b> <i class="bi bi-shield-plus"></i> curtiu sua publicação.<font color="gray">2 d</font></p>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <img src="/static/img/dr.gabrielbelmonte.jpg" alt="gabrielbelmonte">
+                        <p><b>dr.gabrielbelmonte</b> <i class="bi bi-patch-plus"></i> começou a seguir você.<font color="gray">4 d</font></p>
+                    </div>
+                    <hr>
+                    <h3>Este mês</h3>
+                    <div class="container">
+                        <img id="3" src="/static/img/dra.annareis.jpg" alt="annareis">
+                        <p><b>dra.annareis</b> <i class="bi bi-patch-plus"></i> e outras 5 pessoas comentaram na sua publicação.<font color="gray">2 sem</font></p>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <img src="/static/img/andrerodrigues.jpg" alt="andrerodrigues">
+                        <p><b>andrerodrigues</b> <i class="bi bi-patch-plus"></i> começou a seguir você.<font color="gray">3 sem</font></p>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <img src="/static/img/fisiolivia.jpg" alt="fisiolivia">
+                        <p><b>fisioliviaaredes</b> <i class="bi bi-patch-plus"></i> curtiu sua publicação.<font color="gray">3 sem</font></p>
+                    </div>
+            </main>
+        </div>
+    
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+{% endblock %}
