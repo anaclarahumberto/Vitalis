@@ -1,0 +1,131 @@
+{% extends "pages/base.html" %}
+{% block subtitulo %}Perfil{% endblock %}
+{% block conteudo %}
+
+<link rel="stylesheet" href="/static/css/estilo_perfil.css">
+
+<div class="container">
+    <!-- Perfil Header -->
+    <div class="row my-4">
+        <div class="col-md-3 text-center">
+            <img src="/static/img/nath.jpeg" alt="Foto de Perfil" class="profile-img">
+        </div>
+        <div class="col-md-9">
+            <h4>dranathaliacastellani<i class="bi bi-award ms-2 text-primary"></i></h4> <br>
+
+        <div>    
+            <p>Nathália Castellani</p>
+            <p style="color: gray;">Médico(a)</p> 
+            <p>Obstetrícia🩺🤰</p>
+        </div>  
+                
+           
+
+        </div>
+    </div>
+
+    <!-- Destaques -->
+    <div class="row my-4">
+        <div class="col-12">
+            <div class="highlights">
+                <div class="highlight-item text-center">
+                    <a href="#" class="text-decoration-none text-dark">
+                    <img src="/static/img/plus3.jpg" alt="Destaque 1" class="highlight-img" > 
+                    <p>Favoritos</p>
+                    </a>
+                </div>
+                <div class="highlight-item text-center">
+                    <a href="#" class="text-decoration-none text-dark">
+                    <img src="/static/img/bb2.jpeg" alt="Destaque 2" class="highlight-img">
+                    <p>Life</p>
+                    </a>
+                </div>
+                <div class="highlight-item text-center">
+                    <a href="#" class="text-decoration-none text-dark">
+                    <img src="/static/img/formar.jpeg" alt="Destaque 3" class="highlight-img">
+                    <p>Formação</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Publicações, Vídeos e Marcados -->
+    <ul class="nav nav-tabs my-4" id="profileTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true"><i class="bi bi-grid-3x3-gap"></i> Publicações</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="videos-tab" data-bs-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false"><i class="bi bi-play-circle"></i> Vídeos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tagged-tab" data-bs-toggle="tab" href="#tagged" role="tab" aria-controls="tagged" aria-selected="false"><i class="bi bi-person-square"></i> Marcados</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="profileTabContent">
+        <!-- Publicações -->
+        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/ft3.png" alt="Post 1" class="img-fluid" >
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/ft1.png" alt="Post 2" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/ft2.png" alt="Post 3" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vídeos -->
+        <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/vdo2.png" alt="Video 1" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/vdo1.png" alt="Video 2" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/vdo3.png" alt="Video 3" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marcados -->
+        <div class="tab-pane fade" id="tagged" role="tabpanel" aria-labelledby="tagged-tab">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/diabete.png" alt="Tagged 1" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/gestante.png" alt="Tagged 2" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#">
+                    <img src="/static/img/cafe.png" alt="Tagged 3" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

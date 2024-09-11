@@ -1,7 +1,99 @@
 {% extends "pages/base.html" %}
-{% block subtitulo %}Principal{% endblock %}
+{% block subtitulo %}Página Inicial{% endblock %}
 {% block conteudo %}
-<h1>Página Principal</h1>
-<hr>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum mollitia asperiores, ipsum labore at omnis id dolorem, voluptates atque ut modi quisquam quas in veniam iste hic, voluptatum doloremque? Rem fuga dicta molestias aperiam quo sed, at illo pariatur expedita porro nam accusamus, id incidunt ducimus nemo. Minus, a fuga sunt veniam, laborum voluptatem quam quia, dolore hic at mollitia?</p>
+<link rel="stylesheet" href="/static/css/estilo_pagina_inicial.css">
+
+<!-- Conteúdo principal -->
+<div class="content">
+    <!-- Bolinhas clicáveis -->
+    <div class="d-flex justify-content-between my-4">
+        <!-- Bolinha com ícone de + no canto inferior direito -->
+        <div class="story-circle text-center position-relative">
+            <a href="# " class="text-decoration-none text-dark">
+            <img src="/static/img/dra.nathalia.jpg" alt="Story 1" class="rounded-circle" >
+                <a href="#" class="position-relative plus-icon" style="right: 25px; top: 28px;">
+                    <i class="bi bi-plus-circle-fill" ></i>
+                </a>
+                <p class="mt-2">My Daily</p>
+            </a>
+        </div>        
+        <div class="story-circle text-center">
+            <a href="# " class="text-decoration-none text-dark">
+            <img href="#" src="/static/img/dr.gabrielbelmonte.jpg" alt="Story 2" class="rounded-circle ">
+            <p class="mt-2 ">dr.gabrielbel...</p>
+            </a>
+        </div>
+        <div class="story-circle text-center">
+            <a href="# " class="text-decoration-none text-dark">
+            <img src="/static/img/nutri_geovani.jpg" alt="Story 3" class="rounded-circle ">
+            <p class="mt-2">nutri_geovani</p>
+            </a>
+        </div>
+        <div class="story-circle text-center">
+            <a href="# " class="text-decoration-none text-dark">
+            <img src="/static/img/andrerodrigues.jpg" alt="Story 4" class="rounded-circle ">
+            <p class="mt-2">andrerodrigue...</p>
+            </a>
+        </div>
+        <div class="story-circle text-center">
+            <a href="# " class="text-decoration-none text-dark">
+            <img src="/static/img/suelenpsicologa.jpg" alt="Story 5" class="rounded-circle ">
+            <p class="mt-2">suelenpsicolo...</p>
+            </a>
+        </div>
+        <div class="story-circle text-center">
+            <a href="# " class="text-decoration-none text-dark">
+            <img src="/static/img/fisiolivia.jpg" alt="Story 6" class="rounded-circle ">
+            <p class="mt-2">fisioliviaare...</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Linha de separação -->
+    <hr>
+
+    <!-- Hashtags -->
+    <div class="hashtags d-flex justify-content-between my-4">
+        <a href="#" class="text-decoration-none" style="color: #47525E;">#Med</a>
+        <a href="#" class="text-decoration-none" style="color: #47525E;">#Nutri</a>
+        <a href="#" class="text-decoration-none" style="color: #47525E;">#Psicol</a>
+        <a href="#" class="text-decoration-none" style="color: #47525E;">#Ed físico</a>
+        <a href="#" class="text-decoration-none" style="color: #47525E;">#Odonto</a>
+        <a href="#" class="text-decoration-none" style="color: #47525E;">#Fisio</a>
+    </div>
+
+    <!-- Publicação -->
+    <div class="post bg-white p-3 rounded mb-4 position-relative" style="left: 200px;">
+        <!-- Seta no canto superior direito -->
+        
+        <div class="d-flex align-items-center mb-3">
+            <img src="/static/img/dra.nathalia.jpg" alt="Profile" class="rounded-circle me-2" style="width: 50px;">
+            <span class="font-weight-bold">dranathaliacastellani</span>
+            <i class="bi bi-award ms-2 "style="color: #4AE4D6"></i>
+            <a href="#" class="flag-icon position-relative" style="left: 250px;">
+                <i  class="bi bi-chevron-down fs-4 icon-grey"></i></a>
+            <!-- Ícone de coroa azul ao lado do texto -->
+            
+        </div>
+
+        <!-- Container da Imagem de Publicação -->
+        <div class="post-image">
+            <!-- Aqui você pode alterar a imagem da publicação -->
+            <img src="/static/img/gravida 1.jpg" alt="Post Image">
+        </div>
+
+        <!-- Ícones de ações -->
+        <div class="post-actions mt-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <a href="#" class="me-3"><i class="bi bi-heart fs-4 icon-grey"></i></a>
+                <a href="#" class="me-3"><i class="bi bi-chat fs-4 icon-grey"></i></a>
+                <a href="#"><i class="bi bi-send fs-4 icon-grey"></i></a>
+                 <!-- Ícone de bandeira no canto inferior direito -->
+            <a href="#" class="flag-icon position-relative" style="left: 370px;">
+                <i class="bi bi-flag fs-4 icon-grey"></i></a>
+            </div>
+            
+        </div>
+    </div>
+</div>
 {% endblock %}
