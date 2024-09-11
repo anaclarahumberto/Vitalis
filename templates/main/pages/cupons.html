@@ -1,0 +1,75 @@
+{% extends "pages/base.html" %}
+{% block subtitulo %}Notificação{% endblock %}
+{% block conteudo %}
+<link rel="stylesheet" href="/static/css/estilo_cupons.css">
+
+<!-- Título da página com links de navegação -->
+<div class="titulo">
+    <h2>Cupons de desconto</h2>
+    <nav class="nav nav-underline nav-fill">
+        <!-- Link para cupons ativos -->
+        <a href="#link1" class="nav-link active link-ativos">Ativos</a>
+        <!-- Link para cupons indisponíveis -->
+        <a href="#link2" class="nav-link active link-indisponiveis">Indisponíveis</a>
+    </nav>
+</div>
+
+<!-- Container para os cards -->
+<div class="card-container">
+    <!-- Card do Cupom -->
+    <div class="cupom-card">
+        <!-- Container para a imagem -->
+        <div class="cupom-image-container">
+            <div class="cupom-image-wrapper">
+                <img src="/static/img/Vitalette_cupons.png" alt="Mascote Vitalis" class="mascote">
+            </div>
+            <!-- Barra de desconto -->
+            <div class="cupom-discount">% 5</div>
+        </div>
+    </div>
+
+    <!-- Card do Cupom -->
+    <div class="cupom-card">
+        <!-- Container para a imagem -->
+        <div class="cupom-image-container">
+            <div class="cupom-image-wrapper">
+                <img src="/static/img/Vitalette_cupons.png" alt="Mascote Vitalis" class="mascote">
+            </div>
+            <!-- Barra de desconto -->
+            <div class="cupom-discount">% 10</div>
+        </div>
+    </div>
+
+    <!-- Card do Cupom -->
+    <div class="cupom-card">
+        <!-- Container para a imagem -->
+        <div class="cupom-image-container">
+            <div class="cupom-image-wrapper">
+                <img src="/static/img/Vitalette_cupons.png" alt="Mascote Vitalis" class="mascote">
+            </div>
+            <!-- Barra de desconto -->
+            <div class="cupom-discount">% 25</div>
+        </div>
+    </div>
+</div>
+
+<div class="adicionar-cupom">
+    <i class="bi bi-clipboard-plus-fill"></i>
+    <p>Adicionar cupom de desconto</p>
+</div>
+
+
+<div class="card-cupom d-flex" >
+    <div class="card-cupom-content">
+        <!-- Adicione o conteúdo do card aqui -->
+        <p>Conteúdo do card</p>
+    </div>
+</div>
+<div class="card-cupom d-flex" >
+    <div class="card-cupom-content">
+        <!-- Adicione o conteúdo do card aqui -->
+        <p>Conteúdo do card1</p>
+    </div>
+</div>
+
+{% endblock %}
