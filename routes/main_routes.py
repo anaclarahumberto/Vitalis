@@ -27,3 +27,7 @@ async def get_tempogasto(request: Request):
 @router.get("/configuracoes/arquivados", response_class=HTMLResponse)
 async def get_arquivados(request: Request):
     return templates.TemplateResponse("pages/arquivados.html", {"request": request}) 
+
+@router.get("/perfil", response_class=HTMLResponse)
+async def get_perfil(request: Request):
+    return templates.TemplateResponse("pages/perfil.html", {"request": request}) 
