@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/img/onda_azul.png') !important; /* Caminho para a imagem de fundo */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%; /* Ajusta a imagem para preencher toda a área, distorcendo-a */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+}
+
+.page-background {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    position: relative;
+    background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
+    padding: 30px; /* Reduzido o padding */
+    border-radius: 20px; /* Reduzido o border-radius */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Leve redução na sombra */
+    width: 70vw; /* Reduzida a largura */
+    max-width: 600px; /* Reduzida a largura máxima */
+    min-height: 550px; /* Reduzida a altura mínima */
+    max-height: 80vh; /* Reduzida a altura máxima */
+    margin: 0 auto;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+}
+
+/* Título do formulário */
+.form-title {
+    font-family: 'Chewy', cursive;
+    color: #0F6481;
+    font-size: 2.8rem; /* Reduzido o tamanho da fonte */
+    margin-bottom: 15px; /* Ajustado o espaço inferior */
+}
+
+/* Subtítulo do formulário */
+.form-subtitle {
+    margin-top: 0;
+    margin-bottom: 20px; /* Ajustado o espaço inferior */
+    font-size: 1.2rem; /* Mantido o tamanho da fonte */
+}
+
+/* Botão de próxima etapa */
+.btn-next {
+    background-color: #0F6481;
+    color: white;
+    border: none;
+    padding: 10px 25px; /* Mantido o padding reduzido */
+    font-size: 15px; /* Mantido o tamanho da fonte */
+    border-radius: 20px; /* Mantido o border-radius reduzido */
+    margin: 20px auto; /* Mantido o espaçamento */
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+}
+
+/* Efeito de hover do botão */
+.btn-next:hover {
+    background-color: #1e7b9d;
+}
+
+/* Ícone de saída */
+.exit-icon {
+    position: absolute;
+    top: 15px; /* Mantido a posição */
+    left: 15px; /* Mantido a posição */
+    color: #0F6481;
+    font-size: 20px; /* Mantido o tamanho do ícone */
+}
+
+/* Estilo do ícone de saída */
+.exit-icon i {
+    cursor: pointer;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group-append {
+    position: absolute;
+    top: 50%;
+    right: 8px; /* Mantido a posição */
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.input-group-text {
+    background-color: transparent !important;
+    border: none !important;
+    color: #0F6481;
+    padding: 0;
+    font-size: 20px !important; /* Mantido o tamanho da fonte */
+}
+
+.form-control {
+    border-radius: 20px !important; /* Mantido o border-radius reduzido */
+    border: 1px solid #ced4da;
+    padding: 10px 35px; /* Mantido o padding reduzido */
+    color: #47525E !important;
+    background-color: #D2DCE9 !important;
+    box-shadow: none;
+    height: 38px !important; /* Mantida a altura */
+    width: 100% !important;
+    max-width: 300px !important; /* Mantida a largura máxima */
+    position: relative;
+}
+
+/* Cor do placeholder dos campos de entrada */
+.form-control::placeholder {
+    color: #47525E !important;
+    font-weight: bold !important;
+}
+
+/* Estilo das linhas do formulário */
+.form-row {
+    margin-bottom: 14px; /* Mantido o espaçamento inferior reduzido */
+}
+
+/* Estilo das colunas do formulário */
+.col-md-6 {
+    padding: 10px; /* Mantido o padding reduzido */
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 15px; /* Mantido o padding reduzido para dispositivos móveis */
+    }
+}

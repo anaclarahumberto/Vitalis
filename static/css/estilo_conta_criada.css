@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/img/onda_azul.png'); /* Caminho para a imagem de fundo */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%; /* Ajusta a imagem para preencher toda a área, distorcendo-a */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+}
+
+.page-background {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    position: relative;
+    background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
+    padding: 40px; /* Reduzido o padding para diminuir o tamanho */
+    border-radius: 30px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    width: 70vw; /* Reduzido para menor largura */
+    max-width: 550px; /* Reduzido a largura máxima */
+    min-height: 550px; /* Reduzido a altura mínima */
+    max-height: 80vh; /* Reduzido a altura máxima */
+    margin: 0 auto;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+}
+
+/* Título do formulário */
+.form-title {
+    font-family: 'Chewy', cursive;
+    color: #0F6481;
+    font-size: 3rem; /* Tamanho do título */
+    margin-bottom: 20px; /* Espaçamento reduzido */
+}
+
+/* Botão de envio do link */
+.btn-next {
+    background-color: #0F6481;
+    color: white;
+    border: none;
+    padding: 10px 25px; /* Padding do botão */
+    font-size: 15px; /* Tamanho da fonte do botão */
+    border-radius: 20px; /* Bordas arredondadas */
+    margin: 20px auto; /* Margem superior e inferior */
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+    width: 100%; /* Garante que o botão use a largura total disponível */
+    max-width: 220px; /* Reduzido a largura máxima */
+}
+
+/* Efeito de hover do botão */
+.btn-next:hover {
+    background-color: #1e7b9d;
+}
+
+.exit-icon {
+    position: fixed; /* Fixar na tela */
+    top: 15px; /* Distância do topo */
+    right: 15px; /* Distância da borda direita */
+    color: #0F6481;
+    font-size: 24px; /* Tamanho do ícone ajustado */
+}
+
+/* Estilo do ícone de saída */
+.exit-icon i {
+    cursor: pointer;
+}

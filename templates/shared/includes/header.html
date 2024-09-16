@@ -1,43 +1,122 @@
-<header class="col-3 cor-menu pe-0">
-    <div class="row">
-        <div class="d-inline-block col-10 min-vh-100">
-            <nav class="d-flex flex-column ps-2 min-vh-100">
-                <a href="/" class="text-decoration-none">
-                    <img src="/static/img/logo.svg" alt="Logo" class="w-100">
-                </a>
-                <a class="text-white text-decoration-none my-2" href="/">
-                    <i class="bi bi-house fs-5"></i>
-                    Página Inicial</a>
-                <a class="text-white text-decoration-none my-2" href="/perfil">
-                    <i class="bi bi-person fs-5"></i>
-                    Perfil</a>
-                <a class="text-white text-decoration-none my-2" href="/mensagens">
-                    <i class="bi bi-envelope fs-5"></i>
-                    Mensagens</a>
-                <a class="text-white text-decoration-none my-2" href="/notificacoes">
-                    <i class="bi bi-bell fs-5"></i>
-                    Notificações</a>
-                <a class="text-white text-decoration-none my-2" href="/cupons">
-                    <i class="bi bi-tag fs-5"></i>
-                    Cupons</a>
-                <a class="text-white text-decoration-none my-2" href="/nova_publicacao">
-                    <i class="bi bi-plus-circle fs-5"></i>
-                    Nova Publicação</a>
-                <a class="text-white text-decoration-none my-2" href="/configuracoes">
-                    <i class="bi bi-gear fs-5"></i>
-                    Configurações</a>
-                <a class="text-white text-decoration-none my-2 self-end" href="/configuracoes">
-                    <i class="bi bi-text-left fs-5"></i>
-                    Atividades</a>
-            </nav>
-        </div>
-        <div class="d-inline-block col-2">
-            <div class="row ">
-                <div class="col-6 min-vh-100 bg-black bg-opacity-10 rounded-5 rounded-end-0"></div>
-                <div class="col-6 min-vh-100 bg-black bg-opacity-10 p-0">
-                    <div class="min-vh-100 bg-white rounded-5 rounded-end-0 "></div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header com Caixa de Mensagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/static/css/estilo_menu_atividades.css"> <!-- Inclusão do CSS separado -->
+</head>
+<body>
+    <header class="col-3 cor-menu pe-0">
+        <div class="row h-100">
+            <div class="d-inline-block col-10 min-vh-100">
+                <nav class="d-flex flex-column ps-2 min-vh-100 h-100">
+                    <a href="/" class="text-decoration-none">
+                        <img src="/static/img/logo.svg" alt="Logo" class="w-100">
+                    </a>
+                    <a class="text-white text-decoration-none my-2" href="/">
+                        <i class="bi bi-house fs-5"></i>
+                        Página Inicial
+                    </a>
+                    <a class="text-white text-decoration-none my-2" href="/perfil">
+                        <i class="bi bi-person fs-5"></i>
+                        Perfil
+                    </a>
+                    <a class="text-white text-decoration-none my-2" href="/mensagens">
+                        <i class="bi bi-envelope fs-5"></i>
+                        Mensagens
+                    </a>
+                    <a class="text-white text-decoration-none my-2" href="/notificacoes">
+                        <i class="bi bi-bell fs-5"></i>
+                        Notificações
+                    </a>
+                    <a class="text-white text-decoration-none my-2" href="/cupons">
+                        <i class="bi bi-tag fs-5"></i>
+                        Cupons
+                    </a>
+                    <a class="text-white text-decoration-none my-2" href="/nova_publicacao">
+                        <i class="bi bi-plus-circle fs-5"></i>
+                        Nova Publicação
+                    </a>
+                    <a class="text-white text-decoration-none my-2" href="/configuracoes">
+                        <i class="bi bi-gear fs-5"></i>
+                        Configurações
+                    </a>
+                    <a class="text-white text-decoration-none my-2 mt-auto" href="#" id="activities-btn">
+                        <i class="bi bi-text-left fs-5"></i>
+                        Atividades
+                    </a>
+                    <!-- Caixa de mensagem -->
+                    <div id="message-box" class="message-box">
+                        <a href="#" class="button">
+                            <i class="bi bi-bar-chart-line"></i>
+                            Sua Atividade
+                        </a>
+                        <a href="#" class="button">
+                            <i class="bi bi-flag"></i>
+                            Salvos
+                        </a>
+                        <a href="#" class="button">
+                            <i class="bi bi-sun"></i>
+                            Alternar Exibição
+                        </a>
+                        <a href="#" class="button">
+                            <i class="bi bi-cloud"></i>
+                            Relatar um Problema
+                        </a>
+                        <div class="divider"></div> <!-- Seção de divisão -->
+                        <a href="/login" class="button">
+                            <i class="bi bi-arrow-repeat"></i>
+                            Trocar de Conta
+                        </a>
+                        <a href="#" class="button">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Sair
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="d-inline-block col-2 h-100">
+                <div class="row h-100">
+                    <div class="col-6 min-vh-100 bg-black bg-opacity-10 rounded-5 rounded-end-0 h-100"></div>
+                    <div class="col-6 min-vh-100 bg-black bg-opacity-10 p-0 h-100">
+                        <div class="min-vh-100 bg-white rounded-5 rounded-end-0 h-100"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const activitiesBtn = document.getElementById('activities-btn');
+            const messageBox = document.getElementById('message-box');
+            const margin = 30; // Margem entre a caixa de mensagem e o botão
+
+            activitiesBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Evita a navegação padrão
+
+                // Verifica o estado atual da caixa de mensagem e alterna sua visibilidade
+                if (messageBox.style.display === 'block') {
+                    messageBox.style.display = 'none'; // Esconde a caixa de mensagem
+                } else {
+                    // Define a posição da caixa de mensagem
+                    const rect = activitiesBtn.getBoundingClientRect();
+                    messageBox.style.top = `${rect.top + window.scrollY - messageBox.offsetHeight - 480}px`; // Ajusta a posição acima do botão
+                    messageBox.style.left = `${rect.left}px`;
+                    messageBox.style.display = 'block'; // Mostra a caixa de mensagem
+                }
+            });
+
+            // Fecha a caixa de mensagem se clicar fora dela
+            document.addEventListener('click', (e) => {
+                if (!messageBox.contains(e.target) && e.target !== activitiesBtn) {
+                    messageBox.style.display = 'none'; // Esconde a caixa de mensagem
+                }
+            });
+        });
+    </script>
+</body>
+</html>

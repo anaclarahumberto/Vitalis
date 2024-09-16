@@ -28,9 +28,9 @@ body {
     width: 70px;
     height: 70px;
     object-fit: cover;
-    border-width: 3px; /* Ajuste a espessura aqui */
+    border-width: 5px; /* Ajuste a espessura aqui */
     border-style: solid; /* Define o estilo da borda */
-    border-color: #47A9FF; /* Define a cor da borda */
+    border-color: #007bff; /* Define a cor da borda */
 }
 
 .story-circle p {
@@ -43,13 +43,6 @@ body {
     right: 0;
     transform: translate(50%, 50%);
     font-size: 20px;
-    color: #2C556C;
-    
-}
-
-.icon-grey{
-    color: #969FAA;
-
 }
 
 .hashtags a {

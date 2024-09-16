@@ -1,0 +1,63 @@
+/* Estilos para o cabeçalho e navegação */
+.cor-menu {
+    background-color: #333; /* Exemplo de cor de fundo */
+}
+
+/* Estilos para a caixa de mensagem */
+.message-box {
+    display: none; /* Inicialmente escondida */
+    position: absolute;
+    background-color: #ADCBE4; /* Cor da caixa */
+    color: white;
+    padding: 40px; /* Aumentado o padding */
+    border-radius: 30px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    z-index: 1000;
+    white-space: nowrap; /* Para evitar quebra de linha dentro da caixa */
+    min-width: 300px; /* Largura mínima aumentada */
+    min-height: 400px; /* Altura mínima aumentada para tornar a caixa mais retangular */
+    font-size: 18px; /* Aumentado o tamanho da fonte */
+}
+
+.message-box .button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px; /* Espaçamento entre os botões aumentado */
+    text-decoration: none;
+    color: white;
+    font-size: 18px; /* Aumentado o tamanho da fonte do texto */
+}
+
+.message-box .button:last-child {
+    margin-bottom: 0; /* Remove margem inferior do último botão */
+}
+
+.message-box .button i {
+    margin-right: 20px; /* Espaçamento entre ícone e texto aumentado */
+    font-size: 24px; /* Aumentado o tamanho dos ícones */
+}
+
+/* Estilo para o divisor */
+.message-box .divider {
+    height: 4px; /* Aumentado a espessura da linha */
+    background-color: #5A6978; /* Cor da linha */
+    opacity: 48%;
+    width: calc(136%); /* Largura aumentada para além da largura da caixa */
+    margin: 40px -40px; /* Ajusta o espaçamento para compensar a largura extra */
+    border-radius: 5px; /* Adiciona bordas arredondadas à linha */
+}
+
+/* Estilos adicionais */
+.text-white {
+    color: white;
+}
+.text-decoration-none {
+    text-decoration: none;
+}
+.my-2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.mt-auto {
+    margin-top: auto;
+}

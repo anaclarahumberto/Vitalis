@@ -1,0 +1,55 @@
+/* Definir a largura e altura para 100% e adicionar limites máximos */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    max-width: 1200px; /* Defina a largura máxima desejada */
+    max-height: 800px; /* Defina a altura máxima desejada */
+    margin: 0 auto; /* Centraliza o container */
+    box-sizing: border-box; /* Inclui padding e borda na largura e altura */
+    overflow: auto; /* Adiciona rolagem se necessário */
+}
+
+/* Estilo para o texto das perguntas */
+.form-label {
+    font-weight: bold; /* Deixa o texto em negrito */
+    font-size: 14px; /* Tamanho do texto */
+}
+
+/* Campos de texto (textarea) */
+textarea {
+    resize: none; /* Impede que o campo seja redimensionado pelo usuário */
+    color: #cccccc;
+    width: 100%; /* Ajusta a largura do campo de texto */
+    box-sizing: border-box; /* Inclui padding e borda na largura */
+}
+
+/* Estilo para o botão de envio */
+button {
+    width: 100px; /* Largura do botão */
+}
+
+/* Emoji no título */
+.emoji {
+    font-size: 1.2em; /* Tamanho do emoji */
+}
+
+.p {
+    color: #555;
+    font-size: 17px; /* Ajustar tamanho do subtítulo aqui */
+    margin-bottom: 25px;
+}
+
+/* Estilo para os ícones de feedback */
+.icon-thumbs-up {
+    color: aquamarine; /* Altere para a cor desejada */
+}
+
+.icon-thumbs-down {
+    color: aquamarine; /* Altere para a cor desejada */
+}

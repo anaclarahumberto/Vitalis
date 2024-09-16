@@ -1,0 +1,95 @@
+/* Definir a largura e altura para 100% e adicionar limites máximos */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.centro {
+    text-align: center !important;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px; /* Defina a largura máxima desejada */
+    max-height: 800px; /* Defina a altura máxima desejada */
+    margin: 0 auto; /* Centraliza */
+    box-sizing: border-box; /* Inclui padding e borda na largura e altura */
+    overflow: auto; /* Adiciona rolagem se necessário */
+    margin-top: 235px;
+}
+
+.titulo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.sub-titulo {
+    font-size: 16px;
+    color: #6c757d;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.p {
+    color: #555;
+    font-size: 17px; /* Ajustar tamanho do subtítulo aqui */
+    margin-top: 40px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .centro {
+        padding: 20px; /* Reduz o padding em telas menores */
+        max-width: 90%; /* O conteúdo ocupa 90% da largura da tela */
+    }
+
+    .titulo {
+        font-size: 20px; /* Reduz o tamanho da fonte do título */
+    }
+
+    .sub-titulo {
+        font-size: 14px; /* Reduz o tamanho da fonte do subtítulo */
+    }
+
+    .btn {
+        font-size: 14px; /* Ajusta o tamanho do botão */
+        padding: 8px 16px; /* Ajusta o espaçamento interno do botão */
+    }
+}
+
+/* Ajuste para telas ainda menores, como smartphones */
+@media (max-width: 480px) {
+    .centro {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .titulo {
+        font-size: 18px;
+    }
+
+    .sub-titulo {
+        font-size: 13px;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
