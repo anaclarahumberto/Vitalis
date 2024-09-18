@@ -27,7 +27,7 @@
     margin-top: 20px; /* Reduz o espaçamento acima do container */
     font-size: 18px; /* Reduz o tamanho da fonte */
     color: #47525E; /* Define a cor do texto */
-    padding-left: 40px; /* Adiciona espaçamento à esquerda do texto, empurrando-o para a direita */
+    padding-left: 4px; /* Reduz o espaçamento à esquerda do texto */
     font-weight: bold; /* Define o peso da fonte como negrito */
     gap: 6px; /* Reduz o espaçamento entre o ícone e o texto */
 }
@@ -43,4 +43,3 @@
     margin: 0; /* Remove a margem padrão do elemento <p> */
     font-size: 18px; /* Reduz o tamanho da fonte do texto */
 }
-
