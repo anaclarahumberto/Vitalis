@@ -1,0 +1,27 @@
+{% block subtitulo %}{% endblock %}
+{% block conteudo %}
+<link rel="stylesheet" href="/static/css/estilo_anunciante.css">
+
+<body>
+    <div class="pagina-anuncios">
+        <h1 class="titulo-anuncios">Bem-vindo a página do anunciante!</h1>
+        <!-- Quadrado centralizado -->
+        <div class="quadrado-centralizado">
+            <div class="mb-3">
+                <label for="anúncio" class="form-label">Para começar, nos informe que tipo de companhia você é:</label>
+                <select name="anúncio" id="anúncio" class="form-select">
+                    <option value=""> </option>
+                    <option value="pf">Profissional de saúde</option>
+                    <option value="far">Farmácia</option>
+                    <option value="lab">Laboratórios</option>
+                    <option value="aca">Academia</option>
+                    <option value="aca">Outros</option>               
+                </select> 
+            </div>
+            <div class="avancar">
+                <button class="btn btn-primary">Avançar</button>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

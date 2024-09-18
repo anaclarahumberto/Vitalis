@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/img/onda_azul.png'); /* Caminho para a imagem de fundo */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%; /* Ajusta a imagem para preencher toda a área, distorcendo-a */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+}
+
+.page-background {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    position: relative;
+    background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
+    padding: 40px; /* Reduzido o padding para diminuir o tamanho */
+    border-radius: 30px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    width: 70vw; /* Reduzido para menor largura */
+    max-width: 550px; /* Reduzido a largura máxima */
+    min-height: 550px; /* Reduzido a altura mínima */
+    max-height: 80vh; /* Reduzido a altura máxima */
+    margin: 0 auto;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+}
+
+/* Título do formulário */
+.form-title {
+    font-family: 'Chewy', cursive;
+    color: #0F6481;
+    font-size: 3rem; /* Tamanho do título */
+    margin-bottom: 20px; /* Espaçamento reduzido */
+}
+
+/* Subtítulo do formulário */
+.form-subtitle {
+    margin-top: 0;
+    margin-bottom: 30px; /* Espaçamento entre o subtítulo e o campo de entrada */
+    font-size: 1.2rem; /* Tamanho do texto do subtítulo */
+    color: #333; /* Cor padrão para o texto */
+}
+
+/* Botão de envio do link */
+.btn-next {
+    background-color: #0F6481;
+    color: white;
+    border: none;
+    padding: 10px 25px; /* Padding do botão */
+    font-size: 15px; /* Tamanho da fonte do botão */
+    border-radius: 20px; /* Bordas arredondadas */
+    margin: 20px auto; /* Margem superior e inferior */
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+    width: 100%; /* Garante que o botão use a largura total disponível */
+    max-width: 220px; /* Reduzido a largura máxima */
+}
+
+/* Efeito de hover do botão */
+.btn-next:hover {
+    background-color: #1e7b9d;
+}
+
+/* Caixa de entrada para o email */
+.input-group {
+    position: relative;
+    width: 100%; /* Garante que o input group use a largura total disponível */
+    max-width: 550px; /* Reduzido a largura máxima */
+}
+
+.input-group-append {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Ajustado o posicionamento */
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.input-group-text {
+    background-color: transparent !important;
+    border: none !important;
+    color: #0F6481;
+    padding: 0;
+    font-size: 18px !important; /* Reduzido o tamanho da fonte */
+}
+
+.form-control {
+    border-radius: 25px !important;
+    border: 1px solid #ced4da;
+    padding: 12px 40px; /* Reduzido o padding */
+    color: #47525E !important;
+    background-color: #D2DCE9 !important;
+    box-shadow: none;
+    height: 45px !important; /* Reduzido a altura */
+    width: 100%; /* Garante que os campos de entrada usem a largura total disponível */
+    max-width: 550px; /* Reduzido a largura máxima dos campos de entrada */
+    position: relative;
+}
+
+/* Cor do placeholder dos campos de entrada */
+.form-control::placeholder {
+    color: #47525E !important;
+    font-weight: bold !important;
+    font-size: 15px !important; /* Reduzido o tamanho do texto dos placeholders */
+}
+
+/* Estilo das linhas do formulário */
+.form-row {
+    margin-bottom: 14px; /* Espaço reduzido */
+    margin-top: 8px; /* Espaço reduzido para o primeiro campo de entrada */
+}
+
+.divider-text {
+    color: gray; /* Cor cinza */
+    font-size: 1.2rem; /* Tamanho da fonte */
+    margin: 20px 0; /* Margem superior e inferior */
+}
+
+.exit-icon {
+    position: fixed; /* Fixa o ícone na tela */
+    top: 20px; /* Distância do topo da tela */
+    right: 20px; /* Distância da borda direita da tela */
+    color: #0F6481;
+    font-size: 24px; /* Ajuste o tamanho do ícone conforme necessário */
+}
+
+/* Estilo das colunas do formulário */
+.col-md-6 {
+    padding: 10px; /* Reduzido o padding */
+}
+
+/* Texto "Criar Conta" */
+.create-account {
+    color: #0F6481;
+    font-size: 1.8rem; /* Tamanho do texto */
+    font-weight: bold;
+    margin-top: 15px; /* Margem superior */
+    text-decoration: none;
+}

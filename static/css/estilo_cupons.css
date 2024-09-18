@@ -1,157 +1,46 @@
 /* Estilo do título e navegação */
 .titulo {
     text-align: center; /* Centraliza o título e a navegação horizontalmente */
-    margin-top: 25px; /* Espaçamento superior */
+    margin-top: 20px; /* Reduz o espaçamento superior */
 }
 
 .nav {
-    margin-top: 20px; /* Ajusta o espaçamento entre o título e a navegação */
+    margin-top: 15px; /* Ajusta o espaçamento entre o título e a navegação */
 }
 
 /* Link para a aba "Ativos" */
 .link-ativos {
     color: #33F2E0 !important; /* Define a cor do link para "Ativos" */
+    font-size: 16px; /* Reduz o tamanho da fonte dos links */
 }
 
 /* Link para a aba "Indisponíveis" */
 .link-indisponiveis {
     color: #969FAA !important; /* Define a cor do link para "Indisponíveis" */
-}
-
-/* Estilo do card principal */
-.cupom-card {
-    position: relative; /* Permite o uso de posicionamento absoluto nos elementos filhos */
-    width: 145px; /* Define a largura do card */
-    height: 180px; /* Define a altura do card */
-    background-color: #33F2E0; /* Define a cor de fundo do card (verde claro) */
-    border-radius: 20px; /* Define as bordas arredondadas do card */
-    padding: 10px; /* Define o espaçamento interno do card */
-    display: flex; /* Define o layout como flex para facilitar a organização dos elementos internos */
-    flex-direction: column; /* Organiza o conteúdo em uma coluna */
-    align-items: center; /* Centraliza o conteúdo horizontalmente */
-    justify-content: space-between; /* Espaçamento entre o conteúdo interno */
-    margin: 0 10px; /* Adiciona espaçamento horizontal entre os cards */
-}
-
-/* Estilos para as bolinhas brancas nas pontas inferiores do card */
-.cupom-card::before,
-.cupom-card::after {
-    content: ''; /* Cria conteúdo vazio para as bolinhas */
-    position: absolute; /* Posiciona as bolinhas em relação ao card */
-    width: 20px; /* Define o tamanho das bolinhas */
-    height: 20px; /* Define o tamanho das bolinhas */
-    background-color: white; /* Define a cor das bolinhas (branco) */
-    border-radius: 50%; /* Arredonda as bolinhas para que fiquem circulares */
-    bottom: 20px; /* Define a posição vertical das bolinhas */
-}
-
-/* Bolinha na ponta esquerda */
-.cupom-card::before {
-    left: -10px; /* Define a posição da bolinha esquerda em relação ao card */
-}
-
-/* Bolinha na ponta direita */
-.cupom-card::after {
-    right: -10px; /* Define a posição da bolinha direita em relação ao card */
-}
-
-/* Container para a imagem e a barra */
-.cupom-image-container {
-    width: 120px; /* Define a largura do quadrado interno */
-    height: 110px; /* Define a altura do quadrado interno */
-    background-color: #03797A; /* Define a cor de fundo (verde escuro) */
-    border-radius: 10px; /* Define bordas arredondadas para o quadrado */
-    display: flex; /* Usado para centralizar o conteúdo */
-    justify-content: center; /* Centraliza horizontalmente o conteúdo dentro do quadrado */
-    align-items: center; /* Centraliza verticalmente o conteúdo dentro do quadrado */
-    position: relative; /* Define o posicionamento relativo para alinhar corretamente os elementos internos */
-}
-
-/* Container para a imagem */
-.cupom-image-wrapper {
-    width: 100%; /* Faz com que o wrapper ocupe toda a largura disponível */
-    height: 100%; /* Faz com que o wrapper ocupe toda a altura disponível */
-    display: flex; /* Usado para centralizar a imagem */
-    justify-content: center; /* Centraliza horizontalmente a imagem */
-    align-items: center; /* Centraliza verticalmente a imagem */
-}
-
-/* Ajuste da imagem dentro do container */
-.cupom-image-wrapper img {
-    max-width: 100%; /* Garante que a imagem não ultrapasse a largura do wrapper */
-    max-height: 100%; /* Garante que a imagem não ultrapasse a altura do wrapper */
-    object-fit: cover; /* Ajusta a imagem para cobrir o wrapper sem distorção */
-}
-
-/* Barra arredondada com o desconto "% 5" */
-.cupom-discount {
-    width: 80px; /* Define a largura da barra inferior */
-    height: 25px; /* Define a altura da barra inferior */
-    background-color: #BEE4DF; /* Define a cor da barra inferior (verde claro) */
-    border-radius: 12.5px; /* Arredonda completamente as bordas da barra para criar um efeito de pílula */
-    display: flex; /* Usado para centralizar o conteúdo dentro da barra */
-    justify-content: center; /* Centraliza horizontalmente o texto dentro da barra */
-    align-items: center; /* Centraliza verticalmente o texto dentro da barra */
-    color: #000000; /* Define a cor do texto como preto */
-    font-size: 12px; /* Define o tamanho da fonte do texto */
-    position: absolute; /* Posiciona a barra de desconto de forma absoluta em relação ao quadrado verde escuro */
-    bottom: -12px; /* Posiciona a barra de desconto sobre o quadrado verde escuro */
-    border: 2px solid #ffffff; /* Adiciona uma borda verde escuro ao redor da barra */
-}
-
-/* Container para alinhar os cards em linha e centralizá-los */
-.card-container {
-    display: flex; /* Define o layout como flex para alinhar os cards */
-    justify-content: center; /* Centraliza os cards horizontalmente */
-    flex-wrap: wrap; /* Permite que os cards se movam para a linha seguinte se não houver espaço suficiente */
-    gap: 30px; /* Adiciona espaçamento entre os cards */
-    margin-top: 35px; /* Adiciona espaçamento acima dos cards */
+    font-size: 16px; /* Reduz o tamanho da fonte dos links */
 }
 
 /* Estilo para o container do ícone e texto */
 .adicionar-cupom {
     display: flex; /* Define o layout como flex para alinhar o ícone e o texto em linha */
     align-items: center; /* Alinha verticalmente o ícone e o texto no centro */
-    margin-top: 30px; /* Espaçamento acima do container */
-    font-size: 16px; /* Define o tamanho da fonte */
+    margin-top: 20px; /* Reduz o espaçamento acima do container */
+    font-size: 18px; /* Reduz o tamanho da fonte */
     color: #47525E; /* Define a cor do texto */
-    padding-left: 105px; /* Adiciona espaçamento à esquerda do texto, empurrando-o para a direita */
+    padding-left: 40px; /* Adiciona espaçamento à esquerda do texto, empurrando-o para a direita */
     font-weight: bold; /* Define o peso da fonte como negrito */
-    gap: 8px; /* Adiciona espaçamento entre o ícone e o texto */
+    gap: 6px; /* Reduz o espaçamento entre o ícone e o texto */
 }
 
 /* Estilo para o ícone */
 .adicionar-cupom i {
-    font-size: 18px; /* Define o tamanho do ícone, ajuste conforme necessário */
+    font-size: 16px; /* Reduz o tamanho do ícone */
     color: #47525E; /* Define a cor do ícone, se necessário */
 }
 
 /* Estilo para o texto */
 .adicionar-cupom p {
     margin: 0; /* Remove a margem padrão do elemento <p> */
+    font-size: 18px; /* Reduz o tamanho da fonte do texto */
 }
 
-/* Estilo para o card-cupom */
-.card-cupom {
-    position: relative; /* Permite o uso de posicionamento absoluto nos elementos filhos */
-    margin-top: 30px; /* Espaçamento superior do card */
-    width: 760px; /* Largura do card */
-    height: 190px; /* Altura do card */
-    background-color: #BEE4DF; /* Cor de fundo do card (verde claro) */
-    border-radius: 10px; /* Bordas arredondadas do card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve ao redor do card */
-    display: flex; /* Usado para alinhar o conteúdo dentro do card */
-    align-items: center; /* Centraliza verticalmente o conteúdo dentro do card */
-    justify-content: center; /* Centraliza horizontalmente o conteúdo dentro do card */
-    padding: 20px; /* Espaçamento interno do card */
-}
-
-/* Contêiner para centralizar as barras verdes horizontalmente */
-.card-cupom-container {
-    display: flex;              /* Define o contêiner como flexbox */
-    flex-direction: column;     /* Mantém as barras uma embaixo da outra */
-    align-items: center;        /* Centraliza as barras horizontalmente */
-    margin: 0 auto;             /* Centraliza o contêiner horizontalmente na página */
-    gap: 20px;                  /* Espaçamento entre as barras verdes */
-    max-width: 100%;            /* Impede que o contêiner ultrapasse a largura da página */
-}

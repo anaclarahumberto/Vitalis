@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo à Vitalis</title>
+    <link rel="stylesheet" href="/static/css/estilo_bem_vindo.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid full-height">
+        <div class="row no-gutters full-height">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <div class="form-container">
+                    <h2 class="form-title">Bem-vindo à Vitalis</h2>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nome de Usuário" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Senha" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/loguin/esqueci_a_senha" class="forgot-password">Esqueceu a senha?</a>
+                    <form action="/entrar" method="post">
+                        <!-- Outros campos do formulário, se houver -->
+                        <button type="submit" class="btn-next">Entrar</button>
+                    </form>
+
+                    <button class="google-btn">
+                        <img src="/static/img/google.png" alt="Google Logo">
+                        Continuar com o Google
+                    </button>
+
+                    <a href="/criar_conta" class="create-account">Criar Conta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

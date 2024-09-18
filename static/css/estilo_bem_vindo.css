@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/img/onda_azul.png') !important; /* Caminho para a imagem de fundo */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%; /* Ajusta a imagem para preencher toda a área, distorcendo-a */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+}
+
+.page-background {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    position: relative;
+    background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
+    padding: 40px; /* Reduzido o padding para diminuir o tamanho */
+    border-radius: 30px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    width: 70vw; /* Reduzido para menor largura */
+    max-width: 550px; /* Reduzido a largura máxima */
+    min-height: 550px; /* Reduzido a altura mínima */
+    max-height: 80vh; /* Reduzido a altura máxima */
+    margin: 0 auto;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+}
+
+/* Título do formulário */
+.form-title {
+    font-family: 'Chewy', cursive;
+    color: #0F6481;
+    font-size: 3rem; /* Reduzido o tamanho da fonte */
+    margin-bottom: 30px; /* Espaçamento reduzido */
+}
+
+/* Subtítulo do formulário */
+.form-subtitle {
+    margin-top: 0;
+    margin-bottom: 20px; /* Espaço reduzido */
+    font-size: 1.2rem; /* Reduzido o tamanho da fonte */
+}
+
+/* Botão de próxima etapa */
+.btn-next {
+    background-color: #0F6481;
+    color: white;
+    border: none;
+    padding: 10px 25px; /* Reduzido o padding */
+    font-size: 15px; /* Reduzido o tamanho da fonte */
+    border-radius: 20px; /* Ajustado o border-radius */
+    margin: 12px auto; /* Ajustado o margin */
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+    width: 100%; /* Garante que o botão use a largura total disponível */
+    max-width: 220px; /* Reduzido a largura máxima */
+}
+
+/* Efeito de hover do botão */
+.btn-next:hover {
+    background-color: #1e7b9d;
+}
+
+/* Ícone de saída */
+.exit-icon {
+    position: absolute;
+    top: 15px; /* Ajustado o posicionamento */
+    left: 15px; /* Ajustado o posicionamento */
+    color: #0F6481;
+    font-size: 20px; /* Reduzido o tamanho do ícone */
+}
+
+/* Estilo do ícone de saída */
+.exit-icon i {
+    cursor: pointer;
+}
+
+.input-group {
+    position: relative;
+    width: 100%; /* Garante que o input group use a largura total disponível */
+    max-width: 550px; /* Reduzido a largura máxima */
+}
+
+.input-group-append {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Ajustado o posicionamento */
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.input-group-text {
+    background-color: transparent !important;
+    border: none !important;
+    color: #0F6481;
+    padding: 0;
+    font-size: 18px !important; /* Reduzido o tamanho da fonte */
+}
+
+.form-control {
+    border-radius: 25px !important;
+    border: 1px solid #ced4da;
+    padding: 12px 40px; /* Reduzido o padding */
+    color: #47525E !important;
+    background-color: #D2DCE9 !important;
+    box-shadow: none;
+    height: 45px !important; /* Reduzido a altura */
+    width: 100%; /* Garante que os campos de entrada usem a largura total disponível */
+    max-width: 750px; /* Reduzido a largura máxima dos campos de entrada */
+    position: relative;
+}
+
+/* Cor do placeholder dos campos de entrada */
+.form-control::placeholder {
+    color: #47525E !important;
+    font-weight: bold !important;
+    font-size: 15px !important; /* Reduzido o tamanho do texto dos placeholders */
+}
+
+/* Estilo das linhas do formulário */
+.form-row {
+    margin-bottom: 14px; /* Espaço reduzido */
+    margin-top: 8px; /* Espaço reduzido para o primeiro campo de entrada */
+}
+
+/* Estilo das colunas do formulário */
+.col-md-6 {
+    padding: 10px; /* Reduzido o padding */
+}
+
+/* Texto "Esqueceu a senha?" */
+.forgot-password {
+    color: #0F6481;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 6px 0; /* Espaço superior e inferior reduzido */
+    display: block;
+}
+
+/* Botão do Google */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F6481;
+    border: none;
+    padding: 10px 25px; /* Reduzido o padding */
+    border-radius: 20px; /* Ajustado o border-radius */
+    font-size: 14px; /* Reduzido o tamanho da fonte */
+    cursor: pointer;
+    margin-top: 8px; /* Reduzido o margin-top */
+    width: 100%; /* Garante que o botão use a largura total disponível */
+    max-width: 220px; /* Reduzido a largura máxima */
+}
+
+/* Ícone do Google */
+.google-btn img {
+    width: 18px; /* Reduzido o tamanho do ícone */
+    height: 18px; /* Reduzido o tamanho do ícone */
+    margin-right: 8px; /* Ajustado o margin-right */
+}
+
+/* Texto "Criar Conta" */
+.create-account {
+    color: #0F6481;
+    font-size: 1.8rem; /* Reduzido o tamanho da fonte */
+    font-weight: bold;
+    margin-top: 15px; /* Reduzido o margin-top */
+    text-decoration: none;
+}

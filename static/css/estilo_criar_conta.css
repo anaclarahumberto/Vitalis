@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/img/onda_azul.png'); /* Caminho para a imagem de fundo */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%; /* Ajusta a imagem para preencher toda a área, distorcendo-a */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+}
+
+.page-background {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    position: relative;
+    background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
+    padding: 40px; /* Padding ajustado */
+    border-radius: 30px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    width: 70vw; /* Largura do formulário */
+    max-width: 550px; /* Largura máxima do formulário */
+    min-height: 550px; /* Altura mínima do formulário */
+    max-height: 80vh; /* Altura máxima do formulário */
+    margin: 0 auto;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+}
+
+/* Título do formulário */
+.form-title {
+    font-family: 'Chewy', cursive;
+    color: #0F6481;
+    font-size: 2.5rem; /* Ajustado o tamanho da fonte */
+    margin-bottom: 20px; /* Ajustado o espaço inferior */
+}
+
+/* Subtítulo do formulário */
+.form-subtitle {
+    margin-top: 0;
+    margin-bottom: 20px; /* Espaço inferior ajustado */
+    font-size: 1.2rem; /* Tamanho da fonte do subtítulo */
+}
+
+/* Botões de seleção */
+.select-btn {
+    border-radius: 25px !important; /* Bordas arredondadas */
+    border: 1px solid #ced4da; /* Borda do botão */
+    padding: 12px 20px; /* Padding ajustado */
+    color: #47525E !important; /* Cor do texto */
+    background-color: #D2DCE9 !important; /* Cor de fundo do botão */
+    box-shadow: none; /* Sem sombra */
+    height: 45px !important; /* Altura ajustada */
+    width: 200px; /* Largura fixa */
+    font-size: 15px; /* Tamanho da fonte */
+    cursor: pointer; /* Cursor pointer */
+    margin: 8px 0; /* Espaçamento entre botões */
+    text-align: center; /* Centraliza o texto */
+    display: flex; /* Flexbox para alinhamento */
+    align-items: center; /* Alinhamento vertical do texto */
+    justify-content: center; /* Alinhamento horizontal do texto */
+    box-sizing: border-box; /* Inclui padding e borda na largura total */
+}
+
+/* Efeito de hover do botão de seleção */
+.select-btn:hover {
+    background-color: #C0C8D2; /* Cor de fundo quando em hover */
+}
+
+/* Botão de próxima etapa */
+.btn-next {
+    background-color: #0F6481;
+    color: white;
+    border: none;
+    padding: 10px 25px; /* Ajustado o padding */
+    font-size: 15px; /* Tamanho da fonte do botão */
+    border-radius: 20px; /* Border-radius ajustado */
+    margin: 12px auto; /* Margin ajustado */
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+    width: 100%; /* Garante que o botão use a largura total disponível */
+    max-width: 220px; /* Largura máxima do botão */
+}
+
+/* Efeito de hover do botão */
+.btn-next:hover {
+    background-color: #1e7b9d;
+}
+
+/* Ícone de saída */
+.exit-icon {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    color: #0F6481;
+    font-size: 22px;
+}
+
+/* Estilo do ícone de saída */
+.exit-icon i {
+    cursor: pointer;
+}
