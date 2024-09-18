@@ -115,7 +115,7 @@
     margin-top: 30px; /* Espaçamento acima do container */
     font-size: 16px; /* Define o tamanho da fonte */
     color: #47525E; /* Define a cor do texto */
-    padding-left: 40px; /* Adiciona espaçamento à esquerda do texto, empurrando-o para a direita */
+    padding-left: 105px; /* Adiciona espaçamento à esquerda do texto, empurrando-o para a direita */
     font-weight: bold; /* Define o peso da fonte como negrito */
     gap: 8px; /* Adiciona espaçamento entre o ícone e o texto */
 }
@@ -146,3 +146,12 @@
     padding: 20px; /* Espaçamento interno do card */
 }
 
+/* Contêiner para centralizar as barras verdes horizontalmente */
+.card-cupom-container {
+    display: flex;              /* Define o contêiner como flexbox */
+    flex-direction: column;     /* Mantém as barras uma embaixo da outra */
+    align-items: center;        /* Centraliza as barras horizontalmente */
+    margin: 0 auto;             /* Centraliza o contêiner horizontalmente na página */
+    gap: 20px;                  /* Espaçamento entre as barras verdes */
+    max-width: 100%;            /* Impede que o contêiner ultrapasse a largura da página */
+}
