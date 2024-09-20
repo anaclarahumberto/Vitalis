@@ -46,6 +46,9 @@ async def get_cupons(request: Request):
 async def get_feedback(request: Request):
     return templates.TemplateResponse("pages/feedback.html", {"request": request})
 
+@router.get("/perfil", response_class=HTMLResponse)
+async def get_perfil(request: Request):
+    return templates.TemplateResponse("pages/perfil.html", {"request": request})
 
 @router.get("/login", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
