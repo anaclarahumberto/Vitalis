@@ -82,3 +82,4 @@ async def post_entrar(request: Request):
 async def post_conta_criada(request: Request):
     # Aqui você pode processar os dados do formulário se necessário
     return templates.TemplateResponse("pages/conta_criada.html", {"request": request})
+
