@@ -28,7 +28,7 @@ body {
     width: 70px;
     height: 70px;
     object-fit: cover;
-    border-width: 5px; /* Ajuste a espessura aqui */
+    border-width: 3px; /* Ajuste a espessura aqui */
     border-style: solid; /* Define o estilo da borda */
     border-color: #007bff; /* Define a cor da borda */
 }
