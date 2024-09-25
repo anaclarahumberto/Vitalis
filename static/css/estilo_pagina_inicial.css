@@ -1,20 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #ffffff; /* Removido o fundo cinza, agora é branco */
-}
-
-.container-fluid {
-    display: flex;
-}
-
-.cor-menu {
-    background-color: #3a6ea5;
-    color: white;
-}
-
 .content {
     padding: 30px;
     width: 100%;
@@ -30,7 +13,7 @@ body {
     object-fit: cover;
     border-width: 3px; /* Ajuste a espessura aqui */
     border-style: solid; /* Define o estilo da borda */
-    border-color: #007bff; /* Define a cor da borda */
+    border-color: #47A9FF!important; /* Define a cor da borda */
 }
 
 .story-circle p {

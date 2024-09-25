@@ -46,6 +46,9 @@ async def get_cupons(request: Request):
 async def get_feedback(request: Request):
     return templates.TemplateResponse("pages/feedback.html", {"request": request})
 
+@router.get("/perfil", response_class=HTMLResponse)
+async def get_perfil(request: Request):
+    return templates.TemplateResponse("pages/perfil.html", {"request": request})
 
 @router.get("/login", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
@@ -79,3 +82,4 @@ async def post_entrar(request: Request):
 async def post_conta_criada(request: Request):
     # Aqui você pode processar os dados do formulário se necessário
     return templates.TemplateResponse("pages/conta_criada.html", {"request": request})
+
