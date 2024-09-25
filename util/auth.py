@@ -37,4 +37,4 @@ async def checar_permissao(request: Request):
     if area_do_usuario and usuario.perfil != 1:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
     if area_do_admin and usuario.perfil != 2:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)#403 proibido esse tipo de perfil ter acesso à algo

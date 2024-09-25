@@ -11,3 +11,6 @@ app.mount(path="/static", app=StaticFiles(directory="static"), name="static")
 app.middleware(middleware_type="http")(middleware_autenticacao)
 configurar_excecoes(app)
 app.include_router(main_routes.router)
+# adiciona os  tipos de usuários que terão que ser verificados
+# Exemplo:
+    #app.include_router(usuario_roter)
