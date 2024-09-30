@@ -1,14 +1,23 @@
-{% block subtitulo %}Anunciante{% endblock %}
 {% block conteudo %}
 <link rel="stylesheet" href="/static/css/estilo_anunciante.css">
+<!-- Incluindo o CSS do Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <body>
     <div class="pagina-anuncios">
-        <h1 class="titulo-anuncios">Bem-vindo a página do anunciante!</h1>
+        <!-- Ícone no canto superior esquerdo -->
+        <i class="bi bi-megaphone-fill" style="position: absolute; top: 10px; left: 15px; font-size: 24px; color: #47525E;"></i>
+        <!-- Texto "Anúncios" separado -->
+        <span style="position: absolute; top: 10px; left: 50px; font-size: 24px; color: #47525E;">Anúncios</span>
+
+        <!-- Adicionando a imagem no canto superior direito -->
+        <img src="/static/img/Vitalette_dinheiro.png" style="position: absolute; top: 50px; right: 350px; width: 100px; height: auto;" alt="Imagem">
+
+        <h1 class="titulo-anuncios" style="color: white;">Bem-vindo a página do anunciante!</h1>
         <!-- Quadrado centralizado -->
         <div class="quadrado-centralizado">
             <div class="mb-3">
-                <label for="anúncio" class="form-label">Para começar, nos informe que tipo de companhia você é:</label>
+                <label for="anúncio" class="form-label mb-3">Para começar, nos informe que tipo de companhia você é:</label>
                 <select name="anúncio" id="anúncio" class="form-select">
                     <option value=""> </option>
                     <option value="pf">Profissional de saúde</option>
@@ -19,7 +28,7 @@
                 </select> 
             </div>
             <div class="avancar">
-                <button class="btn btn-primary">Avançar</button>
+                <button class="btn btn-primary" style="background-color: #007ec1;">Avançar</button>
             </div>
         </div>
     </div>
