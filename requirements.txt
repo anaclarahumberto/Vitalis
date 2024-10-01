@@ -9,3 +9,4 @@ pillow
 bcrypt
 python-dotenv
 mercadopago
+pyJWT

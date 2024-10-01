@@ -20,35 +20,36 @@
                     <a href="/criar_conta" class="exit-icon"><i class="fa fa-arrow-left"></i></a>
                     <h2 class="form-title">Profissional de Saúde</h2>
                     <h4 class="form-subtitle">Cadastre-se para divulgar seu trabalho!</h4>
-                    <form>
+                    <form action="/cadastrar_profissional" method="post"  enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="name" placeholder="Nome Completo" required>
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="age" placeholder="Idade" required>
+                                <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nascimento" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="phone" placeholder="Telefone" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="address" placeholder="Endereço" required>
+                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="cpf" placeholder="CPF" required>
+                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="password" class="form-control" id="password" placeholder="Senha" required>
+                                <input type="password" class="form-control" id="confsenha" name="confsenha" placeholder="Confirme a senha" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="professional-reg" placeholder="Registro Profissional" required>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fa fa-cloud-download"></i></span>
-                                    </div>
+                                    <input type="file" class="form-control" id="registro-profissional" name="registro_profissional" required style="display: none;">
+                                    <label class="input-group-append" for="registro-profissional" style="cursor: pointer;">
+                                        <span class="input-group-text"><i class="fa fa-upload"></i></span>
+                                    </label>
+                                    <input type="text" class="form-control" readonly placeholder="Nenhum arquivo selecionado" id="file-name">
                                 </div>
                             </div>
                         </div>
@@ -58,5 +59,11 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('registro-profissional').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+            document.getElementById('file-name').value = fileName;
+        });
+    </script>
 </body>
 </html>

@@ -17,7 +17,7 @@
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex justify-content-center align-items-center">
                 <div class="form-container">
-                    <a href="/login" class="exit-icon"><i class="fa fa-arrow-left"></i></a>
+                    <a href="/" class="exit-icon"><i class="fa fa-arrow-left"></i></a>
 
                     <h2 class="form-title">Criar Conta</h2>
                     <p class="form-subtitle">Selecione se você é profissional de Saúde ou Paciente</p>
@@ -64,9 +64,9 @@
 
             btnNext.addEventListener('click', () => {
                 if (selectedOption === 'saude') {
-                    window.location.href = '/criar_conta/cadastro_profissional'; // Atualize o caminho conforme necessário
+                    window.location.href = '/cadastro_profissional'; // Atualize o caminho conforme necessário
                 } else if (selectedOption === 'paciente') {
-                    window.location.href = '/criar_conta/cadastro_paciente'; // Atualize o caminho conforme necessário
+                    window.location.href = '/cadastro_paciente'; // Atualize o caminho conforme necessário
                 } else {
                     alert('Selecione uma opção antes de continuar.');
                 }

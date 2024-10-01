@@ -19,20 +19,14 @@
                 <div class="form-container">
                     <a href="/criar_conta" class="exit-icon"><i class="fa fa-arrow-left"></i></a>
                     <h2 class="form-title">Paciente</h2>
-                    <h4 class="form-subtitle">Cadastre-se para ver fotos e vídeos dos proficionais de saúde.</h4>
-                    <form action="/conta_criada" method="post">
+                    <h4 class="form-subtitle">Cadastre-se para ver fotos e vídeos dos profissionais de saúde.</h4>
+                    <form action="/cadastrar_paciente" method="post">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nome Completo" required>
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="age" name="age" placeholder="Idade" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Endereço" required>
+                                <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nascimento" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
@@ -41,7 +35,13 @@
                                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="password" class="form-control" id="confsenha" name="confsenha" placeholder="Confirme a senha" required>
                             </div>
                         </div>
                         <button type="submit" class="btn-next">Próximo</button>
