@@ -1,36 +1,36 @@
 {% block conteudo %}
 <link rel="stylesheet" href="/static/css/estilo_anunciante.css">
-<!-- Incluindo o CSS do Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-<body>
-    <div class="pagina-anuncios">
-        <!-- Ícone no canto superior esquerdo -->
-        <i class="bi bi-caret-left-fill" style="position: absolute; top: 10px; left: 15px; font-size: 30px; color: #47525E;"></i>
-        <!-- Texto "Anúncios" separado -->
-        <span style="position: absolute; top: 10px; left: 50px; font-size: 30px; color: #47525E;">Anúncios</span>
+<div class="position-absolute top-50 start-50">
+    <!-- Ícone e texto no canto superior esquerdo -->
+    <div class="position-absolute top-0 start-0 m-3 d-flex align-items-center">
+        <i class="bi bi-caret-left-fill fs-1 text-secondary"></i>
+        <span class="fs-1 text-secondary ms-2">Anúncios</span>
+    </div>
 
-        <!-- Adicionando a imagem no canto superior direito -->
-        <img src="/static/img/Vitalette_dinheiro.png" style="position: absolute; top: 50px; right: 350px; width: 100px; height: auto;" alt="Imagem">
+    <!-- Imagem no canto superior direito -->
+    <img src="/static/img/Vitalette_dinheiro.png" class="position-absolute top-0 end-0 m-3" alt="Vitalette" style="width: 80px; height: auto;">
 
-        <h1 class="titulo-anuncios" style="color: white;">Bem-vindo a página do anunciante!</h1>
-        <!-- Quadrado centralizado -->
-        <div class="quadrado-centralizado">
-            <div class="mb-3">
-                <label for="anúncio" class="form-label mb-3">Para começar, nos informe que tipo de companhia você é:</label>
-                <select name="anúncio" id="anúncio" class="form-select">
-                    <option value=""> </option>
+    <!-- Conteúdo centralizado -->
+    <div class="text-center">
+        <h1 class="text-white mb-4">Bem-Vindo à página do anunciante!</h1>
+
+        <!-- Cartão central com bordas arredondadas -->
+        <div class="card p-5 shadow-lg mx-auto" style="max-width: 600px; border-radius: 20px;">
+            <div class="card-body">
+                <p class="h5 mb-4">Para começar, nos informe que tipo de companhia você é:</p>
+                <select class="form-select mb-4" aria-label="Escolha uma opção">
+                    <option selected>Escolha uma opção</option>
                     <option value="pf">Profissional de saúde</option>
                     <option value="far">Farmácia</option>
-                    <option value="lab">Laboratórios</option>
+                    <option value="lab">Laboratório</option>
                     <option value="aca">Academia</option>
-                    <option value="aca">Outros</option>               
-                </select> 
-            </div>
-            <div class="avancar">
-                <button class="btn btn-primary" style="background-color: #007ec1;">Avançar</button>
+                    <option value="outros">Outros</option>
+                </select>
+                <button class="btn btn-primary">Avançar</button>
             </div>
         </div>
     </div>
-</body>
+</div>
 {% endblock %}

@@ -1,164 +1,35 @@
-/* Define o fundo azul da página e a centralização do conteúdo */
-.pagina-anuncios {
-    background-color: #6B98BF; /* Fundo azul */
-    height: 100vh; /* Altura total da página */
-    display: flex;
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    align-items: center; /* Centraliza o conteúdo verticalmente */
-    position: relative; /* Permite o posicionamento absoluto do título */
-    margin: 0; /* Remove margens extras */
-    padding: 0; /* Remove espaçamentos extras */
-}
-
-/* Estilo do texto "Anúncios" no topo esquerdo */
-.titulo-anuncios {
-    color: rgb(0, 0, 0);
-    font-size: 36px;
-    position: absolute;
-    top: 60px;
-    text-align: center;
-    margin: 0; /* Remove margens extras */
-}
-.mb-3 label {
-    text-align: center;
-    display: block;
-
-}
-
-.form-label{
-    font-size: 20px
-}
-
-/* Ajusta a largura e o tamanho da barra de seleção */
-.form-select {
-    width: 100%;
-    padding: 7px; /* Reduz o padding para diminuir a altura */
-    font-size: 18px; /* Diminui o tamanho da fonte */
-    border-radius: 5px; /* Ajusta o raio da borda se necessário */
-    margin-top: 20px;
-    border: 2px solid #918e8e;
-    background-color: #f0f0f0;
-    color: #333;
-    appearance: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Estilo do quadrado centralizado com fundo cinza muito claro */
-.quadrado-centralizado {
-    width: 600px;
-    height: 450px;
-    margin-top: 50px;
-    background-color: rgb(255, 255, 255); /* Cinza muito claro, quase branco */
-    border-radius: 15px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra leve ao quadrado */
-    display: flex;
-    flex-direction: column; /* Organiza os itens verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente */
-}
-
-/* Ajusta a barra de seleção ao passar o mouse */
-.form-select:hover {
-    background-color: #e0e0e0; /* Leve alteração de cor no hover */
-    border-color: #918e8e;
-}
-
-/* Estilo das opções */
-.form-select option {
-    font-size: 16px; /* Ajusta o tamanho da fonte das opções */
-    padding: 5px; /* Reduz o padding das opções */
-}
-
-/* Estilo ao focar no campo */
-.form-select:focus {
-    outline: none;
-    border-color: #5a5959;
-    box-shadow: 0 0 5px rgba(126, 126, 126, 0.5);
-}
-
-/* Estilo do quadrado centralizado com fundo cinza muito claro */
-.quadrado-centralizado {
-    width: 600px;
-    height: 450px;
-    margin-top: 50px;
-    background-color: rgb(255, 255, 255); /* Cinza muito claro, quase branco */
-    border-radius: 15px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra leve ao quadrado */
-}
-
-/* Estilo do botão "Avançar" */
-.avancar {
-    position: absolute; /* Permite o posicionamento absoluto dentro do contêiner */
-    bottom: 20px; /* Distância do fundo do quadrado */
-    right: 20px; /* Distância da borda direita do quadrado */
-    /* O div envolvente não precisa de padding ou bordas */
-    padding: 0;
+/* Ajustes de estilo globais */
+body {
+    background-color: #6B98BF; /* Definição do fundo azul */
     margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-/* Estilo do botão "Avançar" */
-.btn-primary {
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    font-size: 16px; /* Tamanho da fonte do botão */
-    border: none; /* Remove a borda padrão */
-    border-radius: 5px; /* Bordas arredondadas */
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: white; /* Cor do texto do botão */
-    cursor: pointer; /* Aponta que o elemento é clicável */
-    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+/* Ajustes para a imagem */
+img {
+    width: 80px;
+    height: auto;
 }
 
-/* Estilo do botão ao passar o mouse */
-.btn-primary:hover {
-    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+/* Ajustes para o ícone de voltar */
+.bi-caret-left-fill {
+    font-size: 30px;
+    color: #47525E;
 }
 
-/* Estilo do quadrado centralizado com fundo cinza muito claro */
-.quadrado-centralizado {
-    position: relative; /* Define o contêiner como referência para o posicionamento absoluto */
-    width: 600px;
-    height: 450px;
-    margin-top: 50px;
-    background-color: rgb(255, 255, 255); /* Cinza muito claro, quase branco */
-    border-radius: 15px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra leve ao quadrado */
-    display: flex;
-    flex-direction: column; /* Organiza os itens verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente */
-}
-
-/* Ajusta a largura e o tamanho da barra de seleção */
-.form-select {
-    width: 100%;
-    padding: 7px; /* Reduz o padding para diminuir a altura */
-    font-size: 18px; /* Diminui o tamanho da fonte */
-    border-radius: 5px; /* Ajusta o raio da borda se necessário */
-    margin-top: 20px;
-    border: 2px solid #918e8e;
-    background-color: #f0f0f0;
-    color: #333;
-    appearance: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Estilo ao focar no campo */
-.form-select:focus {
-    outline: none;
-    border-color: #5a5959;
-    box-shadow: 0 0 5px rgba(126, 126, 126, 0.5);
-}
-
+/* Responsividade */
 @media (max-width: 768px) {
-    /* Reduz o tamanho do quadrado em telas menores */
-    .quadrado-centralizado {
-        width: 300px;
-        height: 300px;
+    img {
+        width: 60px;
     }
 
-    .titulo-anuncios {
-        font-size: 28px; /* Ajusta o tamanho do texto "Anúncios" para telas menores */
+    h1 {
+        font-size: 24px;
+    }
+
+    .card {
+        max-width: 100%;
+        padding: 1.5rem;
     }
 }
