@@ -20,7 +20,22 @@
             justify-content: left;
             margin: 20px;
         }
-        .quadrado {
+        .quadrado1 {
+            background-color: #aec4db; /* Cor de fundo azul */
+            color: rgb(0, 0, 0); /* Cor do texto */
+            display: inline-flex; /* Usa inline-flex para o tamanho ser adaptável */
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+            padding: 10px; /* Espaçamento interno */
+            border-radius: 8px; /* Bordas arredondadas */
+            font-family: Arial, sans-serif; /* Fonte do texto */
+            text-align: center; /* Alinhamento do texto */
+            font-size: 16px; /* Tamanho da fonte */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efeito de profundidade */
+            margin: 5px; /* Espaço entre os quadrados */
+            max-width: 100%; /* Para não exceder o contêiner pai */
+        }
+        .quadrado2 {
             background-color: #007BFF; /* Cor de fundo azul */
             color: white; /* Cor do texto */
             display: inline-flex; /* Usa inline-flex para o tamanho ser adaptável */
@@ -35,11 +50,17 @@
             margin: 5px; /* Espaço entre os quadrados */
             max-width: 100%; /* Para não exceder o contêiner pai */
         }
-        
+
         .container-right {
             display: flex;
             flex-direction: column;
             align-items: flex-end; /* Alinha a container à direita */
+            gap: 10px; /* Espaço entre os quadrados */
+        }
+        .container-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Alinha a container à direita */
             gap: 10px; /* Espaço entre os quadrados */
         }
         .btn {
@@ -166,11 +187,14 @@ main {
                 <div class="row">
                     <!-- Coluna 4/12 -->
                     <div class="col-md-4 container-custom">
-                        <img src="mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3">julianarmoreira
+                        <img src="/static/img/mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3">julianarmoreira
+                        <div class="container-left">
+                            <div class="quadrado2">Olá, Boa tarde!</div>
+                            <div class="quadrado2">Teria algum horario amanhã na parte da tarde?</div>
+                        </div>
                         <div class="container-right">
-                            <div class="quadrado">Mensagem 1 com um texto que pode ser longo</div>
-                            <div class="quadrado">Mensagem 2</div>
-                            <div class="quadrado">Mensagem 3</div>
+                            <div class="quadrado1">Boa Tarde!</div>
+                            <div class="quadrado1">Teria por volta das 16h. Pode ser?</div>
                         </div>
                         
                     </div>
