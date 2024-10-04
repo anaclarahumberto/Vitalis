@@ -118,27 +118,34 @@
             });
         });
     </script>
-
     <div class="modal fade" id="novaPubModal" tabindex="-1" role="dialog" aria-labelledby="novaPubModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="novaPubModalLabel"><b>Criar nova publicação</b></h5> 
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content" style="padding: 20px; border-radius: 50px;"> <!-- Adicionado border-radius -->
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <h5 class="modal-title" id="novaPubModalLabel" style="text-align: center; flex-grow: 1;"><b>Criar nova publicação</b></h5> 
+                    <button type="button" class="close" aria-label="Close" data-dismiss="modal" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <i class="bi bi-x-circle" style="font-size: 24px; color: black;"></i>
+                    </button>            
+                </div>
+                <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <i class="bi bi-image" style="font-size: 36px; margin: 10px;"></i>
+                    <i class="bi bi-play-btn-fill" style="font-size: 36px; margin: 10px;"></i>
+                    <p>Arraste as fotos e os vídeos aqui</p>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; margin-top: auto; margin-bottom: 20px;">
+                    <button type="button" class="btn btn-primary central-button" style="padding: 0; width: 250px; height: 35px; font-size: 20px; display: flex; justify-content: center; align-items: center; border-radius: 20px; background-color:#0F6481;">Selecionar do Computador</button>
+                    <div style="margin-top: 10px; font-size: 18px;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="checkbox" style="margin-right: 10px; transform: scale(1.5);">
+                            Tornar publicação privada
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <i class="bi bi-image"></i>
-                <i class="bi bi-play-btn-fill"></i>
-                <p>Arraste as fotos e os vídeos aqui</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary central-button">Selecionar do Computador</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+    
+    
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
