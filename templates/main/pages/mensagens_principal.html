@@ -51,93 +51,53 @@
             color: white; /* Cor do texto ao passar o mouse */
         }
 
-        /* Chat window */
-        .chat-window {
-            width: 80%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
 
-        .chat-header {
+
+        body {
+            font-family: Arial, sans-serif;
             display: flex;
+            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-
-        .chat-header img {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .chat-header h2 {
+            height: 100vh;
             margin: 0;
-            font-size: 18px;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .container h2 {
+            font-size: 24px;
             color: #333;
-        }
-
-        .messages {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding-bottom: 20px;
-        }
-
-        .message {
-            display: flex;
             margin-bottom: 10px;
         }
 
-        .message.sent {
-            justify-content: flex-end;
-        }
-
-        .message.received {
-            justify-content: flex-start;
-        }
-
-        .message .bubble {
-            max-width: 60%;
-            padding: 10px;
-            border-radius: 10px;
-            position: relative;
-        }
-
-        .message.sent .bubble {
-            background-color: #cfe9ff;
-        }
-
-        .message.received .bubble {
-            background-color: #e9e9eb;
-        }
-
-        /* Message input */
-        .message-input {
-            display: flex;
-            align-items: center;
-            border-top: 1px solid #ddd;
-            padding: 10px;
-        }
-
-        .message-input input {
-            flex-grow: 1;
-            border: none;
-            padding: 10px;
+        .container p {
             font-size: 16px;
-            border-radius: 20px;
-            background-color: #f1f1f1;
-            margin-right: 10px;
+            color: #666;
+            margin-bottom: 20px;
         }
 
-        .message-input button {
+        .container button {
+            padding: 10px 20px;
+            background-color: #006064;
+            color: white;
             border: none;
-            background-color: transparent;
+            border-radius: 25px;
+            font-size: 16px;
             cursor: pointer;
         }
 
+        .container button:hover {
+            background-color: #004d50;
+        }
     </style>
 </head>
 <body>
@@ -145,6 +105,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h3>Mensagens</h3>
+        
         <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
             <img src="/static/img/mae1.jpeg" alt="User">
             <span>alexandrappinheiros</span>
@@ -171,40 +132,16 @@
         </div>
     </div>
 
-    <!-- Chat Window -->
-    <div class="chat-window">
-        <div class="chat-header">
-            <img src="/static/img/mae4.jpeg" alt="User">
-            <h2>louzada.vivianne</h2>
-        </div>
+    <!-- Chat Window -->  
 
-        <div class="messages">
-   
-            <div class="message sent">
-                <div class="bubble">
-                    <p>Boa tarde. Posso confirmar a consulta de amanha às 8h?</p>
-                </div>
-            </div>
-            <div class="message received">
-                <div class="bubble">
-                    <p>Pode confirmar</p>
-                </div>
-            </div>
-            <div class="message sent">
-                <div class="bubble">
-                    <p>Ok. Marcadinho.</p>
-                </div>
-            </div>
+        <div class="container">
+            <!-- Substitua esta linha com a URL do ícone que você deseja usar -->
+            <img src="/static/img/novamensagem.png" alt="Ícone de Mensagens">
+            <h2>Suas Mensagens</h2>
+            <p>Envie fotos e mensagens privadas para um amigo ou grupo</p>
+            <button>Enviar mensagem</button>
         </div>
-
-        <!-- Message Input -->
-        <div class="message-input">
-            <input type="text" placeholder="Digite uma mensagem...">
-            <button><i class="bi bi-arrow-right-circle-fill"></i></button>
-            <button>😊</button>
-        </div>
-    </div>
-
+        
 </body>
 </html>
 {% endblock %}
