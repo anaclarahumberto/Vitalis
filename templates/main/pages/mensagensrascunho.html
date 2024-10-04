@@ -1,0 +1,254 @@
+{% extends "shared/pages/base.html" %}
+{% block subtitulo %}Mensagens{% endblock %}
+{% block conteudo %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        .foto-redonda-pequena {
+            width: 60px; /* Ajuste o tamanho da imagem conforme necessário */
+            height: 60px;
+            border-radius: 50%;
+        }
+        .container-custom {
+            border: 1px solid #ddd; /* Apenas para visualização */
+            padding: 10px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Espaço entre os quadrados */
+            justify-content: left;
+            margin: 20px;
+        }
+        .quadrado1 {
+            background-color: #aec4db; /* Cor de fundo azul */
+            color: rgb(0, 0, 0); /* Cor do texto */
+            display: inline-flex; /* Usa inline-flex para o tamanho ser adaptável */
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+            padding: 10px; /* Espaçamento interno */
+            border-radius: 8px; /* Bordas arredondadas */
+            font-family: Arial, sans-serif; /* Fonte do texto */
+            text-align: center; /* Alinhamento do texto */
+            font-size: 16px; /* Tamanho da fonte */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efeito de profundidade */
+            margin: 5px; /* Espaço entre os quadrados */
+            max-width: 100%; /* Para não exceder o contêiner pai */
+        }
+        .quadrado2 {
+            background-color: #007BFF; /* Cor de fundo azul */
+            color: white; /* Cor do texto */
+            display: inline-flex; /* Usa inline-flex para o tamanho ser adaptável */
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+            padding: 10px; /* Espaçamento interno */
+            border-radius: 8px; /* Bordas arredondadas */
+            font-family: Arial, sans-serif; /* Fonte do texto */
+            text-align: center; /* Alinhamento do texto */
+            font-size: 16px; /* Tamanho da fonte */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efeito de profundidade */
+            margin: 5px; /* Espaço entre os quadrados */
+            max-width: 100%; /* Para não exceder o contêiner pai */
+        }
+
+        .container-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Alinha a container à direita */
+            gap: 10px; /* Espaço entre os quadrados */
+        }
+        .container-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Alinha a container à direita */
+            gap: 10px; /* Espaço entre os quadrados */
+        }
+        .btn {
+            /*border: 1px solid #ffffff; Cor da borda */
+            border-radius: 5px; /* Borda arredondada */
+            transition: background-color 0.3s; /* Transição suave */
+        }
+        
+        .btn:hover {
+            background-color: #bad1e9; /* Cor ao passar o mouse */
+            color: white; /* Cor do texto ao passar o mouse */
+        }
+        /* General container padding */
+.container {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Circular profile image style */
+.foto-redonda-pequena {
+    width: 50px;          /* Fixed width */
+    height: 50px;         /* Fixed height */
+    border-radius: 50%;   /* Circular shape */
+    object-fit: cover;    /* Ensures the image covers the area without distortion */
+    object-position: center;  /* Centers the image inside the circle */
+    border: 2px solid #ddd;  /* Optional border for better aesthetics */
+}
+
+/* Align icon next to text */
+.icone-profissional {
+    color: #007bff;
+    font-size: 1.2rem;
+}
+
+/* Flex container for alignment */
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+/* Bottom border for section headings */
+h3 {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Spacing and alignment adjustments */
+.me-3 {
+    margin-right: 1rem;
+}
+
+/* Text center alignment */
+.text-center {
+    text-align: center;
+}
+
+/* Minimum height for the main content */
+main {
+    min-height: 100vh;
+}
+
+/* Breakpoint for smaller screens */
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+    .foto-redonda-pequena {
+        width: 60px;
+        height: 60px;
+    }
+}
+.input-container {
+    position: relative; /* Para posicionar o ícone */
+}
+.send-icon {
+    position: absolute;
+    right: 10px; /* Distância do lado direito */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para centralizar */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+.input-container {
+    position: relative; /* Para posicionar o ícone */
+}
+.send-icon {
+    position: absolute;
+    right: 10px; /* Distância do lado direito */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para centralizar */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+/*.custom-input {
+    width: 100%; /* Mantém 100% da largura do contêiner pai */
+    /*height: 600px; /* Ajuste a altura conforme necessário */
+    /*padding-right: 40px; /* Espaço para o ícone */
+/*}*/
+.form-control{
+    width: auto; /* Mantém 100% da largura do contêiner pai */
+    height: 60px; /* Ajuste a altura conforme necessário */
+    padding-right: 40px; /* Espaço para o ícone */
+}
+
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <!-- Coluna 8/12 aaaaa -->
+                <div class="col-md-8 container-custom">
+                    <p>dranathaliacastellani</p>
+                    <h3 class="text-left">Mensagens</h3>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
+                            <img src="/static/img/mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-2"> 
+                            julianarmoreira
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
+                            <img src="/static/img/mae2.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            priscilaalmeida
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
+                            <img src="/static/img/mae3.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            rafaela.cruz
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
+                            <img src="/static/img/mae4.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            tatiane_amacedo
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
+                            <img src="/static/img/mae5.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            _camposkatia
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
+                            <img src="/static/img/mae6.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            vanessacardosolima
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- Coluna 4/12 -->
+            <div class="container py-4">
+                <div class="row">
+                    <!-- Coluna 4/12 -->
+                    <div class="col-md-4 container-custom">
+                        <img src="/static/img/mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3">julianarmoreira
+                    </div>
+                    
+                    <div class="col-md-4 container-custom">
+                        <div class="container-left">
+                            <div class="quadrado2">Olá, Boa tarde!</div>
+                            <div class="quadrado2">Teria algum horário amanhã na parte da tarde?</div>
+                        </div>
+                        <div class="container-right">
+                            <div class="quadrado1">Boa Tarde!</div>
+                            <div class="quadrado1">Teria por volta das 16h. Pode ser?</div>
+                        </div>
+                    
+                        <div class="container">
+                            <div class="input-container">
+                                <input type="text" class="form-control" placeholder="Digite sua mensagem aqui..." />
+                                
+                            </div>
+                            
+                        </div>
+                        <i class="bi bi-arrow-right-circle-fill"></i>
+                    </div>
+                    
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+                     
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Inclua o Bootstrap JS (opcional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
