@@ -131,6 +131,36 @@ main {
         height: 60px;
     }
 }
+.input-container {
+    position: relative; /* Para posicionar o ícone */
+}
+.send-icon {
+    position: absolute;
+    right: 10px; /* Distância do lado direito */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para centralizar */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+.input-container {
+    position: relative; /* Para posicionar o ícone */
+}
+.send-icon {
+    position: absolute;
+    right: 10px; /* Distância do lado direito */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para centralizar */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+/*.custom-input {
+    width: 100%; /* Mantém 100% da largura do contêiner pai */
+    /*height: 600px; /* Ajuste a altura conforme necessário */
+    /*padding-right: 40px; /* Espaço para o ícone */
+/*}*/
+.form-control{
+    width: auto; /* Mantém 100% da largura do contêiner pai */
+    height: 60px; /* Ajuste a altura conforme necessário */
+    padding-right: 40px; /* Espaço para o ícone */
+}
 
     </style>
 </head>
@@ -188,16 +218,30 @@ main {
                     <!-- Coluna 4/12 -->
                     <div class="col-md-4 container-custom">
                         <img src="/static/img/mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3">julianarmoreira
+                    </div>
+                    
+                    <div class="col-md-4 container-custom">
                         <div class="container-left">
                             <div class="quadrado2">Olá, Boa tarde!</div>
-                            <div class="quadrado2">Teria algum horario amanhã na parte da tarde?</div>
+                            <div class="quadrado2">Teria algum horário amanhã na parte da tarde?</div>
                         </div>
                         <div class="container-right">
                             <div class="quadrado1">Boa Tarde!</div>
                             <div class="quadrado1">Teria por volta das 16h. Pode ser?</div>
                         </div>
-                        
+                    
+                        <div class="container">
+                            <div class="input-container">
+                                <input type="text" class="form-control" placeholder="Digite sua mensagem aqui..." />
+                                
+                            </div>
+                            
+                        </div>
+                        <i class="bi bi-arrow-right-circle-fill"></i>
                     </div>
+                    
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+                     
                 </div>
             </div>
         </div>
