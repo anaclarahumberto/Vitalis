@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Inclua o Bootstrap CSS -->
+{% extends "shared/pages/base.html" %}
+{% block subtitulo %}Mensagens{% endblock %}
+{% block conteudo %}
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
     <style>
         .foto-redonda-pequena {
@@ -168,7 +165,7 @@ main {
                     <h3 class="text-left">Mensagens</h3>
                     <div class="d-flex align-items-center mb-3">
                         <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
-                            <img src="mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-2"> 
+                            <img src="/static/img/mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-2"> 
                             julianarmoreira
                         </a>
                     </div>
@@ -226,3 +223,4 @@ main {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+{% endblock %}
