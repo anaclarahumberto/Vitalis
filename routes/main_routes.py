@@ -211,3 +211,6 @@ async def get_perfil(request: Request, usuario: str = Depends(verificar_login)):
 async def get_perfil(request: Request):
     return templates.TemplateResponse("main/pages/entrar.html", {"request": request})
 
+@router.get("/plano", response_class=HTMLResponse)
+async def get_root(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/plano.html", {"request": request})

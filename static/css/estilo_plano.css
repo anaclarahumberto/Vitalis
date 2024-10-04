@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+body {
+    background-color: #6B98BF;
+    text-align: center;
+}
+
+/* Alinha o mascote ao lado do título */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.mascote {
+    width: 150px; /* Tamanho ajustado para o mascote */
+    margin-right: 20px; /* Espaço entre o mascote e o texto */
+}
+
+.texto-header {
+    text-align: left; /* Alinhamento do texto ao lado do mascote */
+}
+
+.titulo {
+    color: #FFFFFF;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.subtitulo {
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+/* Planos ficam separados agora */
+.planos {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    margin: 40px auto; /* Espaço entre o header e os planos */
+}
+
+.plano {
+    background-color: rgba(255, 255, 255, 0.78);
+    border: 0.2cm solid #FFFFFF;
+    border-radius: 20px;
+    width: 350px;
+    padding: 80px;
+    text-align: left;
+    justify-content: flex-start;
+
+}
+
+
+h4 {
+    color: #47525E;
+    font-size: 0.9rem;
+}
+
+.preco {
+    color: #343F4B;
+    font-size: 2.5rem;
+}
+
+.preco span {
+    font-size: 1rem;
+}
+
+
+
+
+.info-extra {
+    color: #5A6978;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.cancelar {
+    display: block;
+    color: #6B98BF;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.botao-assinar {
+    background-color: #6B98BF;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    
+}
+
+.logo {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 180px;
+}
+
+.voltar {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Coloca o ícone à direita */
+    font-size: 2rem; /* Tamanho do ícone */
+    color: #FFFFFF; /* Cor do ícone */
+    text-decoration: none;
+}
+
+.voltar:hover {
+    color: #D1D1D1; /* Cor do ícone quando passar o mouse por cima */
+}
