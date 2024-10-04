@@ -21,19 +21,21 @@
             margin: 20px;
         }
         .quadrado {
-            width: 150px; /* Largura do quadrado */
-            height: 150px; /* Altura do quadrado */
             background-color: #007BFF; /* Cor de fundo azul */
             color: white; /* Cor do texto */
-            display: flex;
+            display: inline-flex; /* Usa inline-flex para o tamanho ser adaptável */
             align-items: center; /* Centraliza verticalmente */
             justify-content: center; /* Centraliza horizontalmente */
+            padding: 10px; /* Espaçamento interno */
             border-radius: 8px; /* Bordas arredondadas */
             font-family: Arial, sans-serif; /* Fonte do texto */
             text-align: center; /* Alinhamento do texto */
             font-size: 16px; /* Tamanho da fonte */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efeito de profundidade */
+            margin: 5px; /* Espaço entre os quadrados */
+            max-width: 100%; /* Para não exceder o contêiner pai */
         }
+        
         .container-right {
             display: flex;
             flex-direction: column;
@@ -112,49 +114,6 @@ main {
     </style>
 </head>
 <body>
-    <header class="col-3 cor-menu pe-0">
-        <div class="row">
-            <div class="d-inline-block col-10 min-vh-100">
-                <nav class="d-flex flex-column ps-2 min-vh-100">
-                    <a href="/" class="text-decoration-none">
-                        <img src="/static/img/logo.svg" alt="Logo" class="w-100">
-                    </a>
-                    <a class="text-white text-decoration-none my-2" href="/">
-                        <i class="bi bi-house fs-5"></i>
-                        Página Inicial</a>
-                    <a class="text-white text-decoration-none my-2" href="/perfil">
-                        <i class="bi bi-person fs-5"></i>
-                        Perfil</a>
-                    <a class="text-white text-decoration-none my-2" href="/mensagens">
-                        <i class="bi bi-envelope fs-5"></i>
-                        Mensagens</a>
-                    <a class="text-white text-decoration-none my-2" href="/notificacoes">
-                        <i class="bi bi-bell fs-5"></i>
-                        Notificações</a>
-                    <a class="text-white text-decoration-none my-2" href="/cupons">
-                        <i class="bi bi-tag fs-5"></i>
-                        Cupons</a>
-                    <a class="text-white text-decoration-none my-2" href="/nova_publicacao">
-                        <i class="bi bi-plus-circle fs-5"></i>
-                        Nova Publicação</a>
-                    <a class="text-white text-decoration-none my-2" href="/configuracoes">
-                        <i class="bi bi-gear fs-5"></i>
-                        Configurações</a>
-                    <a class="text-white text-decoration-none my-2 self-end" href="/configuracoes" style="position: fixed; top: 900px">
-                        <i class="bi bi-text-left fs-5"></i>
-                        Atividades</a>
-                </nav>
-            </div>
-            <div class="d-inline-block col-2">
-                <div class="row ">
-                    <div class="col-6 min-vh-100 bg-black bg-opacity-10 rounded-5 rounded-end-0"></div>
-                    <div class="col-6 min-vh-100 bg-black bg-opacity-10 p-0">
-                        <div class="min-vh-100 bg-white rounded-5 rounded-end-0 "></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
     <main>
         <div class="container">
@@ -171,31 +130,31 @@ main {
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
-                            <img src="mae2.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            <img src="/static/img/mae2.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
                             priscilaalmeida
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
-                            <img src="mae3.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            <img src="/static/img/mae3.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
                             rafaela.cruz
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
-                            <img src="mae4.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            <img src="/static/img/mae4.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
                             tatiane_amacedo
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
-                            <img src="mae5.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            <img src="/static/img/mae5.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
                             _camposkatia
                         </a>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <a href="#" class="text-decoration-none text-dark d-flex align-items-center btn btn-light p-2">
-                            <img src="mae6.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
+                            <img src="/static/img/mae6.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3"> 
                             vanessacardosolima
                         </a>
                     </div>
@@ -209,10 +168,11 @@ main {
                     <div class="col-md-4 container-custom">
                         <img src="mae1.jpeg" alt="gabrielbelmonte" class="foto-redonda-pequena me-3">julianarmoreira
                         <div class="container-right">
-                            <div class="quadrado">Mensagem 1</div>
+                            <div class="quadrado">Mensagem 1 com um texto que pode ser longo</div>
                             <div class="quadrado">Mensagem 2</div>
                             <div class="quadrado">Mensagem 3</div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
