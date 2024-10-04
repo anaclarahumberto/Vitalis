@@ -1,0 +1,11 @@
+{% macro input(name, label, type="text", value='', attributes='') -%}
+<div class="form-floating">
+    <input type="{{type}}" class="form-control" id="{{name}}"  name="{{name}}" placeholder=" " {{attributes|safe}} value="{{value|e}}">
+    <label for="{{name}}">{{label}}</label>
+</div>
+{%- endmacro %}
+
+
+{% macro button(label, color = 'primary') -%}
+<button class="{{btn btn-{{color}} mt-2}}" type="submit">{{label}}</button>
+{%- endmacro %}

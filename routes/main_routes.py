@@ -23,7 +23,8 @@ def verificar_login(request: Request):
 # @router.get("/")
 # async def get_root(request: Request):
 #     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
-#     if not usuario:
+#     
+#     if not usuario or not usuario.email:
 #         return templates.TemplateResponse("pages/entrar.html", {"request": request})
 #     if usuario.perfil == 1:
 #         return RedirectResponse("/aluno", status_code=status.HTTP_303_SEE_OTHER)
@@ -201,4 +202,8 @@ async def get_feedback(request: Request, usuario: str = Depends(verificar_login)
 @router.get("/perfil", response_class=HTMLResponse)
 async def get_perfil(request: Request, usuario: str = Depends(verificar_login)):
     return templates.TemplateResponse("main/pages/perfil.html", {"request": request})
+
+@router.get("/entrarMaroquio", response_class=HTMLResponse)
+async def get_perfil(request: Request):
+    return templates.TemplateResponse("main/pages/entrar.html", {"request": request})
 
