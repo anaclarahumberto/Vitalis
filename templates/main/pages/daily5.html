@@ -1,0 +1,158 @@
+{% extends "shared/pages/base.html" %}
+{% block subtitulo %}Mensagens{% endblock %}
+{% block conteudo %}
+
+<style>
+/* Estilo do overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro e semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Conteúdo do modal */
+/* Conteúdo do modal */
+.modal-content {
+    background-color: rgba(15, 15, 16, 0.0); /* Fundo escuro e semi-transparente */
+    border-radius: 10px;
+    width: 50%;
+    max-width: 800px;
+    position: relative;
+    padding: 20px;
+
+    width: 400px; /* Define a largura da imagem */
+    height: 560px; /* Mantém a proporção da altura baseada na largura */
+}
+
+/* Cabeçalho do modal */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 1.2rem;
+  color: #fff4f4;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.crown-icon {
+  margin-left: 5px;
+  font-size: 1.5rem;
+}
+
+.close-btn {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Corpo do modal */
+.modal-body {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.main-image {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Botões de navegação */
+.prev-btn, .next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+/* Rodapé do modal */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.message-btn {
+  background-color: #ffffff;
+  border: 1px solid #fff4f4;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.icon-container {
+  display: flex;
+  gap: 10px;
+}
+
+.volume-icon, .like-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.main-image {
+    width: 300px; /* Define a largura da imagem */
+    height: 450; /* Mantém a proporção da altura baseada na largura */
+    border-radius: 10px; /* Mantém as bordas arredondadas */
+  }
+</style>
+
+<div class="modal-overlay">
+    <div class="modal-content">
+      <!-- Cabeçalho -->
+      <div class="modal-header">
+        <img src="/static/img/fisiolivia.jpg" alt="Foto do perfil" class="profile-picture">
+        <span class="username">fisioliviaaredes</span>
+        <span class="crown-icon">👑</span>
+        <span class="close-btn">&times;</span>
+      </div>
+  
+      <!-- Imagem principal -->
+      <div class="modal-body">
+        <img src="/static/img/dailyfisio.jpg" alt="Imagem" class="main-image">
+      </div>
+  
+      <!-- Botões de navegação -->
+      <button class="prev-btn">&larr;</button>
+      <button class="next-btn">&rarr;</button>
+  
+      <!-- Botões de controle e ação -->
+      <div class="modal-footer">
+        <button class="message-btn">Enviar mensagem</button>
+        <div class="icon-container">
+          <span class="volume-icon">🔊</span>
+          <span class="like-icon">❤️</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
