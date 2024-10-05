@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay Example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style> body {
+    font-family: Arial, sans-serif;
+}
+
+h1, p {
+    text-align: center;
+}
+
+/* Estilo para a tela sobreposta */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    display: none; /* Oculto por padrão */
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 50px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Oculto por padrão */
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    background-color: white;
+    width: 50%; /* Reduzindo a largura para 50% */
+    height: 50%; /* Reduzindo a altura para 50% */
+    max-width: 500px; /* Definindo um limite máximo de largura */
+    max-height: 400px; /* Definindo um limite máximo de altura */
+    border-radius: 20px; /* Mantendo as bordas arredondadas */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.close-btn {
+    font-size: 30px;
+    cursor: pointer;
+    color: grey;
+}
+
+.input-text {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+}
+
+</style>
+
+
+<body>
+    <!--<button id="openOverlay">Abrir Tela</button>-->
+
+    <!-- Sobreposição -->
+    <!--<div id="overlay" class="overlay">
+        <div class="overlay-content">-->
+        <div class="modal-header">
+            <h2>Nova Mensagem</h2>
+            <span id="closeOverlay" class="close-btn">&times;</span>
+    </div>
+    <input type="text" placeholder="Nova mensagem para..." id="searchInput" class="input-text">
+    <div id="searchResults"></div> <!-- Aqui exibiremos os resultados da pesquisa -->
+
+    <script src="script.js"></script>
+</body>
+</html>
+
