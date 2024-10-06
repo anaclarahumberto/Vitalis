@@ -1,1 +1,36 @@
 {% extends "pages/base_anunciante.html" %}
+{% block subtitulo %}Anunciante{% endblock %}
+
+{% block conteudo %}
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center" style="height: 580px;">
+        <div class="col-md-6">
+            <h2 class="text-center mb-5 text-dark" style="font-size: 28px;">Para começar, nos informe que tipo de companhia você é:</h2>
+            <div class="form-group">
+                <select class="form-select bg-light border-0" id="tipoCompanhia" onchange="esconderTexto()" style="height: 50px; font-size: 18px;  background-color: #c5c5c5 !important;">
+                    <option value="" selected disabled>Escolha uma opção</option>
+                    <option value="tipo1">Profissional da saúde</option>
+                    <option value="tipo2">Farmácia</option>
+                    <option value="tipo3">Laboratórios</option>
+                    <option value="tipo4">Academia</option>
+                </select>
+            </div>
+            <div class="text-center mt-5">
+                <button class="btn" id="avancarButton" style="border-radius: 20px; background-color: #0F6481; color: white; font-size: 18px; padding: 10px 20px;">Avançar</button> <!-- Aumentado o tamanho do botão -->
+            </div>
+        </div>
+    </div>    
+</div>
+
+<script>
+    function esconderTexto() {
+        const select = document.getElementById('tipoCompanhia');
+        const selectedValue = select.value;
+
+        // Se o valor selecionado não for vazio, removemos a opção padrão
+        if (selectedValue) {
+            select.options[0].style.display = 'none'; // Oculta a opção "Escolha uma opção"
+        }
+    }
+</script>
+{% endblock %}
