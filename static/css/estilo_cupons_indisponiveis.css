@@ -1,0 +1,44 @@
+/* Estilo do título e navegação */
+.titulo {
+    text-align: center; /* Centraliza o título e a navegação horizontalmente */
+    margin-top: 20px; /* Reduz o espaçamento superior */
+}
+
+.nav {
+    margin-top: 15px; /* Ajusta o espaçamento entre o título e a navegação */
+}
+
+/* Link para a aba "Ativos" */
+.link-ativos {
+    color: #969FAA !important; /* Define a cor do link para "Ativos" */
+    font-size: 16px; /* Reduz o tamanho da fonte dos links */
+}
+
+/* Link para a aba "Indisponíveis" */
+.link-indisponiveis {
+    color: #33F2E0 !important; /* Define a cor do link para "Indisponíveis" */
+    font-size: 16px; /* Reduz o tamanho da fonte dos links */
+}
+
+/* Estilo para o container do ícone e texto */
+.adicionar-cupom {
+    display: flex; /* Define o layout como flex para alinhar o ícone e o texto em linha */
+    align-items: center; /* Alinha verticalmente o ícone e o texto no centro */
+    font-size: 18px; /* Reduz o tamanho da fonte */
+    color: #47525E; /* Define a cor do texto */
+    padding-left: 4px; /* Reduz o espaçamento à esquerda do texto */
+    font-weight: bold; /* Define o peso da fonte como negrito */
+    gap: 6px; /* Reduz o espaçamento entre o ícone e o texto */
+}
+
+/* Estilo para o ícone */
+.adicionar-cupom i {
+    font-size: 16px; /* Reduz o tamanho do ícone */
+    color: #47525E; /* Define a cor do ícone, se necessário */
+}
+
+/* Estilo para o texto */
+.adicionar-cupom p {
+    margin: 0; /* Remove a margem padrão do elemento <p> */
+    font-size: 18px; /* Reduz o tamanho da fonte do texto */
+}

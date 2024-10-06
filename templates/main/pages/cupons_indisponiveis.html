@@ -1,5 +1,14 @@
 {% extends "shared/pages/base.html" %}
 {% block subtitulo %}Cupons{% endblock %}
 {% block conteudo %}
-<h1>Oi</h1>
+<link rel="stylesheet" href="/static/css/estilo_cupons_indisponiveis.css">
+
+<div class="titulo">
+    <h2>Cupons de desconto</h2>
+    <nav class="nav nav-underline nav-fill">
+        <a href="/cupons_ativos" class="nav-link active link-ativos">Ativos</a>
+        <a href="/cupons_indisponiveis" class="nav-link active link-indisponiveis" >Indisponíveis</a>
+    </nav>
+</div>
+
 {% endblock %}
