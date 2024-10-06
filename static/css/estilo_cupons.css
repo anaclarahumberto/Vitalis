@@ -24,7 +24,6 @@
 .adicionar-cupom {
     display: flex; /* Define o layout como flex para alinhar o ícone e o texto em linha */
     align-items: center; /* Alinha verticalmente o ícone e o texto no centro */
-    margin-top: 20px; /* Reduz o espaçamento acima do container */
     font-size: 18px; /* Reduz o tamanho da fonte */
     color: #47525E; /* Define a cor do texto */
     padding-left: 4px; /* Reduz o espaçamento à esquerda do texto */

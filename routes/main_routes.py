@@ -195,9 +195,13 @@ async def get_anunciante(request: Request, usuario: str = Depends(verificar_logi
 async def get_editar(request: Request, usuario: str = Depends(verificar_login)):
     return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request}) 
 
-@router.get("/cupons", response_class=HTMLResponse)
-async def get_cupons(request: Request, usuario: str = Depends(verificar_login)):
-    return templates.TemplateResponse("main/pages/cupons.html", {"request": request}) 
+@router.get("/cupons_ativos", response_class=HTMLResponse)
+async def get_cuponsativos(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/cupons_ativos.html", {"request": request}) 
+
+@router.get("/cupons_indisponiveis", response_class=HTMLResponse)
+async def get_cuponsindisponiveis(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/cupons_indisponiveis.html", {"request": request}) 
 
 @router.get("/feedback", response_class=HTMLResponse)
 async def get_feedback(request: Request, usuario: str = Depends(verificar_login)):
