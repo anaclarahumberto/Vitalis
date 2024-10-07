@@ -163,9 +163,9 @@ async def get_sair():
 async def get_root(request: Request, usuario: str = Depends(verificar_login)):
     return templates.TemplateResponse("main/pages/index.html", {"request": request})
 
-@router.get("/mensagens", response_class=HTMLResponse)
-async def get_root(request: Request, usuario: str = Depends(verificar_login)):
-    return templates.TemplateResponse("main/pages/mensagens.html", {"request": request})
+@router.get("/mensagens_principal", response_class=HTMLResponse)
+async def get_mensagens(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/mensagens_principal.html", {"request": request})
 
 @router.get("/notificacoes", response_class=HTMLResponse)
 async def get_notificacoes(request: Request, usuario: str = Depends(verificar_login)):
