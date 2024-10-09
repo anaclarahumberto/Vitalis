@@ -3,22 +3,24 @@
 {% block conteudo %}
 <link rel="stylesheet" href="/static/css/estilo_arquivados.css">
 
-<link rel="stylesheet" href="/static/css/estilos.css">
-
-
     <div class="container">
         <div class="row">
             <main class="col-9 min-vh-100">
                 <div class="container">
                     <div class="row mt-4">
                         <div class="col">
-                            <div class="experiencia-vitalis">
-                                <i class="bi bi-caret-left-fill"></i> Sua experiência com a Vitalis
+                            <div class="container mt-4">
+                                <a href="/configuracoes" class="text-decoration-none text-black">
+                                    <i class="bi bi-caret-left-fill fs-5"></i>
+                                    <span class="fs-5">Sua experiência com a Vitalis</span>
+                                </a>
                             </div>
                             <h1 class="titulo-arquivados">Arquivados</h1><br><br>
-                            <div class="linha-colorida">
-                                <span class="publicacoes">Publicações</span>
-                                <span class="dailys">Dailys</span>
+                            <div>
+                                <nav class="nav nav-underline nav-fill">
+                                    <a href="/arquivados" class="nav-link active link-publicacoes">Publicações</a>
+                                    <a href="#link1" class="nav-link active link-dailys" >Dailys</a>
+                                </nav>
                             </div>
                         </div>
                     </div>

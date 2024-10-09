@@ -3,28 +3,30 @@
 {% block conteudo %}
 <link rel="stylesheet" href="/static/css/estilo_editar_perfil.css">
 
-<body>
-
-<div class="voltar">
-    <i class="bi bi-caret-left-fill"></i> Perfil
+<div class="container mt-4">
+    <a href="/configuracoes" class="text-decoration-none text-black">
+        <i class="bi bi-caret-left-fill fs-5"></i>
+        <span class="fs-5">Perfil</span>
+    </a>
 </div>
 
-<div class="centro">
+<div class="container text-center mt-4">
     <h3>Editar perfil</h3>
-    
-    <!-- Retângulo para edição de perfil -->
-    <div class="perfil-editar">
-        <div class="perfil-info">
-            <img src="/static/img/dra.nathalia.jpg" alt="Foto de Perfil" class="foto-perfil">
-            <div class="perfil-texto">
-                <h5>dranathaliacastellani</h5>
-                <p>Nathália Castellani</p>
+
+    <div class="--bg-tertiary-color rounded d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <div class="d-flex align-items-center mb-3 mb-md-0">
+            <img src="/static/img/dra.nathalia.jpg" alt="Foto de Perfil" class="rounded-circle me-3" style="width: 100px; height: 100px;">
+            <div class="text-start">
+                <h5 class="mb-1">dranathaliacastellani</h5>
+                <p class="mb-0">Nathália Castellani</p>
             </div>
         </div>
-        <button class="btn-alterar-foto">Alterar Foto</button>
+        <button class="btn btn-primary" style="border-radius: 20px; background-color: #0F6481;">Alterar Foto</button>
     </div>
+
 </div>
 
+<div class="container mt-4">
     <!-- Formulário com rótulo e textarea -->
     <form>
         <div class="mb-3">
@@ -35,7 +37,7 @@
         <div class="mb-3">
             <label for="Categoria" class="form-label">Categoria</label>
             <select name="categoria" id="categoria" class="form-select">
-                <option value="" ></option>
+                <option value=""></option>
                 <option value="med">Médico</option>
                 <option value="nut">Nutricionista</option>
                 <option value="per">Personal</option>
@@ -43,20 +45,22 @@
                 <option value="odo">Odontologista</option>
             </select> 
         </div>
+
         <div class="mb-3">
             <label for="Gênero" class="form-label">Gênero</label>
             <select name="gênero" id="gênero" class="form-select">
-                <option value="" ></option>
+                <option value=""></option>
                 <option value="fem">Feminino</option>
                 <option value="mas">Masculino</option>
                 <option value="per">Personalizado</option>
                 <option value="pno">Prefiro não opinar</option>                
             </select> 
         </div>
+
         <div class="text-center">
-            <button type="submit" class="btn-alterar-foto">Enviar</button>
+            <button type="submit" class="btn btn-primary mt-3" style="border-radius: 20px; background-color: #0F6481;">Enviar</button>
         </div>
     </form>
+</div>
 
-</body>
 {% endblock %}

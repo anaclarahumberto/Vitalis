@@ -3,49 +3,46 @@
 {% block conteudo %}
 <link rel="stylesheet" href="/static/css/estilo_feedback.css">
 
-    <div class="p">
-        <i class="bi bi-caret-left-fill"></i> Sua experiência com a Vitalis
-    </div>
-    <h4 class="text-center mb-4 ">
+    <div class="container mt-5 p-0">
+        <a class="text-black text-decoration-none my-2" href="/configuracoes">
+            <i class="bi bi-caret-left-fill fs-5"></i>
+            <span class="fs-5">Sua experiência com a Vitalis</span> 
+        </a>
+    </div>  
+    <h4 class="text-center mt-5 mb-5 ">
         Nos dê seu feedback! 
         <i class="bi bi-hand-thumbs-up icon-thumbs-up"></i>
         <i class="bi bi-hand-thumbs-down icon-thumbs-down"></i>
     </h4>
     <div class="p">Ajude-nos contando suas experiências...</div>
         <form>
-        <!-- Primeira Pergunta -->
             <div class="mb-3">
                 <label for="experienciaGeral" class="form-label">Como você descreveria sua experiência geral na nossa rede social?</label>
                 <textarea class="form-control" id="experienciaGeral" rows="2" placeholder="Escreva aqui sua resposta..."></textarea>
             </div>
 
-        <!-- Segunda Pergunta -->
             <div class="mb-3">
                 <label for="melhoria" class="form-label">Há algo que você gostaria de mudar ou melhorar na nossa rede social?</label>
                 <textarea class="form-control" id="melhoria" rows="2" placeholder="Escreva aqui sua resposta..."></textarea>
             </div>
 
-        <!-- Terceira Pergunta -->
             <div class="mb-3">
                 <label for="interfaceFacil" class="form-label">A interface da nossa rede social é fácil de usar?</label>
                 <textarea class="form-control" id="interfaceFacil" rows="2" placeholder="Escreva aqui sua resposta..."></textarea>
             </div>
 
-            <!-- Quarta Pergunta -->
             <div class="mb-3">
                 <label for="dificuldade" class="form-label">Você encontrou alguma dificuldade ao navegar pelo nosso site/aplicativo?</label>
                     <textarea class="form-control" id="dificuldade" rows="2" placeholder="Escreva aqui sua resposta..."></textarea>
                 </div>
 
-            <!-- Quinta Pergunta -->
             <div class="mb-3">
                 <label for="qualidadeConteudo" class="form-label">Como você avalia a qualidade do conteúdo compartilhado por outros usuários?</label>
                 <textarea class="form-control" id="qualidadeConteudo" rows="2" placeholder="Escreva aqui sua resposta..."></textarea>
             </div>
 
-            <!-- Botão Enviar -->
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary mt-3" style="border-radius: 20px; background-color: #0F6481;">Enviar</button>
             </div>
         </form>
 
