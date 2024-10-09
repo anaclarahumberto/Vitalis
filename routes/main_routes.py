@@ -218,3 +218,24 @@ async def get_perfil(request: Request):
 @router.get("/plano", response_class=HTMLResponse)
 async def get_root(request: Request, usuario: str = Depends(verificar_login)):
     return templates.TemplateResponse("main/pages/plano.html", {"request": request})
+
+@router.get("/daily1", response_class=HTMLResponse)
+async def get_daily(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/daily1.html", {"request": request})
+
+@router.get("/daily2", response_class=HTMLResponse)
+async def get_daily(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/daily2.html", {"request": request})
+
+@router.get("/daily3", response_class=HTMLResponse)
+async def get_daily(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/daily3.html", {"request": request})
+
+@router.get("/daily4", response_class=HTMLResponse)
+async def get_daily(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/daily4.html", {"request": request})
+
+@router.get("/daily5", response_class=HTMLResponse)
+async def get_daily(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/daily5.html", {"request": request})
+

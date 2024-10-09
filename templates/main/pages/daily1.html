@@ -1,5 +1,5 @@
 {% extends "shared/pages/base.html" %}
-{% block subtitulo %}Mensagens{% endblock %}
+{% block subtitulo %}Daily{% endblock %}
 {% block conteudo %}
 
 <style>
@@ -132,7 +132,9 @@
         <img src="/static/img/dr.gabrielbelmonte.jpg" alt="Foto do perfil" class="profile-picture">
         <span class="username">dr.gabrielbelmonte</span>
         <span class="crown-icon">👑</span>
-        <span class="close-btn">&times;</span>
+        <a class="text-black text-decoration-none" href="/feed">
+          <span class="close-btn">&times;</span>
+        </a>
       </div>
   
       <!-- Imagem principal -->
@@ -142,7 +144,9 @@
   
       <!-- Botões de navegação -->
       <button class="prev-btn">&larr;</button>
+      <a href="/daily2">
       <button class="next-btn">&rarr;</button>
+      </a>
   
       <!-- Botões de controle e ação -->
       <div class="modal-footer">
