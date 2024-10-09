@@ -10,31 +10,29 @@
     </a>
 </div>
 
-<div class="container text-center mt-4">
+<div class="container text-center mt-4 bg-highlight"> <!-- Adicionei a classe 'bg-highlight' -->
     <h3>Editar perfil</h3>
 
-    <div class="--bg-tertiary-color rounded d-flex flex-column flex-md-row align-items-center justify-content-between">
-        <div class="d-flex align-items-center mb-3 mb-md-0">
+    <div class="--bg-tertiary-color rounded d-flex flex-column flex-md-row align-items-center justify-content-between bg-highlight"> <!-- bg-highlight aqui também -->
+        <div class="d-flex align-items-center mb-3 mb-md-0 bg-highlight"> <!-- bg-highlight aqui -->
             <img src="/static/img/dra.nathalia.jpg" alt="Foto de Perfil" class="rounded-circle me-3" style="width: 100px; height: 100px;">
-            <div class="text-start">
+            <div class="text-start bg-highlight"> <!-- bg-highlight aqui -->
                 <h5 class="mb-1">dranathaliacastellani</h5>
                 <p class="mb-0">Nathália Castellani</p>
             </div>
         </div>
         <button class="btn btn-primary" style="border-radius: 20px; background-color: #0F6481;">Alterar Foto</button>
     </div>
-
 </div>
 
-<div class="container mt-4">
-    <!-- Formulário com rótulo e textarea -->
+<div class="container mt-4 bg-highlight"> <!-- bg-highlight -->
     <form>
-        <div class="mb-3">
+        <div class="mb-3 bg-highlight"> <!-- bg-highlight -->
             <label for="Bio" class="form-label">Bio</label>
             <textarea class="form-control" id="experienciaGeral" rows="2" placeholder="Escreva aqui sua biografia..."></textarea>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 bg-highlight"> <!-- bg-highlight -->
             <label for="Categoria" class="form-label">Categoria</label>
             <select name="categoria" id="categoria" class="form-select">
                 <option value=""></option>
@@ -46,7 +44,7 @@
             </select> 
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 bg-highlight"> <!-- bg-highlight -->
             <label for="Gênero" class="form-label">Gênero</label>
             <select name="gênero" id="gênero" class="form-select">
                 <option value=""></option>
@@ -57,10 +55,11 @@
             </select> 
         </div>
 
-        <div class="text-center">
+        <div class="text-center"> <!-- bg-highlight -->
             <button type="submit" class="btn btn-primary mt-3" style="border-radius: 20px; background-color: #0F6481;">Enviar</button>
         </div>
     </form>
 </div>
+
 
 {% endblock %}

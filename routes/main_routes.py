@@ -239,3 +239,7 @@ async def get_daily(request: Request, usuario: str = Depends(verificar_login)):
 async def get_daily(request: Request, usuario: str = Depends(verificar_login)):
     return templates.TemplateResponse("main/pages/daily5.html", {"request": request})
 
+@router.get("/anunciante_escolha", response_class=HTMLResponse)
+async def get_escolha(request: Request, usuario: str = Depends(verificar_login)):
+    return templates.TemplateResponse("main/pages/anunciante_escolha.html", {"request": request})
+

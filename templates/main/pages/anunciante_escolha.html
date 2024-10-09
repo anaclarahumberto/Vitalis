@@ -1,0 +1,41 @@
+{% extends "pages/base_anunciante.html" %}
+{% block subtitulo %}Anunciante{% endblock %}
+
+{% block conteudo %}
+
+<div style="padding: 20px; border-radius: 10px; margin-top: 20px">
+    <h2>Como funciona os anúncios?</h2>
+    <div class="mt-4">
+        <p>Funciona por quantidade de exibição por dia!</p>
+        <p>Portanto, será multiplicado o valor do tipo de anúncio, vezes a quantidade desejada por você anunciante.</p>
+        <p>Exemplo: Quero que meu anúncio apareça no feed em uma frequência de exibição de 50 vezes. Então o valor total será o valor do anúncio no feed multiplicado pela quantidade de exibições informadas pelo anunciante.</p>
+    </div>
+    <div style="display: flex; gap: 20px; margin-top: 50px">
+        <!-- Primeiro quadrado azul -->
+        <div style="background-color: #A7CBD9; padding: 20px; border-radius: 10px; flex: 1; text-align: center;">
+            <h3 style="color: white;">Anúncio pelo Daily</h3>
+            <p style="color: #47525E;">Seu anúncio aparecerá no Daily dos usuários</p>
+            <p style="color: #47525E;"><strong>Taxa: 0,03</strong></p>
+        </div>
+
+        <!-- Segundo quadrado azul -->
+        <div style="background-color: #A7CBD9; padding: 20px; border-radius: 10px; flex: 1; text-align: center;">
+            <h3 style="color: white;">Anúncio pelo Feed</h3>
+            <p style="color: #47525E;">Seu anúncio aparecerá no Feed dos usuários</p>
+            <p style="color: #47525E;"><strong>Taxa: 0,05</strong></p>
+        </div>
+
+        <!-- Terceiro quadrado azul -->
+        <div style="background-color: #007EA6; padding: 20px; border-radius: 10px; flex: 1; text-align: center; color: white;">
+            <h3 style="color: white;">Anúncio pelo Daily + Feed</h3>
+            <p style="color: rgb(255, 255, 255);">Seu anúncio aparecerá no Daily e no feed dos usuários</p>
+            <p style="color: rgb(255, 255, 255);"><strong>Taxa: 0,10</strong></p>
+        </div>
+    </div>
+
+    <div style="text-align: right; margin-top: 30px;">
+        <button style="border: none; border-radius: 20px; background-color: #0F6481; color: white; font-size: 18px; padding: 10px 20px;">Avançar</button>
+    </div>
+    
+</div>
+{% endblock %}
