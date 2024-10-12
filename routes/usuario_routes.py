@@ -1,15 +1,13 @@
 import base64
-from datetime import date
-from fastapi import APIRouter, Depends, FastAPI, Form, HTTPException, Request, status
+from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi import APIRouter, Form, UploadFile, File, status
+from fastapi import APIRouter, Form
 import os
 
 import jwt
 from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
 from routes.main_routes import verificar_login
-from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
 from util.templates import obter_jinja_templates
 
 router = APIRouter()
@@ -22,6 +20,7 @@ async def get_bem_vindo(request: Request):
 
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request, usuario: str = Depends(verificar_login)):
+    print(request.state.usuario)
     dados_perfil = UsuarioRepo.obter_dados_perfil("camila01@gmail.com")
     
     if dados_perfil is None:
@@ -61,32 +60,8 @@ async def get_anunciante(request: Request, usuario: str = Depends(verificar_logi
 
 @router.get("/editar_perfil", response_class=HTMLResponse)
 async def get_editar(request: Request, usuario: str = Depends(verificar_login)):
-    # # Obtém o token do cookie de autenticação
-    # token = request.cookies.get(NOME_COOKIE_AUTH)
-    
-    # if token is None:
-    #     return RedirectResponse("/login", status_code=303)
-
-    # try:
-    #     payload = jwt.decode(token, os.getenv("JWT_SECRET"), algorithms=[os.getenv("JWT_ALGORITHM")])
-    #     cookie_email = payload.get("email")
-    # except jwt.ExpiredSignatureError:
-    #     return RedirectResponse("/login", status_code=303)
-    # except jwt.JWTError:
-    #     return RedirectResponse("/login", status_code=303)
-    # cookie_email = 
-    # # Busca os dados do usuário pelo email obtido do token
-    dados_perfil = UsuarioRepo.obter_dados_perfil("camila01@gmail.com")
-    
-    if dados_perfil is None:
-        return RedirectResponse("/erro", status_code=303)
-
-    # Verifica se os dados do usuário foram encontrados
-    if dados_perfil is None:
-        return RedirectResponse("/erro", status_code=303)
-
-    # Renderiza o template com os dados do usuário
-    return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request,"dados_perfil": dados_perfil }) 
+    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.email)
+    return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request}) 
 
 @router.post("/atualizar_perfil")
 async def editar_perfil(
@@ -143,13 +118,8 @@ async def get_feedback(request: Request, usuario: str = Depends(verificar_login)
 
 @router.get("/perfil", response_class=HTMLResponse)
 async def get_perfil(request: Request, usuario: str = Depends(verificar_login)):
-    dados_perfil = UsuarioRepo.obter_dados_perfil("camila01@gmail.com")
-    
-    if dados_perfil is None:
-        return RedirectResponse("/erro", status_code=303)
-    if dados_perfil is None:
-        return RedirectResponse("/erro", status_code=303)
-    return templates.TemplateResponse("main/pages/perfil.html", {"request": request, "dados_perfil": dados_perfil})
+    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.email)
+    return templates.TemplateResponse("main/pages/perfil.html", {"request": request})
 
 @router.get("/entrarMaroquio", response_class=HTMLResponse)
 async def get_perfil(request: Request):

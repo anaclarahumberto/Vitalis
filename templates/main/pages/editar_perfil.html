@@ -23,7 +23,7 @@
     
         <div class="--bg-tertiary-color rounded d-flex flex-column align-items-center justify-content-center bg-highlight">
             <div class="d-flex align-items-center mb-3 bg-highlight">
-                <img id="fotoPerfil" src="static/img/{{dados_perfil.id}}.jpeg" alt="Foto de Perfil" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
+                <img id="fotoPerfil" src="static/img/{{usuario.id}}.jpeg" alt="Foto de Perfil" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
             </div>
             <button type="button" id="alterarFoto" class="btn btn-primary" style="border-radius: 20px; background-color: #0F6481;">Alterar Foto</button>
             <input type="file" id="inputFoto" name="foto_perfil" accept="image/*" style="display: none;">
@@ -50,55 +50,55 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="email_atual" value="{{ dados_perfil.email }}">
+    <input type="hidden" name="email_atual" value="{{ usuario.email }}">
     <div class="mb-3 bg-highlight">
         <label for="Nome" class="form-label">Nome</label>
-        <input type="text" name="nome" class="form-control" id="nome" value="{{ dados_perfil.nome or '' }}" 
-               placeholder="{{ dados_perfil.nome or 'Nome' }}" required
-               onfocus="clearValue(this, '{{ dados_perfil.nome or 'Nome' }}')"
-               onblur="restoreValue(this, '{{ dados_perfil.nome or 'Nome' }}')">
+        <input type="text" name="nome" class="form-control" id="nome" value="{{ usuario.nome or '' }}" 
+               placeholder="{{ usuario.nome or 'Nome' }}" required
+               onfocus="clearValue(this, '{{ usuario.nome or 'Nome' }}')"
+               onblur="restoreValue(this, '{{ usuario.nome or 'Nome' }}')">
     </div>
 
     <div class="mb-3 bg-highlight">
         <label for="NomePerfil" class="form-label">Nome do Perfil</label>
-        <input type="text" name="nome_perfil" class="form-control" id="nome_perfil" value="{{ dados_perfil.nome_perfil or '' }}" 
-               placeholder="{{ dados_perfil.nome_perfil or 'Nome de Perfil' }}" required
-               onfocus="clearValue(this, '{{ dados_perfil.nome_perfil or 'Nome de Perfil' }}')"
-               onblur="restoreValue(this, '{{ dados_perfil.nome_perfil or 'Nome de Perfil' }}')">
+        <input type="text" name="nome_perfil" class="form-control" id="nome_perfil" value="{{ usuario.nome_perfil or '' }}" 
+               placeholder="{{ usuario.nome_perfil or 'Nome de Perfil' }}" required
+               onfocus="clearValue(this, '{{ usuario.nome_perfil or 'Nome de Perfil' }}')"
+               onblur="restoreValue(this, '{{ usuario.nome_perfil or 'Nome de Perfil' }}')">
     </div>    
 
     <div class="mb-3 bg-highlight">
         <label for="Email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="email" value="{{ dados_perfil.email or '' }}" 
-               placeholder="{{ dados_perfil.email or 'Email' }}" required
-               onfocus="clearValue(this, '{{ dados_perfil.email or 'Email' }}')"
-               onblur="restoreValue(this, '{{ dados_perfil.email or 'Email' }}')">
+        <input type="email" name="email" class="form-control" id="email" value="{{ usuario.email or '' }}" 
+               placeholder="{{ usuario.email or 'Email' }}" required
+               onfocus="clearValue(this, '{{ usuario.email or 'Email' }}')"
+               onblur="restoreValue(this, '{{ usuario.email or 'Email' }}')">
     </div>
 
     <div class="mb-3 bg-highlight">
         <label for="Telefone" class="form-label">Telefone</label>
-        <input type="text" name="telefone" class="form-control" id="telefone" value="{{ dados_perfil.telefone or '' }}" 
-               placeholder="{{ dados_perfil.telefone or 'Telefone' }}" required
-               onfocus="clearValue(this, '{{ dados_perfil.telefone or 'Telefone' }}')"
-               onblur="restoreValue(this, '{{ dados_perfil.telefone or 'Telefone' }}')">
+        <input type="text" name="telefone" class="form-control" id="telefone" value="{{ usuario.telefone or '' }}" 
+               placeholder="{{ usuario.telefone or 'Telefone' }}" required
+               onfocus="clearValue(this, '{{ usuario.telefone or 'Telefone' }}')"
+               onblur="restoreValue(this, '{{ usuario.telefone or 'Telefone' }}')">
     </div>
 
     <div class="mb-3 bg-highlight">
         <label for="Bio" class="form-label">Bio</label>
         <textarea name="bio_perfil" class="form-control" id="bio" rows="2"
-                  placeholder="{{ dados_perfil.bio_perfil or 'Bio' }}" required
-                  onfocus="clearValue(this, '{{ dados_perfil.bio_perfil or 'Bio' }}')"
-                  onblur="restoreValue(this, '{{ dados_perfil.bio_perfil or 'Bio' }}')">{{ dados_perfil.bio_perfil }}</textarea>
+                  placeholder="{{ usuario.bio_perfil or 'Bio' }}" required
+                  onfocus="clearValue(this, '{{ usuario.bio_perfil or 'Bio' }}')"
+                  onblur="restoreValue(this, '{{ usuario.bio_perfil or 'Bio' }}')">{{ usuario.bio_perfil }}</textarea>
     </div>
 
     <div class="mb-3 bg-highlight">
         <label for="Genero" class="form-label">Gênero</label>
         <select name="genero" id="genero" class="form-select" required>
-            <option value="" disabled {{ dados_perfil.genero is none and 'selected' }}>Selecione o gênero</option>
-            <option value="fem" {{ dados_perfil.genero == 'fem' and 'selected' }}>Feminino</option>
-            <option value="mas" {{ dados_perfil.genero == 'mas' and 'selected' }}>Masculino</option>
-            <option value="per" {{ dados_perfil.genero == 'per' and 'selected' }}>Personalizado</option>
-            <option value="pno" {{ dados_perfil.genero == 'pno' and 'selected' }}>Prefiro não opinar</option>
+            <option value="" disabled {{ usuario.genero is none and 'selected' }}>Selecione o gênero</option>
+            <option value="fem" {{ usuario.genero == 'fem' and 'selected' }}>Feminino</option>
+            <option value="mas" {{ usuario.genero == 'mas' and 'selected' }}>Masculino</option>
+            <option value="per" {{ usuario.genero == 'per' and 'selected' }}>Personalizado</option>
+            <option value="pno" {{ usuario.genero == 'pno' and 'selected' }}>Prefiro não opinar</option>
         </select> 
     </div>
     

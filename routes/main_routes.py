@@ -39,13 +39,12 @@ async def get_bem_vindo(request: Request):
 async def post_login(
     email: str = Form(...), 
     senha: str = Form(...)):
-    UsuarioRepo.criar_tabela()
     usuario = UsuarioRepo.checar_credenciais(email, senha)
     if usuario is None:
         response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
         response.set_cookie(key="mensagem_erro", value="Email ou senha incorretos", max_age=5)
         return response
-    token = criar_token(usuario.nome, usuario.email, usuario.perfil)
+    token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email, usuario.perfil)
     # nome_perfil = None
     # match (usuario[2]):
     #     case 1: nome_perfil = "profissional"
@@ -144,11 +143,12 @@ async def post_senha_redefinida(request: Request):
 #     return templates.TemplateResponse("main/pages/index.html", {"request": request})
 
 @router.get("/conta_criada", response_class=HTMLResponse)
-async def get_conta_criada(request: Request, usuario: str = Depends(verificar_login)):
+async def get_conta_criada(request: Request):
     return templates.TemplateResponse("main/pages/conta_criada.html", {"request": request})
 
 @router.get("/sair")
-async def get_sair():
+async def get_sair(request: Request):
+    request.state.usuario = None
     response = RedirectResponse("/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
     response.set_cookie(
         key=NOME_COOKIE_AUTH,

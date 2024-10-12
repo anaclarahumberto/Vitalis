@@ -1,5 +1,6 @@
 import os
 import bcrypt
+from fastapi.responses import RedirectResponse
 import jwt
 from datetime import datetime
 from datetime import timedelta
@@ -15,7 +16,9 @@ async def obter_usuario_logado(request: Request) -> dict:
             return None
         dados = validar_token(token)
         usuario = UsuarioAutenticado(
-            nome = dados["nome"], 
+            id = dados["id"],
+            nome = dados["nome"],
+            nome_perfil = dados["nome_perfil"], 
             email = dados["email"], 
             perfil= dados["perfil"])
         if "mensagem" in dados.keys():
@@ -61,29 +64,34 @@ def conferir_senha(senha: str, hash_senha: str) -> bool:
         return False
     
 
-def criar_token(nome: str, email: str, perfil: int) -> str:
+def criar_token(id: int, nome: str, nome_perfil: str, email: str, perfil: int) -> str:
     payload = {
+        "id" : id,
         "nome": nome,
+        "nome_perfil" : nome_perfil,
         "email": email,
         "perfil": perfil,
         "exp": datetime.now() + timedelta(days=1)
     }
+    print(payload)
     return jwt.encode(payload, 
         os.getenv("JWT_SECRET"),
         os.getenv("JWT_ALGORITHM"))
 
 
 def validar_token(token: str) -> dict:
+    print("JWT_SECRET:", os.getenv("JWT_SECRET"))
+    print("JWT_ALGORITHM:", os.getenv("JWT_ALGORITHM"))
     try:
         return jwt.decode(token, 
             os.getenv("JWT_SECRET"),
             os.getenv("JWT_ALGORITHM"))
     except jwt.ExpiredSignatureError:
-        return { "nome": None, "email": None, "perfil": 0, "mensagem": "Token expirado" }
+        return { "id": None, "nome": None, "nome_perfil": None, "email": None, "perfil": 0, "mensagem": "Token expirado" }
     except jwt.InvalidTokenError:
-        return { "nome": None, "email": None, "perfil": 0, "mensagem": "Token inválido" }
+        return { "id": None, "nome": None, "nome_perfil": None, "email": None, "perfil": 0, "mensagem": "Token inválido" }
     except Exception as e:
-        return { "nome": None, "email": None, "perfil": 0, "mensagem": f"Erro: {e}" }
+        return { "id": None, "nome": None, "nome_perfil": None, "email": None, "perfil": 0, "mensagem": f"Erro: {e}" }
     
 
 def criar_cookie_auth(response, token):

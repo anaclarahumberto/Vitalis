@@ -1,5 +1,6 @@
 from datetime import date
 from typing import Optional
+from dtos.usuario_autenticado import UsuarioAutenticado
 from models.usuario_model import Usuario
 from sql.usuario_sql import *
 from util.auth import conferir_senha
@@ -63,7 +64,7 @@ class UsuarioRepo:
             cursor.execute(SQL_OBTER_DADOS_PERFIL, (email,))
             resultado = cursor.fetchone()
             if resultado:
-                return Usuario(
+                return UsuarioAutenticado(
                     id = resultado[0],
                     nome = resultado[1],
                     nome_perfil = resultado[2],
@@ -107,11 +108,13 @@ class UsuarioRepo:
             dados = cursor.execute(
                 SQL_CHECAR_CREDENCIAIS, (email,)).fetchone()
             if dados:
-                if conferir_senha(senha, dados[3]):
+                if conferir_senha(senha, dados[5]):
                     return Usuario(
-                        nome = dados[0],
-                        email = dados[1],
-                        perfil = dados[2]
+                        id = dados[0],
+                        nome = dados[1],
+                        nome_perfil = dados[2],
+                        email = dados[3],
+                        perfil = dados[4]
                     )
             return None
     

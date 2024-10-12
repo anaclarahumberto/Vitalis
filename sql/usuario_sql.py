@@ -63,7 +63,7 @@ SQL_ATUALIZAR_ENDERECO = """
 """
 
 SQL_CHECAR_CREDENCIAIS = """
-    SELECT nome, email, perfil, senha
+    SELECT id, nome, nome_perfil, email, perfil, senha
     FROM usuario
     WHERE email = ?
 """
