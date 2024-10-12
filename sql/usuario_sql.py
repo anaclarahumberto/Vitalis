@@ -23,10 +23,31 @@ SQL_CRIAR_TABELA = """
     
 """
 
+SQL_ATUALIZAR_TABELA = [
+    "ALTER TABLE usuario ADD COLUMN foto_perfil BOOL;",
+    "ALTER TABLE usuario ADD COLUMN nome_perfil TEXT;",
+    "ALTER TABLE usuario ADD COLUMN bio_perfil TEXT;",
+    "ALTER TABLE usuario ADD COLUMN categoria_perfil TEXT;",
+    "ALTER TABLE usuario ADD COLUMN genero TEXT;",
+    "ALTER TABLE usuario ADD COLUMN tipo_paciente TEXT;" 
+]
+
 SQL_INSERIR_USUARIO = """
     INSERT INTO usuario 
     (nome, data_nascimento, email, cpf, telefone, senha, perfil, registro_profissional)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+"""
+
+SQL_OBTER_DADOS_PERFIL = """
+    SELECT id, nome, nome_perfil, email, telefone, bio_perfil, categoria_perfil, genero
+    FROM usuario
+    WHERE email = ?
+"""
+
+SQL_ATUALIZAR_DADOS = """
+    UPDATE usuario
+    SET nome = ?, nome_perfil = ?, email = ?, telefone = ?, bio_perfil = ?, categoria_perfil = ?, genero = ?
+    WHERE email = ?
 """
 
 SQL_ATUALIZAR_ENDERECO = """
@@ -49,12 +70,6 @@ SQL_CHECAR_CREDENCIAIS = """
 
 SQL_CHECAR_ID = """
     SELECT id FROM usuario WHERE email = ?
-"""
-
-SQL_ATUALIZAR_DADOS = """
-    UPDATE usuario
-    SET nome = ?, email = ?, telefone = ?
-    WHERE email = ?
 """
 
 SQL_ATUALIZAR_SENHA = """

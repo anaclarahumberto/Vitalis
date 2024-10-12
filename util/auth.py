@@ -32,7 +32,6 @@ async def checar_autenticacao(request: Request, call_next):
         return response
     return response
 
-
 async def checar_autorizacao(request: Request):
     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
     area_do_usuario = request.url.path.startswith("/usuario")
