@@ -6,6 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/static/css/estilo_editar_perfil.css">
 
 <div class="container mt-4">
     <a href="/configuracoes" class="text-decoration-none text-black">
@@ -41,7 +42,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img id="imagemParaCorte" src="" alt="Imagem para Cortar" style="max-width: 100%;">
+                    <div id="crop-container">
+                        <img id="imagemParaCorte" src="" alt="Imagem para Cortar">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -50,6 +53,8 @@
             </div>
         </div>
     </div>
+    
+    
     <input type="hidden" name="email_atual" value="{{ usuario.email }}">
     <div class="mb-3 bg-highlight">
         <label for="Nome" class="form-label">Nome</label>
@@ -111,54 +116,76 @@
 <script>
     let cropper;
 
-    document.getElementById('alterarFoto').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('inputFoto').click();
-    });
+document.getElementById('alterarFoto').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('inputFoto').click();
+});
 
-    document.getElementById('inputFoto').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.getElementById('imagemParaCorte');
-                img.src = e.target.result;
-                $('#modalCortar').modal('show'); // Mostrar modal ao carregar a imagem
-                if (cropper) {
-                    cropper.destroy();
-                }
-                cropper = new Cropper(img, {
-                    aspectRatio: 1,
-                    viewMode: 1,
-                });
+document.getElementById('inputFoto').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById('imagemParaCorte');
+            img.src = e.target.result;
+            $('#modalCortar').modal('show'); // Exibe o modal ao carregar a imagem
+
+            if (cropper) {
+                cropper.destroy(); // Destrói o cropper anterior, se houver
             }
-            reader.readAsDataURL(file);
+
+            // Inicializa o Cropper.js com as opções corretas
+            cropper = new Cropper(img, {
+                aspectRatio: 1, // Proporção 1:1 para o corte quadrado
+                viewMode: 3, // Limita a imagem dentro do canvas
+                dragMode: 'move', // Permite mover a imagem
+                autoCropArea: 1, // A área de corte ocupará o máximo possível
+                cropBoxMovable: false, // Impede o movimento da área de corte
+                cropBoxResizable: false, // Impede o redimensionamento da área de corte
+                zoomable: true, // Permite o zoom
+                movable: true, // Permite mover a imagem
+                background: false, // Remove o fundo escuro ao redor
+                guides: false, // Remove guias de linha no cropper
+                center: false, // Remove a linha central
+                highlight: false, // Remove destaque fora da área de corte
+                modal: false, // Remove o "escurecimento" ao redor da área de corte
+            });
         }
+        reader.readAsDataURL(file);
+    }
+});
+
+document.getElementById('salvarCorte').addEventListener('click', function() {
+    // Obtém o canvas da imagem cortada
+    const canvas = cropper.getCroppedCanvas({
+        width: 300,
+        height: 300
     });
 
-    document.getElementById('salvarCorte').addEventListener('click', function() {
-        const canvas = cropper.getCroppedCanvas({
-            // Você pode remover essas linhas para usar a resolução original
-            // width: 100,
-            // height: 100,
-        });
+    // Converte o canvas para Blob (pode ser enviado ou exibido)
+    canvas.toBlob(function(blob) {
+        const url = URL.createObjectURL(blob);
+        document.getElementById('fotoPerfil').src = url; // Exibe a imagem cortada no perfil
+        const fileInput = document.getElementById('foto_perfil_blob');
+
+        // Ler o Blob como Data URL
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function() {
+            fileInput.value = reader.result; // Armazenar o Data URL no campo oculto
+        };
+
+        $('#modalCortar').modal('hide'); // Fecha o modal ao salvar a imagem cortada
+    }, 'image/png', 0.9); // Qualidade da imagem PNG em 90%
+});
+
+
+
+
+
     
-        // Convertendo a imagem cortada para um Blob
-        canvas.toBlob(function(blob) {
-            const url = URL.createObjectURL(blob);
-            document.getElementById('fotoPerfil').src = url; 
-            const fileInput = document.getElementById('foto_perfil_blob');
-    
-            // Criar um novo File para enviar com o formulário
-            const reader = new FileReader();
-            reader.readAsDataURL(blob); // Ler o Blob como Data URL
-            reader.onloadend = function() {
-                fileInput.value = reader.result; // Armazenar o Data URL no campo oculto
-            };
-    
-            $('#modalCortar').modal('hide');
-        }, 'image/png', 0.9); // Aumente a qualidade para 0.9 (90%)
-    });
+
+
 
     // Atualizar o evento de envio do formulário
     document.querySelector('form').addEventListener('submit', function(event) {

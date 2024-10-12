@@ -1,1 +1,36 @@
+/* Modal */
+#modalCortar .modal-dialog {
+    max-width: 400px;
+    margin: auto;
+}
 
+/* Área de corte fixa no quadrado */
+#crop-container {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    background-color: #f0f0f0;
+}
+
+/* Ajuste da imagem para preencher o quadrado */
+#imagemParaCorte {
+    max-width: 100%;
+    display: block;
+    position: absolute;
+}
+
+/* Adicionar o círculo ao centro da área de corte sem borda */
+#crop-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5); /* Escurecer ao redor do círculo */
+    pointer-events: none; /* Impede interação do usuário */
+    z-index: 1; /* Garante que fique sobre a imagem */
+}
