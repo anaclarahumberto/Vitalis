@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Perfil - Vitalis</title>
+    <link rel="stylesheet" href="/static/css/estilo_bem_vindo.css">
+    <link rel="stylesheet" href="/static/css/estilo_editar_perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            margin-bottom: 1em;
+        }
+
+        .btn-photo {
+            display: inline-block;
+            background-color: transparent;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-bottom: 2em; /* Aumenta o espaço abaixo do botão */
+        }
+
+        .btn-photo:hover {
+            text-decoration: none; /* Remove o sublinhado ao passar o mouse */
+        }
+
+        .btn-photo:focus {
+            outline: none;
+        }
+
+        .file-input {
+            display: none; /* Esconde o input de arquivo */
+        }
+
+        .input-group {
+            margin-bottom: 1em;
+        }
+
+        .btn-save {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75em;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .btn-save:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="modalCortar" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cortar Foto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="crop-container">
+                        <img id="imagemParaCorte" src="" alt="Imagem para Cortar">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="salvarCorte" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid full-height">
+        <div class="row no-gutters full-height">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <div class="form-container">
+                    <h2 class="form-title">Vamos finalizar seu perfil</h2>
+                    <form action="/finalizar_perfil" method="post" enctype="multipart/form-data">
+                        <!-- Imagem do perfil -->
+                        <div class="text-center">
+                            <img id="fotoPerfil" src="/static/img/perfil_sem_foto.jpg" alt="Foto de Perfil" class="profile-pic">
+                        </div>
+
+                        <!-- Botão para escolher foto (customizado) -->
+                        <label class="btn-photo" id="EscolherFoto" for="inputFoto">Escolher sua foto de perfil</label>
+                        <input type="file" class="file-input" id="inputFoto" name="foto_perfil" accept="image/*">
+                        <input type="hidden" name="foto_perfil_blob" id="foto_perfil_blob">
+                        <!-- Campo para nome do perfil -->
+                        <div class="form-row">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="nome_perfil" name="nome_perfil" placeholder="Nome do Perfil" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botão para salvar as alterações -->
+                        <button type="submit" class="btn-save">Confirmar Alterações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('profileImage');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    let cropper;
+
+    document.getElementById('EscolherFoto').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('inputFoto').click();
+    });
+
+    document.getElementById('inputFoto').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('imagemParaCorte');
+                img.src = e.target.result;
+                $('#modalCortar').modal('show'); // Exibe o modal ao carregar a imagem
+
+                if (cropper) {
+                    cropper.destroy(); // Destrói o cropper anterior, se houver
+                }
+
+                // Inicializa o Cropper.js com as opções corretas
+                cropper = new Cropper(img, {
+                    aspectRatio: 1, // Proporção 1:1 para o corte quadrado
+                    viewMode: 3, // Limita a imagem dentro do canvas
+                    dragMode: 'move', // Permite mover a imagem
+                    autoCropArea: 1, // A área de corte ocupará o máximo possível
+                    cropBoxMovable: false, // Impede o movimento da área de corte
+                    cropBoxResizable: false, // Impede o redimensionamento da área de corte
+                    zoomable: true, // Permite o zoom
+                    movable: true, // Permite mover a imagem
+                    background: false, // Remove o fundo escuro ao redor
+                    guides: false, // Remove guias de linha no cropper
+                    center: false, // Remove a linha central
+                    highlight: false, // Remove destaque fora da área de corte
+                    modal: false, // Remove o "escurecimento" ao redor da área de corte
+                });
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('salvarCorte').addEventListener('click', function() {
+        // Obtém o canvas da imagem cortada
+        const canvas = cropper.getCroppedCanvas({
+            width: 300,
+            height: 300
+        });
+
+        // Converte o canvas para Blob (pode ser enviado ou exibido)
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            document.getElementById('fotoPerfil').src = url; // Exibe a imagem cortada no perfil
+            const fileInput = document.getElementById('foto_perfil_blob');
+
+            // Ler o Blob como Data URL
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+                fileInput.value = reader.result; // Armazenar o Data URL no campo oculto
+            };
+
+            $('#modalCortar').modal('hide'); // Fecha o modal ao salvar a imagem cortada
+        }, 'image/png', 0.9); // Qualidade da imagem PNG em 90%
+    });
+    </script>
+</body>
+</html>

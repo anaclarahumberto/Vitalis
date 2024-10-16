@@ -18,17 +18,43 @@ templates = obter_jinja_templates("templates")
 async def get_bem_vindo(request: Request):
     return templates.TemplateResponse("main/pages/login.html", {"request": request})
 
+@router.get("/definir_perfil", response_class=HTMLResponse)
+async def get_bem_vindo(request: Request):
+    return templates.TemplateResponse("main/pages/definir_perfil.html", {"request": request})
+
+@router.post("/finalizar_perfil")
+async def finalizar_perfil(
+    request: Request,
+    nome_perfil: str = Form(...),
+    foto_perfil_blob: str = Form(...),
+):
+    
+    atualizacao_sucesso = UsuarioRepo.inserir_dados_perfil(
+        nome_perfil=nome_perfil,
+        foto_perfil=True,
+        id=request.state.usuario.id,
+    )
+    
+    if not atualizacao_sucesso:
+        return RedirectResponse("/erro", status_code=303)
+    
+    if foto_perfil_blob:
+        header, base64_data = foto_perfil_blob.split(",", 1)
+        nome_arquivo = f"{request.state.usuario.id}.jpeg"  # Nome do arquivo
+        caminho_arquivo = os.path.join("static/img", nome_arquivo)
+        with open(caminho_arquivo, "wb") as file:
+            file.write(base64.b64decode(base64_data))
+    
+    return RedirectResponse("/feed", status_code=303)
+
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request, usuario: str = Depends(verificar_login)):
-    print(request.state.usuario)
-    dados_perfil = UsuarioRepo.obter_dados_perfil("camila01@gmail.com")
-    
-    if dados_perfil is None:
-        return RedirectResponse("/erro", status_code=303)
-
-    if dados_perfil is None:
-        return RedirectResponse("/erro", status_code=303)
-    return templates.TemplateResponse("main/pages/index.html", {"request": request, "dados_perfil": dados_perfil})
+    foto_perfil = UsuarioRepo.verificar_foto_perfil(request.state.usuario.id)
+    print(foto_perfil)
+    if foto_perfil == None:
+        print("oi")
+        return RedirectResponse(url="/definir_perfil")
+    return templates.TemplateResponse("main/pages/index.html", {"request": request})
 
 @router.get("/mensagens_principal", response_class=HTMLResponse)
 async def get_mensagens(request: Request, usuario: str = Depends(verificar_login)):
@@ -94,8 +120,7 @@ async def editar_perfil(
     
     if foto_perfil_blob:
         header, base64_data = foto_perfil_blob.split(",", 1)
-        usuario_id = UsuarioRepo.obter_id_por_email(email_atual)
-        nome_arquivo = f"{usuario_id}.jpeg"  # Nome do arquivo
+        nome_arquivo = f"{request.state.usuario.id}.jpeg"  # Nome do arquivo
         caminho_arquivo = os.path.join("static/img", nome_arquivo)
         with open(caminho_arquivo, "wb") as file:
             file.write(base64.b64decode(base64_data))

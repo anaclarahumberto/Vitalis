@@ -80,8 +80,6 @@ def criar_token(id: int, nome: str, nome_perfil: str, email: str, perfil: int) -
 
 
 def validar_token(token: str) -> dict:
-    print("JWT_SECRET:", os.getenv("JWT_SECRET"))
-    print("JWT_ALGORITHM:", os.getenv("JWT_ALGORITHM"))
     try:
         return jwt.decode(token, 
             os.getenv("JWT_SECRET"),

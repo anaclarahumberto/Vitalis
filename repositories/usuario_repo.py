@@ -36,9 +36,7 @@ class UsuarioRepo:
             cursor = db.cursor()
             resultado = cursor.execute(SQL_ATUALIZAR_PERFIL,
                 (usuario.nome_perfil,
-                 usuario.descricao_perfil,
-                 usuario.categoria_perfil,
-                 usuario.genero,
+                 usuario.foto_perfil,
                  usuario.id))
             return resultado.rowcount > 0
         
@@ -55,6 +53,14 @@ class UsuarioRepo:
                  usuario.endereco_cidade,
                  usuario.endereco_uf,
                  usuario.id))
+            return resultado.rowcount > 0
+        
+    @classmethod
+    def inserir_dados_perfil(cls, nome_perfil: str, foto_perfil: bool, id) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            resultado = cursor.execute(
+                SQL_ATUALIZAR_PERFIL, (nome_perfil,  foto_perfil, id))
             return resultado.rowcount > 0
         
     @classmethod
@@ -77,13 +83,6 @@ class UsuarioRepo:
             return None  
 
         
-    @classmethod
-    def obter_id_por_email(cls, email: str) -> Optional[int]:
-        with obter_conexao() as db:
-            cursor = db.cursor()
-            cursor.execute(SQL_CHECAR_ID, (email,))
-            dados = cursor.fetchone()
-            return dados[0] if dados else None
          
     @classmethod
     def atualizar_dados_perfil(cls, nome:  str, nome_perfil: str, email: str, telefone: str, bio_perfil: str, categoria: str, genero: str, email_atual: str) -> bool:
@@ -117,6 +116,19 @@ class UsuarioRepo:
                         perfil = dados[4]
                     )
             return None
+        
+    @classmethod
+    def verificar_foto_perfil(cls, id: int):
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_CHECAR_FOTO_PERFIL, (id,))
+            resultado = cursor.fetchone()  
+            
+            if resultado is not None:
+                return resultado[0]
+            else:
+                return False
+
     
     @classmethod
     def excluir_usuario(cls, email: str) -> bool:

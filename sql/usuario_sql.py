@@ -44,6 +44,12 @@ SQL_OBTER_DADOS_PERFIL = """
     WHERE email = ?
 """
 
+SQL_ATUALIZAR_PERFIL = """
+    UPDATE usuario
+    SET nome_perfil = ?, foto_perfil = ?
+    WHERE ID = ?
+"""
+
 SQL_ATUALIZAR_DADOS = """
     UPDATE usuario
     SET nome = ?, nome_perfil = ?, email = ?, telefone = ?, bio_perfil = ?, categoria_perfil = ?, genero = ?
@@ -70,6 +76,10 @@ SQL_CHECAR_CREDENCIAIS = """
 
 SQL_CHECAR_ID = """
     SELECT id FROM usuario WHERE email = ?
+"""
+
+SQL_CHECAR_FOTO_PERFIL = """
+    SELECT foto_perfil FROM usuario WHERE id = ?
 """
 
 SQL_ATUALIZAR_SENHA = """
