@@ -49,6 +49,7 @@ async def finalizar_perfil(
 
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request, usuario: str = Depends(verificar_login)):
+    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.email)
     foto_perfil = UsuarioRepo.verificar_foto_perfil(request.state.usuario.id)
     print(foto_perfil)
     if foto_perfil == None:
