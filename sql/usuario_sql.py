@@ -52,8 +52,8 @@ SQL_ATUALIZAR_PERFIL = """
 
 SQL_ATUALIZAR_DADOS = """
     UPDATE usuario
-    SET nome = ?, nome_perfil = ?, email = ?, telefone = ?, bio_perfil = ?, categoria_perfil = ?, genero = ?
-    WHERE email = ?
+    SET nome = ?, nome_perfil = ?, telefone = ?, bio_perfil = ?, categoria_perfil = ?, genero = ?
+    WHERE id = ?
 """
 
 SQL_ATUALIZAR_ENDERECO = """

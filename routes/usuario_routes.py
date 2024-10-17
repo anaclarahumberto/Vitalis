@@ -95,25 +95,22 @@ async def editar_perfil(
     request: Request,
     nome: str = Form(...),
     nome_perfil: str = Form(...),
-    email: str = Form(...),
     telefone: str = Form(...),
     bio_perfil: str = Form(...),
     categoria: str = Form(None),
     genero: str = Form(...),
     foto_perfil_blob: str = Form(...),
-    email_atual: str = Form(None),
 ):
 
     # Atualiza os dados do usuário
     atualizacao_sucesso = UsuarioRepo.atualizar_dados_perfil(
         nome=nome,
         nome_perfil=nome_perfil,
-        email=email,
         telefone=telefone,
         bio_perfil=bio_perfil,
         categoria=categoria,
         genero=genero,
-        email_atual=email_atual,
+        id=request.state.usuario.id,
     )
     
     if not atualizacao_sucesso:

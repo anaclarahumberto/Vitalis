@@ -53,9 +53,7 @@
             </div>
         </div>
     </div>
-    
-    
-    <input type="hidden" name="email_atual" value="{{ usuario.email }}">
+
     <div class="mb-3 bg-highlight">
         <label for="Nome" class="form-label">Nome</label>
         <input type="text" name="nome" class="form-control" id="nome" value="{{ usuario.nome or '' }}" 
@@ -71,14 +69,6 @@
                onfocus="clearValue(this, '{{ usuario.nome_perfil or 'Nome de Perfil' }}')"
                onblur="restoreValue(this, '{{ usuario.nome_perfil or 'Nome de Perfil' }}')">
     </div>    
-
-    <div class="mb-3 bg-highlight">
-        <label for="Email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="email" value="{{ usuario.email or '' }}" 
-               placeholder="{{ usuario.email or 'Email' }}" required
-               onfocus="clearValue(this, '{{ usuario.email or 'Email' }}')"
-               onblur="restoreValue(this, '{{ usuario.email or 'Email' }}')">
-    </div>
 
     <div class="mb-3 bg-highlight">
         <label for="Telefone" class="form-label">Telefone</label>

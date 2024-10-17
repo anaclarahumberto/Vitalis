@@ -85,11 +85,11 @@ class UsuarioRepo:
         
          
     @classmethod
-    def atualizar_dados_perfil(cls, nome:  str, nome_perfil: str, email: str, telefone: str, bio_perfil: str, categoria: str, genero: str, email_atual: str) -> bool:
+    def atualizar_dados_perfil(cls, nome:  str, nome_perfil: str, telefone: str, bio_perfil: str, categoria: str, genero: str, id: int) -> bool:
         with obter_conexao() as db:
             cursor = db.cursor()
             resultado = cursor.execute(
-                SQL_ATUALIZAR_DADOS, (nome, nome_perfil, email, telefone, bio_perfil, categoria, genero, email_atual))
+                SQL_ATUALIZAR_DADOS, (nome, nome_perfil, telefone, bio_perfil, categoria, genero, id))
             return resultado.rowcount > 0
     
     @classmethod
