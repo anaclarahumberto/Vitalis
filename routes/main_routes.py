@@ -6,6 +6,7 @@ import os
 from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
+from util.mensagens import adicionar_mensagem_erro
 from util.templates import obter_jinja_templates
 
 router = APIRouter()
@@ -42,7 +43,7 @@ async def post_login(
     usuario = UsuarioRepo.checar_credenciais(email, senha)
     if usuario is None:
         response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
-        response.set_cookie(key="mensagem_erro", value="Email ou senha incorretos", max_age=5)
+        adicionar_mensagem_erro(response, "Email ou senha inválidos")
         return response
     token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email, usuario.perfil)
     # nome_perfil = None
