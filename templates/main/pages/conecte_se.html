@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/estilo_bem_vindo.css">
+</head>
+<body>
+    <div class="container-fluid full-height">
+        <div class="row no-gutters full-height">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <div class="form-container">
+                    <h2 class="form-title">Vitalis</h2>
+
+                    <!-- Formulário de cadastro -->
+                    <form action="/login" method="post" class="form-full">
+                        <!-- Campo Email -->
+                        <div class="form-row">
+                            <div class="input-group mb-2">
+                                <input type="email" class="form-control input-field" id="email" name="email" 
+                                       value="{{ request.cookies.get('email', '') }}" 
+                                       placeholder="Email" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Campo Senha -->
+                        <div class="form-row">
+                            <div class="input-group mb-2">
+                                <input type="password" class="form-control input-field" id="senha" name="senha" 
+                                       value="{{ request.cookies.get('senha', '') }}" 
+                                       placeholder="Senha" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button type="submit" class="btn-next">Entrar</button>
+
+                        <div class="or-container">
+                            <div class="line"></div>
+                            <span class="or-text">OU</span>
+                            <div class="line"></div>
+                        </div>
+                    </form>
+                    <button class="google-btn">
+                        <img src="/static/img/google.png" alt="Google Logo">
+                        Continuar com Google
+                    </button>
+                    {% if request.cookies.get('mensagem_erro') %}
+                            <span class="error-message">{{ request.cookies.get('mensagem_erro') }}</span>
+                    {% endif %}
+                    <a href="/esqueci_a_senha" class="forgot-password">Esqueceu a senha?</a>
+                    <div class="create-account-section" style="margin-top: 20px;">
+                        <span class="create-account-text">Não tem uma conta? </span>
+                        <a href="/criar_conta" class="create-account">Cadastre-se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clearValue(input, defaultValue) {
+            if (input.value === defaultValue || input.value === '') {
+                input.value = ''; // Limpa o valor do campo
+            }
+        }
+
+        function restoreValue(input, defaultValue) {
+            if (input.value === '') {
+                input.value = defaultValue; // Restaura o valor padrão se o campo estiver vazio
+            }
+        }
+    </script>
+</body>
+</html>

@@ -39,16 +39,15 @@ async def get_bem_vindo(request: Request):
 
 @router.get("/login", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
-    return templates.TemplateResponse("main/pages/login.html", {"request": request})
+    return templates.TemplateResponse("main/pages/conecte_se.html", {"request": request})
 
 @router.post("/login")
-async def post_login(
-    email: str = Form(...), 
-    senha: str = Form(...)):
-    usuario = UsuarioRepo.checar_credenciais(email, senha)
+async def post_login(request: Request):
+    dados = dict(await request.form())
+    usuario = UsuarioRepo.checar_credenciais(dados["email"], dados["senha"])
     if usuario is None:
         response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_erro(response, "Email ou senha inválidos")
+        adicionar_mensagem_erro(response, "Seus dados estão incorretos. Confira-os")
         return response
     token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email, usuario.perfil)
     # nome_perfil = None

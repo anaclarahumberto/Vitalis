@@ -1,10 +1,10 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('/static/img/onda_azul.png') !important; /* Caminho para a imagem de fundo */
+    background-image: url('/static/img/onda_azul.png') !important;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 100% 100%; /* Ajusta a imagem para preencher toda a área, distorcendo-a */
+    background-size: 100% 100%;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -12,6 +12,8 @@ body {
     justify-content: center;
     font-family: 'Ubuntu', sans-serif;
     overflow: hidden;
+    overflow-y: auto; 
+    overflow-x: hidden; 
 }
 
 .page-background {
@@ -33,13 +35,13 @@ body {
 .form-container {
     position: relative;
     background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
-    padding: 40px; /* Reduzido o padding para diminuir o tamanho */
+    padding: 40px; /* Mantendo o padding */
     border-radius: 30px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-    width: 70vw; /* Reduzido para menor largura */
-    max-width: 550px; /* Reduzido a largura máxima */
-    min-height: 550px; /* Reduzido a altura mínima */
-    max-height: 80vh; /* Reduzido a altura máxima */
+    width: 85vw; /* Mantém a largura dinâmica */
+    max-width: 400px; /* Mantém uma largura máxima */
+    min-height: auto; /* Remover altura mínima fixa */
+    max-height: none; /* Remover altura máxima fixa */
     margin: 0 auto;
     color: black;
     display: flex;
@@ -50,66 +52,57 @@ body {
     overflow: auto;
 }
 
-/* Título do formulário */
 .form-title {
     font-family: 'Chewy', cursive;
     color: #0F6481;
-    font-size: 3rem; /* Reduzido o tamanho da fonte */
-    margin-bottom: 30px; /* Espaçamento reduzido */
+    font-size: 3rem;
+    margin-bottom: 30px;
 }
 
-/* Subtítulo do formulário */
 .form-subtitle {
     margin-top: 0;
-    margin-bottom: 20px; /* Espaço reduzido */
-    font-size: 1.2rem; /* Reduzido o tamanho da fonte */
+    margin-bottom: 20px;
+    font-size: 1.2rem;
 }
 
-/* Botão de próxima etapa */
 .btn-next {
     background-color: #0F6481;
     color: white;
     border: none;
-    padding: 10px 25px; /* Reduzido o padding */
-    font-size: 15px; /* Reduzido o tamanho da fonte */
-    border-radius: 20px; /* Ajustado o border-radius */
-    margin: 12px auto; /* Ajustado o margin */
+    padding: 10px 40px;
+    font-size: 15px;
+    border-radius: 20px;
+    margin: 12px auto;
     display: inline-block;
     font-family: 'Ubuntu', sans-serif;
     cursor: pointer;
-    width: 100%; /* Garante que o botão use a largura total disponível */
-    max-width: 220px; /* Reduzido a largura máxima */
+    width: 100%; /* O botão agora usa toda a largura do formulário */
 }
 
-/* Efeito de hover do botão */
 .btn-next:hover {
     background-color: #1e7b9d;
 }
 
-/* Ícone de saída */
 .exit-icon {
     position: absolute;
-    top: 15px; /* Ajustado o posicionamento */
-    left: 15px; /* Ajustado o posicionamento */
+    top: 15px;
+    left: 15px;
     color: #0F6481;
-    font-size: 20px; /* Reduzido o tamanho do ícone */
+    font-size: 20px;
 }
 
-/* Estilo do ícone de saída */
 .exit-icon i {
     cursor: pointer;
 }
 
 .input-group {
-    position: relative;
-    width: 100%; /* Garante que o input group use a largura total disponível */
-    max-width: 550px; /* Reduzido a largura máxima */
+    width: 100%; /* Garante que o input group use toda a largura disponível */
 }
 
 .input-group-append {
     position: absolute;
     top: 50%;
-    right: 10px; /* Ajustado o posicionamento */
+    right: 20px;
     transform: translateY(-50%);
     z-index: 10;
 }
@@ -119,77 +112,118 @@ body {
     border: none !important;
     color: #0F6481;
     padding: 0;
-    font-size: 18px !important; /* Reduzido o tamanho da fonte */
+    font-size: 18px !important;
+}
+
+.form-row {
+    width: 100%;
 }
 
 .form-control {
     border-radius: 25px !important;
     border: 1px solid #ced4da;
-    padding: 12px 40px; /* Reduzido o padding */
+    padding: 12px 20px;
     color: #47525E !important;
     background-color: #D2DCE9 !important;
     box-shadow: none;
-    height: 45px !important; /* Reduzido a altura */
-    width: 100%; /* Garante que os campos de entrada usem a largura total disponível */
-    max-width: 750px; /* Reduzido a largura máxima dos campos de entrada */
-    position: relative;
+    height: 45px !important;
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
-/* Cor do placeholder dos campos de entrada */
 .form-control::placeholder {
     color: #47525E !important;
     font-weight: bold !important;
-    font-size: 15px !important; /* Reduzido o tamanho do texto dos placeholders */
+    font-size: 15px !important;
 }
 
-/* Estilo das linhas do formulário */
-.form-row {
-    margin-bottom: 14px; /* Espaço reduzido */
-    margin-top: 8px; /* Espaço reduzido para o primeiro campo de entrada */
-}
-
-/* Estilo das colunas do formulário */
 .col-md-6 {
-    padding: 10px; /* Reduzido o padding */
+    padding: 10px;
 }
 
-/* Texto "Esqueceu a senha?" */
 .forgot-password {
-    color: #0F6481;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 6px 0; /* Espaço superior e inferior reduzido */
-    display: block;
+    color: #0F6481; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    margin: 30px 0; /* Margem */
+    display: block; /* Faz com que o link ocupe toda a largura disponível */
+    font-size: 0.9rem; /* Tamanho do texto - ajuste conforme necessário */
 }
 
-/* Botão do Google */
 .google-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     color: #0F6481;
     border: none;
-    padding: 10px 25px; /* Reduzido o padding */
-    border-radius: 20px; /* Ajustado o border-radius */
-    font-size: 14px; /* Reduzido o tamanho da fonte */
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 14px;
     cursor: pointer;
-    margin-top: 8px; /* Reduzido o margin-top */
-    width: 100%; /* Garante que o botão use a largura total disponível */
-    max-width: 220px; /* Reduzido a largura máxima */
+    margin-top: 8px;
+    width: 100%; /* O botão Google agora usa toda a largura do formulário */
+    max-width: 220px;
 }
 
-/* Ícone do Google */
 .google-btn img {
-    width: 18px; /* Reduzido o tamanho do ícone */
-    height: 18px; /* Reduzido o tamanho do ícone */
-    margin-right: 8px; /* Ajustado o margin-right */
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
 }
 
-/* Texto "Criar Conta" */
 .create-account {
     color: #0F6481;
-    font-size: 1.8rem; /* Reduzido o tamanho da fonte */
-    font-weight: bold;
-    margin-top: 15px; /* Reduzido o margin-top */
+    font-size: 0.95rem;
+    margin-top: 15px;
     text-decoration: none;
+}
+
+.create-account-text {
+    font-size: 0.95rem;
+}
+
+/* Ajustes novos para garantir a largura correta do formulário */
+.full-height {
+    height: 100%;
+}
+
+.container-fluid, .row {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0;
+}
+
+.or-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0; /* Espaço acima e abaixo do container "OU" */
+}
+
+.line {
+    flex: 1; /* Faz com que a linha ocupe todo o espaço disponível */
+    height: 1px; /* A altura da linha, pode ser ajustada */
+    background-color: #c7c5c5; /* Cor da linha (cinza) */
+   
+}
+
+.or-text {
+    color: #575757; /* Cor do texto "OU" (cinza) */
+    white-space: nowrap; /* Evita que o texto quebre a linha */
+    padding: 0 10px; /* Adiciona um pequeno espaço ao redor do texto */
+}
+
+.error-message {
+    color: red; /* Define a cor do texto como vermelho */
+    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+    margin-top: 30px; /* Define o mesmo espaço superior e inferior */
+    display: block; /* Garante que o elemento ocupe uma linha inteira */
+    text-align: center; /* Centraliza o texto */
 }
