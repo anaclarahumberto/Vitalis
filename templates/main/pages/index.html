@@ -50,20 +50,22 @@
     </div>
 
     <!-- Publicação -->
-    <div class="post bg-white p-3 rounded mb-4 position-relative" style="left: 200px;">
+    <div class="post bg-white p-3 rounded mb-4 mx-auto" style="width: fit-content;">
         <!-- Seta no canto superior direito -->
         <div class="d-flex align-items-center mb-3">
             <img src="/static/img/{{usuario.id}}.jpeg" alt="Profile" class="rounded-circle me-2" style="width: 50px;">
             <a href="/perfil" style="text-decoration: none;" class="font-weight-bold text-dark">{{usuario.nome_perfil}}
             <i class="bi bi-award ms-2" style="color: #4AE4D6;"></i></a>
-            <a href="#" class="flag-icon position-relative" style="left: 240px;">
-                <i class="bi bi-chevron-down fs-4" style="color: #47525E;"></i> <!-- Seta preta -->
-            </a>
+            <div class="position-relative ms-auto">
+                <a href="#" class="flag-icon">
+                    <i class="bi bi-chevron-down fs-4" style="color: #47525E;"></i>
+                </a>
+            </div>
         </div>
 
         <!-- Container da Imagem de Publicação -->
         <div class="post-image">
-            <img src="/static/img/gravida 1.jpg" alt="Post Image">
+            <img src="/static/img/gravida 1.jpg" alt="Post Image" class="img-fluid"> <!-- Adicione img-fluid para responsividade -->
         </div>
 
         <!-- Ícones de ações -->
@@ -74,10 +76,15 @@
                 <a href="#"><i class="bi bi-send fs-4"></i></a>
             </div>
             <!-- Ícone de bandeira no canto inferior direito -->
-            <a href="#" class="flag-icon position-relative" style="right: 380px;">
-                <i class="bi bi-flag fs-4"></i>
-            </a>
+            <div class="position-relative">
+                <a href="#" class="flag-icon" style="right: 0;">
+                    <i class="bi bi-flag fs-4"></i>
+                </a>
+            </div>
         </div>
     </div>
+
+
+
 </div>
 {% endblock %}
