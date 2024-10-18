@@ -39,9 +39,6 @@
                         <div class="error-container" style="height: 1.5em; margin-top: 0.5em; color: red;">
                             {% if request.cookies.get('mensagem_erro') %}
                                 {{ request.cookies.get('mensagem_erro') }}
-                                <script>
-                                    document.cookie = "mensagem_erro=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";  // Remove o cookie
-                                </script>
                             {% endif %}
                         </div>
                         <button type="submit" class="btn-next">Entrar</button>

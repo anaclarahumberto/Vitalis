@@ -9,3 +9,41 @@
 {% macro button(label, color = 'primary') -%}
 <button class="{{btn btn-{{color}} mt-2}}" type="submit">{{label}}</button>
 {%- endmacro %}
+
+{% macro publicacao (label, color = 'primary') -%}
+<!-- Publicação -->
+<div class="post bg-white p-3 rounded mb-4 mx-auto" style="width: fit-content;">
+    <!-- Seta no canto superior direito -->
+    <div class="d-flex align-items-center mb-3">
+        <img src="/static/img/{{usuario.id}}.jpeg" alt="Profile" class="rounded-circle me-2" style="width: 50px;">
+        <a href="/perfil" style="text-decoration: none;" class="font-weight-bold text-dark">{{usuario.nome_perfil}}
+        <i class="bi bi-award ms-2" style="color: #4AE4D6;"></i></a>
+        <div class="position-relative ms-auto">
+            <a href="#" class="flag-icon">
+                <i class="bi bi-chevron-down fs-4" style="color: #47525E;"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Container da Imagem de Publicação -->
+    <div class="post-image">
+        <img src="/static/img/gravida 1.jpg" alt="Post Image" class="img-fluid"> <!-- Adicione img-fluid para responsividade -->
+    </div>
+
+    <!-- Ícones de ações -->
+    <div class="post-actions mt-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <a href="#" class="me-3"><i class="bi bi-heart fs-4"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-chat fs-4"></i></a>
+            <a href="#"><i class="bi bi-send fs-4"></i></a>
+        </div>
+        <!-- Ícone de bandeira no canto inferior direito -->
+        <div class="position-relative">
+            <a href="#" class="flag-icon" style="right: 0;">
+                <i class="bi bi-flag fs-4"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+{%- endmacro %}
