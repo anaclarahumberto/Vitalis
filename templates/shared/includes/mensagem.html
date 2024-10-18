@@ -1,0 +1,19 @@
+{%- if not mensagem_sucesso -%}
+{%- set mensagem_sucesso = request.cookies.get("mensagem_sucesso") -%}
+{%- endif -%}
+{%- if not mensagem_erro -%}
+{%- set mensagem_erro = request.cookies.get("mensagem_erro") -%}
+{%- endif -%}
+{%- if not mensagem_aviso -%}
+{%- set mensagem_aviso = request.cookies.get("mensagem_aviso") -%}
+{%- endif -%}
+
+{%- if mensagem_sucesso -%}
+{%- include "shared/includes/mensagem_sucesso.html" with context -%}
+{%- endif -%}
+{%- if mensagem_erro -%}
+{%- include "shared/includes/mensagem_erro.html" with context -%}
+{%- endif -%}
+{%- if mensagem_aviso -%}
+{%- include "shared/includes/mensagem_aviso.html" with context -%}
+{%- endif -%}
