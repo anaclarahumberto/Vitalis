@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime, timedelta
 from fastapi import APIRouter, Depends, FastAPI, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi import APIRouter, Form, UploadFile, File, status
@@ -8,6 +8,7 @@ from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
 from util.mensagens import adicionar_mensagem_erro
 from util.templates import obter_jinja_templates
+from util.validators import *
 
 router = APIRouter()
 
@@ -101,27 +102,32 @@ async def post_cadastrar_profissional(
 
 
 @router.post("/cadastrar_paciente")
-async def post_cadastrar_paciente(
-    nome: str = Form(...),
-    data_nascimento: date = Form(...),
-    email: str = Form(...),
-    cpf: str = Form(...),
-    telefone: str = Form(...),
-    senha: str = Form(...),
-    confsenha: str = Form(...)):
-    if senha != confsenha:
-        return RedirectResponse("/cadastro_paciente", status_code=status.HTTP_303_SEE_OTHER)
-    senha_hash = obter_hash_senha(senha)
-    usuario = Usuario(
-        nome=nome, 
-        data_nascimento=data_nascimento, 
-        email=email, 
-        cpf=cpf, 
-        telefone=telefone, 
-        senha=senha_hash, 
-        perfil=2)
+async def post_cadastrar_paciente(request: Request):
+    dados = dict(await request.form())
+    erros = {}
+    #atualizações do maroquio
+    if is_matching_fields(dados["senha"], "senha", "Senha", dados["confirmacao_senha"], "Confirmação de Senha", erros):
+        dados.pop("confirmacao_senha")
+    is_person_fullname(dados["nome"], "nome", "Nome", erros)
+    is_size_between(dados["nome"], "nome", "Nome", erros)
+    data_minima = datetime.now() - timedelta(days=365 *130)
+    data_maxima = datetime.now() + timedelta(days=365 *18)
+    is_date_between(dados["data_nascimento"], "data_nascimento", "Data de Nascimento", data_minima, data_maxima, erros)
+    is_email(dados["email"], "email", "E-mail", erros)
+    is_size_between(dados["telefone"], "telefone", "Telefone", erros)
+    is_password(dados["senha"], "senha", "Senha", erros)
+
+    if erros:
+        response = templates.TemplatesResponse("pages/cadastrar_paciente.html", {"request": request, "dados": dados, "erros": erros},)
+        adicionar_mensagem_erro(response, "Há erros no formulário. Corrija-os e tente novamente")
+        return response
+    senha_hash = obter_hash_senha(dados["senha"])
+    dados["senha"] = senha_hash
+    usuario = Usuario(**dados)
     UsuarioRepo.inserir(usuario)
     return RedirectResponse("/conta_criada", status_code=status.HTTP_303_SEE_OTHER)
+
+#validação
 
 @router.get("/criar_conta", response_class=HTMLResponse)
 async def get_criar_conta(request: Request):
