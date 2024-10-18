@@ -11,8 +11,8 @@ def tratar_excecoes(app: FastAPI):
 
     @app.exception_handler(401)
     async def unauthorized_exception_handler(request, exc):
-        return_url = f"?return_url={request.url.path}"
-        response = RedirectResponse(f"/{return_url}")
+        return_url = f"/login?return_url={request.url.path}"
+        response = RedirectResponse(f"{return_url}")
         adicionar_mensagem_erro(
             response,
             f"Você precisa estar autenticado para acessar a página do endereço {request.url.path}.",
@@ -22,8 +22,8 @@ def tratar_excecoes(app: FastAPI):
     @app.exception_handler(403)
     async def forbidden_exception_handler(request, exc):
         usuarioAutenticadoDto = request.state.usuario
-        return_url = f"?return_url={request.url.path}"
-        response = RedirectResponse(f"/{return_url}")
+        return_url = f"/login?return_url={request.url.path}"
+        response = RedirectResponse(f"{return_url}")
         adicionar_mensagem_erro(
             response,
             f"Você está logado como {usuarioAutenticadoDto.nome} e seu perfil de usuário não tem permissão para acessar a página do endereço {request.url.path}. Entre com as credenciais de um perfil compatível.",

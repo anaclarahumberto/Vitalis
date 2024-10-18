@@ -34,6 +34,10 @@ def verificar_login(request: Request):
 
 @router.get("/", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
+    return RedirectResponse("/login", status.HTTP_303_SEE_OTHER)
+
+@router.get("/login", response_class=HTMLResponse)
+async def get_bem_vindo(request: Request):
     return templates.TemplateResponse("main/pages/login.html", {"request": request})
 
 @router.post("/login")
@@ -51,7 +55,7 @@ async def post_login(
     #     case 1: nome_perfil = "profissional"
     #     case 2: nome_perfil = "paciente"
     #     case _: nome_perfil = ""
-    response = RedirectResponse(f"/feed", status_code=status.HTTP_303_SEE_OTHER)    
+    response = RedirectResponse(f"/usuario/feed", status_code=status.HTTP_303_SEE_OTHER)    
     response.set_cookie(
         key=NOME_COOKIE_AUTH,
         value=token,

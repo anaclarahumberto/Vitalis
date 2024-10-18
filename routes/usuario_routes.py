@@ -10,7 +10,7 @@ from repositories.usuario_repo import UsuarioRepo
 from routes.main_routes import verificar_login
 from util.templates import obter_jinja_templates
 
-router = APIRouter()
+router = APIRouter(prefix="/usuario")
 
 templates = obter_jinja_templates("templates")
 
@@ -54,7 +54,7 @@ async def get_root(request: Request, usuario: str = Depends(verificar_login)):
     print(foto_perfil)
     if foto_perfil == None:
         print("oi")
-        return RedirectResponse(url="/definir_perfil")
+        return RedirectResponse("/usuario/definir_perfil", 303)
     return templates.TemplateResponse("main/pages/index.html", {"request": request})
 
 @router.get("/mensagens_principal", response_class=HTMLResponse)
