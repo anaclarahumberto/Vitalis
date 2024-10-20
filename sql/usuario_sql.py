@@ -81,6 +81,9 @@ SQL_CHECAR_ID = """
 SQL_CHECAR_FOTO_PERFIL = """
     SELECT foto_perfil FROM usuario WHERE id = ?
 """
+SQL_CHECAR_EMAIL_UNICO = """SELECT 1 FROM usuario WHERE email = ?"""
+
+SQL_CHECAR_NOME_PERFIL_UNICO = """SELECT 1 FROM usuario WHERE nome_perfil = ?"""
 
 SQL_ATUALIZAR_SENHA = """
     UPDATE usuario

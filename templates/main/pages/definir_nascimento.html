@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/estilo_cadastro_login.css">
+    <style>
+        .birthday-icon {
+            font-size: 20vw; 
+            color: #0F6481; 
+            margin-bottom: 15px; 
+            transition: transform 0.3s; 
+        }
+
+        .birthday-icon:hover {
+            transform: scale(1.1); 
+        }
+
+        @media (min-width: 768px) {
+            .birthday-icon {
+                font-size: 100px; 
+            }
+        }
+
+        .form-row {
+            margin-bottom: 15px; 
+        }
+        
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid full-height">
+        <div class="row no-gutters full-height">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                <div class="form-container text-center">
+                    <i class="bi bi-cake2 birthday-icon mb-3"></i>
+                    <p>Adicione sua data de nascimento</p>
+                    <p class="small-text">Isso não fará parte do seu perfil público.</p>
+                    
+                    <!-- Formulário -->
+                    <form action="/salvar_aniversario" method="post">
+                        <div class="form-row d-flex justify-content-center">
+                            <div class="col-auto month-select" style="flex: 3 1 100px;">
+                                <select class="form-control" id="mes" name="mes" required>
+                                    <option value="">Mês</option>
+                                    <script>
+                                        const meses = [
+                                            "", "Janeiro", "Fevereiro", "Março", "Abril",
+                                            "Maio", "Junho", "Julho", "Agosto", "Setembro",
+                                            "Outubro", "Novembro", "Dezembro"
+                                        ];
+                                        const currentMonth = new Date().getMonth() + 1;
+                                        for (let i = 1; i <= 12; i++) {
+                                            document.write(`<option value="${i}" ${i === currentMonth ? 'selected' : ''}>${meses[i]}</option>`);
+                                        }
+                                    </script>
+                                </select>
+                            </div>
+                            <div class="col-auto day-select" style="flex: 1 1 50px;">
+                                <select class="form-control" id="dia" name="dia" required>
+                                    <option value="">Dia</option>
+                                    <script>
+                                        const today = new Date();
+                                        const currentDay = today.getDate();
+                                        for (let i = 31; i >= 1; i--) {
+                                            document.write(`<option value="${i}" ${i === currentDay ? 'selected' : ''}>${i}</option>`);
+                                        }
+                                    </script>
+                                </select>
+                            </div>
+                            <div class="col-auto year-select" style="flex: 2 1 75px;">
+                                <select class="form-control" id="ano" name="ano" required>
+                                    <option value="">Ano</option>
+                                    <script>
+                                        const currentYear = new Date().getFullYear();
+                                        for (let i = currentYear; i >= 1900; i--) {
+                                            document.write(`<option value="${i}" ${i === currentYear ? 'selected' : ''}>${i}</option>`);
+                                        }
+                                    </script>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+
+                        <button type="submit" class="btn-next mt-3">Avançar</button>
+                        <a href="/cadastro" class="btn-back">Voltar</a>
+                    </form>
+                    {% if request.cookies.get('mensagem_erro') %}
+                        <div class="error-container">
+                            <span class="error-message">{{ request.cookies.get('mensagem_erro') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-container" style="padding: 30px; margin-top: 15px">
+                    <div class="create-account-section">
+                        <span class="create-account-text">Tem uma conta? </span>
+                        <a href="/login" class="create-account">Conecte-se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clearValue(input, defaultValue) {
+            if (input.value === defaultValue || input.value === '') {
+                input.value = '';
+            }
+        }
+
+        function restoreValue(input, defaultValue) {
+            if (input.value === '') {
+                input.value = defaultValue;
+            }
+        }
+    </script>
+</body>
+</html>

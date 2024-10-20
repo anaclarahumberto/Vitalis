@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/estilo_cadastro_login.css">
+    <script src="/static/js/verificaForcaSenha.js"></script>
+</head>
+<body>
+    <div class="container-fluid full-height">
+        <div class="row no-gutters full-height">
+            <div class="col-12 d-flex flex-direction: column justify-content-center align-items-center">
+                <div class="form-container">
+                    <h2 class="form-title">Vitalis</h2>
+                    <p>Cadastre-se para ver fotos e vídeos dos seus amigos.</p>
+
+                    <!-- Botão Google -->
+                    <button class="google-btn">
+                        <img src="/static/img/google.png" alt="Google Logo">
+                        Continuar com Google
+                    </button>
+
+                    <!-- Formulário de cadastro -->
+                    <form action="/cadastrar" method="post"> <!-- Atualize a rota aqui -->
+                        <div class="or-container">
+                            <div class="line"></div>
+                            <span class="or-text">OU</span>
+                            <div class="line"></div>
+                        </div>
+                        <!-- Campo Email -->
+                        <div class="form-row">
+                            <div class="input-group mb-2">
+                                <input type="email" class="form-control" id="email" name="email" 
+                                       value="{{ request.cookies.get('email', '') }}" 
+                                       placeholder="Email" required 
+                                       onfocus="clearValue(this, '{{ request.cookies.get('email', 'Email') }}')" 
+                                       onblur="restoreValue(this, '{{ request.cookies.get('email', 'Email') }}')">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group mb-2">
+                                <input type="password" class="form-control" id="senha" name="senha" 
+                                       placeholder="Senha" required 
+                                       onfocus="clearValue(this, '{{ request.cookies.get('senha', 'Senha') }}')" 
+                                       onblur="restoreValue(this, '{{ request.cookies.get('senha', 'Senha') }}')"
+                                       oninput="checkPasswordStrength(this.value); togglePasswordIcon(this.value, 'passwordIcon')">
+                                <div class="input-group-append">
+                                    <span id="senha-forca" class="senha-forca"></span> 
+                                    <span class="input-group-text" id="togglePassword">
+                                        <i class="bi bi-lock" id="passwordIcon" 
+                                           onmouseover="changeCursor(this, 'pointer')" 
+                                           onclick="togglePasswordVisibility('senha', 'passwordIcon')"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="input-group mb-2">
+                                <input type="password" class="form-control" id="conf_senha" name="conf_senha" 
+                                       placeholder="Confirme a Senha" required 
+                                       onfocus="clearValue(this, '{{ request.cookies.get('conf_senha', 'Confirme a Senha') }}')" 
+                                       onblur="restoreValue(this, '{{ request.cookies.get('conf_senha', 'Confirme a Senha') }}')"
+                                       oninput="toggleConfirmPasswordIcon(this.value);">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="bi bi-check-circle" id="confirmPasswordIcon"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <!-- Campo Nome -->
+                        <div class="form-row">
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control" id="nome" name="nome" data-mask='nome'
+                                       value="{{ request.cookies.get('nome', '') }}" 
+                                       placeholder="Nome" required 
+                                       onfocus="clearValue(this, '{{ request.cookies.get('nome', 'Nome') }}')" 
+                                       onblur="restoreValue(this, '{{ request.cookies.get('nome', 'Nome') }}')">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Campo Nome de Perfil -->
+                        <div class="form-row">
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control" id="nome_perfil" name="nome_perfil" 
+                                       value="{{ request.cookies.get('nome_perfil', '') }}"
+                                       placeholder="Nome de Perfil" required 
+                                       onfocus="clearValue(this, '{{ request.cookies.get('nome_perfil', 'Nome de Perfil') }}')" 
+                                       onblur="restoreValue(this, '{{ request.cookies.get('nome_perfil', 'Nome de Perfil') }}')">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botão Cadastre-se -->
+                        <button type="submit" class="btn-next">Cadastre-se</button> <!-- Botão de submit -->
+                        
+                    </form>
+                    {% if request.cookies.get('mensagem_erro') %}
+                        <span class="error-message">{{ request.cookies.get('mensagem_erro') }}</span>
+                    {% endif %}
+                </div>
+                <div class="form-container" style="padding: 30px; margin-top: 15px">
+                    <div class="create-account-section">
+                        <span class="create-account-text">Tem uma conta? </span>
+                        <a href="/login" class="create-account">Conecte-se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clearValue(input, defaultValue) {
+            if (input.value === defaultValue || input.value === '') {
+                input.value = ''; // Limpa o valor do campo
+            }
+        }
+
+        function restoreValue(input, defaultValue) {
+            if (input.value === '') {
+                input.value = defaultValue; // Restaura o valor padrão se o campo estiver vazio
+            }
+        }
+    </script>
+    <script src="/static/js/mascararCampos.js"></script>
+</body>
+</html>

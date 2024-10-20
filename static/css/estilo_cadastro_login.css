@@ -1,19 +1,17 @@
 body {
     margin: 0;
-    padding: 0;
+    padding: 40px;
     background-image: url('/static/img/onda_azul.png') !important;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh; /* Permite que o body cresça além de 100vh */
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Ubuntu', sans-serif;
-    overflow: hidden;
-    overflow-y: auto; 
-    overflow-x: hidden; 
+    overflow-x: hidden; /* Mantém o overflow no eixo X escondido */
+    overflow-y: auto; /* Permite o scroll no Y se necessário */
 }
 
 .page-background {
@@ -36,7 +34,7 @@ body {
     position: relative;
     background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
     padding: 40px; /* Mantendo o padding */
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
     width: 85vw; /* Mantém a largura dinâmica */
     max-width: 400px; /* Mantém uma largura máxima */
@@ -83,6 +81,36 @@ body {
     background-color: #1e7b9d;
 }
 
+.btn-back {
+    background-color: transparent;
+    color: #0F6481;
+    border: none;
+    padding: 10px 40px;
+    font-size: 15px;
+    border-radius: 20px;
+    margin: 12px auto;
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    text-decoration: none; /* Remove o sublinhado */
+}
+
+.btn-back:hover {
+    background-color: #f0f0f0;
+    text-decoration: none; /* Garante que o sublinhado continua removido ao passar o mouse */
+}
+
+/* Texto explicativo adicional */
+.small-text {
+    font-size: 16px;
+    color: #666;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .exit-icon {
     position: absolute;
     top: 15px;
@@ -116,13 +144,18 @@ body {
 }
 
 .form-row {
-    width: 100%;
+    width: 100%; /* Garante que a form-row use toda a largura disponível */
+}
+
+.form-row > div {
+    flex: 1; /* Faz com que cada coluna dentro da form-row ocupe o mesmo espaço */
+    padding: 5px; /* Reduzido o espaço lateral entre os campos */
 }
 
 .form-control {
     border-radius: 25px !important;
     border: 1px solid #ced4da;
-    padding: 12px 20px;
+    padding: 10px 15px; /* Ajustado o padding para não cortar o texto */
     color: #47525E !important;
     background-color: #D2DCE9 !important;
     box-shadow: none;
@@ -133,7 +166,6 @@ body {
 
 .form-control::placeholder {
     color: #47525E !important;
-    font-weight: bold !important;
     font-size: 15px !important;
 }
 
@@ -211,7 +243,6 @@ body {
     flex: 1; /* Faz com que a linha ocupe todo o espaço disponível */
     height: 1px; /* A altura da linha, pode ser ajustada */
     background-color: #c7c5c5; /* Cor da linha (cinza) */
-   
 }
 
 .or-text {
@@ -220,10 +251,53 @@ body {
     padding: 0 10px; /* Adiciona um pequeno espaço ao redor do texto */
 }
 
-.error-message {
-    color: red; /* Define a cor do texto como vermelho */
-    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
-    margin-top: 30px; /* Define o mesmo espaço superior e inferior */
-    display: block; /* Garante que o elemento ocupe uma linha inteira */
-    text-align: center; /* Centraliza o texto */
+.error-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    width: 100%; /* Para ocupar todo o espaço disponível */
 }
+
+.error-message {
+    text-align: justify; /* Justifica o texto */
+    margin-top: 30px; /* Adiciona um espaço em cima e embaixo */
+    padding: 10px; /* Adiciona um padding interno, se desejado */
+    font-size: 15px; /* Ajuste o tamanho da fonte conforme necessário */
+    color: red; /* Define a cor do texto como vermelho */
+}
+
+.col-12 {
+    flex-direction: column;
+}
+
+.day-select {
+    min-width: 80px; /* Ajuste conforme necessário */
+}
+
+.month-select {
+    min-width: 120px; /* Ajuste conforme necessário */
+}
+
+.year-select {
+    min-width: 70px; /* Ajuste conforme necessário */
+}
+
+.senha-forca {
+    margin-top: 2px;
+    margin-right: 5px;
+    font-size: 15px
+}
+.fraca {
+    color: red;
+}
+.media {
+    color: yellow;
+}
+.forte {
+    color: green;
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+

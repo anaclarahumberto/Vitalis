@@ -4,7 +4,7 @@ from dtos.usuario_autenticado import UsuarioAutenticado
 from models.usuario_model import Usuario
 from sql.usuario_sql import *
 from util.auth import conferir_senha
-from util.db import obter_conexao
+from util.database import obter_conexao
 
 
 class UsuarioRepo:
@@ -136,4 +136,18 @@ class UsuarioRepo:
             cursor = db.cursor()
             resultado = cursor.execute(
                 SQL_EXCLUIR_USUARIO, (email,))
-            return resultado.rowcount > 0    
+            return resultado.rowcount > 0
+        
+    @classmethod
+    def is_email_unique(cls, email: str) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_CHECAR_EMAIL_UNICO, (email,))
+            return cursor.fetchone() is None
+
+    @classmethod
+    def is_username_unique(cls, username: str) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_CHECAR_NOME_PERFIL_UNICO, (username,))
+            return cursor.fetchone() is None    

@@ -44,6 +44,7 @@ async def get_bem_vindo(request: Request):
 @router.post("/login")
 async def post_login(request: Request):
     dados = dict(await request.form())
+    request.session['email'] = dados["email"]
     usuario = UsuarioRepo.checar_credenciais(dados["email"], dados["senha"])
     if usuario is None:
         response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
@@ -64,6 +65,84 @@ async def post_login(request: Request):
         samesite="lax"
     )
     return response
+
+
+@router.get("/cadastro", response_class=HTMLResponse)
+async def get_bem_vindo(request: Request):
+    return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request})
+
+@router.post("/cadastrar")
+async def post_cadastrar_paciente(request: Request):
+    dados = dict(await request.form())
+    senha = dados.pop("senha", None)
+    conf_senha = dados.pop("conf_senha", None)
+    request.session['dados_usuario'] = dados
+    if not is_email(dados["email"]):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
+        return response
+    if not UsuarioRepo.is_email_unique(dados["email"]):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "Outra conta está usando o mesmo email.")
+        return response
+    if not is_matching_fields(senha, conf_senha):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "As senhas não coincidem.")
+        return response
+    if not is_password(senha):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "As senhas devem ter no mínimo 6 caracteres, letras maiúsculas e minúsculas, números e caracteres especiais."),
+        return response
+    if not is_person_fullname(dados["nome"]):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "Os nomes devem conter um primeiro nome e um sobrenome."),
+        return response
+    if not is_only_letters_or_space(dados["nome"]):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "Os nomes devem conter apenas letras e espaços."),
+        return response
+    if not is_own_name(dados["nome"]):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "Esse não é um nome próprio valido. Confira-o."),
+        return response
+    if not is_user_name(dados["nome_perfil"]):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "Os nomes de usuário só podem usar letras, números, sublinhados e pontos."),
+        return response
+    if UsuarioRepo.is_username_unique(dados["nome_perfil"]):
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+        adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
+        return response
+    senha_hash = obter_hash_senha(senha)
+    request.session['dados_usuario']['senha_hash'] = senha_hash
+    # usuario = Usuario(**dados)
+    # UsuarioRepo.inserir(usuario)
+    return RedirectResponse("/definir_data", status_code=status.HTTP_303_SEE_OTHER)
+
+@router.post("/salvar_aniversario")
+async def post_cadastrar_aniversario(request: Request):
+
+    dados = dict(await request.form())
+    
+    try:
+        dia = int(dados["dia"])
+        mes = int(dados["mes"])
+        ano = int(dados["ano"])
+
+        data_aniversario = datetime(ano, mes, dia)
+        data_hoje = datetime.today()
+        data_minima = data_hoje.replace(year=data_hoje.year - 13)
+        if not is_date_less_than(data_aniversario, data_minima):
+            response = RedirectResponse(f"/definir_data", status_code=status.HTTP_303_SEE_OTHER)  
+            adicionar_mensagem_erro(response, "A idade mínima para se cadastrar é de 13 anos"),
+            return response
+        request.session['dados_usuario']['data_aniversario'] = data_aniversario
+        return RedirectResponse("/criar_conta", status_code=status.HTTP_303_SEE_OTHER)
+    
+    except (ValueError, KeyError):
+        response = RedirectResponse(f"/definir_data", status_code=status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_erro(response, "Data de nascimento inválida. Verifique os campos.")
+        return response
 
 @router.post("/cadastrar_profissional")
 async def post_cadastrar_profissional(
@@ -126,7 +205,9 @@ async def post_cadastrar_paciente(request: Request):
     UsuarioRepo.inserir(usuario)
     return RedirectResponse("/conta_criada", status_code=status.HTTP_303_SEE_OTHER)
 
-#validação
+@router.get("/definir_data", response_class=HTMLResponse)
+async def get_criar_conta(request: Request):
+    return templates.TemplateResponse("main/pages/definir_nascimento.html", {"request": request})
 
 @router.get("/criar_conta", response_class=HTMLResponse)
 async def get_criar_conta(request: Request):

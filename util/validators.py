@@ -2,6 +2,8 @@ import re
 from datetime import date
 from typing import Any
 
+from fastapi import Response
+
 
 def add_error(field_name: str, msg: str, errors: dict) -> bool:
     if errors.get(field_name) is None:
@@ -149,7 +151,7 @@ def is_matching_regex(
         return False
 
 
-def is_email(field_value: str, field_name: str, field_label: str, errors: dict) -> bool:
+def is_email(field_value: str) -> bool:
     if not field_value:
         return True
     if (
@@ -161,11 +163,6 @@ def is_email(field_value: str, field_name: str, field_label: str, errors: dict) 
     ):
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser um e-mail com formato válido.",
-            errors,
-        )
         return False
 
 
@@ -244,7 +241,7 @@ def is_person_name(
 
 
 def is_person_fullname(
-    field_value: str, field_name: str, field_label: str, errors: dict
+    field_value: str,
 ) -> bool:
     if not field_value:
         return True
@@ -254,32 +251,30 @@ def is_person_fullname(
     ):
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser um nome completo válido.",
-            errors,
-        )
         return False
 
 
 def is_own_name(
-    field_value: str, field_name: str, field_label: str, errors: dict
+    field_value: str,
 ) -> bool:
     if not field_value:
         return True
     if re.match(r"^[\w]+(\s[\w]+)*$", field_value) is not None:
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser um nome válido.",
-            errors,
-        )
+        return False
+    
+def is_user_name(field_value: str) -> bool:
+    if not field_value:
+        return True  
+    if re.match(r"^[a-zA-Z0-9_.]{2,20}$", field_value) is not None:
+        return True
+    else:
         return False
 
 
 def is_password(
-    field_value: str, field_name: str, field_label: str, errors: dict
+    field_value: str
 ) -> bool:
     """
     Tenha pelo menos um caractere minúsculo.
@@ -299,32 +294,18 @@ def is_password(
     ):
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser uma senha válida entre 4 e 64 caracteres, contendo caracteres maiúsculos, minúsculos, dígitos e caracteres especiais (@#$!%*?&).",
-            errors,
-        )
         return False
 
 
 def is_matching_fields(
     field_value: str,
-    field_name: str,
-    field_label: str,
     matching_field_value: str,
-    matching_field_label: str,
-    errors: dict,
 ) -> bool:
     if not field_value:
         return True
     if field_value.strip() == matching_field_value.strip():
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser igual ao do campo {matching_field_label}.",
-            errors,
-        )
         return False
 
 
@@ -447,41 +428,25 @@ def is_date_between(
 
 def is_date_greater_than(
     field_value: date,
-    field_name: str,
-    field_label: str,
     min_date: date,
-    errors: dict,
 ) -> bool:
     if not field_value:
         return True
     if field_value > min_date:
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser maior que {min_date.strftime('%d/%m/%Y')}.",
-            errors,
-        )
         return False
 
 
 def is_date_less_than(
     field_value: date,
-    field_name: str,
-    field_label: str,
     max_date: date,
-    errors: dict,
 ) -> bool:
     if not field_value:
         return True
     if field_value < max_date:
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser menor que {max_date.strftime('%d/%m/%Y')}.",
-            errors,
-        )
         return False
 
 
@@ -502,18 +467,13 @@ def is_only_digits(
 
 
 def is_only_letters_or_space(
-    field_value: str, field_name: str, field_label: str, errors: dict
+    field_value: str, 
 ) -> bool:
     if not field_value:
         return True
     if re.match(r"^[a-zA-ZÀ-ú\s]+$", field_value) is not None:
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve conter apenas letras ou espaços.",
-            errors,
-        )
         return False
 
 
