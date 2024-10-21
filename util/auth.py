@@ -73,7 +73,6 @@ def criar_token(id: int, nome: str, nome_perfil: str, email: str, perfil: int) -
         "perfil": perfil,
         "exp": datetime.now() + timedelta(days=1)
     }
-    print(payload)
     return jwt.encode(payload, 
         os.getenv("JWT_SECRET"),
         os.getenv("JWT_ALGORITHM"))

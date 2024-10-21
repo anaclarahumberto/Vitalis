@@ -1,11 +1,18 @@
 from datetime import date, datetime, timedelta
+import json
+import uuid
 from fastapi import APIRouter, Depends, FastAPI, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi import APIRouter, Form, UploadFile, File, status
 import os
+
+import jwt
 from models.usuario_model import Usuario
+from repositories.cadastro_temp_repo import CadastroTempRepo
 from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
+from util.cadastro import *
+from util.cookies import *
 from util.mensagens import adicionar_mensagem_erro
 from util.templates import obter_jinja_templates
 from util.validators import *
@@ -35,89 +42,111 @@ def verificar_login(request: Request):
 
 @router.get("/", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
+    request.session.clear()
     return RedirectResponse("/login", status.HTTP_303_SEE_OTHER)
 
 @router.get("/login", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
-    return templates.TemplateResponse("main/pages/conecte_se.html", {"request": request})
+    email_temp = request.cookies.get('email_temp', '')
+    print(email_temp)
+    return templates.TemplateResponse("main/pages/conecte_se.html", {"request": request, "email_temp": email_temp})
+
+from datetime import timedelta
+
+from datetime import datetime, timedelta, timezone
 
 @router.post("/login")
-async def post_login(request: Request):
+async def post_login(request: Request, response: Response):
     dados = dict(await request.form())
-    request.session['email'] = dados["email"]
+    
     usuario = UsuarioRepo.checar_credenciais(dados["email"], dados["senha"])
+    
     if usuario is None:
         response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
+        adicionar_cookie(response, NOME_COOKIE_EMAIL_TEMP, dados["email"], 180)
         adicionar_mensagem_erro(response, "Seus dados estão incorretos. Confira-os")
         return response
+
     token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email, usuario.perfil)
-    # nome_perfil = None
-    # match (usuario[2]):
-    #     case 1: nome_perfil = "profissional"
-    #     case 2: nome_perfil = "paciente"
-    #     case _: nome_perfil = ""
-    response = RedirectResponse(f"/usuario/feed", status_code=status.HTTP_303_SEE_OTHER)    
-    response.set_cookie(
-        key=NOME_COOKIE_AUTH,
-        value=token,
-        max_age=3600*24*365*10,
-        httponly=True,
-        samesite="lax"
-    )
+
+    if request.cookies.get(NOME_COOKIE_EMAIL_TEMP):
+        response.delete_cookie(NOME_COOKIE_EMAIL_TEMP)
+
+    request.session['usuario_autenticado'] = {
+        "id": usuario.id,
+        "nome": usuario.nome,
+        "nome_perfil": usuario.nome_perfil,
+        "perfil": usuario.perfil
+    }
+
+    response = RedirectResponse(f"/usuario/feed", status_code=status.HTTP_303_SEE_OTHER)
+    adicionar_cookie(response, NOME_COOKIE_AUTH, token, 3600)
     return response
+
 
 
 @router.get("/cadastro", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
-    return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request})
+    email_temp = request.cookies.get(NOME_COOKIE_EMAIL_TEMP, '')
+    nome_temp = request.cookies.get(NOME_COOKIE_NOME_TEMP, '')
+    nome_perfil_temp = request.cookies.get(NOME_COOKIE_NOME_PERFIL_TEMP, '')
+    dados_temp = dict(email=email_temp, nome=nome_temp, nome_perfil=nome_perfil_temp)
+    print(dados_temp)
+    return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request, 
+        "dados_temp": dados_temp})
 
 @router.post("/cadastrar")
 async def post_cadastrar_paciente(request: Request):
     dados = dict(await request.form())
     senha = dados.pop("senha", None)
     conf_senha = dados.pop("conf_senha", None)
-    request.session['dados_usuario'] = dados
+    response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
+    adicionar_cookie(response, NOME_COOKIE_EMAIL_TEMP, dados["email"], 180)
+    adicionar_cookie(response, NOME_COOKIE_NOME_TEMP, dados["nome"], 180)
+    adicionar_cookie(response, NOME_COOKIE_NOME_PERFIL_TEMP, dados["nome_perfil"], 180)
     if not is_email(dados["email"]):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
         return response
     if not UsuarioRepo.is_email_unique(dados["email"]):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "Outra conta está usando o mesmo email.")
         return response
     if not is_matching_fields(senha, conf_senha):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "As senhas não coincidem.")
         return response
     if not is_password(senha):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "As senhas devem ter no mínimo 6 caracteres, letras maiúsculas e minúsculas, números e caracteres especiais."),
         return response
     if not is_person_fullname(dados["nome"]):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "Os nomes devem conter um primeiro nome e um sobrenome."),
         return response
     if not is_only_letters_or_space(dados["nome"]):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "Os nomes devem conter apenas letras e espaços."),
         return response
     if not is_own_name(dados["nome"]):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "Esse não é um nome próprio valido. Confira-o."),
         return response
     if not is_user_name(dados["nome_perfil"]):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
         adicionar_mensagem_erro(response, "Os nomes de usuário só podem usar letras, números, sublinhados e pontos."),
         return response
-    if UsuarioRepo.is_username_unique(dados["nome_perfil"]):
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)  
+    if not UsuarioRepo.is_username_unique(dados["nome_perfil"]):
         adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
         return response
     senha_hash = obter_hash_senha(senha)
-    request.session['dados_usuario']['senha_hash'] = senha_hash
-    # usuario = Usuario(**dados)
-    # UsuarioRepo.inserir(usuario)
-    return RedirectResponse("/definir_data", status_code=status.HTTP_303_SEE_OTHER)
+    id_cookie = request.cookies.get(NOME_COOKIE_ID_TEMP)
+    if id_cookie:
+        playload = validar_token_id(id_cookie) 
+        id_temp = playload.get("id")
+        if id_temp == None:
+            mensagem = playload.get("mensagem")
+            adicionar_mensagem_erro(response, mensagem)
+            return response
+    else:
+        id_temp = str(uuid.uuid4())
+        id_secreto = criar_token_id(id_temp) 
+    CadastroTempRepo.inserir_dados(id_temp, dados["nome"], dados["nome_perfil"], dados["email"], senha_hash,)
+    response = RedirectResponse("/definir_data", status_code=status.HTTP_303_SEE_OTHER)
+    if not id_cookie: adicionar_cookie(response, NOME_COOKIE_ID_TEMP, id_secreto, 180)
+    return response
 
 @router.post("/salvar_aniversario")
 async def post_cadastrar_aniversario(request: Request):
@@ -136,8 +165,29 @@ async def post_cadastrar_aniversario(request: Request):
             response = RedirectResponse(f"/definir_data", status_code=status.HTTP_303_SEE_OTHER)  
             adicionar_mensagem_erro(response, "A idade mínima para se cadastrar é de 13 anos"),
             return response
-        request.session['dados_usuario']['data_aniversario'] = data_aniversario
-        return RedirectResponse("/criar_conta", status_code=status.HTTP_303_SEE_OTHER)
+        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
+        id_secreto = request.cookies.get(NOME_COOKIE_ID_TEMP)
+        if id_secreto:
+            playload = validar_token_id(id_secreto) 
+            id_temp = playload.get("id")
+            if id_temp == None:
+                mensagem = playload.get("mensagem")
+                adicionar_mensagem_erro(response, mensagem)
+                return response
+            CadastroTempRepo.atualizar_data(id_temp, data_aniversario)
+            if request.cookies.get(NOME_COOKIE_ID_TEMP):
+                response.delete_cookie(NOME_COOKIE_ID_TEMP)
+            if request.cookies.get(NOME_COOKIE_EMAIL_TEMP):
+                response.delete_cookie(NOME_COOKIE_EMAIL_TEMP)
+            if request.cookies.get(NOME_COOKIE_NOME_TEMP):
+                response.delete_cookie(NOME_COOKIE_NOME_TEMP)
+            if request.cookies.get(NOME_COOKIE_NOME_PERFIL_TEMP):
+                response.delete_cookie(NOME_COOKIE_NOME_PERFIL_TEMP)
+            CadastroTempRepo.mover_para_banco_real(id_temp)
+            return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
+        else:
+            adicionar_mensagem_erro(response, "Sessão expirada")
+            return response
     
     except (ValueError, KeyError):
         response = RedirectResponse(f"/definir_data", status_code=status.HTTP_303_SEE_OTHER)

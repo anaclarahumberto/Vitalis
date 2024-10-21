@@ -6,12 +6,11 @@ SQL_CRIAR_TABELA = """
     CREATE TABLE IF NOT EXISTS usuario (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     nome TEXT NOT NULL,
-    data_nascimento DATE NOT NULL,
-    telefone TEXT NOT NULL UNIQUE, 
+    data_nascimento DATE NOT NULL, 
     email TEXT NOT NULL UNIQUE,
     senha TEXT NOT NULL,
-    cpf TEXT NOT NULL UNIQUE,
-    perfil INTEGER NOT NULL,
+    telefone TEXT UNIQUE,
+    cpf TEXT UNIQUE,
     endereco_cep TEXT,
     endereco_logradouro TEXT,
     endereco_numero TEXT,
@@ -19,18 +18,24 @@ SQL_CRIAR_TABELA = """
     endereco_bairro TEXT,
     endereco_cidade TEXT,
     endereco_uf   TEXT,
-    registro_profissional BOOL)
-    
+    foto_perfil BOOL,
+    nome_perfil TEXT NOT NULL,
+    bio_perfil TEXT,
+    categoria_perfil TEXT,
+    genero TEXT,
+    tipo_perfil INTEGER,
+    registro_profissional BOOL,
+    tipo_paciente INTEGER )   
 """
 
-SQL_ATUALIZAR_TABELA = [
-    "ALTER TABLE usuario ADD COLUMN foto_perfil BOOL;",
-    "ALTER TABLE usuario ADD COLUMN nome_perfil TEXT;",
-    "ALTER TABLE usuario ADD COLUMN bio_perfil TEXT;",
-    "ALTER TABLE usuario ADD COLUMN categoria_perfil TEXT;",
-    "ALTER TABLE usuario ADD COLUMN genero TEXT;",
-    "ALTER TABLE usuario ADD COLUMN tipo_paciente TEXT;" 
-]
+# SQL_ATUALIZAR_TABELA = [
+#     "ALTER TABLE usuario ADD COLUMN foto_perfil BOOL;",
+#     "ALTER TABLE usuario ADD COLUMN nome_perfil TEXT;",
+#     "ALTER TABLE usuario ADD COLUMN bio_perfil TEXT;",
+#     "ALTER TABLE usuario ADD COLUMN categoria_perfil TEXT;",
+#     "ALTER TABLE usuario ADD COLUMN genero TEXT;",
+#     "ALTER TABLE usuario ADD COLUMN tipo_paciente TEXT;" 
+# ]
 
 SQL_INSERIR_USUARIO = """
     INSERT INTO usuario 

@@ -1,15 +1,18 @@
-NOME_COOKIE_AUTH = "token"
+NOME_COOKIE_AUTH = "jwt-token"
+NOME_COOKIE_EMAIL_TEMP = "email_temp"
+NOME_COOKIE_NOME_TEMP = "nome_temp"
+NOME_COOKIE_NOME_PERFIL_TEMP = "nome_perfil_temp"
+NOME_COOKIE_ID_TEMP = "id_temp"
 
 
-def adicionar_cookie_auth(response, token):
+def adicionar_cookie(response, key, value, max_age):
     response.set_cookie(
-        key=NOME_COOKIE_AUTH, value=token, max_age=1800, httponly=True, samesite="lax"
+        key=key, 
+        value=value, 
+        max_age=max_age, 
+        httponly=True, 
+        samesite="lax"
     )
-    return response
-
-
-def excluir_cookie_auth(response):
-    response.set_cookie(key=NOME_COOKIE_AUTH, value=" ", httponly=True, expires=0)
     return response
 
 

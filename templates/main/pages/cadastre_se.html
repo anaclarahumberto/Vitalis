@@ -38,7 +38,7 @@
                         <div class="form-row">
                             <div class="input-group mb-2">
                                 <input type="email" class="form-control" id="email" name="email" 
-                                    value="{{ request.session.get('dados_usuario', {}).get('email', '') }}" 
+                                    value="{{ dados_temp.get('email', '') }}" 
                                     placeholder="Email" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
@@ -72,7 +72,7 @@
                         <div class="form-row">
                             <div class="input-group mb-2">
                                 <input type="text" class="form-control" id="nome" name="nome" 
-                                    value="{{ request.session.get('dados_usuario', {}).get('nome', '') }}" 
+                                    value="{{ dados_temp.get('nome', '') }}" 
                                     placeholder="Nome" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
@@ -84,7 +84,7 @@
                         <div class="form-row">
                             <div class="input-group mb-2">
                                 <input type="text" class="form-control" id="nome_perfil" name="nome_perfil" 
-                                    value="{{ request.session.get('dados_usuario', {}).get('nome_perfil', '') }}"
+                                    value="{{ dados_temp.get('nome_perfil', '') }}"
                                     placeholder="Nome de Perfil" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
@@ -111,20 +111,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function clearValue(input, defaultValue) {
-            if (input.value === defaultValue || input.value === '') {
-                input.value = ''; // Limpa o valor do campo
-            }
-        }
-
-        function restoreValue(input, defaultValue) {
-            if (input.value === '') {
-                input.value = defaultValue; // Restaura o valor padrão se o campo estiver vazio
-            }
-        }
-    </script>
     <script src="/static/js/mascararCampos.js"></script>
 </body>
 </html>

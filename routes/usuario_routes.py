@@ -49,13 +49,9 @@ async def finalizar_perfil(
 
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request, usuario: str = Depends(verificar_login)):
-    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.email)
-    foto_perfil = UsuarioRepo.verificar_foto_perfil(request.state.usuario.id)
-    print(foto_perfil)
-    if foto_perfil == None:
-        print("oi")
-        return RedirectResponse("/usuario/definir_perfil", 303)
-    return templates.TemplateResponse("main/pages/index.html", {"request": request})
+    dados_usuario = request.session.get('usuario_autenticado', {})
+    id_usuario = dados_usuario.get('id')
+    return templates.TemplateResponse("main/pages/index.html", {"request": request, "id_usuario": id_usuario})
 
 @router.get("/mensagens_principal", response_class=HTMLResponse)
 async def get_mensagens(request: Request, usuario: str = Depends(verificar_login)):
