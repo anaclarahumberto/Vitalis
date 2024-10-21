@@ -19,8 +19,7 @@ async def obter_usuario_logado(request: Request) -> dict:
             id = dados["id"],
             nome = dados["nome"],
             nome_perfil = dados["nome_perfil"], 
-            email = dados["email"], 
-            perfil= dados["perfil"])
+            email = dados["email"])
         if "mensagem" in dados.keys():
             usuario.mensagem = dados["mensagem"]
         return usuario
@@ -40,7 +39,7 @@ async def checar_autorizacao(request: Request):
     area_do_usuario = request.url.path.startswith("/usuario")
     area_do_profissional = request.url.path.startswith("/profissional")
     area_do_paciente = request.url.path.startswith("/paciente")
-    if (area_do_usuario or area_do_paciente or area_do_profissional) and (not usuario or not usuario.perfil):
+    if (area_do_usuario or area_do_paciente or area_do_profissional) and (not usuario):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     if area_do_profissional and usuario.perfil != 1:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
@@ -64,13 +63,12 @@ def conferir_senha(senha: str, hash_senha: str) -> bool:
         return False
     
 
-def criar_token(id: int, nome: str, nome_perfil: str, email: str, perfil: int) -> str:
+def criar_token(id: int, nome: str, nome_perfil: str, email: str) -> str:
     payload = {
         "id" : id,
         "nome": nome,
         "nome_perfil" : nome_perfil,
         "email": email,
-        "perfil": perfil,
         "exp": datetime.now() + timedelta(days=1)
     }
     return jwt.encode(payload, 

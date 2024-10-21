@@ -48,7 +48,6 @@ async def get_bem_vindo(request: Request):
 @router.get("/login", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
     email_temp = request.cookies.get('email_temp', '')
-    print(email_temp)
     return templates.TemplateResponse("main/pages/conecte_se.html", {"request": request, "email_temp": email_temp})
 
 from datetime import timedelta
@@ -67,7 +66,7 @@ async def post_login(request: Request, response: Response):
         adicionar_mensagem_erro(response, "Seus dados estão incorretos. Confira-os")
         return response
 
-    token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email, usuario.perfil)
+    token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email)
 
     if request.cookies.get(NOME_COOKIE_EMAIL_TEMP):
         response.delete_cookie(NOME_COOKIE_EMAIL_TEMP)
@@ -76,11 +75,16 @@ async def post_login(request: Request, response: Response):
         "id": usuario.id,
         "nome": usuario.nome,
         "nome_perfil": usuario.nome_perfil,
-        "perfil": usuario.perfil
     }
 
     response = RedirectResponse(f"/usuario/feed", status_code=status.HTTP_303_SEE_OTHER)
-    adicionar_cookie(response, NOME_COOKIE_AUTH, token, 3600)
+    response.set_cookie(
+        key=NOME_COOKIE_AUTH,
+        value=token,
+        max_age=1800,
+        httponly=True,
+        samesite="lax",
+    )
     return response
 
 
