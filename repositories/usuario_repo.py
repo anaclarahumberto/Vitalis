@@ -21,13 +21,18 @@ class UsuarioRepo:
             cursor = db.cursor()
             resultado = cursor.execute(SQL_INSERIR_USUARIO,
                 (usuario.nome,
-                 usuario.data_nascimento,
                  usuario.email,
-                 usuario.cpf,
-                 usuario.telefone,
                  usuario.senha,
-                 usuario.perfil,
-                 usuario.registro_profissional))
+                 usuario.nome_perfil))
+            return resultado.rowcount > 0
+    
+    @classmethod
+    def inserir_data(cls, email: str, data: date) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            resultado = cursor.execute(SQL_ATUALIZAR_DATA,
+                (data,
+                 email))
             return resultado.rowcount > 0
     
     @classmethod

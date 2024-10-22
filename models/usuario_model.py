@@ -13,11 +13,12 @@ class Usuario:
     telefone: Optional[str] = None
     senha: Optional[str] = None
     perfil: Optional[int] = None
-    foto_perfil: Optional[bool] = None
     nome_perfil: Optional[str] = None
+    foto_perfil: Optional[bool] = None
     bio_perfil: Optional[str] = None
-    categoria_perfil: Optional[str] = None
     genero: Optional[str] = None
+    tipo_paciente: Optional[int] = None
+    registro_profissional: Optional[bool] = None
     endereco_cep: Optional[str] = None
     endereco_logradouro: Optional[str] = None
     endereco_numero: Optional[str] = None
@@ -25,5 +26,4 @@ class Usuario:
     endereco_bairro: Optional[str] = None
     endereco_cidade: Optional[str] = None
     endereco_uf: Optional[str] = None
-    tipo_paciente: Optional[int] = None
-    registro_profissional: Optional[bool] = None
+    

@@ -1,15 +1,18 @@
+from datetime import date
 import sqlite3
 from contextlib import contextmanager
 
+from models.usuario_model import Usuario
 from sql.cadastro_temp_sql import *
 from util.database import obter_conexao
 
 
-class CadastroTempRepo:
+class UsuarioTempRepo:
     @classmethod
     def criar_tabela_temp(cls):
         with obter_conexao() as db:
             cursor = db.cursor()
+            cursor.execute(SQL_APAGAR_TABELA_TEMP)
             cursor.execute(SQL_CRIAR_TABELA_TEMP)
             db.commit()
             cursor.execute(SQL_VERIFICAR_TRIGGER_EXPIRACAO)
@@ -20,17 +23,17 @@ class CadastroTempRepo:
                 db.commit()
 
     @classmethod
-    def inserir_dados(cls, id_usuario, nome=None, nome_perfil = None, email=None, senha_hash=None) -> bool:
+    def inserir_dados(cls, usuario: Usuario) -> bool:
         with obter_conexao() as db:
             cursor = db.cursor()
-            cursor.execute(SQL_INSERIR_TEMP, (id_usuario, nome, nome_perfil, email, senha_hash))
+            cursor.execute(SQL_INSERIR_TEMP, (usuario.nome, usuario.nome_perfil, usuario.email, usuario.senha))
             db.commit()
 
     @classmethod
-    def atualizar_data(cls, id_usuario, data_nascimento=None,) -> bool:
+    def atualizar_data(cls, data_nascimento: date, email: str) -> bool:
         with obter_conexao() as db:
             cursor = db.cursor()
-            cursor.execute(SQL_ATUALIZAR_DATA_TEMP, (data_nascimento, id_usuario))
+            cursor.execute(SQL_ATUALIZAR_DATA_TEMP, (data_nascimento, email))
             db.commit()
 
     @classmethod

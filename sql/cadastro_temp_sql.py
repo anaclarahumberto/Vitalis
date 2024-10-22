@@ -1,10 +1,10 @@
 SQL_APAGAR_TABELA_TEMP = '''
-    DROP TABLE IF EXISTS cadastro_temp 
+    DROP TABLE IF EXISTS usuario_temp 
 '''
 
 SQL_CRIAR_TABELA_TEMP = '''
-    CREATE TABLE IF NOT EXISTS cadastro_temp (
-        id_usuario TEXT PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS usuario_temp (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT,
         nome_perfil TEXT,
         email TEXT,
@@ -20,27 +20,27 @@ SQL_VERIFICAR_TRIGGER_EXPIRACAO = """
 
 SQL_CRIAR_TRIGGER_EXPIRACAO = """
     CREATE TRIGGER limpar_registros_expirados
-    AFTER INSERT ON cadastro_temp
+    AFTER INSERT ON usuario_temp
     BEGIN
-        DELETE FROM cadastro_temp
+        DELETE FROM usuario_temp
         WHERE created_at < datetime('now', '-10 minutes');
     END;
 """
 
 SQL_INSERIR_TEMP = '''
-    INSERT INTO cadastro_temp (id_usuario, nome, nome_perfil, email, senha)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO usuario_temp (nome, nome_perfil, email, senha)
+    VALUES (?, ?, ?, ?)
 '''
 
 SQL_ATUALIZAR_DATA_TEMP = '''
-    UPDATE cadastro_temp
+    UPDATE usuario_temp
     SET data_nascimento = ?
-    WHERE id_usuario = ?
+    WHERE email = ?
 '''
 
 SQL_OBTER_DADOS_TEMP = '''
     SELECT nome, nome_perfil, email, senha, data_nascimento 
-        FROM cadastro_temp 
+        FROM usuario_temp 
         WHERE id_usuario = ?
 '''
 
@@ -51,5 +51,5 @@ SQL_INSERIR_USUARIO_REAL = """
 """
 
 SQL_REMOVER_DADOS_TEMP = '''
-    DELETE FROM cadastro_temp WHERE id_usuario = ?
+    DELETE FROM usuario_temp WHERE id_usuario = ?
 '''

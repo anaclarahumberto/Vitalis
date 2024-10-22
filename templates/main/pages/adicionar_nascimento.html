@@ -38,35 +38,16 @@
             margin-top: 10px;
         }
 
-        .col-auto {
-            width: 100%; /* Garante que o input group use toda a largura disponível */
-            margin-right: 10px;
-            margin-left: 0px;
+        .form-control {
             border-radius: 25px !important;
             border: 1px solid #ced4da;
-            padding: 10px 15px; 
+            padding: 10px 15px; /* Ajustado o padding para não cortar o texto */
             color: #47525E !important;
             background-color: #D2DCE9 !important;
-            box-shadow: none;
-            height: 45px !important;
-            width: 100%; 
-            box-sizing: border-box;  
-        }
-
-
-        select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%27http://www.w3.org/2000/svg%27 width%3D%2716%27 height%3D%2716%27 fill%3D%27%23000%27 class%3D%27bi bi-chevron-down%27 viewBox%3D%270 0 16 16%27%3E%3Cpath fill-rule%3D%27evenodd%27 d%3D%27M1.646 5.646a.5.5 0 0 1 .708 0l5.646 5.647L13.646 5.646a.5.5 0 1 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z%27/%3E%3C/svg%3E');
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 16px;
         }
     </style>
 </head>
 <body>
-    {% from 'shared/macros.html' import button_next %}
     <div class="container-fluid full-height">
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex flex-column justify-content-center align-items-center">
@@ -79,7 +60,7 @@
                     <form action="/salvar_nascimento" method="post">
                         <div class="form-row d-flex justify-content-center">
                             <div class="col-auto month-select" style="flex: 3 1 100px;">
-                                <select class="form-control custom-input" style="margin-top: 10px" id="mes" name="mes" required>
+                                <select class="form-control" id="mes" name="mes" required>
                                     <option value="">Mês</option>
                                     <script>
                                         const meses = [
@@ -95,7 +76,7 @@
                                 </select>
                             </div>
                             <div class="col-auto day-select" style="flex: 1 1 50px;">
-                                <select class="form-control custom-input" style="margin-top: 10px" id="dia" name="dia" required>
+                                <select class="form-control" id="dia" name="dia" required>
                                     <option value="">Dia</option>
                                     <script>
                                         const today = new Date();
@@ -107,7 +88,7 @@
                                 </select>
                             </div>
                             <div class="col-auto year-select" style="flex: 2 1 75px;">
-                                <select class="form-control custom-input" style="margin-top: 10px" id="ano" name="ano" required>
+                                <select class="form-control" id="ano" name="ano" required>
                                     <option value="">Ano</option>
                                     <script>
                                         const currentYear = new Date().getFullYear();
@@ -119,7 +100,9 @@
                             </div>
                         </div>
                         
-                        {{ button_next(text="Avançar")}}
+                        
+
+                        <button type="submit" class="btn-next mt-3">Avançar</button>
                         <a href="/cadastro" class="btn-back">Voltar</a>
                     </form>
                     {% if request.cookies.get('mensagem_erro') %}
@@ -138,18 +121,5 @@
         </div>
     </div>
 
-    <script>
-        function clearValue(input, defaultValue) {
-            if (input.value === defaultValue || input.value === '') {
-                input.value = '';
-            }
-        }
-
-        function restoreValue(input, defaultValue) {
-            if (input.value === '') {
-                input.value = defaultValue;
-            }
-        }
-    </script>
 </body>
 </html>

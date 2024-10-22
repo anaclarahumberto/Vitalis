@@ -39,8 +39,14 @@ SQL_CRIAR_TABELA = """
 
 SQL_INSERIR_USUARIO = """
     INSERT INTO usuario 
-    (nome, data_nascimento, email, cpf, telefone, senha, perfil, registro_profissional)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    (nome, email, senha, nome_perfil)
+    VALUES (?, ?, ?, ?)
+"""
+
+SQL_ATUALIZAR_DATA = """
+    UPDATE usuario
+    SET data_nascimento = ?,
+    WHERE EMAIL = ?
 """
 
 SQL_OBTER_DADOS_PERFIL = """

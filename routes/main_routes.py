@@ -5,10 +5,8 @@ from fastapi import APIRouter, Depends, FastAPI, Form, HTTPException, Request, s
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi import APIRouter, Form, UploadFile, File, status
 import os
-
-import jwt
 from models.usuario_model import Usuario
-from repositories.cadastro_temp_repo import CadastroTempRepo
+from repositories.usuario_temp_repo import UsuarioTempRepo
 from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
 from util.cadastro import *
@@ -91,24 +89,22 @@ async def post_login(request: Request, response: Response):
 
 @router.get("/cadastro", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
-    email_temp = request.cookies.get(NOME_COOKIE_EMAIL_TEMP, '')
-    nome_temp = request.cookies.get(NOME_COOKIE_NOME_TEMP, '')
-    nome_perfil_temp = request.cookies.get(NOME_COOKIE_NOME_PERFIL_TEMP, '')
-    dados_temp = dict(email=email_temp, nome=nome_temp, nome_perfil=nome_perfil_temp)
-    print(dados_temp)
+    dados_usuario = request.session.get('usuario', '')
     return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request, 
-        "dados_temp": dados_temp})
+        "dados_usuario": dados_usuario})
 
 @router.post("/cadastrar")
 async def post_cadastrar_paciente(request: Request):
     dados = dict(await request.form())
-    print("Dados", dados)
     senha = dados.pop("senha", None)
     conf_senha = dados.pop("conf_senha", None)
+    usuario =  Usuario(**dados)
+    request.session['usuario'] = {
+        "nome": usuario.nome,
+        "email": usuario.email,
+        "nome_perfil": usuario.nome_perfil
+    }
     response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
-    adicionar_cookie(response, NOME_COOKIE_EMAIL_TEMP, dados["email"], 180)
-    adicionar_cookie(response, NOME_COOKIE_NOME_TEMP, dados["nome"], 180)
-    adicionar_cookie(response, NOME_COOKIE_NOME_PERFIL_TEMP, dados["nome_perfil"], 180)
     if not is_email(dados["email"]):
         adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
         return response
@@ -137,20 +133,9 @@ async def post_cadastrar_paciente(request: Request):
         adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
         return response
     senha_hash = obter_hash_senha(senha)
-    id_cookie = request.cookies.get(NOME_COOKIE_ID_TEMP)
-    if id_cookie:
-        playload = validar_token_id(id_cookie) 
-        id_temp = playload.get("id")
-        if id_temp == None:
-            mensagem = playload.get("mensagem")
-            adicionar_mensagem_erro(response, mensagem)
-            return response
-    else:
-        id_temp = str(uuid.uuid4())
-        id_secreto = criar_token_id(id_temp) 
-    CadastroTempRepo.inserir_dados(id_temp, dados["nome"], dados["nome_perfil"], dados["email"], senha_hash,)
-    response = RedirectResponse("/definir_data", status_code=status.HTTP_303_SEE_OTHER)
-    if not id_cookie: adicionar_cookie(response, NOME_COOKIE_ID_TEMP, id_secreto, 180)
+    usuario.senha = senha_hash
+    UsuarioTempRepo.inserir_dados(usuario)
+    response = RedirectResponse("/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)
     return response
 
 @router.post("/salvar_nascimento")
@@ -170,29 +155,10 @@ async def post_cadastrar_aniversario(request: Request):
             response = RedirectResponse(f"/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)  
             adicionar_mensagem_erro(response, "A idade mínima para se cadastrar é de 13 anos"),
             return response
-        response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
-        id_secreto = request.cookies.get(NOME_COOKIE_ID_TEMP)
-        if id_secreto:
-            playload = validar_token_id(id_secreto) 
-            id_temp = playload.get("id")
-            if id_temp == None:
-                mensagem = playload.get("mensagem")
-                adicionar_mensagem_erro(response, mensagem)
-                return response
-            CadastroTempRepo.atualizar_data(id_temp, data_aniversario)
-            if request.cookies.get(NOME_COOKIE_ID_TEMP):
-                response.delete_cookie(NOME_COOKIE_ID_TEMP)
-            if request.cookies.get(NOME_COOKIE_EMAIL_TEMP):
-                response.delete_cookie(NOME_COOKIE_EMAIL_TEMP)
-            if request.cookies.get(NOME_COOKIE_NOME_TEMP):
-                response.delete_cookie(NOME_COOKIE_NOME_TEMP)
-            if request.cookies.get(NOME_COOKIE_NOME_PERFIL_TEMP):
-                response.delete_cookie(NOME_COOKIE_NOME_PERFIL_TEMP)
-            CadastroTempRepo.mover_para_banco_real(id_temp)
-            return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
-        else:
-            adicionar_mensagem_erro(response, "Sessão expirada")
-            return response
+        usuario = request.session.get('usuario', '')
+        email = usuario['email']
+        UsuarioTempRepo.atualizar_data(data_aniversario, email)
+        return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
     
     except (ValueError, KeyError):
         response = RedirectResponse(f"/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)

@@ -37,7 +37,7 @@
                             <div class="line"></div>
                         </div>
                         <!-- Campo Email -->
-                        {{ input_box(type="email", id="email", name="email", placeholder="Email", icon_class="bi bi-envelope", value=dados_temp.get('email', '') ) }}
+                        {{ input_box(type="email", id="email", name="email", placeholder="Email", icon_class="bi bi-envelope", value=dados_usuario.email if dados_usuario.email else '',)}}
 
                         <!-- Campo Senha -->
                         {{ input_box(type="password", id="senha", name="senha", placeholder="Senha", icon_class="bi bi-lock", ) }}
@@ -46,10 +46,10 @@
                         {{ input_box(type="password", id="conf_senha", name="conf_senha", placeholder="Confirme a senha", icon_class="bi bi-check-circle", ) }}
 
                         <!-- Campo Nome -->
-                        {{ input_box(type="text", id="nome", name="nome", placeholder="Nome", icon_class="bi bi-person", value=dados_temp.get('nome', ''), attributes='data-mask="nome"', ) }}
+                        {{ input_box(type="text", id="nome", name="nome", placeholder="Nome", icon_class="bi bi-person", value=dados_usuario.nome if dados_usuario.nome else '', attributes='data-mask="nome"', ) }}
 
                         <!-- Campo Nome de Perfil -->
-                        {{ input_box(type="text", id="nome_perfil", name="nome_perfil", placeholder="Nome de Perfil", icon_class="bi bi-person-badge", value=dados_temp.get('nome_perfil', '') ) }}
+                        {{ input_box(type="text", id="nome_perfil", name="nome_perfil", placeholder="Nome de Perfil", icon_class="bi bi-person-badge", value=dados_usuario.nome_perfil if dados_usuario.nome_perfil else '', ) }}
 
 
                         <!-- Botão Cadastre-se -->
