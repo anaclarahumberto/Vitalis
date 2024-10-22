@@ -21,6 +21,7 @@ class UsuarioRepo:
             cursor = db.cursor()
             resultado = cursor.execute(SQL_INSERIR_USUARIO,
                 (usuario.nome,
+                 usuario.data_nascimento,
                  usuario.email,
                  usuario.senha,
                  usuario.nome_perfil))

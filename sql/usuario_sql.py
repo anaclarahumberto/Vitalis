@@ -39,8 +39,8 @@ SQL_CRIAR_TABELA = """
 
 SQL_INSERIR_USUARIO = """
     INSERT INTO usuario 
-    (nome, email, senha, nome_perfil)
-    VALUES (?, ?, ?, ?)
+    (nome, data_nascimento, email, senha, nome_perfil)
+    VALUES (?, ?, ?, ?, ?)
 """
 
 SQL_ATUALIZAR_DATA = """

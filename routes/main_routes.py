@@ -157,7 +157,9 @@ async def post_cadastrar_aniversario(request: Request):
             return response
         usuario = request.session.get('usuario', '')
         email = usuario['email']
-        UsuarioTempRepo.atualizar_data(data_aniversario, email)
+        usuario = UsuarioTempRepo.obter_dados(email)
+        usuario.data_nascimento = data_aniversario
+        UsuarioRepo.inserir(usuario)
         return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
     
     except (ValueError, KeyError):

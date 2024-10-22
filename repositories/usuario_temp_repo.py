@@ -37,11 +37,19 @@ class UsuarioTempRepo:
             db.commit()
 
     @classmethod
-    def obter_dados(cls, id_usuario):
+    def obter_dados(cls, email):
         with obter_conexao() as db:
             cursor = db.cursor()
-            cursor.execute(SQL_OBTER_DADOS_TEMP, (id_usuario,))
-            return cursor.fetchone()
+            resultado = cursor.execute(SQL_OBTER_DADOS_TEMP, (email,))
+            resultado = cursor.fetchone()
+            if resultado:
+                return Usuario(
+                    nome = resultado[0],
+                    nome_perfil = resultado[1],
+                    email = resultado[2],
+                    senha = resultado[3],
+                )
+            return None
 
     @classmethod
     def remover_dados(cls, id_usuario):

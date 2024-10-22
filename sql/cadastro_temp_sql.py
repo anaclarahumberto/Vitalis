@@ -39,9 +39,9 @@ SQL_ATUALIZAR_DATA_TEMP = '''
 '''
 
 SQL_OBTER_DADOS_TEMP = '''
-    SELECT nome, nome_perfil, email, senha, data_nascimento 
+    SELECT nome, nome_perfil, email, senha
         FROM usuario_temp 
-        WHERE id_usuario = ?
+        WHERE email = ?
 '''
 
 SQL_INSERIR_USUARIO_REAL = """
