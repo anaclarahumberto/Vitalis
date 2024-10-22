@@ -32,14 +32,12 @@ body {
 
 .form-container {
     position: relative;
-    background-color: rgba(227, 238, 237, 0.9); /* Leve transparência */
-    padding: 40px; /* Mantendo o padding */
+    background-color: rgba(227, 238, 237, 0.9);
+    padding: 40px;
     border-radius: 20px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-    width: 85vw; /* Mantém a largura dinâmica */
-    max-width: 400px; /* Mantém uma largura máxima */
-    min-height: auto; /* Remover altura mínima fixa */
-    max-height: none; /* Remover altura máxima fixa */
+    width: 85vw;
+    max-width: 400px;
     margin: 0 auto;
     color: black;
     display: flex;
@@ -47,7 +45,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .form-title {
@@ -125,6 +123,21 @@ body {
 
 .input-group {
     width: 100%; /* Garante que o input group use toda a largura disponível */
+    margin-right: 0px;
+    margin-left: 0px;
+    border-radius: 25px !important;
+    border: 1px solid #ced4da;
+    padding: 10px 15px; 
+    color: #47525E !important;
+    background-color: #D2DCE9 !important;
+    box-shadow: none;
+    height: 45px !important;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+.input-group:focus-within {
+    border-color: #007bff;
 }
 
 .input-group-append {
@@ -145,24 +158,36 @@ body {
 
 .form-row {
     width: 100%; /* Garante que a form-row use toda a largura disponível */
+    margin: 0px;
 }
 
 .form-row > div {
     flex: 1; /* Faz com que cada coluna dentro da form-row ocupe o mesmo espaço */
-    padding: 5px; /* Reduzido o espaço lateral entre os campos */
+    padding: 0px; /* Reduzido o espaço lateral entre os campos */
 }
 
-.form-control {
-    border-radius: 25px !important;
-    border: 1px solid #ced4da;
-    padding: 10px 15px; /* Ajustado o padding para não cortar o texto */
-    color: #47525E !important;
-    background-color: #D2DCE9 !important;
-    box-shadow: none;
-    height: 45px !important;
-    width: 100%; 
-    box-sizing: border-box; 
+
+.custom-input {
+    all: unset; /* Remove todos os estilos */
+    width: 100%; /* Garante que o input ocupe toda a largura do contêiner */
+    padding: 0; /* Remove o padding padrão */
+    margin-left: 20px;
+    margin-right: 50px;
+    text-align: left;
+    border: none; /* Remove a borda padrão */
+    outline: none; /* Remove o contorno ao focar */
+    box-shadow: none; /* Remove a sombra */
+    font-size: inherit; /* Usa o tamanho da fonte do pai */
+    background-color: transparent; /* Torna o fundo transparente */
 }
+
+.custom-input:focus {
+    outline: none; /* Remove o contorno ao focar */
+    border: none; /* Garante que a borda não apareça ao focar */
+    box-shadow: none;
+    background-color: transparent
+}
+
 
 .form-control::placeholder {
     color: #47525E !important;
@@ -280,6 +305,8 @@ body {
 .year-select {
     min-width: 70px; /* Ajuste conforme necessário */
 }
+
+/*camposenha*/
 
 .senha-forca {
     margin-top: 2px;

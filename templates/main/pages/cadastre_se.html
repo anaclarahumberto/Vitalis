@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/estilo_cadastro_login.css">
+    
 </head>
 <body>
+    {% from 'shared/macros.html' import input_box, button_next %}
     <div class="container-fluid full-height">
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex flex-direction: column justify-content-center align-items-center">
@@ -35,65 +37,23 @@
                             <div class="line"></div>
                         </div>
                         <!-- Campo Email -->
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="email" class="form-control" id="email" name="email" 
-                                    value="{{ dados_temp.get('email', '') }}" 
-                                    placeholder="Email" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                </div>
-                            </div>
-                        </div>
+                        {{ input_box(type="email", id="email", name="email", placeholder="Email", icon_class="bi bi-envelope", value=dados_temp.get('email', '') ) }}
 
                         <!-- Campo Senha -->
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="password" class="form-control" id="senha" name="senha"  
-                                    placeholder="Senha" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                </div>
-                            </div>
-                        </div>
+                        {{ input_box(type="password", id="senha", name="senha", placeholder="Senha", icon_class="bi bi-lock", ) }}
 
                         <!-- Campo Confirmar Senha -->
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="password" class="form-control" id="conf_senha" name="conf_senha" 
-                                    placeholder="Confirme a Senha" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-check-circle"></i></span>
-                                </div>
-                            </div>
-                        </div>
+                        {{ input_box(type="password", id="conf_senha", name="conf_senha", placeholder="Confirme a senha", icon_class="bi bi-check-circle", ) }}
 
                         <!-- Campo Nome -->
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="text" class="form-control" id="nome" name="nome" 
-                                    value="{{ dados_temp.get('nome', '') }}" 
-                                    placeholder="Nome" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                </div>
-                            </div>
-                        </div>
+                        {{ input_box(type="text", id="nome", name="nome", placeholder="Nome", icon_class="bi bi-person", value=dados_temp.get('nome', ''), attributes='data-mask="nome"', ) }}
 
                         <!-- Campo Nome de Perfil -->
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="text" class="form-control" id="nome_perfil" name="nome_perfil" 
-                                    value="{{ dados_temp.get('nome_perfil', '') }}"
-                                    placeholder="Nome de Perfil" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
-                                </div>
-                            </div>
-                        </div>
+                        {{ input_box(type="text", id="nome_perfil", name="nome_perfil", placeholder="Nome de Perfil", icon_class="bi bi-person-badge", value=dados_temp.get('nome_perfil', '') ) }}
+
 
                         <!-- Botão Cadastre-se -->
-                        <button type="submit" class="btn-next">Cadastre-se</button> <!-- Botão de submit -->
+                         {{ button_next(text="Cadastre-se")}}
                         
                     </form>
                     {% if request.cookies.get('mensagem_erro') %}

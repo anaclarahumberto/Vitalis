@@ -102,6 +102,7 @@ async def get_bem_vindo(request: Request):
 @router.post("/cadastrar")
 async def post_cadastrar_paciente(request: Request):
     dados = dict(await request.form())
+    print("Dados", dados)
     senha = dados.pop("senha", None)
     conf_senha = dados.pop("conf_senha", None)
     response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
@@ -152,7 +153,7 @@ async def post_cadastrar_paciente(request: Request):
     if not id_cookie: adicionar_cookie(response, NOME_COOKIE_ID_TEMP, id_secreto, 180)
     return response
 
-@router.post("/salvar_aniversario")
+@router.post("/salvar_nascimento")
 async def post_cadastrar_aniversario(request: Request):
 
     dados = dict(await request.form())
@@ -166,7 +167,7 @@ async def post_cadastrar_aniversario(request: Request):
         data_hoje = datetime.today()
         data_minima = data_hoje.replace(year=data_hoje.year - 13)
         if not is_date_less_than(data_aniversario, data_minima):
-            response = RedirectResponse(f"/definir_data", status_code=status.HTTP_303_SEE_OTHER)  
+            response = RedirectResponse(f"/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)  
             adicionar_mensagem_erro(response, "A idade mínima para se cadastrar é de 13 anos"),
             return response
         response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
@@ -194,7 +195,7 @@ async def post_cadastrar_aniversario(request: Request):
             return response
     
     except (ValueError, KeyError):
-        response = RedirectResponse(f"/definir_data", status_code=status.HTTP_303_SEE_OTHER)
+        response = RedirectResponse(f"/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)
         adicionar_mensagem_erro(response, "Data de nascimento inválida. Verifique os campos.")
         return response
 
@@ -259,9 +260,9 @@ async def post_cadastrar_paciente(request: Request):
     UsuarioRepo.inserir(usuario)
     return RedirectResponse("/conta_criada", status_code=status.HTTP_303_SEE_OTHER)
 
-@router.get("/definir_data", response_class=HTMLResponse)
+@router.get("/adicionar_nascimento", response_class=HTMLResponse)
 async def get_criar_conta(request: Request):
-    return templates.TemplateResponse("main/pages/definir_nascimento.html", {"request": request})
+    return templates.TemplateResponse("main/pages/adicionar_nascimento.html", {"request": request})
 
 @router.get("/criar_conta", response_class=HTMLResponse)
 async def get_criar_conta(request: Request):

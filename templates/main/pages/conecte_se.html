@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/static/css/estilo_cadastro_login.css">
 </head>
 <body>
+    {% from 'shared/macros.html' import input_box, button_next %}
     <div class="container-fluid full-height">
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex flex-direction: column justify-content-center align-items-center">
@@ -23,29 +24,11 @@
                     <!-- Formulário de cadastro -->
                     <form action="/login" method="post" class="form-full">
                         <!-- Campo Email -->
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="email" class="form-control input-field" id="email" name="email" 
-                                       value="{{ email_temp }}"
-                                       placeholder="Email" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    
+                        {{ input_box(type="email", id="email", name="email", placeholder="Email", icon_class="bi bi-envelope", value=email_temp ) }}
                         <!-- Campo Senha -->
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="password" class="form-control input-field" id="senha" name="senha" 
-                                        placeholder="Senha" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <button type="submit" class="btn-next">Entrar</button>
+                        {{ input_box(type="password", id="senha", name="senha", placeholder="Senha", icon_class="bi bi-lock", ) }}
+                        <!-- Botão de Entrar-->
+                        {{ button_next(text="Entrar")}}
 
                         <div class="or-container">
                             <div class="line"></div>
