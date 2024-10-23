@@ -52,3 +52,92 @@
 </div>
 
 {%- endmacro %}
+
+<!---------------------------------------------------- Macros do Maroquio ------------------------------------------------------------->
+
+{% macro input_text(name, label, attributes='', value='', div_classes='') %}
+<div class="{{div_classes}}">
+    <div class="form-floating">
+        <input type="text" name="{{name}}" id="{{name}}" class="form-control" placeholder=" " {{attributes|safe}} value="{{value|e}}">
+        <label for="{{name}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro input_email(name, label, attributes='', value='', div_classes='') %}
+<div class="{{div_classes}}">
+    <div class="form-floating">
+        <input type="email" name="{{name}}" id="{{name}}" class="form-control" placeholder=" " {{attributes|safe}} value="{{value|e}}">
+        <label for="{{name}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro input_date(name, label, attributes='', value='', div_classes='') %}
+<div class="{{div_classes}}">
+    <div class="form-floating">
+        <input type="date" name="{{name}}" id="{{name}}" class="form-control" placeholder=" " {{attributes|safe}} value="{{value|e}}">
+        <label for="{{name}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro input_password(name, label, attributes='', div_classes='') %}
+<div class="{{div_classes}}">
+    <div class="form-floating">
+        <input type="password" name="{{name}}" id="{{name}}" class="form-control" placeholder=" " {{attributes|safe}}>
+        <label for="{{name}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro input_textarea(name, label, attributes='', value='', div_classes='') %}
+<div class="{{div_classes}}">
+    <div class="form-floating">
+        <textarea name="{{name}}" id="{{name}}" class="form-control" placeholder=" " {{attributes|safe}} style="height:6rem;">{{value|e}}</textarea>
+        <label for="{{name}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro input_select(name, label, options, attributes='', value='', div_classes='') %}
+<div class="{{div_classes}}">
+    <div class="form-floating">
+        <select name="{{name}}" id="{{name}}" class="form-control" placeholder=" " {{attributes|safe}}>
+            <option value="" {{"selected" if not value}}>Escolha uma opção...</option>
+            {% for option in options %}
+            {%- set selected = "selected" if option.value == value -%}
+            <option value="{{option.value}}" {{selected}}>{{option.label}}</option>
+            {% endfor %}
+        </select>
+        <label for="{{name}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro input_radios(name, label, options, attributes='', value='', div_classes='') %}
+<div class="{{div_classes}}">
+    <fieldset class="border rounded-2" style="padding: .75rem">
+        <legend class="text-secondary" style="font-size:13px">{{label}}</legend>
+        <div class="row gx-3">
+            {% for option in options %}
+            {%- set checked = "checked" if option.value == value -%}
+            <div class="col">
+                <input type="radio" class="btn-check" name="{{name}}" id="{{name}}{{loop.index}}" value="{{option.value}}" autocomplete="off" {{checked}}>
+                <label class="btn btn-outline-secondary w-100" for="{{name}}{{loop.index}}">{{option.label|safe}}</label>
+            </div>
+            {% endfor %}
+        </div>
+    </fieldset>
+</div>
+{% endmacro %}
+
+{%- macro input_switch(name, label, attributes='', value='', div_classes='') -%}
+{% set checked = "checked" if valor else "" %}
+<div class="{{div_classes}}">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="{{name}}" name="{{name}}" {{checked}}>
+        <label class="form-check-label" for="{{name}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}
