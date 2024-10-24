@@ -39,9 +39,10 @@ body, p {
     position: relative;
     background-color: white;
     padding: 40px;
+    padding-bottom: 20px;
     border-radius: 20px;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-color: #cacaca;
     width: 85vw;
     max-width: 350px;
@@ -233,6 +234,20 @@ body, p {
     width: 18px;
     height: 18px;
     margin-right: 8px;
+}
+
+.custom-text {
+    font-family: "Alex Brush", cursive;
+    font-style: bold;
+    font-size: 18px; 
+    margin-top: 30px;
+    color: black; 
+    -webkit-text-stroke: 0.5px black;
+}
+
+.custom-text i {
+    color: black; /* Cor do ícone de coração */
+    font-size: 14px; /* Tamanho do ícone */
 }
 
 .create-account {
