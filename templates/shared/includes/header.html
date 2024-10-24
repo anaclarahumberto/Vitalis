@@ -9,44 +9,44 @@
     <link rel="stylesheet" href="/static/css/estilo_menu_atividades.css"> <!-- Inclusão do CSS separado -->
 </head>
 <body>
-    <header class="col-3 cor-menu pe-0">
+    <header class="cor-menu">
         <div class="row h-100">
             <div class="d-inline-block col-10 min-vh-100">
                 <nav class="d-flex flex-column ps-2 min-vh-100 h-100">
                     <a href="/" class="text-decoration-none">
-                        <img src="/static/img/logo.svg" alt="Logo" class="w-100">
+                        <img src="/static/img/logo.svg" alt="Logo" class="logo"> <!-- Aplica a classe "logo" -->
                     </a>
-                    <a class="text-white text-decoration-none my-2" href="/usuario/feed">
-                        <i class="bi bi-house fs-5"></i>
+                    <a class="text-white text-decoration-none" href="/usuario/feed">
+                        <i class="bi bi-house"></i>
                         Página Inicial
                     </a>
-                    <a class="text-white text-decoration-none my-2" href="/usuario/perfil">
-                        <i class="bi bi-person fs-5"></i>
+                    <a class="text-white text-decoration-none meu-link" href="/usuario/perfil">
+                        <i class="bi bi-person"></i>
                         Perfil
                     </a>
-                    <a class="text-white text-decoration-none my-2" href="/usuario/mensagens_principal">
-                        <i class="bi bi-envelope fs-5"></i>
+                    <a class="text-white text-decoration-none meu-link" href="/usuario/mensagens_principal">
+                        <i class="bi bi-envelope"></i>
                         Mensagens
                     </a>
-                    <a class="text-white text-decoration-none my-2" href="/usuario/notificacoes">
-                        <i class="bi bi-bell fs-5"></i>
+                    <a class="text-white text-decoration-none meu-link" href="/usuario/notificacoes">
+                        <i class="bi bi-bell"></i>
                         Notificações
                     </a>
-                    <a class="text-white text-decoration-none my-2" href="/usuario/cupons_ativos">
-                        <i class="bi bi-tag fs-5"></i>
+                    <a class="text-white text-decoration-none meu-link" href="/usuario/cupons_ativos">
+                        <i class="bi bi-tag"></i>
                         Cupons
                     </a>
-                    <a type="button" class="text-white text-decoration-none my-2"  data-toggle="modal" data-target="#novaPubModal">
-                        <i class="bi bi-plus-circle fs-5"></i>
+                    <a type="button" class="text-white text-decoration-none meu-link" data-toggle="modal" data-target="#novaPubModal">
+                        <i class="bi bi-plus-circle"></i>
                         Nova Publicação
                     </a>
-                    <a class="text-white text-decoration-none my-2" href="/usuario/configuracoes">
-                        <i class="bi bi-gear fs-5"></i>
+                    <a class="text-white text-decoration-none meu-link" href="/usuario/configuracoes">
+                        <i class="bi bi-gear"></i>
                         Configurações
                     </a>
-                    <a class="text-white text-decoration-none my-2 mt-auto" href="#" id="activities-btn">
-                        <i class="bi bi-text-left fs-5"></i>
-                        Atividades
+                    <a class="text-white text-decoration-none my-2 mt-auto" href="#" id="mais-btn">
+                        <i class="bi bi-text-left"></i>
+                        Mais
                     </a>
                     <!-- Caixa de mensagem -->
                     <div id="message-box" class="message-box">
@@ -91,25 +91,28 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            const activitiesBtn = document.getElementById('activities-btn');
+            const activitiesBtn = document.getElementById('mais-btn');
             const messageBox = document.getElementById('message-box');
-            const margin = 30; // Margem entre a caixa de mensagem e o botão
-
+            const margin = 310; 
+    
             activitiesBtn.addEventListener('click', (e) => {
                 e.preventDefault(); // Evita a navegação padrão
-
+    
                 // Verifica o estado atual da caixa de mensagem e alterna sua visibilidade
                 if (messageBox.style.display === 'block') {
                     messageBox.style.display = 'none'; // Esconde a caixa de mensagem
                 } else {
                     // Define a posição da caixa de mensagem
                     const rect = activitiesBtn.getBoundingClientRect();
-                    messageBox.style.top = `${rect.top + window.scrollY - messageBox.offsetHeight - 480}px`; // Ajusta a posição acima do botão
+                    
+                    // Ajusta a posição para que a messageBox apareça 5px acima do botão
+                    messageBox.style.top = `${rect.top + window.scrollY - messageBox.offsetHeight - margin}px`;
                     messageBox.style.left = `${rect.left}px`;
+    
                     messageBox.style.display = 'block'; // Mostra a caixa de mensagem
                 }
             });
-
+    
             // Fecha a caixa de mensagem se clicar fora dela
             document.addEventListener('click', (e) => {
                 if (!messageBox.contains(e.target) && e.target !== activitiesBtn) {

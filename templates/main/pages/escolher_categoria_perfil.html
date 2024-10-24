@@ -16,10 +16,12 @@
         /* Mantém o options-container com cor de fundo */
         .options-container {
             position: relative;
-            background-color: rgba(227, 238, 237, 0.9);
+            background-color: white;
             padding: 20px;
             border-radius: 20px;
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+            border-style: solid;
+            border-width: 1px;
+            border-color: #cacaca;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -52,6 +54,12 @@
             font-size: 1.6rem;
         }
 
+        .col-12 h2 {
+            font-size: 20px; 
+            font-family: "Ubuntu", sans-serif;
+            margin-bottom: 30px;
+        }
+
         .description-text {
             font-size: 16px;
             color:rgb(79, 79, 79);
@@ -75,7 +83,7 @@
             font-size: 16px;
             vertical-align: middle;
             margin-right: 8px; /* Espaçamento entre o ícone e o texto */
-        }        
+        }
 
         /* Responsivo: em telas menores, o inner-container se adapta verticalmente */
         @media (max-width: 768px) {
@@ -95,9 +103,7 @@
     <div class="container-fluid full-height">
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex justify-content-center align-items-center">
-                <div class="options-container" style="margin-bottom:20px; border-radius: 20px; padding-left: 20px; padding-right: 20px; padding-top:10px; padding-bottom: 10px;">
-                    <h2 style="font-size: 20px; font-family: Ubuntu, sans-serif">Escolha como deseja fazer parte da nossa comunidade</h2>
-                </div>
+                <h2 class="tittle">Escolha como deseja fazer parte da nossa comunidade</h2>
                 <div class="options-container">
                     <!-- Novo inner-container -->
                     <div class="inner-container">
@@ -107,7 +113,7 @@
                             <!-- Formulário ao redor do botão -->
                             <form id="paciente-form" action="/salvar_perfil" method="post">
                                 <input type="hidden" name="perfil" value="1">
-                                <button type="submit" class="btn-next" style="margin-bottom: 20px; color: #0F6481; background-color: white">Seja um paciente</button>
+                                <button type="submit" class="btn-next" style="margin-bottom: 20px; color: #0099cc; background-color: #fcfcfc">Seja um paciente</button>
                             </form>
                             <p><i class="bi bi-check2"></i>Acesso a conteúdos personalizados</p>
                             <p><i class="bi bi-check2"></i>Conexão com profissionais confiáveis</p>

@@ -138,6 +138,10 @@ async def post_cadastrar_paciente(request: Request):
     response = RedirectResponse("/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)
     return response
 
+@router.get("/adicionar_nascimento", response_class=HTMLResponse)
+async def get_criar_conta(request: Request):
+    return templates.TemplateResponse("main/pages/adicionar_nascimento.html", {"request": request})
+
 @router.post("/salvar_nascimento")
 async def post_cadastrar_aniversario(request: Request):
 
@@ -194,6 +198,9 @@ async def escolher_perfil(request: Request, perfil: int = Form(...)):
         adicionar_mensagem_erro(response, "Erro ao selecionar perfil. Tente novamente.")
         return response
 
+@router.get("/adicionar_registro_profissional", response_class=HTMLResponse)
+async def get_criar_conta(request: Request):
+    return templates.TemplateResponse("main/pages/adicionar_registro_profissional.html", {"request": request})
 
 @router.post("/cadastrar_profissional")
 async def post_cadastrar_profissional(
@@ -256,9 +263,6 @@ async def post_cadastrar_paciente(request: Request):
     UsuarioRepo.inserir(usuario)
     return RedirectResponse("/conta_criada", status_code=status.HTTP_303_SEE_OTHER)
 
-@router.get("/adicionar_nascimento", response_class=HTMLResponse)
-async def get_criar_conta(request: Request):
-    return templates.TemplateResponse("main/pages/adicionar_nascimento.html", {"request": request})
 
 @router.get("/cadastro_profissional", response_class=HTMLResponse)
 async def get_cadastro_profissional(request: Request):

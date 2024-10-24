@@ -1,5 +1,6 @@
-.cor-menu {
-    background-color: #6B98BF !important;
+main {
+    margin-left: 20%; /* Largura da header */
+    padding: 20px;
 }
 
 .fullscreen {

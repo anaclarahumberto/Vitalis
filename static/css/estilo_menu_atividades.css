@@ -1,30 +1,36 @@
 /* Estilos para o cabeçalho e navegação */
 .cor-menu {
-    background-color: #333; /* Exemplo de cor de fundo */
+    background-color: #6B98BF; /* Cor de fundo */
+    width: 20%; /* Fixa a header no canto esquerdo */
+    height: 100vh; /* Faz com que a altura seja igual à da tela */
+    overflow: hidden; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+    position: fixed;
 }
+
 
 /* Estilos para a caixa de mensagem */
 .message-box {
     display: none; /* Inicialmente escondida */
     position: absolute;
+    align-items: left;
     background-color: #ADCBE4; /* Cor da caixa */
     color: white;
-    padding: 40px; /* Aumentado o padding */
+    padding: 20px; /* Aumentado o padding */
     border-radius: 30px; /* Bordas mais arredondadas */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
     z-index: 1000;
     white-space: nowrap; /* Para evitar quebra de linha dentro da caixa */
-    min-width: 300px; /* Largura mínima aumentada */
-    min-height: 400px; /* Altura mínima aumentada para tornar a caixa mais retangular */
+    width: 80%; /* Largura mínima aumentada */
+    height: auto; /* Altura mínima aumentada para tornar a caixa mais retangular */
     font-size: 18px; /* Aumentado o tamanho da fonte */
 }
 
 .message-box .button {
     display: flex;
     align-items: center;
-    margin-bottom: 25px; /* Espaçamento entre os botões aumentado */
+    margin-bottom: 20px; /* Espaçamento entre os botões reduzido */
     text-decoration: none;
     color: white;
+    padding: 0px;
     font-size: 18px; /* Aumentado o tamanho da fonte do texto */
 }
 
@@ -34,7 +40,7 @@
 
 .message-box .button i {
     margin-right: 20px; /* Espaçamento entre ícone e texto aumentado */
-    font-size: 24px; /* Aumentado o tamanho dos ícones */
+    font-size: 20px; /* Aumentado o tamanho dos ícones */
 }
 
 /* Estilo para o divisor */
@@ -42,8 +48,8 @@
     height: 4px; /* Aumentado a espessura da linha */
     background-color: #5A6978; /* Cor da linha */
     opacity: 48%;
-    width: calc(136%); /* Largura aumentada para além da largura da caixa */
-    margin: 40px -40px; /* Ajusta o espaçamento para compensar a largura extra */
+    width: 120%; /* Largura aumentada para além da largura da caixa */
+    margin-left: -20px;
     border-radius: 5px; /* Adiciona bordas arredondadas à linha */
 }
 
@@ -60,4 +66,28 @@
 }
 .mt-auto {
     margin-top: auto;
+}
+
+/* Reduzir o tamanho do logo */
+.logo {
+    width: 200px; /* ajuste o valor conforme necessário */
+    height: auto;
+}
+
+/* Aumentar o tamanho do texto nos links */
+nav a {
+    font-size: 1.05rem; /* Aumentar o tamanho do texto */
+    padding: 15px; /* Aumentar o padding para maior espaçamento dos botões */
+    margin: 0;
+}
+
+.menu-link {
+    margin-top: 5px; /* Ajuste para controlar o espaçamento superior */
+    margin-bottom: 0px; /* Ajuste para controlar o espaçamento inferior */
+}
+
+/* Aumentar os botões */
+nav a i {
+    font-size: 1.5rem; /* Aumenta o tamanho dos ícones */
+    margin-right: 10px; /* Adiciona espaçamento entre o ícone e o texto */
 }

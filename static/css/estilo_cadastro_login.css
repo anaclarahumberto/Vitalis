@@ -1,9 +1,10 @@
 body {
     margin: 0;
-    padding: 40px;
-    background-image: url('/static/img/onda_azul.png') !important;
+    padding: 20px;
+    /* background-image: url('/static/img/onda_azul.png') !important; */
     background-repeat: no-repeat;
     background-position: center center;
+    background-color: #ffffff;
     background-size: 100% 100%;
     min-height: 100vh; /* Permite que o body cresça além de 100vh */
     display: flex;
@@ -36,12 +37,14 @@ body, p {
 
 .form-container {
     position: relative;
-    background-color: rgba(227, 238, 237, 0.9);
+    background-color: white;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cacaca;
     width: 85vw;
-    max-width: 400px;
+    max-width: 350px;
     margin: 0 auto;
     color: black;
     display: flex;
@@ -53,9 +56,9 @@ body, p {
 }
 
 .form-title {
-    font-family: 'Chewy', cursive;
-    color: #0F6481;
-    font-size: 3rem;
+    font-family: 'Cookie', cursive;
+    color: #000000;
+    font-size: 50px;
     margin-bottom: 30px;
 }
 
@@ -66,7 +69,7 @@ body, p {
 }
 
 .btn-next {
-    background-color: #0F6481;
+    background-color: #0099cc;
     color: white;
     border: none;
     padding: 10px 40px;
@@ -133,11 +136,12 @@ body, p {
     border: 1px solid #ced4da;
     padding: 10px 15px; 
     color: #47525E !important;
-    background-color: #D2DCE9 !important;
+    background-color: #f9f9f9 !important;
     box-shadow: none;
     height: 45px !important;
     width: 100%; 
     box-sizing: border-box; 
+    border-color: #cacaca;
 }
 
 .input-group:focus-within {
@@ -204,8 +208,8 @@ body, p {
 
 .forgot-password {
     color: #0F6481; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado */
-    margin: 30px 0; /* Margem */
+    text-decoration: none; /* Remove o sublinhado */ 
+    margin-top: 30px;/* Margem */
     display: block; /* Faz com que o link ocupe toda a largura disponível */
     font-size: 0.9rem; /* Tamanho do texto - ajuste conforme necessário */
 }
