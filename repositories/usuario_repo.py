@@ -37,13 +37,11 @@ class UsuarioRepo:
             return resultado.rowcount > 0
     
     @classmethod
-    def inserir_perfil(cls, usuario: Usuario) -> bool:
+    def inserir_categoria_perfil(cls, email: str, perfil: int) -> bool:
         with obter_conexao() as db:
             cursor = db.cursor()
-            resultado = cursor.execute(SQL_ATUALIZAR_PERFIL,
-                (usuario.nome_perfil,
-                 usuario.foto_perfil,
-                 usuario.id))
+            resultado = cursor.execute(SQL_ATUALIZAR_CATEGORIA_PERFIL,
+                (perfil, email))
             return resultado.rowcount > 0
         
     @classmethod

@@ -21,7 +21,7 @@ SQL_CRIAR_TABELA = """
     foto_perfil BOOL,
     nome_perfil TEXT NOT NULL,
     bio_perfil TEXT,
-    categoria_perfil TEXT,
+    categoria_perfil INT,
     genero TEXT,
     tipo_perfil INTEGER,
     registro_profissional BOOL,
@@ -55,10 +55,10 @@ SQL_OBTER_DADOS_PERFIL = """
     WHERE email = ?
 """
 
-SQL_ATUALIZAR_PERFIL = """
+SQL_ATUALIZAR_CATEGORIA_PERFIL = """
     UPDATE usuario
-    SET nome_perfil = ?, foto_perfil = ?
-    WHERE ID = ?
+    SET categoria_perfil = ?
+    WHERE email = ?
 """
 
 SQL_ATUALIZAR_DADOS = """

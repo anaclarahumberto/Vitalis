@@ -166,6 +166,34 @@ async def post_cadastrar_aniversario(request: Request):
         response = RedirectResponse(f"/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)
         adicionar_mensagem_erro(response, "Data de nascimento inválida. Verifique os campos.")
         return response
+    
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import RedirectResponse
+from starlette import status
+
+app = FastAPI()
+
+@router.get("/escolher_categoria_perfil", response_class=HTMLResponse)
+async def get_criar_conta(request: Request):
+    return templates.TemplateResponse("main/pages/escolher_categoria_perfil.html", {"request": request})
+
+@app.post("/salvar_perfil")
+async def escolher_perfil(request: Request, perfil: int = Form(...)):
+    try:
+        usuario = request.session.get('usuario', '')
+        email = usuario.get('email')
+        
+        if not email:
+            return RedirectResponse("/login", status_code=status.HTTP_303_SEE_OTHER)
+        
+        UsuarioRepo.inserir_categoria_perfil(email, perfil)
+        return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
+
+    except Exception as e:
+        response = RedirectResponse("/escolher_categoria_perfil", status_code=status.HTTP_303_SEE_OTHER)
+        adicionar_mensagem_erro(response, "Erro ao selecionar perfil. Tente novamente.")
+        return response
+
 
 @router.post("/cadastrar_profissional")
 async def post_cadastrar_profissional(
@@ -231,10 +259,6 @@ async def post_cadastrar_paciente(request: Request):
 @router.get("/adicionar_nascimento", response_class=HTMLResponse)
 async def get_criar_conta(request: Request):
     return templates.TemplateResponse("main/pages/adicionar_nascimento.html", {"request": request})
-
-@router.get("/criar_conta", response_class=HTMLResponse)
-async def get_criar_conta(request: Request):
-    return templates.TemplateResponse("main/pages/criar_conta.html", {"request": request})
 
 @router.get("/cadastro_profissional", response_class=HTMLResponse)
 async def get_cadastro_profissional(request: Request):

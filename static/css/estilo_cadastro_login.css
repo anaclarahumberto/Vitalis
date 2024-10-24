@@ -14,6 +14,10 @@ body {
     overflow-y: auto; /* Permite o scroll no Y se necessário */
 }
 
+body, p {
+    font-family: 'Ubuntu', sans-serif; /* Ou a fonte desejada */
+}
+
 .page-background {
     width: 100%;
     height: 100%;
