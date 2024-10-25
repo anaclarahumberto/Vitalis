@@ -85,7 +85,9 @@ async def post_login(request: Request, response: Response):
     )
     return response
 
-
+@router.get("/criar_conta", response_class=HTMLResponse)
+async def get_criar_conta(request: Request):
+    return templates.TemplateResponse("main/pages/criar_conta.html", {"request": request})
 
 @router.get("/cadastro", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
@@ -213,6 +215,10 @@ async def post_cadastrar_profissional(
     confsenha: str = Form(...),
     registro_profissional: UploadFile = File(...)
 ):
+    response = RedirectResponse("/cadastro_profissional", status_code=status.HTTP_303_SEE_OTHER)
+    if not is_email(email):
+        adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
+        return response
     if senha != confsenha:
         return RedirectResponse("/cadastro_profissional", status_code=status.HTTP_303_SEE_OTHER)
     senha_hash = obter_hash_senha(senha)
@@ -241,9 +247,12 @@ async def post_cadastrar_profissional(
 async def post_cadastrar_paciente(request: Request):
     dados = dict(await request.form())
     erros = {}
-    #atualizações do maroquio
-    if is_matching_fields(dados["senha"], "senha", "Senha", dados["confirmacao_senha"], "Confirmação de Senha", erros):
-        dados.pop("confirmacao_senha")
+    if is_matching_fields(dados["senha"], dados["confsenha"]):
+        dados.pop("confsenha")
+    response = RedirectResponse("/cadastro_profissional", status_code=status.HTTP_303_SEE_OTHER)
+    if not is_email(dados["email"]):
+        adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
+        return response
     is_person_fullname(dados["nome"], "nome", "Nome", erros)
     is_size_between(dados["nome"], "nome", "Nome", erros)
     data_minima = datetime.now() - timedelta(days=365 *130)

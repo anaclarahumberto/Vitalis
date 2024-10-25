@@ -3,7 +3,7 @@
     background-color: #6B98BF; /* Cor de fundo */
     width: 20%; /* Fixa a header no canto esquerdo */
     height: 100vh; /* Faz com que a altura seja igual à da tela */
-    overflow: hidden; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+    overflow: hidden; 
     position: fixed;
 }
 

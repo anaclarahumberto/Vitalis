@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 20px;
-    /* background-image: url('/static/img/onda_azul.png') !important; */
+    background-image: url('/static/img/onda_azul.png') !important;
     background-repeat: no-repeat;
     background-position: center center;
     background-color: #ffffff;
@@ -37,15 +37,13 @@ body, p {
 
 .form-container {
     position: relative;
-    background-color: white;
+    background-color: rgb(227, 238, 237, 0.9);
     padding: 40px;
     padding-bottom: 20px;
-    border-radius: 20px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #cacaca;
+    border-radius: 40px;
     width: 85vw;
-    max-width: 350px;
+    max-width: 500px;
+    height:auto;
     margin: 0 auto;
     color: black;
     display: flex;
@@ -57,9 +55,10 @@ body, p {
 }
 
 .form-title {
-    font-family: 'Cookie', cursive;
-    color: #000000;
-    font-size: 50px;
+    font-family: 'Chewy', cursive;
+    color: #0F6481;
+    font-size: 40px;
+    margin-top: 20px;
     margin-bottom: 30px;
 }
 
@@ -70,11 +69,11 @@ body, p {
 }
 
 .btn-next {
-    background-color: #0099cc;
+    background-color: #0F6481;
     color: white;
     border: none;
     padding: 10px 40px;
-    font-size: 15px;
+    font-size: 16px;
     border-radius: 20px;
     margin: 12px auto;
     display: inline-block;
@@ -137,7 +136,7 @@ body, p {
     border: 1px solid #ced4da;
     padding: 10px 15px; 
     color: #47525E !important;
-    background-color: #f9f9f9 !important;
+    background-color: #D2DCE9 !important;
     box-shadow: none;
     height: 45px !important;
     width: 100%; 
@@ -160,7 +159,7 @@ body, p {
 .input-group-text {
     background-color: transparent !important;
     border: none !important;
-    color: #0F6481;
+    color: #969FAA;
     padding: 0;
     font-size: 18px !important;
 }
@@ -210,7 +209,7 @@ body, p {
 .forgot-password {
     color: #0F6481; /* Cor do texto */
     text-decoration: none; /* Remove o sublinhado */ 
-    margin-top: 30px;/* Margem */
+    margin: 10px;/* Margem */
     display: block; /* Faz com que o link ocupe toda a largura disponível */
     font-size: 0.9rem; /* Tamanho do texto - ajuste conforme necessário */
 }
@@ -252,7 +251,7 @@ body, p {
 
 .create-account {
     color: #0F6481;
-    font-size: 0.95rem;
+    font-size: 20px;
     margin-top: 15px;
     text-decoration: none;
 }

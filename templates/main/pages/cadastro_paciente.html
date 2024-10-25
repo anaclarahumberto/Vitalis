@@ -13,15 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    {% from 'shared/macros.html' import input_box, button_next %}
     <div class="container-fluid full-height">
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex justify-content-center align-items-center">
-                <div class="form-container">
+                <div class="form-container" style="max-height: 100%">
                     <a href="/criar_conta" class="exit-icon"><i class="fa fa-arrow-left"></i></a>
                     <h2 class="form-title">Paciente</h2>
                     <h4 class="form-subtitle">Cadastre-se para ver fotos e vídeos dos profissionais de saúde.</h4>
                     <form action="/cadastrar_paciente" method="post">
                         <div class="form-row">
+                            <!-- {{ input_box(type="text", id="nome", name="nome", placeholder="Nome Completo", icon_class="bi bi-person", attributes='data-mask:"nome"') }} -->
                             <div class="col-md-6 mb-3">
                                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo" data-mask='nome' required>
                             </div>
@@ -44,6 +46,11 @@
                                 <input type="password" class="form-control" id="confsenha" name="confsenha" placeholder="Confirme a senha" required>
                             </div>
                         </div>
+                        {% if request.cookies.get('mensagem_erro') %}
+                        <div class="error-container">
+                            <span class="error-message">{{ request.cookies.get('mensagem_erro') }}</span>
+                        </div>
+                        {% endif %}
                         <button type="submit" class="btn-next">Próximo</button>
                     </form>
                 </div>                            

@@ -21,7 +21,7 @@
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex flex-direction: column justify-content-center align-items-center">
                 <div class="form-container">
-                    <h2 class="form-title">Vitalis</h2>
+                    <h2 class="form-title">Bem-vindo a Vitalis!</h2>
 
                     <!-- Formulário de cadastro -->
                     <form action="/login" method="post" class="form-full">
@@ -30,6 +30,7 @@
                         <!-- Campo Senha -->
                         {{ input_box(type="password", id="senha", name="senha", placeholder="Senha", icon_class="bi bi-lock", ) }}
                         <!-- Botão de Entrar-->
+                        <a href="/esqueci_a_senha" class="forgot-password">Esqueceu a senha?</a>
                         {{ button_next(text="Entrar")}}
 
                         <div class="or-container">
@@ -47,16 +48,8 @@
                             <span class="error-message">{{ request.cookies.get('mensagem_erro') }}</span>
                         </div>
                     {% endif %}
-
-                    <a href="/esqueci_a_senha" class="forgot-password">Esqueceu a senha?</a>
-                    <p class="custom-text">Feito com <i class="bi bi-suit-heart-fill"></i> pela equipe Pipoqueiros</p>
-                
-                </div>
-                <div class="form-container" style="padding: 30px; margin-top: 15px">
-                    <div class="create-account-section">
-                        <span class="create-account-text">Não tem uma conta? </span>
-                        <a href="/cadastro" class="create-account">Cadastre-se</a>
-                    </div>
+                    <a href="/criar_conta" class="create-account">Criar Conta</a>
+                    <p class="custom-text">Feito com <i class="bi bi-suit-heart-fill"></i> pela equipe Pipoqueiros</p>      
                 </div>
             </div>
         </div>
