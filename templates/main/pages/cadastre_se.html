@@ -47,7 +47,11 @@
             <div class="col-12 d-flex justify-content-center align-items-center">
                 <div class="form-container">
                     <h2 class="form-title">Vitalis</h2>
-                    <h4 class="form-subtitle">Cadastre-se para ver fotos e vídeos dos profissionais de saúde.</h4>
+                    {% if tipo_perfil == 2 %}
+                        <h4 class="form-subtitle">Ganhe visibilidade e aumente seu alcance no mundo digital da saúde.</h4>
+                    {% else %}
+                        <h4 class="form-subtitle">Esteja mais próximo de profissionais de saúde confiáveis.</h4>
+                    {% endif %}
                     <form action="/cadastrar" method="post" style="width: 85%" enctype="multipart/form-data">
                         {{ input_box(type="text", id="nome", name="nome", placeholder="Nome", icon_class="bi bi-person", attributes='data-mask="nome"' )}}
                         {{ input_box(type="text", id="nome_perfil", name="nome_perfil", placeholder="Nome de Perfil", icon_class="bi bi-person-badge",)}}

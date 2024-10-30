@@ -18,14 +18,6 @@ router = APIRouter()
 
 templates = obter_jinja_templates("templates")
 
-def verificar_login(request: Request):
-    if not request.cookies.get(NOME_COOKIE_AUTH):
-        raise HTTPException(
-            status_code=status.HTTP_303_SEE_OTHER,
-            detail="Usuário não está logado",
-            headers={"Location": "/"},
-        )
-
 # @router.get("/")
 # async def get_root(request: Request):
 #     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
@@ -39,7 +31,6 @@ def verificar_login(request: Request):
 
 @router.get("/", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
-    request.session.clear()
     return RedirectResponse("/login", status.HTTP_303_SEE_OTHER)
 
 @router.get("/login", response_class=HTMLResponse)
@@ -52,8 +43,7 @@ from datetime import timedelta
 from datetime import datetime, timedelta, timezone
 
 @router.post("/login")
-async def post_login(request: Request, response: Response):
-    request.session.clear()  
+async def post_login(request: Request, response: Response): 
     dados = dict(await request.form())
     
     usuario = UsuarioRepo.checar_credenciais(dados["email"], dados["senha"])
@@ -86,12 +76,6 @@ async def get_criar_conta(request: Request):
 @router.post("/escolher_perfil")
 async def escolher_perfil(request: Request, tipo_perfil: int = Form(...)):
     return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request, "tipo_perfil": tipo_perfil})
-
-@router.get("/cadastro", response_class=HTMLResponse)
-async def get_bem_vindo(request: Request):
-    dados_usuario = request.session.get('usuario', '')
-    return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request, 
-        "dados_usuario": dados_usuario})
 
 @router.post("/cadastrar")
 async def post_cadastrar_paciente(request: Request, registro_profissional: UploadFile = File(None)):
@@ -138,114 +122,6 @@ async def post_cadastrar_paciente(request: Request, registro_profissional: Uploa
             file.write(await registro_profissional.read())
     response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
     return response
-
-from fastapi import FastAPI, Request, Form
-from fastapi.responses import RedirectResponse
-from starlette import status
-
-app = FastAPI()
-
-@router.get("/escolher_categoria_perfil", response_class=HTMLResponse)
-async def get_criar_conta(request: Request):
-    return templates.TemplateResponse("main/pages/escolher_categoria_perfil.html", {"request": request})
-
-@app.post("/salvar_perfil")
-async def escolher_perfil(request: Request, perfil: int = Form(...)):
-    try:
-        usuario = request.session.get('usuario', '')
-        email = usuario.get('email')
-        
-        if not email:
-            return RedirectResponse("/login", status_code=status.HTTP_303_SEE_OTHER)
-        
-        UsuarioRepo.inserir_categoria_perfil(email, perfil)
-        return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
-
-    except Exception as e:
-        response = RedirectResponse("/escolher_categoria_perfil", status_code=status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_erro(response, "Erro ao selecionar perfil. Tente novamente.")
-        return response
-
-@router.get("/adicionar_registro_profissional", response_class=HTMLResponse)
-async def get_criar_conta(request: Request):
-    return templates.TemplateResponse("main/pages/adicionar_registro_profissional.html", {"request": request})
-
-@router.post("/cadastrar_profissional")
-async def post_cadastrar_profissional(
-    nome: str = Form(...),
-    data_nascimento: date = Form(...),
-    email: str = Form(...),
-    cpf: str = Form(...),
-    telefone: str = Form(...),
-    senha: str = Form(...),
-    confsenha: str = Form(...),
-    registro_profissional: UploadFile = File(...)
-):
-    response = RedirectResponse("/cadastro_profissional", status_code=status.HTTP_303_SEE_OTHER)
-    if not is_email(email):
-        adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
-        return response
-    if senha != confsenha:
-        return RedirectResponse("/cadastro_profissional", status_code=status.HTTP_303_SEE_OTHER)
-    senha_hash = obter_hash_senha(senha)
-    usuario = Usuario(
-        nome=nome, 
-        data_nascimento=data_nascimento, 
-        email=email, 
-        cpf=cpf, 
-        telefone=telefone, 
-        senha=senha_hash, 
-        perfil=1,
-        registro_profissional=True
-    )
-    UsuarioRepo.inserir(usuario)
-    usuario_id = UsuarioRepo.obter_id_por_email(email)
-    if usuario_id is None:
-        return RedirectResponse("/cadastro_profissional", status_code=status.HTTP_303_SEE_OTHER)
-    nome_arquivo = f"{usuario_id}_rp.pdf" 
-    file_location = os.path.join("static/documentos", nome_arquivo)
-    with open(file_location, "wb") as file:
-        file.write(await registro_profissional.read())
-    return RedirectResponse("/conta_criada", status_code=status.HTTP_303_SEE_OTHER)
-
-
-@router.post("/cadastrar_paciente")
-async def post_cadastrar_paciente(request: Request):
-    dados = dict(await request.form())
-    erros = {}
-    if is_matching_fields(dados["senha"], dados["confsenha"]):
-        dados.pop("confsenha")
-    response = RedirectResponse("/cadastro_profissional", status_code=status.HTTP_303_SEE_OTHER)
-    if not is_email(dados["email"]):
-        adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
-        return response
-    is_person_fullname(dados["nome"], "nome", "Nome", erros)
-    is_size_between(dados["nome"], "nome", "Nome", erros)
-    data_minima = datetime.now() - timedelta(days=365 *130)
-    data_maxima = datetime.now() + timedelta(days=365 *18)
-    is_date_between(dados["data_nascimento"], "data_nascimento", "Data de Nascimento", data_minima, data_maxima, erros)
-    is_email(dados["email"], "email", "E-mail", erros)
-    is_size_between(dados["telefone"], "telefone", "Telefone", erros)
-    is_password(dados["senha"], "senha", "Senha", erros)
-
-    if erros:
-        response = templates.TemplatesResponse("pages/cadastrar_paciente.html", {"request": request, "dados": dados, "erros": erros},)
-        adicionar_mensagem_erro(response, "Há erros no formulário. Corrija-os e tente novamente")
-        return response
-    senha_hash = obter_hash_senha(dados["senha"])
-    dados["senha"] = senha_hash
-    usuario = Usuario(**dados)
-    UsuarioRepo.inserir(usuario)
-    return RedirectResponse("/conta_criada", status_code=status.HTTP_303_SEE_OTHER)
-
-
-@router.get("/cadastro_profissional", response_class=HTMLResponse)
-async def get_cadastro_profissional(request: Request):
-    return templates.TemplateResponse("main/pages/cadastro_profissional.html", {"request": request})
-
-@router.get("/cadastro_paciente", response_class=HTMLResponse)
-async def get_cadastro_paciente(request: Request):
-    return templates.TemplateResponse("main/pages/cadastro_paciente.html", {"request": request})
 
 @router.get("/esqueci_a_senha", response_class=HTMLResponse)
 async def get_esqueci_a_senha(request: Request):

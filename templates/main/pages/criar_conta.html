@@ -27,6 +27,11 @@
             border-color: #cacaca;
             margin-bottom: 10px;
         }
+
+        .btn-next:disabled {
+            background-color: #cccccc; /* Cor do botão desativado */
+            cursor: not-allowed; /* Muda o cursor para indicar que não está clicável */
+        }
     </style>
 </head>
 <body>
@@ -36,10 +41,10 @@
                 <div class="form-container" style="align-items: center">
 
                     <div class="inner-container" style="width:85%">
-                        <h2 class="form-title">Criar Conta</h2>
+                        <h2 class="form-title">Cadastre-se</h2>
                         <p class="form-subtitle">Selecione se você é profissional de Saúde ou Paciente:</p>
 
-                        <form id="form-perfil" method="POST" action="/escolher_perfil"> <!-- Atualize o caminho conforme necessário -->
+                        <form id="form-perfil" method="POST" action="/escolher_perfil">
                             <div class="form-row" style="display: flex; justify-content: center; width: 100%;">
                                 <button type="button" class="select-btn" id="saude" value="2">
                                     Profissional de Saúde
@@ -53,8 +58,9 @@
                             </div>
 
                             <input type="hidden" name="tipo_perfil" id="tipo_perfil" value="">
-
-                            <button type="submit" class="btn-next" style="margin-bottom: 50px;" id="btn-next">Próximo</button>
+                            
+                            <button type="submit" class="btn-next" id="btn-next" disabled>Próximo</button>
+                            <a href="/" class="btn-back">Voltar</a>
                         </form>
                     </div>
                 </div>
@@ -73,15 +79,15 @@
                 tipoPerfilInput.value = '2'; // Profissional de Saúde
                 saudeBtn.classList.add('active');
                 pacienteBtn.classList.remove('active');
+                btnNext.disabled = false; // Habilita o botão "Próximo"
             });
 
             pacienteBtn.addEventListener('click', () => {
                 tipoPerfilInput.value = '1'; // Paciente
                 pacienteBtn.classList.add('active');
                 saudeBtn.classList.remove('active');
+                btnNext.disabled = false; // Habilita o botão "Próximo"
             });
-
-            // O evento de clique no botão "Próximo" será tratado pelo envio do formulário
         });
     </script>
 </body>
