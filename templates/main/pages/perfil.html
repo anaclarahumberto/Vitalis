@@ -8,7 +8,7 @@
     <!-- Perfil Header -->
     <div class="row my-4">
         <div class="col-md-3 text-center">
-            <img src="/static/img/{{usuario.id}}.jpeg" alt="Foto de Perfil" class="profile-img">
+            <img src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="profile-img">
         </div>
         <div class="col-md-9">
             <h4>{{usuario.nome_perfil}}<i class="bi bi-award ms-2 text-primary"></i></h4> <br>

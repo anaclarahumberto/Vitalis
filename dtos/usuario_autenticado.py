@@ -8,7 +8,7 @@ class UsuarioAutenticado:
     nome: Optional[str] = None
     email: Optional[str] = None
     telefone: Optional[str] = None
-    perfil: Optional[int] = None
+    tipo_perfil: Optional[int] = None
     foto_perfil: Optional[bool] = None
     nome_perfil: Optional[str] = None
     bio_perfil: Optional[str] = None

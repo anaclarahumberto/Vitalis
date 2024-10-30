@@ -12,7 +12,7 @@ class Usuario:
     cpf: Optional[str] = None
     telefone: Optional[str] = None
     senha: Optional[str] = None
-    perfil: Optional[int] = None
+    tipo_perfil: Optional[int] = None
     nome_perfil: Optional[str] = None
     foto_perfil: Optional[bool] = None
     bio_perfil: Optional[str] = None

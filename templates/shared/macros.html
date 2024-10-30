@@ -1,7 +1,7 @@
 {% macro input_box(type,id,name,placeholder, icon_class, value='', attributes='') -%}
 <div class="form-row">
     <div class="input-group mb-2">
-        <input type="{{type}}" class="form-control custom-input" id={{id}} name={{name}}
+        <input type="{{type}}" class="custom-input" id={{id}} name={{name}}
             value="{{value|e}}" {{attributes|safe}}
             placeholder="{{placeholder}}" required>
         <div class="input-group-append">

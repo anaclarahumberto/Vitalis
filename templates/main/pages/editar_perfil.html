@@ -24,7 +24,7 @@
     
         <div class="--bg-tertiary-color rounded d-flex flex-column align-items-center justify-content-center bg-highlight">
             <div class="d-flex align-items-center mb-3 bg-highlight">
-                <img id="fotoPerfil" src="static/img/{{usuario.id}}.jpeg" alt="Foto de Perfil" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
+                <img id="fotoPerfil" src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
             </div>
             <button type="button" id="alterarFoto" class="btn btn-primary" style="border-radius: 20px; background-color: #0F6481;">Alterar Foto</button>
             <input type="file" id="inputFoto" name="foto_perfil" accept="image/*" style="display: none;">

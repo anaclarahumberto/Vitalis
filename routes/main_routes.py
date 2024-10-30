@@ -6,7 +6,6 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi import APIRouter, Form, UploadFile, File, status
 import os
 from models.usuario_model import Usuario
-from repositories.usuario_temp_repo import UsuarioTempRepo
 from repositories.usuario_repo import UsuarioRepo
 from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
 from util.cadastro import *
@@ -54,6 +53,7 @@ from datetime import datetime, timedelta, timezone
 
 @router.post("/login")
 async def post_login(request: Request, response: Response):
+    request.session.clear()  
     dados = dict(await request.form())
     
     usuario = UsuarioRepo.checar_credenciais(dados["email"], dados["senha"])
@@ -64,16 +64,10 @@ async def post_login(request: Request, response: Response):
         adicionar_mensagem_erro(response, "Seus dados estão incorretos. Confira-os")
         return response
 
-    token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email)
+    token = criar_token(usuario.id, usuario.nome, usuario.nome_perfil, usuario.email, usuario.foto_perfil, usuario.tipo_perfil)
 
     if request.cookies.get(NOME_COOKIE_EMAIL_TEMP):
         response.delete_cookie(NOME_COOKIE_EMAIL_TEMP)
-
-    request.session['usuario_autenticado'] = {
-        "id": usuario.id,
-        "nome": usuario.nome,
-        "nome_perfil": usuario.nome_perfil,
-    }
 
     response = RedirectResponse(f"/usuario/feed", status_code=status.HTTP_303_SEE_OTHER)
     response.set_cookie(
@@ -89,6 +83,10 @@ async def post_login(request: Request, response: Response):
 async def get_criar_conta(request: Request):
     return templates.TemplateResponse("main/pages/criar_conta.html", {"request": request})
 
+@router.post("/escolher_perfil")
+async def escolher_perfil(request: Request, tipo_perfil: int = Form(...)):
+    return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request, "tipo_perfil": tipo_perfil})
+
 @router.get("/cadastro", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
     dados_usuario = request.session.get('usuario', '')
@@ -96,16 +94,8 @@ async def get_bem_vindo(request: Request):
         "dados_usuario": dados_usuario})
 
 @router.post("/cadastrar")
-async def post_cadastrar_paciente(request: Request):
+async def post_cadastrar_paciente(request: Request, registro_profissional: UploadFile = File(None)):
     dados = dict(await request.form())
-    senha = dados.pop("senha", None)
-    conf_senha = dados.pop("conf_senha", None)
-    usuario =  Usuario(**dados)
-    request.session['usuario'] = {
-        "nome": usuario.nome,
-        "email": usuario.email,
-        "nome_perfil": usuario.nome_perfil
-    }
     response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
     if not is_email(dados["email"]):
         adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
@@ -113,10 +103,11 @@ async def post_cadastrar_paciente(request: Request):
     if not UsuarioRepo.is_email_unique(dados["email"]):
         adicionar_mensagem_erro(response, "Outra conta está usando o mesmo email.")
         return response
-    if not is_matching_fields(senha, conf_senha):
+    if not is_matching_fields(dados["senha"], dados["conf_senha"]):
         adicionar_mensagem_erro(response, "As senhas não coincidem.")
         return response
-    if not is_password(senha):
+    else : dados.pop("conf_senha")
+    if not is_password(dados["senha"]):
         adicionar_mensagem_erro(response, "As senhas devem ter no mínimo 6 caracteres, letras maiúsculas e minúsculas, números e caracteres especiais."),
         return response
     if not is_person_fullname(dados["nome"]):
@@ -134,45 +125,20 @@ async def post_cadastrar_paciente(request: Request):
     if not UsuarioRepo.is_username_unique(dados["nome_perfil"]):
         adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
         return response
-    senha_hash = obter_hash_senha(senha)
-    usuario.senha = senha_hash
-    UsuarioTempRepo.inserir_dados(usuario)
-    response = RedirectResponse("/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)
+    senha_hash = obter_hash_senha(dados["senha"])
+    dados["senha"] = senha_hash
+    usuario = Usuario(**dados)
+    if(usuario.tipo_perfil == 2): usuario.registro_profissional = True
+    else: usuario.registro_profissional = False
+    UsuarioRepo.inserir(usuario)
+    if registro_profissional:
+        nome_arquivo = f"{usuario.nome}_rp.pdf" 
+        file_location = os.path.join("static/documentos", nome_arquivo)
+        with open(file_location, "wb") as file:
+            file.write(await registro_profissional.read())
+    response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
     return response
 
-@router.get("/adicionar_nascimento", response_class=HTMLResponse)
-async def get_criar_conta(request: Request):
-    return templates.TemplateResponse("main/pages/adicionar_nascimento.html", {"request": request})
-
-@router.post("/salvar_nascimento")
-async def post_cadastrar_aniversario(request: Request):
-
-    dados = dict(await request.form())
-    
-    try:
-        dia = int(dados["dia"])
-        mes = int(dados["mes"])
-        ano = int(dados["ano"])
-
-        data_aniversario = datetime(ano, mes, dia)
-        data_hoje = datetime.today()
-        data_minima = data_hoje.replace(year=data_hoje.year - 13)
-        if not is_date_less_than(data_aniversario, data_minima):
-            response = RedirectResponse(f"/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)  
-            adicionar_mensagem_erro(response, "A idade mínima para se cadastrar é de 13 anos"),
-            return response
-        usuario = request.session.get('usuario', '')
-        email = usuario['email']
-        usuario = UsuarioTempRepo.obter_dados(email)
-        usuario.data_nascimento = data_aniversario
-        UsuarioRepo.inserir(usuario)
-        return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
-    
-    except (ValueError, KeyError):
-        response = RedirectResponse(f"/adicionar_nascimento", status_code=status.HTTP_303_SEE_OTHER)
-        adicionar_mensagem_erro(response, "Data de nascimento inválida. Verifique os campos.")
-        return response
-    
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import RedirectResponse
 from starlette import status

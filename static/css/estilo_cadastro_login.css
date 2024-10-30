@@ -174,7 +174,6 @@ body, p {
     padding: 0px; /* Reduzido o espaço lateral entre os campos */
 }
 
-
 .custom-input {
     all: unset; /* Remove todos os estilos */
     width: 100%; /* Garante que o input ocupe toda a largura do contêiner */

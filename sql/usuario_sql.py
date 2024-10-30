@@ -39,8 +39,8 @@ SQL_CRIAR_TABELA = """
 
 SQL_INSERIR_USUARIO = """
     INSERT INTO usuario 
-    (nome, data_nascimento, email, senha, nome_perfil)
-    VALUES (?, ?, ?, ?, ?)
+    (nome, nome_perfil, email, cpf, telefone, data_nascimento, senha, tipo_perfil, registro_profissional)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 SQL_ATUALIZAR_DATA = """
@@ -63,7 +63,7 @@ SQL_ATUALIZAR_CATEGORIA_PERFIL = """
 
 SQL_ATUALIZAR_DADOS = """
     UPDATE usuario
-    SET nome = ?, nome_perfil = ?, telefone = ?, bio_perfil = ?, categoria_perfil = ?, genero = ?
+    SET foto_perfil = ?, nome = ?, nome_perfil = ?, telefone = ?, bio_perfil = ?, categoria_perfil = ?, genero = ?
     WHERE id = ?
 """
 
@@ -80,7 +80,7 @@ SQL_ATUALIZAR_ENDERECO = """
 """
 
 SQL_CHECAR_CREDENCIAIS = """
-    SELECT id, nome, nome_perfil, email, senha
+    SELECT id, nome, nome_perfil, senha, foto_perfil, tipo_perfil
     FROM usuario
     WHERE email = ?
 """

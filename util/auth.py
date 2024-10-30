@@ -19,7 +19,9 @@ async def obter_usuario_logado(request: Request) -> dict:
             id = dados["id"],
             nome = dados["nome"],
             nome_perfil = dados["nome_perfil"], 
-            email = dados["email"])
+            email = dados["email"],
+            foto_perfil = dados["foto_perfil"],
+            tipo_perfil = dados["tipo_perfil"])
         if "mensagem" in dados.keys():
             usuario.mensagem = dados["mensagem"]
         return usuario
@@ -63,12 +65,14 @@ def conferir_senha(senha: str, hash_senha: str) -> bool:
         return False
     
 
-def criar_token(id: int, nome: str, nome_perfil: str, email: str) -> str:
+def criar_token(id: int, nome: str, nome_perfil: str, email: str, foto_perfil: bool, tipo_perfil: int) -> str:
     payload = {
         "id" : id,
         "nome": nome,
         "nome_perfil" : nome_perfil,
         "email": email,
+        "foto_perfil": foto_perfil,
+        "tipo_perfil": tipo_perfil,
         "exp": datetime.now() + timedelta(days=1)
     }
     return jwt.encode(payload, 

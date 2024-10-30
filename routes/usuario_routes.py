@@ -49,9 +49,8 @@ async def finalizar_perfil(
 
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request, usuario: str = Depends(verificar_login)):
-    dados_usuario = request.session.get('usuario_autenticado', {})
-    id_usuario = dados_usuario.get('id')
-    return templates.TemplateResponse("main/pages/index.html", {"request": request, "id_usuario": id_usuario})
+    print(request.state.usuario)
+    return templates.TemplateResponse("main/pages/index.html", {"request": request})
 
 @router.get("/mensagens_principal", response_class=HTMLResponse)
 async def get_mensagens(request: Request, usuario: str = Depends(verificar_login)):
@@ -83,7 +82,6 @@ async def get_anunciante(request: Request, usuario: str = Depends(verificar_logi
 
 @router.get("/editar_perfil", response_class=HTMLResponse)
 async def get_editar(request: Request, usuario: str = Depends(verificar_login)):
-    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.email)
     return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request}) 
 
 @router.post("/atualizar_perfil")
@@ -100,6 +98,7 @@ async def editar_perfil(
 
     # Atualiza os dados do usuário
     atualizacao_sucesso = UsuarioRepo.atualizar_dados_perfil(
+        foto_perfil = True,
         nome=nome,
         nome_perfil=nome_perfil,
         telefone=telefone,
@@ -119,7 +118,7 @@ async def editar_perfil(
         with open(caminho_arquivo, "wb") as file:
             file.write(base64.b64decode(base64_data))
     
-    return RedirectResponse("/perfil", status_code=303)
+    return RedirectResponse("/usuario/perfil", status_code=303)
 
 
 
@@ -137,7 +136,6 @@ async def get_feedback(request: Request, usuario: str = Depends(verificar_login)
 
 @router.get("/perfil", response_class=HTMLResponse)
 async def get_perfil(request: Request, usuario: str = Depends(verificar_login)):
-    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.email)
     return templates.TemplateResponse("main/pages/perfil.html", {"request": request})
 
 @router.get("/entrarMaroquio", response_class=HTMLResponse)

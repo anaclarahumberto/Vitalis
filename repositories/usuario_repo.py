@@ -19,12 +19,7 @@ class UsuarioRepo:
     def inserir(cls, usuario: Usuario) -> bool:
         with obter_conexao() as db:
             cursor = db.cursor()
-            resultado = cursor.execute(SQL_INSERIR_USUARIO,
-                (usuario.nome,
-                 usuario.data_nascimento,
-                 usuario.email,
-                 usuario.senha,
-                 usuario.nome_perfil))
+            resultado =  cursor.execute(SQL_INSERIR_USUARIO, (usuario.nome, usuario.nome_perfil, usuario.email, usuario.cpf, usuario.telefone, usuario.data_nascimento, usuario.senha, usuario.tipo_perfil, usuario.registro_profissional,))
             return resultado.rowcount > 0
     
     @classmethod
@@ -89,11 +84,11 @@ class UsuarioRepo:
         
          
     @classmethod
-    def atualizar_dados_perfil(cls, nome:  str, nome_perfil: str, telefone: str, bio_perfil: str, categoria: str, genero: str, id: int) -> bool:
+    def atualizar_dados_perfil(cls, foto_perfil: bool, nome:  str, nome_perfil: str, telefone: str, bio_perfil: str, categoria: str, genero: str, id: int) -> bool:
         with obter_conexao() as db:
             cursor = db.cursor()
             resultado = cursor.execute(
-                SQL_ATUALIZAR_DADOS, (nome, nome_perfil, telefone, bio_perfil, categoria, genero, id))
+                SQL_ATUALIZAR_DADOS, (foto_perfil, nome, nome_perfil, telefone, bio_perfil, categoria, genero, id))
             return resultado.rowcount > 0
     
     @classmethod
@@ -111,12 +106,13 @@ class UsuarioRepo:
             dados = cursor.execute(
                 SQL_CHECAR_CREDENCIAIS, (email,)).fetchone()
             if dados:
-                if conferir_senha(senha, dados[4]):
+                if conferir_senha(senha, dados[3]):
                     return Usuario(
                         id = dados[0],
                         nome = dados[1],
                         nome_perfil = dados[2],
-                        email = dados[3],
+                        foto_perfil = dados[4],
+                        tipo_perfil = dados[5],
                     )
             return None
         
