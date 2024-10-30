@@ -10,3 +10,4 @@ bcrypt
 python-dotenv
 mercadopago
 pyJWT
+itsdangerous
