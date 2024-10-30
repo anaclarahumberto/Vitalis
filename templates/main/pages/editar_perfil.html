@@ -56,7 +56,7 @@
 
     <div class="mb-3 bg-highlight">
         <label for="Nome" class="form-label">Nome</label>
-        <input type="text" name="nome" class="form-control" id="nome" value="{{ usuario.nome or '' }}" 
+        <input type="text" name="nome" class="form-control" data-mask="nome" id="nome" value="{{ usuario.nome or '' }}" 
                placeholder="{{ usuario.nome or 'Nome' }}" required
                onfocus="clearValue(this, '{{ usuario.nome or 'Nome' }}')"
                onblur="restoreValue(this, '{{ usuario.nome or 'Nome' }}')">
@@ -72,7 +72,7 @@
 
     <div class="mb-3 bg-highlight">
         <label for="Telefone" class="form-label">Telefone</label>
-        <input type="text" name="telefone" class="form-control" id="telefone" value="{{ usuario.telefone or '' }}" 
+        <input type="text" name="telefone" class="form-control" data-mask="telefone" id="telefone" value="{{ usuario.telefone or '' }}" 
                placeholder="{{ usuario.telefone or 'Telefone' }}" required
                onfocus="clearValue(this, '{{ usuario.telefone or 'Telefone' }}')"
                onblur="restoreValue(this, '{{ usuario.telefone or 'Telefone' }}')">
@@ -102,7 +102,7 @@
     </div>
 </form>
 <!-- Fim do formulário -->
-
+<script src="/static/js/mascararCampos.js"></script>
 <script>
     let cropper;
 

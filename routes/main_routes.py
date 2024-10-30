@@ -77,15 +77,34 @@ async def get_criar_conta(request: Request):
 async def escolher_perfil(request: Request, tipo_perfil: int = Form(...)):
     return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request, "tipo_perfil": tipo_perfil})
 
+@router.get("/cadastro", response_class=HTMLResponse)
+async def get_criar_conta(request: Request, tipo_perfil: int = None):
+    return templates.TemplateResponse("main/pages/cadastre_se.html", {"request": request, "tipo_perfil": tipo_perfil})
+
 @router.post("/cadastrar")
 async def post_cadastrar_paciente(request: Request, registro_profissional: UploadFile = File(None)):
     dados = dict(await request.form())
-    response = RedirectResponse(f"/cadastro", status_code=status.HTTP_303_SEE_OTHER)
+    response = RedirectResponse(f"/cadastro?tipo_perfil={dados["tipo_perfil"]}", status_code=status.HTTP_303_SEE_OTHER)
     if not is_email(dados["email"]):
         adicionar_mensagem_erro(response, "Esse não é um email valido. Confira-o")
         return response
     if not UsuarioRepo.is_email_unique(dados["email"]):
         adicionar_mensagem_erro(response, "Outra conta está usando o mesmo email.")
+        return response
+    if not UsuarioRepo.is_username_unique(dados["nome_perfil"]):
+        adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
+        return response
+    if not UsuarioRepo.is_cpf_unique(dados["cpf"]):
+        adicionar_mensagem_erro(response, "Outra conta está usando o mesmo cpf.")
+        return response
+    if not UsuarioRepo.is_phone_unique(dados["telefone"]):
+        adicionar_mensagem_erro(response, "Outra conta está usando o mesmo telefone.")
+        return response
+    if not is_cpf(dados["cpf"]):
+        adicionar_mensagem_erro(response, "Esse não é um cpf valido. Confira-o")
+        return response
+    if not is_phone_number(dados["telefone"]):
+        adicionar_mensagem_erro(response, "Esse não é um telefone valido. Confira-o")
         return response
     if not is_matching_fields(dados["senha"], dados["conf_senha"]):
         adicionar_mensagem_erro(response, "As senhas não coincidem.")
@@ -105,9 +124,6 @@ async def post_cadastrar_paciente(request: Request, registro_profissional: Uploa
         return response
     if not is_user_name(dados["nome_perfil"]):
         adicionar_mensagem_erro(response, "Os nomes de usuário só podem usar letras, números, sublinhados e pontos."),
-        return response
-    if not UsuarioRepo.is_username_unique(dados["nome_perfil"]):
-        adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
         return response
     senha_hash = obter_hash_senha(dados["senha"])
     dados["senha"] = senha_hash

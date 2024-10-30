@@ -48,7 +48,7 @@ async def finalizar_perfil(
 
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request):
-    print(request.state.usuario)
+    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
     return templates.TemplateResponse("main/pages/index.html", {"request": request})
 
 @router.get("/mensagens_principal", response_class=HTMLResponse)
@@ -81,6 +81,7 @@ async def get_anunciante(request: Request):
 
 @router.get("/editar_perfil", response_class=HTMLResponse)
 async def get_editar(request: Request):
+    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
     return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request}) 
 
 @router.post("/atualizar_perfil")
@@ -135,6 +136,7 @@ async def get_feedback(request: Request):
 
 @router.get("/perfil", response_class=HTMLResponse)
 async def get_perfil(request: Request):
+    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
     return templates.TemplateResponse("main/pages/perfil.html", {"request": request})
 
 @router.get("/entrarMaroquio", response_class=HTMLResponse)

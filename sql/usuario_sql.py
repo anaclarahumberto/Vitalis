@@ -50,9 +50,9 @@ SQL_ATUALIZAR_DATA = """
 """
 
 SQL_OBTER_DADOS_PERFIL = """
-    SELECT id, nome, nome_perfil, email, telefone, bio_perfil, categoria_perfil, genero
+    SELECT id, nome, nome_perfil, email, telefone, bio_perfil, categoria_perfil, genero, foto_perfil
     FROM usuario
-    WHERE email = ?
+    WHERE id = ?
 """
 
 SQL_ATUALIZAR_CATEGORIA_PERFIL = """
@@ -93,6 +93,10 @@ SQL_CHECAR_FOTO_PERFIL = """
     SELECT foto_perfil FROM usuario WHERE id = ?
 """
 SQL_CHECAR_EMAIL_UNICO = """SELECT 1 FROM usuario WHERE email = ?"""
+
+SQL_CHECAR_CPF_UNICO = """SELECT 1 FROM usuario WHERE cpf = ?"""
+
+SQL_CHECAR_TELEFONE_UNICO = """SELECT 1 FROM usuario WHERE telefone = ?"""
 
 SQL_CHECAR_NOME_PERFIL_UNICO = """SELECT 1 FROM usuario WHERE nome_perfil = ?"""
 

@@ -40,9 +40,9 @@ body, p {
     background-color: rgb(227, 238, 237, 0.9);
     padding: 40px;
     padding-bottom: 20px;
-    border-radius: 20px;
+    border-radius: 40px;
     width: 85vw;
-    max-width: 400px;
+    max-width: 500px;
     height:auto;
     margin: 0 auto;
     color: black;
@@ -59,7 +59,7 @@ body, p {
     color: #0F6481;
     font-size: 45px;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .form-subtitle {
@@ -212,7 +212,7 @@ body, p {
     text-decoration: none; /* Remove o sublinhado */ 
     margin: 10px;/* Margem */
     display: block; /* Faz com que o link ocupe toda a largura disponível */
-    font-size: 0.9rem; /* Tamanho do texto - ajuste conforme necessário */
+    font-size: 1.1rem; /* Tamanho do texto - ajuste conforme necessário */
 }
 
 .google-btn {
@@ -223,16 +223,16 @@ body, p {
     border: none;
     padding: 10px 25px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 1.1rem;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 100%; /* O botão Google agora usa toda a largura do formulário */
-    max-width: 220px;
 }
 
 .google-btn img {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     margin-right: 8px;
 }
 
@@ -254,6 +254,7 @@ body, p {
     color: #0F6481;
     font-size: 20px;
     margin-top: 15px;
+    margin-bottom: 30px;
     text-decoration: none;
 }
 
@@ -351,3 +352,21 @@ body, p {
     cursor: pointer;
 }
 
+.header-container {
+    position: relative; /* Para que os elementos internos possam ser posicionados relativamente a essa div */
+    width: 100%; /* Ocupa 100% da largura */
+    padding: 20px 0; /* Espaçamento superior e inferior, ajuste conforme necessário */
+    text-align: center; /* Centraliza o título */
+}
+
+.icon-container {
+    position: absolute; /* Posiciona o ícone de forma absoluta */
+    left: 30px; /* Ajuste conforme necessário */
+    top: 40px; /* Centraliza verticalmente em relação ao container */
+    transform: translateY(-50%); /* Compensa o deslocamento para centralizar */
+}
+
+.icon-container i {
+    font-size: 30px; 
+    color: #0F6481;
+}

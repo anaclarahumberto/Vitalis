@@ -11,6 +11,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         .select-btn {
             width: 100%; /* Garante que o input group use toda a largura disponível */
@@ -32,19 +33,25 @@
             background-color: #cccccc; /* Cor do botão desativado */
             cursor: not-allowed; /* Muda o cursor para indicar que não está clicável */
         }
+
     </style>
 </head>
 <body>
     <div class="container-fluid full-height">
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex justify-content-center align-items-center">
-                <div class="form-container" style="align-items: center">
-
-                    <div class="inner-container" style="width:85%">
-                        <h2 class="form-title">Cadastre-se</h2>
+                <div class="form-container" style="position: relative">
+                    <div class="icon-container">
+                        <a href="/">
+                            <i class="bi bi-arrow-left-circle-fill"></i>
+                        </a>
+                    </div>
+                    <div class="header-container">
+                        <h2 class="form-title">Criar Conta</h2>
+                    </div>
+                    <div class="inner-container" style="width:85%; display: flex; flex-direction: column; align-items: center; justify-content: center">
                         <p class="form-subtitle">Selecione se você é profissional de Saúde ou Paciente:</p>
-
-                        <form id="form-perfil" method="POST" action="/escolher_perfil">
+                        <form id="form-perfil" style="justify-content: center; width: 85%;" method="POST" action="/escolher_perfil">
                             <div class="form-row" style="display: flex; justify-content: center; width: 100%;">
                                 <button type="button" class="select-btn" id="saude" value="2">
                                     Profissional de Saúde
@@ -58,9 +65,9 @@
                             </div>
 
                             <input type="hidden" name="tipo_perfil" id="tipo_perfil" value="">
-                            
+                            <div class="spacer" style="height: 20px;"></div>
                             <button type="submit" class="btn-next" id="btn-next" disabled>Próximo</button>
-                            <a href="/" class="btn-back">Voltar</a>
+                            <div class="spacer" style="height: 50px;"></div>
                         </form>
                     </div>
                 </div>

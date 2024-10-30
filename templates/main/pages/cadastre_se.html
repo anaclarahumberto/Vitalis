@@ -38,6 +38,23 @@
     #file-name {
         border-right: none; /* Remove a borda direita para uma aparência mais limpa */
     }
+
+    .input-grid {
+        display: flex;
+        flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha */
+        width: 100%; /* Ocupa 100% da largura disponível */
+        gap: 10px; /* Espaço pequeno entre as colunas */
+    }
+    
+    .input-grid > div {
+        flex: 1 1 calc(50% - 10px); /* Cada coluna ocupará 50% menos o espaço do gap */
+        box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+    }
+    
+    /* Para garantir que os inputs ocupem 100% da largura do seu container */
+    .input-grid input {
+        width: 100%;
+    }
     </style>
 </head>
 <body>
@@ -45,50 +62,53 @@
     <div class="container-fluid full-height">
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex justify-content-center align-items-center">
-                <div class="form-container">
-                    <h2 class="form-title">Vitalis</h2>
+                <div class="form-container" style="max-width:700px">
+                    <div class="icon-container">
+                        <a href="/criar_conta">
+                            <i class="bi bi-arrow-left-circle-fill"></i>
+                        </a>
+                    </div>
                     {% if tipo_perfil == 2 %}
+                        <h2 class="form-title">Cadastro de Profissional</h2>
                         <h4 class="form-subtitle">Ganhe visibilidade e aumente seu alcance no mundo digital da saúde.</h4>
                     {% else %}
+                        <h2 class="form-title">Cadastro de Paciente</h2>
                         <h4 class="form-subtitle">Esteja mais próximo de profissionais de saúde confiáveis.</h4>
                     {% endif %}
                     <form action="/cadastrar" method="post" style="width: 85%" enctype="multipart/form-data">
-                        {{ input_box(type="text", id="nome", name="nome", placeholder="Nome", icon_class="bi bi-person", attributes='data-mask="nome"' )}}
-                        {{ input_box(type="text", id="nome_perfil", name="nome_perfil", placeholder="Nome de Perfil", icon_class="bi bi-person-badge",)}}
-                        {{ input_box(type="email", id="email", name="email", placeholder="Email", icon_class="bi bi-envelope",)}}
-                        {{ input_box(type="text", id="cpf", name="cpf", placeholder="CPF", icon_class="bi bi-person-check", attributes='data-mask="cpf"')}}
-                        {{ input_box(type="text", id="telefone", name="telefone", placeholder="Telefone", icon_class="bi bi-telephone", attributes='data-mask="telefone"')}}
-                        {{ input_box(type="date", id="data_nascimento", name="data_nascimento", placeholder="Data de Nacimento", icon_class="bi bi-calendar")}}
-                        {{ input_box(type="password", id="senha", name="senha", placeholder="Senha", icon_class="bi bi-lock",)}}
-                        {{ input_box(type="password", id="conf_senha", name="conf_senha", placeholder="Confirme a Senha", icon_class="bi bi-check-circle",)}}
-                        <input type="hidden" name="tipo_perfil" id="tipo_perfil" value="{{ tipo_perfil }}">
-                        {% if tipo_perfil == 2 %}
-                        <div class="form-row">
-                            <div class="input-group mb-2">
-                                <input type="file" class="form-control custom-input" id="registro-profissional" name="registro_profissional" required style="display: none;">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="bi bi-upload"></i></span>
+                        <div class="input-grid">
+                            <div>{{ input_box(type="text", id="nome", name="nome", placeholder="Nome", icon_class="bi bi-person", attributes='data-mask="nome"') }}</div>
+                            <div>{{ input_box(type="text", id="nome_perfil", name="nome_perfil", placeholder="Nome de Perfil", icon_class="bi bi-person-badge") }}</div>
+                            <div>{{ input_box(type="email", id="email", name="email", placeholder="Email", icon_class="bi bi-envelope") }}</div>
+                            <div>{{ input_box(type="text", id="cpf", name="cpf", placeholder="CPF", icon_class="bi bi-person-check", attributes='data-mask="cpf"') }}</div>
+                            <div>{{ input_box(type="text", id="telefone", name="telefone", placeholder="Telefone", icon_class="bi bi-telephone", attributes='data-mask="telefone"') }}</div>
+                            <div>{{ input_box(type="date", id="data_nascimento", name="data_nascimento", placeholder="Data de Nascimento", icon_class="bi bi-calendar") }}</div>
+                            <div>{{ input_box(type="password", id="senha", name="senha", placeholder="Senha", icon_class="bi bi-lock") }}</div>
+                            <div>{{ input_box(type="password", id="conf_senha", name="conf_senha", placeholder="Confirme a Senha", icon_class="bi bi-check-circle") }}</div>
+                            <input type="hidden" name="tipo_perfil" id="tipo_perfil" value="{{ tipo_perfil }}">
+                            
+                            {% if tipo_perfil == 2 %}
+                            <div class="form-row">
+                                <div class="input-group mb-2">
+                                    <input type="file" class="form-control custom-input" id="registro-profissional" name="registro_profissional" required style="display: none;">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="bi bi-upload"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control custom-input" placeholder="Nenhum arquivo selecionado" id="file-name" readonly>
                                 </div>
-                                <input type="text" class="form-control custom-input" placeholder="Nenhum arquivo selecionado" id="file-name" readonly>
                             </div>
-                        </div>                                                                    
-                        {% endif %}
+                            {% endif %}
+                        </div>                        
+                        <div class="spacer" style="height: 20px;"></div>
                         {{ button_next(text="Cadastre-se")}}
-                        <a href="/criar_conta" class="btn-back">Voltar</a>
                     </form>
                     {% if request.cookies.get('mensagem_erro') %}
                         <div class="error-container">
                             <span class="error-message">{{ request.cookies.get('mensagem_erro') }}</span>
                         </div>
                     {% endif %}
-                    <div class="or-container">
-                        <div class="line"></div>
-                        <span class="or-text">OU</span>
-                        <div class="line"></div>
-                    </div>
                     <a href="/" class="create-account">Entrar com sua Conta</a>
-                    <p class="custom-text">Feito com <i class="bi bi-suit-heart-fill"></i> pela equipe Pipoqueiros</p>
-
+                    <div class="spacer" style="height: 40px;"></div>
                 </div>                            
             </div>
         </div>

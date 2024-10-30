@@ -21,7 +21,7 @@
         <div class="row no-gutters full-height">
             <div class="col-12 d-flex flex-direction: column justify-content-center align-items-center">
                 <div class="form-container">
-                    <h2 class="form-title">Vitalis</h2>
+                    <h2 class="form-title">Bem vindo a Vitalis!</h2>
 
                     <!-- Formulário de cadastro -->
                     <form action="/login" method="post" class="form-full">
@@ -32,24 +32,17 @@
                         <!-- Botão de Entrar-->
                         <a href="/esqueci_a_senha" class="forgot-password">Esqueceu a senha?</a>
                         {{ button_next(text="Entrar")}}
-
-                        <div class="or-container">
-                            <div class="line"></div>
-                            <span class="or-text">OU</span>
-                            <div class="line"></div>
-                        </div>
+                        <button class="google-btn">
+                            <img src="/static/img/google.png" alt="Google Logo">
+                            Continuar com Google
+                        </button>
                     </form>
-                    <button class="google-btn">
-                        <img src="/static/img/google.png" alt="Google Logo">
-                        Continuar com Google
-                    </button>
                     {% if request.cookies.get('mensagem_erro') %}
                         <div class="error-container">
                             <span class="error-message">{{ request.cookies.get('mensagem_erro') }}</span>
                         </div>
                     {% endif %}
-                    <a href="/criar_conta" class="create-account">Criar Conta</a>
-                    <p class="custom-text">Feito com <i class="bi bi-suit-heart-fill"></i> pela equipe Pipoqueiros</p>      
+                    <a href="/criar_conta" class="create-account">CRIAR CONTA</a>     
                 </div>
             </div>
         </div>

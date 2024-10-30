@@ -63,10 +63,10 @@ class UsuarioRepo:
             return resultado.rowcount > 0
         
     @classmethod
-    def obter_dados_perfil(cls, email: str):
+    def obter_dados_perfil(cls, id: int):
         with obter_conexao() as db:
             cursor = db.cursor()
-            cursor.execute(SQL_OBTER_DADOS_PERFIL, (email,))
+            cursor.execute(SQL_OBTER_DADOS_PERFIL, (id,))
             resultado = cursor.fetchone()
             if resultado:
                 return UsuarioAutenticado(
@@ -78,6 +78,7 @@ class UsuarioRepo:
                     bio_perfil = resultado[5],
                     categoria_perfil = resultado[6],
                     genero = resultado[7],
+                    foto_perfil= resultado[8],
                 )
             return None  
 
@@ -142,6 +143,20 @@ class UsuarioRepo:
         with obter_conexao() as db:
             cursor = db.cursor()
             cursor.execute(SQL_CHECAR_EMAIL_UNICO, (email,))
+            return cursor.fetchone() is None
+        
+    @classmethod
+    def is_cpf_unique(cls, cpf: str) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_CHECAR_CPF_UNICO, (cpf,))
+            return cursor.fetchone() is None
+    
+    @classmethod
+    def is_phone_unique(cls, telefone: str) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_CHECAR_TELEFONE_UNICO, (telefone,))
             return cursor.fetchone() is None
 
     @classmethod
