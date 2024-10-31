@@ -166,17 +166,12 @@ def is_email(field_value: str) -> bool:
         return False
 
 
-def is_cpf(field_value: str, field_name: str, field_label: str, errors: dict) -> bool:
+def is_cpf(field_value: str) -> bool:
     if not field_value:
         return True
     if re.match(r"^\d{3}\.\d{3}\.\d{3}-\d{2}$", field_value) is not None:
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser um CPF válido.",
-            errors,
-        )
         return False
 
 
@@ -194,19 +189,12 @@ def is_cnpj(field_value: str, field_name: str, field_label: str, errors: dict) -
         return False
 
 
-def is_phone_number(
-    field_value: str, field_name: str, field_label: str, errors: dict
-) -> bool:
+def is_phone_number(field_value: str) -> bool:
     if not field_value:
         return True
     if re.match(r"^\(\d{2}\) \d{5}-\d{4}$", field_value) is not None:
         return True
     else:
-        add_error(
-            field_name,
-            f"O valor do campo <b>{field_label}</b> deve ser um telefone no formato (99) 99999-9999.",
-            errors,
-        )
         return False
 
 

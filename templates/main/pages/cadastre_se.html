@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Profissional de Saúde</title>
-    <link rel="stylesheet" href="/static/css/estilo_cadastro_login.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -14,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/estilo_editar_perfil.css">
+    <link rel="stylesheet" href="/static/css/estilo_cadastro_login.css">
     <style>
     .error-message {
         color: red;
@@ -22,8 +21,7 @@
     }
 
     .form-control[readonly] {
-        background-color: #D2DCE9 !important; /* Cor de fundo igual aos outros campos */
-        color: #495057; /* Cor do texto */
+        background-color: transparent; 
         height: 100%;
         padding: 0px;
         cursor: default; /* Muda o cursor para o padrão */
@@ -33,6 +31,10 @@
     .form-control[readonly]:focus {
         outline: none; /* Remove o contorno ao focar */
         box-shadow: none; /* Remove qualquer sombra ao focar */
+    }
+
+    .form-control[readonly]:hover {
+        cursor: pointer;
     }
 
     #file-name {
@@ -54,6 +56,7 @@
     /* Para garantir que os inputs ocupem 100% da largura do seu container */
     .input-grid input {
         width: 100%;
+        color: #0c7496;
     }
     </style>
 </head>
@@ -82,7 +85,7 @@
                             <div>{{ input_box(type="email", id="email", name="email", placeholder="Email", icon_class="bi bi-envelope") }}</div>
                             <div>{{ input_box(type="text", id="cpf", name="cpf", placeholder="CPF", icon_class="bi bi-person-check", attributes='data-mask="cpf"') }}</div>
                             <div>{{ input_box(type="text", id="telefone", name="telefone", placeholder="Telefone", icon_class="bi bi-telephone", attributes='data-mask="telefone"') }}</div>
-                            <div>{{ input_box(type="date", id="data_nascimento", name="data_nascimento", placeholder="Data de Nascimento", icon_class="bi bi-calendar") }}</div>
+                            <div>{{ input_box(type="text", id="data_nascimento", name="data_nascimento", placeholder="Data de Nascimento", icon_class="bi bi-calendar", attributes='data-mask="data"') }}</div>
                             <div>{{ input_box(type="password", id="senha", name="senha", placeholder="Senha", icon_class="bi bi-lock") }}</div>
                             <div>{{ input_box(type="password", id="conf_senha", name="conf_senha", placeholder="Confirme a Senha", icon_class="bi bi-check-circle") }}</div>
                             <input type="hidden" name="tipo_perfil" id="tipo_perfil" value="{{ tipo_perfil }}">
@@ -90,7 +93,7 @@
                             {% if tipo_perfil == 2 %}
                             <div class="form-row">
                                 <div class="input-group mb-2">
-                                    <input type="file" class="form-control custom-input" id="registro-profissional" name="registro_profissional" required style="display: none;">
+                                    <input type="file" class="form-control custom-input select-file" id="registro-profissional" name="registro_profissional" required style="display: none;">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="bi bi-upload"></i></span>
                                     </div>

@@ -37,7 +37,7 @@ body, p {
 
 .form-container {
     position: relative;
-    background-color: rgb(227, 238, 237, 0.9);
+    background-color: rgba(202, 238, 253, 0.8);
     padding: 40px;
     padding-bottom: 20px;
     border-radius: 40px;
@@ -56,7 +56,7 @@ body, p {
 
 .form-title {
     font-family: 'Chewy', cursive;
-    color: #0F6481;
+    color: #0c7496;
     font-size: 45px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -71,7 +71,7 @@ body, p {
 }
 
 .btn-next {
-    background-color: #0F6481;
+    background-color: #0c7496;
     color: white;
     border: none;
     padding: 10px 40px;
@@ -85,28 +85,7 @@ body, p {
 }
 
 .btn-next:hover {
-    background-color: #1e7b9d;
-}
-
-.btn-back {
-    background-color: transparent;
-    color: #0F6481;
-    border: none;
-    padding: 10px 40px;
-    font-size: 15px;
-    border-radius: 20px;
-    margin: 12px auto;
-    display: inline-block;
-    font-family: 'Ubuntu', sans-serif;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    text-decoration: none; /* Remove o sublinhado */
-}
-
-.btn-back:hover {
-    background-color: #f0f0f0;
-    text-decoration: none; /* Garante que o sublinhado continua removido ao passar o mouse */
+    background-color: #1090ba;
 }
 
 /* Texto explicativo adicional */
@@ -135,15 +114,14 @@ body, p {
     margin-right: 0px;
     margin-left: 0px;
     border-radius: 25px !important;
-    border: 1px solid #ced4da;
+    border: 1px solid;
     padding: 10px 15px; 
-    color: #47525E !important;
-    background-color: #D2DCE9 !important;
+    background-color: #addbe9 !important;
     box-shadow: none;
     height: 45px !important;
     width: 100%; 
     box-sizing: border-box; 
-    border-color: #cacaca;
+    border-color: #9bc5d2;
 }
 
 .input-group:focus-within {
@@ -161,7 +139,7 @@ body, p {
 .input-group-text {
     background-color: transparent !important;
     border: none !important;
-    color: #969FAA;
+    color: #0c7496;
     padding: 0;
     font-size: 18px !important;
 }
@@ -197,10 +175,9 @@ body, p {
     background-color: transparent
 }
 
-
-.form-control::placeholder {
-    color: #47525E !important;
-    font-size: 15px !important;
+.custom-input::placeholder {
+    color: #0c7496 !important;
+    font-size: 16px !important;
 }
 
 .col-md-6 {
@@ -208,11 +185,15 @@ body, p {
 }
 
 .forgot-password {
-    color: #0F6481; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado */ 
+    color: #0c7496; /* Cor do texto */
     margin: 10px;/* Margem */
     display: block; /* Faz com que o link ocupe toda a largura disponível */
     font-size: 1.1rem; /* Tamanho do texto - ajuste conforme necessário */
+}
+
+.forgot-password:hover {
+    color: #1090ba;
+    text-decoration: none;
 }
 
 .google-btn {
@@ -251,15 +232,16 @@ body, p {
 }
 
 .create-account {
-    color: #0F6481;
+    color: #0c7496;
     font-size: 20px;
     margin-top: 15px;
     margin-bottom: 30px;
     text-decoration: none;
 }
 
-.create-account-text {
-    font-size: 0.95rem;
+.create-account:hover {
+    color: #1090ba;
+    text-decoration: none;
 }
 
 /* Ajustes novos para garantir a largura correta do formulário */
@@ -368,5 +350,5 @@ body, p {
 
 .icon-container i {
     font-size: 30px; 
-    color: #0F6481;
+    color: #0c7496;
 }

@@ -39,3 +39,15 @@
     pointer-events: none; /* Impede interação do usuário */
     z-index: 1; /* Garante que fique sobre a imagem */
 }
+
+.error-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    width: 100%; /* Para ocupar todo o espaço disponível */
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+

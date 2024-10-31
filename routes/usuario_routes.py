@@ -1,5 +1,6 @@
 import base64
-from fastapi import APIRouter, Depends, Form, Request
+from datetime import date, timedelta
+from fastapi import APIRouter, Depends, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi import APIRouter, Form
 import os
@@ -7,7 +8,9 @@ import os
 import jwt
 from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
+from util.mensagens import adicionar_mensagem_erro
 from util.templates import obter_jinja_templates
+from util.validators import *
 
 router = APIRouter(prefix="/usuario")
 
@@ -85,26 +88,45 @@ async def get_editar(request: Request):
     return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request}) 
 
 @router.post("/atualizar_perfil")
-async def editar_perfil(
-    request: Request,
-    nome: str = Form(...),
-    nome_perfil: str = Form(...),
-    telefone: str = Form(...),
-    bio_perfil: str = Form(...),
-    categoria: str = Form(None),
-    genero: str = Form(...),
-    foto_perfil_blob: str = Form(...),
-):
+async def editar_perfil(request: Request):
+    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
+    dados = dict(await request.form())
+    foto_perfil_blob = dados["foto_perfil_blob"]
+    dados.pop("foto_perfil_blob")
+    response = RedirectResponse(f"/usuario/editar_perfil", status_code=status.HTTP_303_SEE_OTHER)
+    if not is_person_fullname(dados["nome"]):
+        adicionar_mensagem_erro(response, "Os nomes devem conter um primeiro nome e um sobrenome."),
+        return response
+    if not is_only_letters_or_space(dados["nome"]):
+        adicionar_mensagem_erro(response, "Os nomes devem conter apenas letras e espaços."),
+        return response
+    if not is_own_name(dados["nome"]):
+        adicionar_mensagem_erro(response, "Esse não é um nome próprio valido. Confira-o."),
+        return response
+    if dados["nome_perfil"] != request.state.usuario.nome_perfil:
+        if not is_user_name(dados["nome_perfil"]):
+            adicionar_mensagem_erro(response, "Os nomes de usuário só podem usar letras, números, sublinhados e pontos."),
+            return response
+        if not UsuarioRepo.is_username_unique(dados["nome_perfil"]):
+            adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
+            return response
+    if dados["telefone"] != request.state.usuario.telefone:
+        if not is_phone_number(dados["telefone"]):
+            adicionar_mensagem_erro(response, "Esse não é um telefone valido. Confira-o")
+            return response
+        if not UsuarioRepo.is_phone_unique(dados["telefone"]):
+            adicionar_mensagem_erro(response, "Outra conta está usando o mesmo telefone.")
+            return response
 
     # Atualiza os dados do usuário
     atualizacao_sucesso = UsuarioRepo.atualizar_dados_perfil(
         foto_perfil = True,
-        nome=nome,
-        nome_perfil=nome_perfil,
-        telefone=telefone,
-        bio_perfil=bio_perfil,
-        categoria=categoria,
-        genero=genero,
+        nome=dados["nome"],
+        nome_perfil=dados["nome_perfil"],
+        telefone=dados["telefone"],
+        bio_perfil=dados["bio_perfil"],
+        categoria= None,
+        genero=dados["genero"],
         id=request.state.usuario.id,
     )
     
