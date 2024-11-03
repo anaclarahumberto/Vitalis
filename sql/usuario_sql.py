@@ -21,7 +21,7 @@ SQL_CRIAR_TABELA = """
     foto_perfil BOOL,
     nome_perfil TEXT NOT NULL,
     bio_perfil TEXT,
-    categoria_perfil INT,
+    categoria_perfil INTEGER,
     genero TEXT,
     tipo_perfil INTEGER,
     registro_profissional BOOL,

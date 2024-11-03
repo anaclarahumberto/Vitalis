@@ -1,0 +1,95 @@
+
+.emoji-button-container {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.emoji-container {
+    height: 50%;
+    width: 100%;
+    position: relative; 
+    padding: 0px;
+    padding-bottom: 20px;
+}
+
+.emoji-button {
+    background-color: transparent; /* Cor de fundo do botão */
+    border: none; /* Remove bordas */
+    border-radius: 50%; /* Botão circular */
+    width: 30px; /* Largura do botão */
+    height: 30px; /* Altura do botão */
+    display: flex; /* Centraliza o ícone */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    transition: background-color 0.3s; /* Transição suave ao passar o mouse */
+}
+
+.emoji-button i {
+    color: #999;
+    font-size: 20px; /* Aumenta o tamanho do ícone */
+}
+
+.emoji-drawer-container {
+    padding: 5px; /* Espaçamento ao redor do emoji drawer */
+    background-color: white; /* Cor de fundo do contêiner */
+    border-radius: 1px; /* Cantos arredondados */
+}
+
+.emoji-drawer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%; /* Largura total do contêiner pai */
+    height: 100%; /* Altura máxima da modal */
+    overflow-y: scroll; /* Rolagem vertical */
+    padding: 8px; /* Padding interno do drawer */
+    position: absolute; /* Permite que a modal seja posicionada em relação ao contêiner */
+    z-index: 1000;
+}
+
+.emoji-drawer::-webkit-scrollbar {
+    display: none; /* Para navegadores baseados em WebKit (Chrome, Safari) */
+}
+
+.emoji {
+    text-align: center;
+    font-size: 22px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.emoji:hover {
+    background-color: #f0f0f0;
+}
+
+#input {
+    width: 300px;
+    padding: 8px;
+    margin-top: 16px;
+}
+
+/* Estilo da modal */
+#modal-emoji {
+    display: none; /* Oculta a modal inicialmente */
+    position: absolute; /* Permite que a modal seja posicionada em relação ao contêiner */
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 95%; 
+    overflow-y: scroll; 
+    border-radius: 2px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    z-index: 999; 
+}
+
+#modal-emoji::-webkit-scrollbar {
+    display: none; /* Para navegadores baseados em WebKit (Chrome, Safari) */
+}
+
+#modal-emoji.active {
+    display: flex; /* Exibe a modal quando ativa */
+}

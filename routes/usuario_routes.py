@@ -1,12 +1,15 @@
 import base64
-from datetime import date, timedelta
-from fastapi import APIRouter, Depends, Form, Request, status
-from fastapi.responses import HTMLResponse, RedirectResponse
+from datetime import date, datetime, timedelta
+import uuid
+from fastapi import APIRouter, Depends, File, Form, Request, UploadFile, status
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi import APIRouter, Form
 import os
 
 import jwt
+from models.publicacao_model import Publicacao
 from models.usuario_model import Usuario
+from repositories.publicacao_repo import PublicacaoRepo
 from repositories.usuario_repo import UsuarioRepo
 from util.mensagens import adicionar_mensagem_erro
 from util.templates import obter_jinja_templates
@@ -53,6 +56,47 @@ async def finalizar_perfil(
 async def get_root(request: Request):
     request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
     return templates.TemplateResponse("main/pages/index.html", {"request": request})
+
+@router.post("/compartilhar_publicacao")
+async def post_compartilhar_publicação(
+    request: Request,
+    texto_pub: str = Form(...),
+    imagem: UploadFile = File(None)
+):
+    print(texto_pub)
+
+    dados = {
+        "texto_pub": texto_pub,
+        "imagem": None  
+    }
+
+    if imagem:
+        # Lê os dados da imagem
+        imagem_data = await imagem.read()
+
+        # Gera um nome de arquivo único
+        nome_arquivo = f"{uuid.uuid4()}.jpeg"
+        caminho_arquivo = os.path.join("static/img/publicacoes", nome_arquivo)
+
+        try:
+            # Salvar a imagem no servidor
+            with open(caminho_arquivo, "wb") as file:
+                file.write(imagem_data)
+        except Exception as e:
+            print(f"Erro ao salvar a imagem: {e}")
+            return {"error": "Erro ao salvar a imagem."}
+        
+        publicacao = Publicacao(
+            descricao = texto_pub,
+            imagem = nome_arquivo,
+            id_usuario = request.state.usuario.id,
+            data_criacao = datetime.now(),
+        )
+
+        PublicacaoRepo.inserir(publicacao)
+
+    return JSONResponse({"message": "Publicação compartilhada com sucesso!"}, status_code=200)
+
 
 @router.get("/mensagens_principal", response_class=HTMLResponse)
 async def get_mensagens(request: Request):

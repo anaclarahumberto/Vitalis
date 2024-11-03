@@ -6,7 +6,130 @@
     <title>Header com Caixa de Mensagem</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/static/css/estilo_menu_atividades.css"> <!-- Inclusão do CSS separado -->
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/estilo_menu_atividades.css">
+    <link rel="stylesheet" href="/static/css/estilo_emojis.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- Versão completa -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <style>
+        .btn-nova-pub-modal {
+            background-color: #006994;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 20px;
+            margin: 12px auto;
+            display: inline-block;
+            font-family: 'Ubuntu', sans-serif;
+            cursor: pointer;
+            width: 50%; /* O botão agora usa toda a largura do formulário */
+        }
+
+        #modal-body-pub {
+            padding: 0px;
+        }
+        
+        /* Área de corte fixa no quadrado */
+        #crop-container-pub {
+            width: 100%;
+            overflow: visible;
+            position: relative;
+            margin: auto;
+            background-color: #f0f0f0;
+        }
+        
+        /* Ajuste da imagem para preencher o quadrado */
+        #imagemPub {
+            max-width: 100%;
+            display: block;
+            position: absolute;
+            cursor: grab; /* Indica que a imagem pode ser arrastada */
+        }
+        
+        #imagemPub:active {
+            cursor: grabbing; /* Indica que a imagem está sendo arrastada */
+        }
+
+        #imagemSharePub {
+            max-width: 70%; /* Para que a imagem não ultrapasse a largura da modal */
+            height: auto; /* Para manter a proporção */
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column; 
+            height: 100%; 
+            width: 100%;
+        }
+
+        .textarea-pub {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 300;
+            width: 100%;
+            height: 40%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            resize: none;
+            border: none;
+            outline: none;
+        }
+
+        .textarea-pub::-webkit-scrollbar {
+            display: none; /* Para navegadores baseados em WebKit (Chrome, Safari) */
+        }
+
+        #novaPubModal {
+            z-index: 1040 !important; /* Z-index da modal principal */
+        }
+        
+        #confirmCloseModal {
+            z-index: 1050 !important; /* Z-index do modal de confirmação */
+        }
+        
+        .modal-backdrop {
+            z-index: 1030 !important; /* Z-index do backdrop padrão */
+            opacity: 0.6 !important;
+        }
+        
+        .custom-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Cor e transparência (mais escuro) */
+            z-index: 1045; /* Z-index que fica entre o modal principal e o de confirmação */
+        }
+
+        .btn-descartar:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .btn-close-modal {
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            border: none; 
+            background-color: transparent; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1050;
+        }
+
+        .btn-close-modal i{
+            color: white;
+            font-size: 35px;
+        }
+    </style>
 </head>
 <body>
     <header class="cor-menu">
@@ -36,7 +159,7 @@
                         <i class="bi bi-tag"></i>
                         Cupons
                     </a>
-                    <a type="button" class="text-white text-decoration-none meu-link" data-toggle="modal" data-target="#novaPubModal">
+                    <a type="button" id="NovaPubBtn" class="text-white text-decoration-none meu-link" onclick="$('#novaPubModal').modal('show');">
                         <i class="bi bi-plus-circle"></i>
                         Nova Publicação
                     </a>
@@ -88,6 +211,204 @@
             </div>
         </div>
     </header>
+    <div class="modal" id="confirmCloseModal" tabindex="-1" role="dialog" aria-labelledby="confirmCloseModalLabel" aria-hidden="true" style="z-index: 10000000;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 80%; margin-left: 10%; margin-right: 10%; border-radius: 20px;">
+                <div class="modal-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 0px; font-family: Ubuntu, sans-serif;">
+                    <h5 style="color: black; text-align: center; margin: 10px 0px; font-weight: 300;">Descartar publicação?</h5>
+                    <p style="color: gray; text-align: center; margin-bottom: 30px; font-size: 14px">Se você sair agora, suas edições não serão salvas.</p>
+                    <button type="button" class="btn-descartar" style="width: 100%; height: 50px; background: none; border:none; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; color: red; cursor: pointer;">
+                        Descartar
+                    </button>
+                    <button type="button" style="width: 100%; height: 50px; background: none; border:none; color: black; cursor: pointer;">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="novaPubModal" tabindex="-1" role="dialog" aria-labelledby="novaPubModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close-modal" onclick="$('#novaPubModal').modal('hide');">
+            <i class="bi bi-x"></i>
+        </button>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border-radius: 20px;">
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 10px; position: relative;">
+                    <h5 class="modal-title" id="novaPubModalLabel" style="text-align: center; flex-grow: 1; font-family: 'Ubuntu', sans-serif; font-size: 16px; font-weight: 300;"><b>Criar nova publicação</b></h5>
+                </div>
+                <div class="spacer" style="height: 50px;"></div>
+                <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <div style="position: relative; margin: 30px auto; width: 100px; height: 100px;">
+                        <i class="bi bi-image" style="font-size: 70px; position: absolute; left: 40%; top: 50%; transform: translate(-50%, -50%); z-index: 2;"></i>
+                        <i class="bi bi-play-btn-fill" style="font-size: 70px; position: absolute; left: calc(50% + 5px); top: calc(15%); z-index: 2;"></i>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 18px">Arraste as fotos e os vídeos aqui</p>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; margin-top: auto; margin-bottom: 20px;">
+                    <button type="button" class="btn-nova-pub-modal" id="selecionarImagemPub">Selecionar do Computador</button>
+                    <input type="file" id="inputImagemPub" accept="image/*" style="display: none;" />
+                </div>
+                <div class="spacer" style="height: 100px;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para cortar imagem -->
+    <div class="modal" id="cortarImagemModal" tabindex="-1" role="dialog" aria-labelledby="cortarImagemModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close-modal" onclick="$('#cortarImagemModal').modal('hide');">
+            <i class="bi bi-x"></i>
+        </button>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border-radius: 20px; font-family: 'Ubuntu', sans-serif; overflow:hidden;">
+                <div class="modal-header" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px; position: relative;">
+                    <button type="button" class="close" aria-label="Close" onclick="$('#cortarImagemModal').modal('hide'); $('#novaPubModal').modal('show');" style="background: none; border: none; padding: 0; cursor: pointer; position: absolute; left: 10px;">
+                        <i class="bi bi-arrow-left" style="font-size: 24px; color: black;"></i>
+                    </button>
+                    <h5 class="modal-title" id="cortarImagemModalLabel" style="text-align: center; flex-grow: 1; font-size: 16px; font-weight: 300;">
+                        <b>Cortar Imagem</b>
+                    </h5>
+                    <button type="button" id="avancarPubBtn" class="btn" style="background: transparent; border: none; color: #006994; font-size: 16px; text-decoration: none; cursor: pointer; position: absolute; right: 10px;">
+                        Avançar
+                    </button>
+                </div>
+                               
+                <div class="modal-body-pub">
+                    <div id="crop-container-pub">
+                        <img id="imagemPub" src="" alt="Imagem para Publicação">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para compartilhar a publicação -->
+    <div class="modal" id="compartilharPubModal" tabindex="-1" role="dialog" aria-labelledby="compartilharPubModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close-modal" onclick="$('#compartilharPubModal').modal('hide');">
+            <i class="bi bi-x"></i>
+        </button>
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 60%;">
+            <div class="modal-content" style="border-radius: 20px; font-family: 'Ubuntu', sans-serif; overflow:hidden;">
+                <div class="modal-header" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px; position: relative;">
+                    <button type="button" class="close" aria-label="Close" onclick="$('#compartilharPubModal').modal('hide'); $('#cortarImagemModal').modal('show');" style="background: none; border: none; padding: 0; cursor: pointer; position: absolute; left: 10px;">
+                        <i class="bi bi-arrow-left" style="font-size: 24px; color: black;"></i>
+                    </button>
+                    <h5 class="modal-title" id="cortarImagemModalLabel" style="text-align: center; flex-grow: 1; font-size: 16px; font-weight: 300;">
+                        <b>Criar nova publicação</b>
+                    </h5>
+                    <button id="btn-compartilhar" type="button" class="btn" style="background: transparent; border: none; color: #006994; font-size: 16px; text-decoration: none; cursor: pointer; position: absolute; right: 10px;">
+                        Compartilhar
+                    </button>
+                </div>
+                <div class="modal-body-share-pub">
+                    <div class="d-flex">
+                        <div id="share-pub-img-container" style="flex: 0 0 60%; max-width: 60%; border-right: 1px solid #ccc;">
+                            <img id="imagemSharePub" src="" alt="Imagem para Publicação" style="max-width: 100%; height: auto;">
+                        </div>
+                        
+                        <div id="share-pub-text-container" style="flex: 0 0 40%; max-width: 40%; height: auto; display: flex; flex-direction: column; padding: 10px;">
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #e0e0e0; margin-right: 10px; overflow: hidden;">
+                                    <img id="fotoPerfil" src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="rounded-circle mb-3" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>                                
+                                <span style="font-weight: bold;">{{usuario.nome_perfil}}</span>
+                            </div>
+                            <div class="content-container">
+                                <textarea class="textarea-pub" id="textarea-pub" oninput="validarTextoPub(this); atualizarContagem(this);"></textarea>
+                                <div class="emoji-button-container">
+                                    <button class="emoji-button" onclick="toggleEmojiDrawer()">
+                                        <i class="bi bi-emoji-smile"></i>
+                                    </button>
+                                    <div id="contador-caracteres" style="margin-right: 5px; font-size: 14px; color: #999;">
+                                        0/500
+                                    </div>
+                                </div>
+                                <div class="emoji-container">
+                                    <div id="modal-emoji" class="modal-emoji" onclick="closeModal(event)">
+                                        <div class="emoji-drawer-container"> <!-- Novo contêiner -->
+                                            <div class="emoji-drawer"> 
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😃</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😄</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😁</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😆</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😅</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😂</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤣</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😇</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😉</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😊</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😍</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😋</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😜</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤓</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😎</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😏</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😤</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😢</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😭</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😱</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😵</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤯</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥳</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">😷</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤒</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤕</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤢</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤮</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥺</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">❤️</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">💙</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">💚</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">💛</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🧡</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">💜</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🖤</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🤍</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍏</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍎</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍌</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍇</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍓</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍉</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍊</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍋</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍈</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥭</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍍</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥥</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥑</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍆</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🌽</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥕</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥔</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🥗</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍕</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍔</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🌭</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍟</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍝</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍣</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍰</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍦</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍩</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🍪</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🧑‍⚕️</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">👩‍⚕️</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🏃‍♂️</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🏃‍♀️</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🧘‍♂️</div>
+                                                <div class="emoji" onclick="addEmoji(this.innerHTML)">🧘‍♀️</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -121,39 +442,233 @@
             });
         });
     </script>
-    <div class="modal fade" id="novaPubModal" tabindex="-1" role="dialog" aria-labelledby="novaPubModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="padding: 20px; border-radius: 50px;"> <!-- Adicionado border-radius -->
-                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                    <h5 class="modal-title" id="novaPubModalLabel" style="text-align: center; flex-grow: 1;"><b>Criar nova publicação</b></h5> 
-                    <button type="button" class="close" aria-label="Close" data-dismiss="modal" style="background: none; border: none; padding: 0; cursor: pointer;">
-                        <i class="bi bi-x-circle" style="font-size: 24px; color: black;"></i>
-                    </button>            
-                </div>
-                <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                    <div style="position: relative; margin-bottom: 20px; margin-top: 30px;">
-                        <i class="bi bi-image" style="font-size: 48px; margin: 10px;"></i>
-                        <i class="bi bi-play-btn-fill" style="font-size: 48px; margin: 10px; position: absolute; left: 30px; top: 15px;"></i> <!-- Ajuste feito aqui -->
-                    </div>
-                    <p style="margin-top: 20px;">Arraste as fotos e os vídeos aqui</p>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: center; margin-top: auto; margin-bottom: 20px;">
-                    <button type="button" class="btn btn-primary central-button" style="padding: 0; width: 250px; height: 35px; font-size: 20px; display: flex; justify-content: center; align-items: center; border-radius: 20px; background-color:#0F6481;">Selecionar do Computador</button>
-                    <div style="margin-top: 10px; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                            <input type="checkbox" style="margin-right: 10px; transform: scale(1.5);">
-                            Tornar publicação privada
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputImagemPub = document.getElementById('inputImagemPub');
+            const imagemPub = document.getElementById('imagemPub');
+            const avancarPubBtn = document.getElementById('avancarPubBtn');
+            let cropperPub;
     
+            document.getElementById('selecionarImagemPub').addEventListener('click', function(event) {
+                event.preventDefault();
+                inputImagemPub.click();
+            });
+        
+            inputImagemPub.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagemPub.src = e.target.result;
+                        $('#novaPubModal').modal('hide');
+                        $('#cortarImagemModal').modal('show');
+                        imagemPub.onload = function() {
+                            if (cropperPub) {
+                                cropperPub.destroy();
+                            }
+                            cropperPub = new Cropper(imagemPub, {
+                                aspectRatio: 1,
+                                viewMode: 3,
+                                dragMode: 'move',
+                                autoCropArea: 1,
+                                cropBoxMovable: false,
+                                cropBoxResizable: false,
+                                zoomable: true,
+                                movable: true,
+                                background: false,
+                                guides: false,
+                                center: false,
+                                highlight: false,
+                                modal: false,
+                            });
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
     
+            function ajustarAlturaCropContainer() {
+                const cropContainer = document.getElementById('crop-container-pub');
+                const largura = cropContainer.clientWidth;
+                cropContainer.style.height = largura + 'px';
+            }
     
+            function ajustarAlturaSharePubTextContainer() {
+                const imgContainer = document.getElementById('share-pub-img-container');
+                const textContainer = document.getElementById('share-pub-text-container'); // Corrige o seletor
     
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+                if (imgContainer && textContainer) {
+                    textContainer.style.height = imgContainer.clientHeight + 'px';
+                }
+            }
+    
+            $('#cortarImagemModal').on('shown.bs.modal', ajustarAlturaCropContainer);
+            window.addEventListener('resize', ajustarAlturaCropContainer);
+    
+            avancarPubBtn.addEventListener('click', function() {
+                if (cropperPub) {
+                    const canvas = cropperPub.getCroppedCanvas({
+                        width: 1080,
+                        height: 1080,
+                    });
+                    const croppedImage = canvas.toDataURL();
+    
+                    const imagemSharePub = document.getElementById('imagemSharePub');
+                    imagemSharePub.src = croppedImage;
+    
+                    // Espera a imagem carregar para ajustar a altura
+                    imagemSharePub.onload = function() {
+                        ajustarAlturaSharePubTextContainer();
+                    };
+    
+                    $('#cortarImagemModal').modal('hide');
+                    $('#compartilharPubModal').modal('show');
+                }
+            });
+
+            $(document).ready(function() {
+                // Função para configurar modais
+                function setupModal(modalId, confirmModalId) {
+                    // Impede que a modal principal feche automaticamente ao clicar fora
+                    $(modalId).modal({
+                        backdrop: 'static', // Não fecha ao clicar fora
+                        keyboard: false // Não fecha ao pressionar ESC
+                    });
+            
+                    // Evento para mostrar a modal de confirmação
+                    $(modalId).on('click', function(event) {
+                        // Verifica se o clique foi fora do conteúdo do modal principal
+                        if (!$(event.target).closest('.modal-content').length && !$(event.target).closest('.btn-close-modal').length) {
+                            // Impede que a modal principal feche
+                            event.stopPropagation();
+            
+                            // Ajusta o z-index para garantir que a modal de confirmação fique em cima
+                            $(modalId).css('z-index', 1040);
+                            $(confirmModalId).css('z-index', 1050);
+            
+                            // Cria um backdrop customizado para a modal de confirmação
+                            $('<div class="custom-backdrop"></div>').appendTo('body');
+            
+                            // Exibe a modal de confirmação
+                            $(confirmModalId).modal('show');
+                        }
+                    });
+            
+                    // Configura o botão "Descartar" na modal de confirmação
+                    $(confirmModalId + ' button:first').on('click', function() {
+                        $(confirmModalId).modal('hide'); // Fecha a modal de confirmação
+                        $(modalId).modal('hide'); // Fecha a modal principal
+                    });
+            
+                    // Configura o botão "Cancelar" na modal de confirmação
+                    $(confirmModalId + ' button:last').on('click', function() {
+                        $(confirmModalId).modal('hide'); // Apenas fecha a modal de confirmação
+                        // Restaura o backdrop da modal principal ao fechar a confirmação
+                        $('.modal-backdrop').css('display', 'block'); // Mostra o backdrop novamente
+                    });
+            
+                    $(confirmModalId).on('hidden.bs.modal', function() {
+                        $('.custom-backdrop').remove(); // Remove o backdrop customizado
+                    });
+                }
+            
+                // Chama a função para cada modal desejada
+                setupModal('#novaPubModal', '#confirmCloseModal');
+                setupModal('#cortarImagemModal', '#confirmCloseModal'); 
+                setupModal('#compartilharPubModal', '#confirmCloseModal'); 
+            });
+
+            $('#novaPubModal').on('shown.bs.modal', function() {
+                inputImagemPub.value = ''; // Limpa o input
+                if (cropperPub) {
+                    cropperPub.destroy(); // Destrói a instância do Cropper
+                    cropperPub = null; // Reseta a variável do Cropper
+                }
+                imagemPub.src = ''; // Limpa a imagem exibida
+            });
+        });
+    </script>    
+
+    <script>
+        function addEmoji(emoji) {
+            let inputEle = document.getElementById('textarea-pub');
+            inputEle.value += emoji;
+            atualizarContagem(inputEle); // Atualiza o contador após adicionar o emoji
+        }
+    
+        function toggleEmojiDrawer() {
+            let modal = document.getElementById('modal-emoji');
+            modal.classList.toggle('active');
+        }
+    
+        function closeModal(event) {
+            if (event.target === document.getElementById('modal-emoji')) {
+                toggleEmojiDrawer(); 
+            }
+        }
+    
+        function validarTextoPub(textarea) {
+            let valor = textarea.value;
+            if (valor.length > 500) {
+                valor = valor.substr(0, 500); // Limita a 500 caracteres
+                textarea.value = valor; // Atualiza o valor do textarea
+            }
+            atualizarContagem(textarea); // Atualiza o contador ao validar
+        }
+    
+        function atualizarContagem(textarea) {
+            const contador = document.getElementById('contador-caracteres');
+            const numeroCaracteres = textarea.value.length;
+            contador.textContent = `${numeroCaracteres}/500`; // Atualiza o contador
+        }
+    </script>  
+    
+    <script>
+        document.getElementById("btn-compartilhar").addEventListener("click", async function() {
+            const textoPub = document.getElementById("textarea-pub").value;
+            const imagemInput = document.getElementById("imagemSharePub"); // Captura a imagem exibida no perfil
+        
+            // Criar um FormData para enviar os dados
+            const formData = new FormData();
+            formData.append("texto_pub", textoPub);
+        
+            // Verifica se a imagem já foi cortada e está pronta para ser enviada
+            if (imagemInput.src) {
+                try {
+                    const response = await fetch(imagemInput.src);
+                    if (!response.ok) throw new Error("Erro ao buscar a imagem.");
+        
+                    const blob = await response.blob();
+                    const nomeArquivo = `imagem_${Date.now()}.jpg`; // Nome do arquivo dinâmico
+                    formData.append("imagem", blob, nomeArquivo); // Adiciona o blob com nome dinâmico
+                } catch (error) {
+                    console.error("Erro ao processar a imagem:", error);
+                    return; // Interrompe o processamento se houver erro
+                }
+            } else {
+                console.warn("Nenhuma imagem para compartilhar."); // Aviso se não houver imagem
+            }
+        
+            // Envia os dados para o backend
+            try {
+                const res = await fetch("/usuario/compartilhar_publicacao", {
+                    method: "POST",
+                    body: formData,
+                });
+        
+                if (res.ok) {
+                    console.log("Publicação compartilhada com sucesso!");
+                    $('#compartilharPubModal').modal('hide');
+                    window.location.href = "/usuario/feed";
+                } else {
+                    const errorMessage = await res.text(); // Pega o corpo da resposta
+                    console.error("Erro ao compartilhar a publicação:", errorMessage);
+                }
+            } catch (error) {
+                console.error("Erro na requisição:", error);
+            }
+        });        
+    </script>
 </body>
 </html>

@@ -40,9 +40,9 @@ body, p {
     background-color: rgba(202, 238, 253, 0.8);
     padding: 40px;
     padding-bottom: 20px;
-    border-radius: 40px;
+    border-radius: 30px;
     width: 85vw;
-    max-width: 500px;
+    max-width: 460px;
     height:auto;
     margin: 0 auto;
     color: black;
@@ -71,7 +71,7 @@ body, p {
 }
 
 .btn-next {
-    background-color: #0c7496;
+    background-color: #006994;
     color: white;
     border: none;
     padding: 10px 40px;
@@ -85,7 +85,7 @@ body, p {
 }
 
 .btn-next:hover {
-    background-color: #1090ba;
+    background-color: #0076AA;
 }
 
 /* Texto explicativo adicional */
