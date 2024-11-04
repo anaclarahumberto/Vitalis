@@ -20,3 +20,7 @@ SQL_INSERIR_PUBLICACAO = """
     VALUES (?, ?, ?, ?)
 """
 
+SQL_OBTER_PUBLICACOES_POR_USUARIO = """
+    SELECT * FROM publicacao WHERE id_usuario = ?
+"""
+

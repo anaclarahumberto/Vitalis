@@ -7,6 +7,9 @@
     <link rel="icon" href="/static/img/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/estilos.css">
     <title>Vitalis :: {% block subtitulo %}{% endblock %}</title>
 </head>
@@ -16,7 +19,7 @@
     <div class="container-fluid">
         <div class="row">
             {% include "shared/includes/header.html" %}
-            <main class="col-9 min-vh-100">
+            <main class="col w-80 min-vh-100" id="conteudoContainer">
                 {% block conteudo %}
                 {% endblock %}
             </main>

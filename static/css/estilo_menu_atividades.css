@@ -1,6 +1,6 @@
 /* Estilos para o cabeçalho e navegação */
 .cor-menu {
-    background-color: #6B98BF; /* Cor de fundo */
+    background-color: #007eb3; /* Cor de fundo */
     width: 20%; /* Fixa a header no canto esquerdo */
     height: 100vh; /* Faz com que a altura seja igual à da tela */
     overflow: hidden; 

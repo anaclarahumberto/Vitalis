@@ -202,8 +202,16 @@ async def get_feedback(request: Request):
 
 @router.get("/perfil", response_class=HTMLResponse)
 async def get_perfil(request: Request):
-    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
-    return templates.TemplateResponse("main/pages/perfil.html", {"request": request})
+    usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
+    
+    publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(request.state.usuario.id)
+
+    return templates.TemplateResponse("main/pages/perfil.html", {
+        "request": request,
+        "usuario": usuario,
+        "publicacoes": publicacoes
+    })
+
 
 @router.get("/entrarMaroquio", response_class=HTMLResponse)
 async def get_perfil(request: Request):

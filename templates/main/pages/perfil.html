@@ -4,103 +4,177 @@
 
 <link rel="stylesheet" href="/static/css/estilo_perfil.css">
 
-<div class="container">
+<div class="container" id="editarPerfilContainer">
     <!-- Perfil Header -->
-    <div class="row my-4">
-        <div class="col-md-3 text-center">
+    <div class="row">
+        <div class="col-md-3" id="fotoPerfilContainer">
             <img src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="profile-img">
         </div>
         <div class="col-md-9">
-            <h4>{{usuario.nome_perfil}}<i class="bi bi-award ms-2 " style="color: #4AE4D6;"></i></h4> <br>
+            <div class="flex-row" id="nomePerfilRow">
+                <div class="title-container">
+                    <h4>{{ usuario.nome_perfil }}<i class="bi bi-award ms-2" style="color: #4AE4D6;"></i></h4>
+                </div>
+                <button class="btn-editar" onclick="window.location.href='editar_perfil'">Editar Perfil</button>
+                <button class="btn-config" onclick="window.location.href='configuracoes'">
+                    <i class="bi bi-gear"></i>
+                </button>
+            </div> 
+            <div class="flex-row" id="numerosPerfilRow">
+                <div class="d-flex" id="numerosPerfil">
+                    <p>0</p><p>publicações</p>
+                </div>
+                <div class="d-flex" id="numerosPerfil">
+                    <p>0</p><p>seguidores</p>
+                </div>
+                <div class="d-flex" id="numerosPerfil">
+                    <p>0</p><p>seguindo</p>
+                </div>
+            </div>                                
 
-        <div>    
-            <p>{{usuario.nome}}</p>
-            <p style="color: gray;">{{usuario.categoria_perfil or ''}}</p> 
-            <p>{{usuario.bio_perfil or ''}}</p>
-        </div>  
-                
-           
-
+            <div id="dadosPerfilContainer">    
+                <p id="nomePerfilText">{{ usuario.nome }}</p>
+                <p style="color: gray;">{{ usuario.categoria_perfil or '' }}</p> 
+                <div id="bioPerfilBox"><p id="bioPerfilText">{{ usuario.bio_perfil or '' }}</p></div>
+            </div>  
         </div>
     </div>
-
+    <div class="w-100"></div>
     <!-- Destaques -->
-    <div class="row my-4">
+    <div class="row order-3 order-md-2" id="Destaques">
         <div class="col-12">
             <div class="highlights">
                 <div class="highlight-item text-center">
-                    <a href="#" class="text-decoration-none text-dark">
-                    <img src="/static/img/plus.png" alt="Destaque 1" class="highlight-img" > 
-                    <p>Favoritos</p>
-                    </a>
-                </div>
-                <div class="highlight-item text-center">
-                    <a href="#" class="text-decoration-none text-dark">
-                    <img src="/static/img/ft2.jpg" alt="Destaque 2" class="highlight-img">
-                    <p>Life</p>
-                    </a>
-                </div>
-                <div class="highlight-item text-center">
-                    <a href="#" class="text-decoration-none text-dark">
-                    <img src="/static/img/ft3.jpg" alt="Destaque 3" class="highlight-img">
-                    <p>Formação</p>
-                    </a>
+                    <button id="highlight-icon-button">
+                        <i class="bi bi-plus-circle-fill"></i>
+                    </button>
+                    <p>Novo</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Publicações, Vídeos e Marcados -->
-    <ul class="nav nav-tabs my-4" id="profileTab" role="tablist">
+    <ul class="nav nav-tabs my-4 d-flex justify-content-around" id="profileTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true"><i class="bi bi-grid-3x3-gap"></i> Publicações</a>
+            <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
+                <i class="bi bi-grid-3x3"></i> PUBLICAÇÕES
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="videos-tab" data-bs-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false"><i class="bi bi-play-circle"></i> Vídeos</a>
+            <a class="nav-link" id="videos-tab" data-bs-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false">
+                <i class="bi bi-play-circle"></i> SALVOS
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="tagged-tab" data-bs-toggle="tab" href="#tagged" role="tab" aria-controls="tagged" aria-selected="false"><i class="bi bi-person-square"></i> Marcados</a>
+            <a class="nav-link" id="tagged-tab" data-bs-toggle="tab" href="#tagged" role="tab" aria-controls="tagged" aria-selected="false">
+                <i class="bi bi-person-square"></i> MARCADOS
+            </a>
         </li>
     </ul>
 
-    <div class="tab-content" id="profileTabContent">
-        <!-- Publicações -->
-        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <a href="#">
-                    <img src="/static/img/bb.png" alt="Post 1" class="img-fluid" >
-                    </a>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <a href="#">
-                    <img src="/static/img/vip.png" alt="Post 2" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <a href="#">
-                    <img src="/static/img/calendario.png" alt="Post 3" class="img-fluid">
-                    </a>
+    <div class="modal" id="pubModal" tabindex="-1" role="dialog" aria-labelledby="pubModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close-modal" onclick="fecharPubModal()">
+            <i class="bi bi-x"></i>
+        </button>
+        <div class="modal-dialog modal-dialog-centered" role="document" id="baseModalPub">
+            <div class="modal-content" id="modal-pub-content">
+                <div class="modal-pub-body">
+                    <div class="d-flex">
+                        <div class="modal-image-container">
+                            <img class="imagem-publicacao" src="" alt="Imagem da Publicação">
+                        </div>
+                        <div class="modal-info-container">
+                            <div class="perfil-container d-flex align-items-center">
+                                <div class="perfil-imagem-container">
+                                    <img id="foto-perfil" alt="Foto de Perfil" class="rounded-circle">
+                                </div>
+                                <span class="nome-perfil"></span>
+                            </div>
+                            <div id="descricao-container" class="d-flex align-items-center">
+                                <div class="perfil-imagem-container">
+                                    <img id="foto-perfil-descricao" alt="Foto de Perfil" class="rounded-circle">
+                                </div>
+                                <span class="nome-perfil-descricao"></span>
+                                <div id="descricao-publicacao" class="descricao"></div>
+                            </div>
+                            <div class="comentarios-container">
+                                <p>Ainda não há comentários aqui...</p>
+                            </div>
+                            <div class="footer-pub-container">
+                                <div class="post-actions-pub d-flex justify-content-between align-items-center">
+                                    <div class="d-flex">
+                                        <a href="#" class="me-3"><i class="bi bi-heart"></i></a>
+                                        <a href="#" class="me-3"><i class="bi bi-chat"></i></a>
+                                        <a href="#"><i class="bi bi-send"></i></a>
+                                    </div>
+                                    <!-- Ícone de bandeira no canto inferior direito -->
+                                    <div class="position-relative">
+                                        <a href="#" class="flag-icon" style="right: 0;">
+                                            <i class="bi bi-flag icons-pub"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="curtidas-pub">0 curtidas</p>
+                                <div id="data-publicacao" class="data"></div>
+                                <div class="add-comentario-pub-container d-flex align-items-center">
+                                    <div class="emoji-add-comentario-container">
+                                        <i class="bi bi-emoji-smile"></i>
+                                    </div>
+                                    <div class="textarea-add-comentario-container">
+                                        <textarea class="textarea-add-comentario-pub" id="textarea-add-comentario-pub" placeholder="Adicione um comentário..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
+    </div>
+    
+    <div class="tab-content" id="profileTabContent">
+        <!-- Publicações -->
+        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+            {% if publicacoes %}
+                <div class="container-pai">
+                    {% for publicacao in publicacoes %}
+                        <div class="container-coluna" data-publicacao='{"imagem": "{{ publicacao.imagem | e }}", "data_criacao": "{{ publicacao.data_criacao | e }}", "descricao": "{{ publicacao.descricao | e }}", "id_perfil": "{{ usuario.id | e }}", "nome_perfil": "{{ usuario.nome_perfil | e }}"}'
+                        onclick="abrirPubModal(this)">
+                            <img src="/static/img/publicacoes/{{ publicacao.imagem }}" alt="Imagem da Publicação">
+                        </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div id="publicacoesContainer">
+                    <div id="circle">
+                        <i id="cameraIcon" class="bi bi-camera"></i> 
+                    </div>
+                    <h1 id="compartilharTexto">Compartilhar fotos</h1>
+                    <p id="descricaoTexto">Quando você compartilha fotos, elas aparecerão no seu perfil.</p>
+                    <button id="compartilharButton" type="button" onclick="$('#novaPubModal').modal('show');">Compartilhar sua primeira foto</button>
+                </div>
+            {% endif %}
+                     
+            
+        </div>
+        
         <!-- Vídeos -->
         <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <a href="#">
-                    <img src="/static/img/vdo2.png" alt="Video 1" class="img-fluid">
+                        <img src="/static/img/vdo2.png" alt="Video 1" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
                     <a href="#">
-                    <img src="/static/img/vdo1.png" alt="Video 2" class="img-fluid">
+                        <img src="/static/img/vdo1.png" alt="Video 2" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
                     <a href="#">
-                    <img src="/static/img/vdo3.png" alt="Video 3" class="img-fluid">
+                        <img src="/static/img/vdo3.png" alt="Video 3" class="img-fluid">
                     </a>
                 </div>
             </div>
@@ -111,21 +185,47 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <a href="#">
-                    <img src="/static/img/ft4.png" alt="Tagged 1" class="img-fluid">
+                        <img src="/static/img/ft4.png" alt="Tagged 1" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
                     <a href="#">
-                    <img src="/static/img/ft5.png" alt="Tagged 2" class="img-fluid">
+                        <img src="/static/img/ft5.png" alt="Tagged 2" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
                     <a href="#">
-                    <img src="/static/img/ft6.png" alt="Tagged 3" class="img-fluid">
+                        <img src="/static/img/ft6.png" alt="Tagged 3" class="img-fluid">
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function abrirPubModal(element) {
+        const dadosPublicacao = JSON.parse(element.getAttribute('data-publicacao'));
+        
+        // Acessa a modal
+        const modal = document.getElementById('pubModal');
+        
+        // Preenche os dados na modal
+        modal.querySelector('.imagem-publicacao').src = `/static/img/publicacoes/${dadosPublicacao.imagem}`;
+        modal.querySelector('#foto-perfil').src = `/static/img/${dadosPublicacao.id_perfil}.jpeg`; 
+        modal.querySelector('.nome-perfil').textContent = dadosPublicacao.nome_perfil;
+        modal.querySelector('#foto-perfil-descricao').src = `/static/img/${dadosPublicacao.id_perfil}.jpeg`; 
+        modal.querySelector('.nome-perfil-descricao').textContent = dadosPublicacao.nome_perfil;
+        modal.querySelector('#descricao-publicacao').textContent = dadosPublicacao.descricao;
+        modal.querySelector('#data-publicacao').textContent = dadosPublicacao.data_criacao;
+    
+        // Exibe a modal
+        $(modal).modal('show'); // Usando jQuery para abrir a modal
+    }
+    
+    function fecharPubModal() {
+        $('#pubModal').modal('hide');
+    }
+</script>
+
 {% endblock %}

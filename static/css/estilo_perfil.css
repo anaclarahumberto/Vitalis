@@ -1,10 +1,127 @@
 /* Estilo da página de perfil */
+#editarPerfilContainer {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    padding: 50px 0px;
+}
+
+#fotoPerfilContainer{
+    display:flex;
+    justify-content: center;
+}
+
+#nomePerfilRow {
+    display: flex;             
+    align-items: center;         
+    width: 100%;                 
+    gap: 10px;                   
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;     
+}
+
+#nomePerfilRow h4 {
+    padding-top: 4px;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0px;
+}
+
+.title-container {
+    display: inline-block; 
+}
+
+.btn-editar {
+    padding: 4px 15px;
+    margin: 0px;
+    background-color: rgb(182, 235, 255, 0.8);
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-editar:hover {
+    background-color: #76ddfff4; /* Cor ao passar o mouse */
+}
+
+.btn-config {
+    background-color: transparent;
+    color: black;
+    border: none;
+    margin: 0px;
+    border-radius: 50%;
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-config i{
+    font-size: 22px;
+}
+
+#numerosPerfilRow {
+    display: flex;             
+    align-items: center;  
+    justify-items: space-between;;       
+    width: 75%;                                    
+    box-sizing: border-box; 
+    margin: 10px 0px;
+    padding: 0;     
+}
+
+#numerosPerfilRow > div {
+    flex: 1; 
+}
+
+#numerosPerfilRow p{
+    margin: 0;   
+}
+
+#numerosPerfil p:first-child {
+    margin-right: 5px; 
+    font-weight: 500;
+}
+
+#dadosPerfilContainer {
+    height: 50%;
+}
+
+#dadosPerfilContainer p{
+    margin: 0px;
+}
+
+#bioPerfilBox {
+    width: 100%;
+}
+
+#nomePerfilText {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+#bioPerfilText {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.5;  
+    height: 60%;                   
+    width: 100%;                                              
+    box-sizing: border-box;
+}
 
 /* Perfil Header */
 .profile-img {
     border-radius: 50%;
     width: 150px;
     height: 150px;
+}
+
+#Destaques {
+    margin: 20px 0px;
 }
 
 /* Destaques */
@@ -18,23 +135,70 @@
     text-align: center;
 }
 
-.highlight-img {
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    display: block;
-    margin: 0 auto;
+.highlight-item p{
+    font-weight: 500;
+    margin: 10px 0px;
+    font-size: 12px;
 }
 
-/* Tabs de Publicações, Vídeos e Marcados */
+#highlight-icon-button {
+    position: relative; 
+    display: flex;                   
+    align-items: center;             
+    justify-content: center;        
+    border-radius: 50%;              
+    border: 1px solid #BDBDBD;               
+    width: 80px;                     
+    height: 80px;                    
+    margin: 0;                       
+    padding-top: 5px;                     
+    overflow: hidden;                
+    background-color: transparent;  
+    cursor: pointer;                
+}
+
+#highlight-icon-button::before {
+    content: "";                    
+    position: absolute;             
+    top: 10px;                         
+    left: 10px;                       
+    right: 0;                      
+    bottom: 0;   
+    width: 50px;                     
+    height: 50px;                      
+    background-color: #BDBDBD; 
+    border-radius: 50%;             
+    z-index: -1;                  
+}
+
+#highlight-icon-button i {
+    margin: 0;                       
+    font-size: 70px;                 
+    color: #EFEFEF; 
+}
+
+
+.nav-tabs .nav-link.active {
+    border: none;
+    border-bottom: 3px solid #02B8F5; /* Ajuste a cor e a espessura conforme desejado */
+    color: #02B8F5; /* Cor do texto do item ativo */
+}
+
+/* Remova a borda padrão do Bootstrap para os itens de navegação */
 .nav-tabs .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    border: none;
+    color: #6c757d; 
+    font-weight: 400;
+    font-size: 13px; 
 }
 
-.nav-tabs .nav-link i {
-    font-size: 18px;
+.nav-tabs .nav-link:hover {
+    color: #02B8F5; /* Cor de destaque ao passar o mouse */
+}
+
+/* Espaçamento entre os itens */
+.nav-tabs .nav-item {
+    margin: 0 10px;
 }
 
 /* Imagens de Publicações, Vídeos e Marcados */
@@ -42,6 +206,231 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+}
+
+#publicacoesContainer {
+    width: 100%; /* 100% da largura */
+    display: flex;
+    flex-direction: column; /* organiza verticalmente */
+    align-items: center; /* centraliza horizontalmente */
+    padding: 20px; /* espaço interno */
+    box-sizing: border-box; /* inclui padding na largura total */
+}
+
+#circle {
+    width: 80px; /* largura do círculo */
+    height: 80px; /* altura do círculo */
+    border: 2px solid black; /* borda preta */
+    border-radius: 50%; /* torna o elemento um círculo */
+    display: flex;
+    align-items: center; /* centraliza verticalmente o ícone */
+    justify-content: center; /* centraliza horizontalmente o ícone */
+    background-color: rgba(255, 255, 255, 0.5); /* fundo transparente */
+    margin-bottom: 20px; /* espaço abaixo do círculo */
+}
+
+#cameraIcon {
+    font-size: 50px; /* tamanho do ícone */
+    color: black; /* cor do ícone */
+    stroke-width: 1;
+}
+
+#compartilharTexto {
+    font-size: 30px; /* tamanho do texto */
+    font-weight: 600;
+    text-align: center; /* centraliza o texto */
+    margin: 0; /* remove margem */
+    margin-bottom: 10px; /* espaço abaixo do título */
+}
+
+#descricaoTexto {
+    font-size: 16px; /* tamanho do texto da descrição */
+    text-align: center; /* centraliza o texto */
+    margin: 0; /* remove margem */
+    margin-bottom: 20px; /* espaço abaixo da descrição */
+}
+
+#compartilharButton {
+    background-color: transparent;
+    border: none;
+    font-size: 16px; /* tamanho do texto do link */
+    color: #0c7496; /* cor azul */
+    text-decoration: none; /* remove sublinhado */
+}
+
+/* Container pai ocupando 100% da largura */
+.container-pai {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
+    gap: 5px; /* Espaçamento de 5px entre as colunas e linhas */
+    width: 100%; /* Ocupar toda a largura disponível */
+}
+
+/* Cada coluna */
+.container-coluna {
+    background-color: #f0f0f0; /* Cor de fundo opcional para destacar as colunas */
+    overflow: hidden; /* Garantir que a imagem não saia dos limites */
+}
+
+/* Imagem dentro de cada coluna */
+#baseModalPub {
+    max-width: 70%;
+}
+
+#modal-pub-content{
+    border-radius: 20px; 
+    font-family: 'Open Sans', sans-serif;
+    background-color: white; 
+    overflow:hidden;
+}
+.container-coluna img {
+    width: 100%; /* Imagem ocupa toda a largura do container */
+    height: auto; /* Manter proporção da imagem */
+    display: block; /* Remove espaços indesejados */
+}
+
+/* estilo da modal */
+.modal-pub-body {
+    display: flex;
+    padding: 0;
+}
+
+.modal-image-container {
+    flex: 0 0 60%;
+    width: 60%;
+    height: auto;
+    border-right: 1px solid #ccc;
+}
+
+.modal-info-container {
+    flex: 0 0 40%;
+    width: 40%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+}
+
+.perfil-container {
+    flex: 0 0 10%; /* 20% do espaço para a seção de perfil */
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+#descricao-container {
+    flex: 0 0 10%;
+    display: flex;
+    align-items: center;
+}
+
+.footer-pub-container{
+    flex: 0 0 10%; 
+    border-top: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
+
+.footer-pub-container i{
+    font-size: 20px;
+    color: black;
+}
+
+.post-actions-pub {
+    margin-top: 10px;
+}
+
+.curtidas-pub {
+    padding:0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.data {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.comentarios-container {
+    flex: 1; 
+    margin-top: 10px; /* Adiciona um espaço acima */
+}
+
+.comentarios-container p{
+    font-size: 14px;
+    color: #999
+}
+
+.comentarios-container i{
+    font-size: 14px;
+    color: #999
+}
+
+.perfil-imagem-container {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.nome-perfil {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.nome-perfil-descricao {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.imagem-publicacao {
+    max-width: 100%;
+    height: auto;
+}
+
+.rounded-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.descricao {
+    font-size: 15px;
+}
+
+.add-comentario-pub-container{
+    border-top: 1px solid #ccc;
+}
+
+.emoji-add-comentario-container {
+    display: flex; /* Usando flexbox */
+    align-items: center; /* Alinha verticalmente ao centro */
+    margin-right: 10px; /* Espaço entre o emoji e a textarea */
+}
+
+.textarea-add-comentario-container {
+    flex-grow: 1;
+    padding: 10px 0px;
+    align-items: center; /* Faz a textarea ocupar o espaço restante */
+}
+
+.textarea-add-comentario-pub {
+    padding-top:0.5rem;
+    font-size: 13px;
+    width: 100%; 
+    min-height: 30px;
+    max-height: 40px;
+    border: none;
+    resize: none; 
+    outline: none; 
+    vertical-align: middle; 
+    box-sizing: border-box;
+}
+
+.textarea-add-comentario-pub::-webkit-scrollbar {
+    display: none; /* Centraliza o placeholder */
 }
 
 
