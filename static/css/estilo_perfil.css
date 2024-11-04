@@ -278,8 +278,8 @@
 }
 
 #modal-pub-content{
-    border-radius: 20px; 
-    font-family: 'Open Sans', sans-serif;
+    border-radius: 10px; 
+    font-family: 'Roboto', sans-serif;
     background-color: white; 
     overflow:hidden;
 }
@@ -377,12 +377,12 @@
 
 .nome-perfil {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .nome-perfil-descricao {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .imagem-publicacao {

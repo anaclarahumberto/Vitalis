@@ -1,5 +1,6 @@
 import base64
 from datetime import date, datetime, timedelta
+import locale
 import uuid
 from fastapi import APIRouter, Depends, File, Form, Request, UploadFile, status
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
@@ -63,7 +64,6 @@ async def post_compartilhar_publicação(
     texto_pub: str = Form(...),
     imagem: UploadFile = File(None)
 ):
-    print(texto_pub)
 
     dados = {
         "texto_pub": texto_pub,
@@ -86,11 +86,19 @@ async def post_compartilhar_publicação(
             print(f"Erro ao salvar a imagem: {e}")
             return {"error": "Erro ao salvar a imagem."}
         
+        meses = {
+            1: "Janeiro", 2: "Fevereiro", 3: "Março", 4: "Abril",
+            5: "Maio", 6: "Junho", 7: "Julho", 8: "Agosto",
+            9: "Setembro", 10: "Outubro", 11: "Novembro", 12: "Dezembro"
+        }
+        
+        data_criacao = datetime.now()
+
         publicacao = Publicacao(
             descricao = texto_pub,
             imagem = nome_arquivo,
             id_usuario = request.state.usuario.id,
-            data_criacao = datetime.now(),
+            data_criacao = f"{data_criacao.day} de {meses[data_criacao.month]} de {data_criacao.year}"
         )
 
         PublicacaoRepo.inserir(publicacao)

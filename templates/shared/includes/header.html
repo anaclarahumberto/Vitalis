@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/estilo_menu_atividades.css">
     <link rel="stylesheet" href="/static/css/estilo_emojis.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- Versão completa -->
@@ -129,6 +130,10 @@
             color: white;
             font-size: 35px;
         }
+
+        .modal-font {
+            font-family: 'Roboto', sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -213,8 +218,8 @@
     </header>
     <div class="modal" id="confirmCloseModal" tabindex="-1" role="dialog" aria-labelledby="confirmCloseModalLabel" aria-hidden="true" style="z-index: 10000000;">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="width: 80%; margin-left: 10%; margin-right: 10%; border-radius: 20px;">
-                <div class="modal-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 0px; font-family: Ubuntu, sans-serif;">
+            <div class="modal-content modal-font" style="width: 80%; margin-left: 10%; margin-right: 10%; border-radius: 20px;">
+                <div class="modal-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 0px;">
                     <h5 style="color: black; text-align: center; margin: 10px 0px; font-weight: 300;">Descartar publicação?</h5>
                     <p style="color: gray; text-align: center; margin-bottom: 30px; font-size: 14px">Se você sair agora, suas edições não serão salvas.</p>
                     <button type="button" class="btn-descartar" style="width: 100%; height: 50px; background: none; border:none; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; color: red; cursor: pointer;">
@@ -232,9 +237,9 @@
             <i class="bi bi-x"></i>
         </button>
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="border-radius: 20px;">
+            <div class="modal-content modal-font" style="border-radius: 20px;">
                 <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 10px; position: relative;">
-                    <h5 class="modal-title" id="novaPubModalLabel" style="text-align: center; flex-grow: 1; font-family: 'Ubuntu', sans-serif; font-size: 16px; font-weight: 300;"><b>Criar nova publicação</b></h5>
+                    <h5 class="modal-title" id="novaPubModalLabel" style="text-align: center; flex-grow: 1; font-size: 16px; font-weight: 300;"><b>Criar nova publicação</b></h5>
                 </div>
                 <div class="spacer" style="height: 50px;"></div>
                 <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -259,7 +264,7 @@
             <i class="bi bi-x"></i>
         </button>
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="border-radius: 20px; font-family: 'Ubuntu', sans-serif; overflow:hidden;">
+            <div class="modal-content modal-font" style="border-radius: 20px; overflow:hidden;">
                 <div class="modal-header" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px; position: relative;">
                     <button type="button" class="close" aria-label="Close" onclick="$('#cortarImagemModal').modal('hide'); $('#novaPubModal').modal('show');" style="background: none; border: none; padding: 0; cursor: pointer; position: absolute; left: 10px;">
                         <i class="bi bi-arrow-left" style="font-size: 24px; color: black;"></i>
@@ -287,7 +292,7 @@
             <i class="bi bi-x"></i>
         </button>
         <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 60%;">
-            <div class="modal-content" style="border-radius: 20px; font-family: 'Ubuntu', sans-serif; overflow:hidden;">
+            <div class="modal-content modal-font" style="border-radius: 20px; overflow:hidden;">
                 <div class="modal-header" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px; position: relative;">
                     <button type="button" class="close" aria-label="Close" onclick="$('#compartilharPubModal').modal('hide'); $('#cortarImagemModal').modal('show');" style="background: none; border: none; padding: 0; cursor: pointer; position: absolute; left: 10px;">
                         <i class="bi bi-arrow-left" style="font-size: 24px; color: black;"></i>
