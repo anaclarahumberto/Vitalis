@@ -81,11 +81,12 @@
             </div>
             <div class="col-4">
                 <div class="d-flex flex-column justify-content-center h-100 me-4">
-                    <button class="btn btn-lg fs-1 px-5 position-relative" style="background-color: #157B72; color: white; border-radius: 17px; font-weight: bold;">
-                        <span class="position-absolute start-0 top-50 p-3 rounded-circle translate-middle" style="background-color: #BEE4DF;"></span>
+                    <button class="btn btn-lg fs-1 px-5 position-relative btn-coupon" style="background-color: #157B72; color: white; border-radius: 17px; font-weight: bold;">
+                        <span class="position-absolute start-0 top-50 p-3 rounded-circle translate-middle left-circle" style="background-color: #BEE4DF;"></span>
                         Resgatar
-                        <span class="position-absolute start-100 top-50 p-3 rounded-circle translate-middle" style="background-color: #BEE4DF;"></span>
+                        <span class="position-absolute start-100 top-50 p-3 rounded-circle translate-middle right-circle" style="background-color: #BEE4DF;"></span>
                     </button>
+                    
                 </div>
             </div>
         </div>
@@ -107,11 +108,12 @@
             </div>
             <div class="col-4">
                 <div class="d-flex flex-column justify-content-center h-100 me-4">
-                    <button class="btn btn-lg fs-1 px-5 position-relative" style="background-color: #157B72; color: white; border-radius: 17px; font-weight: bold;">
-                        <span class="position-absolute start-0 top-50 p-3 rounded-circle translate-middle" style="background-color: #BEE4DF;"></span>
+                    <button class="btn btn-lg fs-1 px-5 position-relative btn-coupon" style="background-color: #157B72; color: white; border-radius: 17px; font-weight: bold;">
+                        <span class="position-absolute start-0 top-50 p-3 rounded-circle translate-middle left-circle" style="background-color: #BEE4DF;"></span>
                         Resgatar
-                        <span class="position-absolute start-100 top-50 p-3 rounded-circle translate-middle" style="background-color: #BEE4DF;"></span>
+                        <span class="position-absolute start-100 top-50 p-3 rounded-circle translate-middle right-circle" style="background-color: #BEE4DF;"></span>
                     </button>
+                    
                 </div>
             </div>
         </div>
@@ -133,11 +135,12 @@
             </div>
             <div class="col-4">
                 <div class="d-flex flex-column justify-content-center h-100 me-4">
-                    <button class="btn btn-lg fs-1 px-5 position-relative" style="background-color: #157B72; color: white; border-radius: 17px; font-weight: bold;">
-                        <span class="position-absolute start-0 top-50 p-3 rounded-circle translate-middle" style="background-color: #BEE4DF;"></span>
+                    <button class="btn btn-lg fs-1 px-5 position-relative btn-coupon" style="background-color: #157B72; color: white; border-radius: 17px; font-weight: bold;">
+                        <span class="position-absolute start-0 top-50 p-3 rounded-circle translate-middle left-circle" style="background-color: #BEE4DF;"></span>
                         Resgatar
-                        <span class="position-absolute start-100 top-50 p-3 rounded-circle translate-middle" style="background-color: #BEE4DF;"></span>
+                        <span class="position-absolute start-100 top-50 p-3 rounded-circle translate-middle right-circle" style="background-color: #BEE4DF;"></span>
                     </button>
+                    
                 </div>
             </div>
         </div>
@@ -145,31 +148,37 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll('button');
-
-            buttons.forEach(button => {
-                button.addEventListener('click', function () {
-                    if (this.innerText.trim() === "Resgatado") return;
-
-                    // Trocar texto e cores
-                    this.innerText = "Resgatado";
-                    this.style.backgroundColor = "white";
-                    this.style.color = "#157B72";
-                    this.style.fontWeight = "bold";  // Garante o texto grosso
-
-                    // Selecionar bolinhas
-                    const leftCircle = this.querySelector('span:first-child');
-                    const rightCircle = this.querySelector('span:last-child');
-
-                    // Manter as bolinhas visíveis e trocar as cores
-                    if (leftCircle) {
-                        leftCircle.style.backgroundColor = "#BEE4DF";  // Cor das bolinhas após resgatar
-                    }
-                    if (rightCircle) {
-                        rightCircle.style.backgroundColor = "#BEE4DF";  // Cor das bolinhas após resgatar
-                    }
+            // Escopo isolado para a funcionalidade de cupons
+            (function() {
+                // Seletor específico para botões de cupons
+                const couponButtons = document.querySelectorAll('.btn-coupon');
+    
+                couponButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        // Evita que o código continue se o cupom já foi resgatado
+                        if (this.innerText.trim() === "Resgatado") return;
+    
+                        // Alterações de estilo para o botão "Resgatado"
+                        this.innerText = "Resgatado";
+                        this.style.backgroundColor = "white";
+                        this.style.color = "#157B72";
+                        this.style.fontWeight = "bold";  // Garante o texto grosso
+    
+                        // Selecionar e estilizar as bolinhas
+                        const leftCircle = this.querySelector('.left-circle');
+                        const rightCircle = this.querySelector('.right-circle');
+    
+                        // Manter as bolinhas visíveis e trocar as cores
+                        if (leftCircle) {
+                            leftCircle.style.backgroundColor = "#BEE4DF";  // Cor das bolinhas após resgatar
+                        }
+                        if (rightCircle) {
+                            rightCircle.style.backgroundColor = "#BEE4DF";  // Cor das bolinhas após resgatar
+                        }
+                    });
                 });
-            });
+            })();
         });
     </script>
+    
 {% endblock %}
