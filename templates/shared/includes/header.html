@@ -137,6 +137,7 @@
     </style>
 </head>
 <body>
+    {% from 'shared/macros.html' import header_button %}
     <header class="cor-menu">
         <div class="row h-100">
             <div class="d-inline-block col-10 min-vh-100">
@@ -144,34 +145,20 @@
                     <a href="/" class="text-decoration-none">
                         <img src="/static/img/logo.svg" alt="Logo" class="logo"> <!-- Aplica a classe "logo" -->
                     </a>
-                    <a class="text-white text-decoration-none" href="/usuario/feed">
-                        <i class="bi bi-house"></i>
-                        Página Inicial
-                    </a>
-                    <a class="text-white text-decoration-none meu-link" href="/usuario/perfil">
-                        <i class="bi bi-person"></i>
-                        Perfil
-                    </a>
-                    <a class="text-white text-decoration-none meu-link" href="/usuario/mensagens_principal">
-                        <i class="bi bi-envelope"></i>
-                        Mensagens
-                    </a>
-                    <a class="text-white text-decoration-none meu-link" href="/usuario/notificacoes">
-                        <i class="bi bi-bell"></i>
-                        Notificações
-                    </a>
-                    <a class="text-white text-decoration-none meu-link" href="/usuario/cupons_ativos">
-                        <i class="bi bi-tag"></i>
-                        Cupons
-                    </a>
+
+                    {{header_button(nome="Página Inicial", rota="/usuario/feed", icone="bi bi-house")}}
+                    {{header_button(nome="Perfil", rota="/usuario/perfil", icone="bi bi-person")}}
+                    {{header_button(nome="Mensagens", rota="/usuario/mensagens_principal", icone="bi bi-envelope")}}
+                    {{header_button(nome="Notificações", rota="/usuario/notificacoes", icone="bi bi-bell")}}
+                    {{header_button(nome="Cupons", rota="/usuario/cupons_ativos", icone="bi bi-tag")}}
+
                     <a type="button" id="NovaPubBtn" class="text-white text-decoration-none meu-link" onclick="$('#novaPubModal').modal('show');">
                         <i class="bi bi-plus-circle"></i>
                         Nova Publicação
                     </a>
-                    <a class="text-white text-decoration-none meu-link" href="/usuario/configuracoes">
-                        <i class="bi bi-gear"></i>
-                        Configurações
-                    </a>
+
+                    {{header_button(nome="Configurações", rota="/usuario/configuracoes", icone="bi bi-gear")}}
+
                     <a class="text-white text-decoration-none my-2 mt-auto" href="#" id="mais-btn">
                         <i class="bi bi-text-left"></i>
                         Mais

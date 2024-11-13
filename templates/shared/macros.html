@@ -141,3 +141,14 @@
     </div>
 </div>
 {% endmacro %}
+
+
+
+
+<!----------------------------------------------------------------------Macros que Camila criou----------------------------------------------------------------------------------->
+{%- macro header_button(nome, rota, icone) -%}
+<a class="text-white text-decoration-none" href="{{rota}}">
+    <i class="{{icone}}"></i>
+    {{nome}}
+</a>
+{% endmacro %}
