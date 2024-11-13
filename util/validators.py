@@ -420,7 +420,7 @@ def is_date_greater_than(
 ) -> bool:
     if not field_value:
         return True
-    if field_value > min_date:
+    if field_value < min_date:
         return True
     else:
         return False

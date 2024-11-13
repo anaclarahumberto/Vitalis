@@ -117,7 +117,7 @@ async def post_cadastrar_paciente(request: Request, registro_profissional: Uploa
         adicionar_mensagem_erro(response, "Outra conta está usando o mesmo email.")
         return response
     data_minima = date.today() - timedelta(days=13*365)
-    if not is_date_greater_than(dados["data_nascimento", data_minima]):
+    if not is_date_greater_than(dados["data_nascimento"], data_minima):
         adicionar_mensagem_erro(response, "Você deve ter mais de 13 anos para se cadastrar."),
         return response
     if not is_cpf(dados["cpf"]):
