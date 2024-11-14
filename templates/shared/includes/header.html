@@ -137,59 +137,42 @@
     </style>
 </head>
 <body>
-    {% from 'shared/macros.html' import header_button %}
+    {% from 'shared/macros.html' import header_button, mais_menu_button %}
     <header class="cor-menu">
         <div class="row h-100">
             <div class="d-inline-block col-10 min-vh-100">
                 <nav class="d-flex flex-column ps-2 min-vh-100 h-100">
-                    <a href="/" class="text-decoration-none">
-                        <img src="/static/img/logo.svg" alt="Logo" class="logo"> <!-- Aplica a classe "logo" -->
-                    </a>
+                    <div class="top-box">
+                        <a href="/" class="text-decoration-none">
+                            <img src="/static/img/logo.svg" alt="Logo" class="logo"> <!-- Aplica a classe "logo" -->
+                        </a>
+                    </div>
+                    <div class="middle-box">
+                        {{header_button(nome="Página Inicial", click_function="window.location.href='/usuario/feed'", icone="bi bi-house")}}
+                    {{header_button(nome="Perfil", click_function="window.location.href='/usuario/perfil'", icone="bi bi-person")}}
+                    {{header_button(nome="Mensagens", click_function="window.location.href='/usuario/mensagens_principal'", icone="bi bi-envelope")}}
+                    {{header_button(nome="Notificações", click_function="window.location.href='/usuario/notificacoes'", icone="bi bi-bell")}}
+                    {{header_button(nome="Cupons", click_function="window.location.href='/usuario/cupons_ativos'", icone="bi bi-tag")}}
+                    {{header_button(nome="Nova Pubçicação", click_function="$('#novaPubModal').modal('show');", icone="bi bi-plus-circle", id="NovaPubBtn")}}
+                    {{header_button(nome="Configurações", click_function="window.location.href='/usuario/configuracoes'", icone="bi bi-gear")}}
+                    {{header_button(nome="Configurações", click_function="window.location.href='/usuario/configuracoes'", icone="bi bi-text-left", id="mais-btn")}}
+                    </div>
+                    
+                    <div class="bottom-box">
+                        <a class="text-white text-decoration-none my-2 mt-auto" href="#" id="mais">
+                            <i class="bi bi-text-left"></i>
+                            Mais
+                        </a>
+                    </div>
 
-                    {{header_button(nome="Página Inicial", rota="/usuario/feed", icone="bi bi-house")}}
-                    {{header_button(nome="Perfil", rota="/usuario/perfil", icone="bi bi-person")}}
-                    {{header_button(nome="Mensagens", rota="/usuario/mensagens_principal", icone="bi bi-envelope")}}
-                    {{header_button(nome="Notificações", rota="/usuario/notificacoes", icone="bi bi-bell")}}
-                    {{header_button(nome="Cupons", rota="/usuario/cupons_ativos", icone="bi bi-tag")}}
-
-                    <a type="button" id="NovaPubBtn" class="text-white text-decoration-none meu-link" onclick="$('#novaPubModal').modal('show');">
-                        <i class="bi bi-plus-circle"></i>
-                        Nova Publicação
-                    </a>
-
-                    {{header_button(nome="Configurações", rota="/usuario/configuracoes", icone="bi bi-gear")}}
-
-                    <a class="text-white text-decoration-none my-2 mt-auto" href="#" id="mais-btn">
-                        <i class="bi bi-text-left"></i>
-                        Mais
-                    </a>
-                    <!-- Caixa de mensagem -->
-                    <div id="message-box" class="message-box">
-                        <a href="#" class="button">
-                            <i class="bi bi-bar-chart-line"></i>
-                            Sua Atividade
-                        </a>
-                        <a href="#" class="button">
-                            <i class="bi bi-flag"></i>
-                            Salvos
-                        </a>
-                        <a href="#" class="button">
-                            <i class="bi bi-sun"></i>
-                            Alternar Exibição
-                        </a>
-                        <a href="#" class="button">
-                            <i class="bi bi-cloud"></i>
-                            Relatar um Problema
-                        </a>
-                        <div class="divider"></div> <!-- Seção de divisão -->
-                        <a href="/sair" class="button">
-                            <i class="bi bi-arrow-repeat"></i>
-                            Trocar de Conta
-                        </a>
-                        <a href="/sair" class="button">
-                            <i class="bi bi-box-arrow-right"></i>
-                            Sair
-                        </a>
+                    <div class="mais-menu-box" id="maisMenu">
+                        {{mais_menu_button(nome="Sua Atividade", click_function="window.location.href='#'", icone="bi bi-bar-chart-line")}}
+                        {{mais_menu_button(nome="Salvos", click_function="window.location.href='#'", icone="bi bi-flag")}}
+                        {{mais_menu_button(nome="Alternar Exibição", click_function="window.location.href='#'", icone="bi bi-sun")}}
+                        {{mais_menu_button(nome="Relatar um Problema", click_function="window.location.href='#'", icone="bi bi-cloud")}}
+                        <div class="divider"></div>
+                        {{mais_menu_button(nome="Trocar de Conta", click_function="window.location.href='#'", icone="bi bi-arrow-repeat")}}
+                        {{mais_menu_button(nome="Sair", click_function="window.location.href='#'", icone="bi bi-box-arrow-right")}}
                     </div>
                 </nav>
             </div>
@@ -400,38 +383,28 @@
             </div>
         </div>
     </div>
-    
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const activitiesBtn = document.getElementById('mais-btn');
-            const messageBox = document.getElementById('message-box');
-            const margin = 310; 
-    
-            activitiesBtn.addEventListener('click', (e) => {
-                e.preventDefault(); // Evita a navegação padrão
-    
-                // Verifica o estado atual da caixa de mensagem e alterna sua visibilidade
-                if (messageBox.style.display === 'block') {
-                    messageBox.style.display = 'none'; // Esconde a caixa de mensagem
-                } else {
-                    // Define a posição da caixa de mensagem
-                    const rect = activitiesBtn.getBoundingClientRect();
-                    
-                    // Ajusta a posição para que a messageBox apareça 5px acima do botão
-                    messageBox.style.top = `${rect.top + window.scrollY - messageBox.offsetHeight - margin}px`;
-                    messageBox.style.left = `${rect.left}px`;
-    
-                    messageBox.style.display = 'block'; // Mostra a caixa de mensagem
-                }
-            });
-    
-            // Fecha a caixa de mensagem se clicar fora dela
-            document.addEventListener('click', (e) => {
-                if (!messageBox.contains(e.target) && e.target !== activitiesBtn) {
-                    messageBox.style.display = 'none'; // Esconde a caixa de mensagem
-                }
-            });
+        const btnMore = document.getElementById('mais');
+        const moreMenu = document.getElementById('maisMenu');
+
+        function showMenuAboveButton() {
+        const btnRect = btnMore.getBoundingClientRect(); 
+        
+        
+        moreMenu.style.left = `${btnRect.left +20}px`;  
+        moreMenu.style.bottom = `${window.innerHeight - btnRect.top +10}px`;  
+
+        
+        moreMenu.style.display = 'block';
+        }
+
+        btnMore.addEventListener('click', function() {
+        if (moreMenu.style.display === 'block') {
+            moreMenu.style.display = 'none';  
+        } else {
+            showMenuAboveButton();  
+        }
         });
     </script>
 
