@@ -43,7 +43,7 @@
     background-color: #07A8F0; /* Cor da caixa */
     color: white;
     padding: 20px; /* Aumentado o padding */
-    border-radius: 30px; /* Bordas mais arredondadas */
+    border-radius: 10px; /* Bordas mais arredondadas */
     z-index: 1000;
     white-space: nowrap; /* Para evitar quebra de linha dentro da caixa */
     width: 80%; /* Largura mínima aumentada */
