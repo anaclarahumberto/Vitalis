@@ -140,11 +140,11 @@
     {% from 'shared/macros.html' import header_button, mais_menu_button %}
     <header class="cor-menu">
         <div class="row h-100">
-            <div class="d-inline-block col-10 min-vh-100">
-                <nav class="d-flex flex-column ps-2 min-vh-100 h-100">
+            <div class="d-inline-block col-10 min-vh-100" styles="padding: 0;">
+                <nav class="d-flex flex-column min-vh-100 h-100">
                     <div class="top-box">
                         <a href="/" class="text-decoration-none">
-                            <img src="/static/img/logo.svg" alt="Logo" class="logo"> <!-- Aplica a classe "logo" -->
+                            <img src="/static/img/logo.svg" alt="Logo" class="logo"> 
                         </a>
                     </div>
                     <div class="middle-box">
@@ -153,16 +153,12 @@
                     {{header_button(nome="Mensagens", click_function="window.location.href='/usuario/mensagens_principal'", icone="bi bi-envelope")}}
                     {{header_button(nome="Notificações", click_function="window.location.href='/usuario/notificacoes'", icone="bi bi-bell")}}
                     {{header_button(nome="Cupons", click_function="window.location.href='/usuario/cupons_ativos'", icone="bi bi-tag")}}
-                    {{header_button(nome="Nova Pubçicação", click_function="$('#novaPubModal').modal('show');", icone="bi bi-plus-circle", id="NovaPubBtn")}}
+                    {{header_button(nome="Nova Publicação", click_function="$('#novaPubModal').modal('show');", icone="bi bi-plus-circle", id="NovaPubBtn")}}
                     {{header_button(nome="Configurações", click_function="window.location.href='/usuario/configuracoes'", icone="bi bi-gear")}}
-                    {{header_button(nome="Configurações", click_function="window.location.href='/usuario/configuracoes'", icone="bi bi-text-left", id="mais-btn")}}
                     </div>
                     
                     <div class="bottom-box">
-                        <a class="text-white text-decoration-none my-2 mt-auto" href="#" id="mais">
-                            <i class="bi bi-text-left"></i>
-                            Mais
-                        </a>
+                        {{header_button(nome="Mais", click_function="window.location.href='#", icone="bi bi-text-left", id="mais")}}
                     </div>
 
                     <div class="mais-menu-box" id="maisMenu">

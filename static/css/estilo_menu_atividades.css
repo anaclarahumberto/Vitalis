@@ -1,4 +1,5 @@
 /* Estilos para o cabeçalho e navegação */
+
 .cor-menu {
     background-color: #007eb3; /* Cor de fundo */
     width: 20%; /* Fixa a header no canto esquerdo */
@@ -8,19 +9,19 @@
 }
 
 .top-box {
-    flex: 0.1;
+    flex: 0.2;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .top-box img{
-    height: 200px;
+    height: 150px;
     width: auto;
 }
 
 .middle-box {
-    flex: 1;
+    flex: 0.7;
     align-items: flex-start;
 }
 
@@ -28,11 +29,6 @@
     flex: 0.1;
     align-items: flex-end;
 }
-
-/* .logo {
-    height: 100%;
-    width: auto;
-} */
 
 
 /* Estilos para a caixa de mensagem */
@@ -94,11 +90,12 @@
 .header-button {
     display: flex;
     border-radius: 10px;
-    align-items: flex-start;
+    align-items: center;
     border: none; 
     box-shadow: none; 
     background-color: transparent;
     font-size: 1.05rem; 
+    height: 50px;
     padding: 15px; 
     margin: 0;
     width: 100%
@@ -131,4 +128,26 @@
 .menu-link {
     margin-top: 5px; /* Ajuste para controlar o espaçamento superior */
     margin-bottom: 0px; /* Ajuste para controlar o espaçamento inferior */
+}
+
+@media (max-width: 768px) {
+    .cor-menu {
+        width: 10%;
+        height: 100%;
+    }
+
+    /* Oculta o texto */
+    .cor-menu {
+        text-align: center; /* Centraliza o ícone */
+    }
+
+    .top-box img{
+        height: 50px;
+        width: auto;
+    }
+
+    /* Isso pode ocultar o texto diretamente */
+    .cor-menu .text-white {
+        display: none;
+    }
 }
