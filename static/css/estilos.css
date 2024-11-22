@@ -3,7 +3,7 @@ body {
 }
 
 main {
-    margin-left: 20%; /* Largura da header */
+    margin-left: 15%; /* Largura da header */
     padding: 20px;
 }
 
@@ -13,6 +13,20 @@ main {
     border-radius: 0.5rem 0 0 0.5rem;
 }
 
+#paginaContainer {
+    display: flex;
+    padding: 0;
+    padding-left: 2%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px; 
+    background-color: rgba(0, 106, 153, 0.6)
+    ;
+}
+
 #conteudoContainer {
+    height: 100%;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     padding: 0px 100px;
 }
