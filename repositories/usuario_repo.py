@@ -79,6 +79,7 @@ class UsuarioRepo:
                     categoria_perfil = resultado[6],
                     genero = resultado[7],
                     foto_perfil= resultado[8],
+                    tipo_perfil= resultado[9],
                 )
             return None  
 

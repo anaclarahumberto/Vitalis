@@ -56,6 +56,7 @@ async def finalizar_perfil(
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request):
     request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
+    print(request.state.usuario)
     return templates.TemplateResponse("main/pages/index.html", {"request": request})
 
 @router.post("/compartilhar_publicacao")

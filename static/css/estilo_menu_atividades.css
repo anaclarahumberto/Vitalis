@@ -55,6 +55,14 @@
     margin-right: 10px; 
 }
 
+#FazerUpgradeButton i {
+    font-size: 1.1rem; 
+}
+
+#FazerUpgradeButton span {
+    font-size: 0.9rem; 
+}
+
 .text-white {
     color: white;
 }

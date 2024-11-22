@@ -6,6 +6,21 @@
     border-radius: 8px;
     margin-top: 20px;
 }
+
+#configuracoesPage {
+    display: flex;
+    align-items: 'center';
+    justify-content: 'center';
+    width: 100%;
+}
+
+#configuracoesRow {
+    display: flex;
+    align-items: 'center';
+    justify-content: 'center';
+    width: 100%;
+}
+
 .main-title {
     text-align: center;
     font-size: 32px; /* Ajustar tamanho do título aqui */
@@ -44,9 +59,5 @@ img.mascote {
     right: -30px;
     width: 120px; /* Ajustar tamanho da imagem da mascote aqui */
     height: 50 px; /* Manter proporção  */
-}
-
-.cor-menu {
-    background-color: #6B98BF !important;
 }
 

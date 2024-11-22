@@ -13,7 +13,7 @@
         <div class="col-md-9">
             <div class="flex-row" id="nomePerfilRow">
                 <div class="title-container">
-                    <h4>{{ usuario.nome_perfil }}<i class="bi bi-award ms-2" style="color: #4AE4D6;"></i></h4>
+                    <h4>{{ usuario.nome_perfil }}{%- if usuario.tipo_perfil == 2 %}<i class="bi bi-heart-pulse ms-2" style="color: #4AE4D6;">{%- endif %}{%- if usuario.tipo_perfil == 1 and usuario.tipo_paciente == 2%}<i class="bi bi-stars ms-2" style="color: #4AE4D6;">{%- endif %}</i></h4>
                 </div>
                 <button class="btn-editar" onclick="window.location.href='editar_perfil'">Editar Perfil</button>
                 <button class="btn-config" onclick="window.location.href='configuracoes'">

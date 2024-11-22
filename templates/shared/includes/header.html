@@ -148,16 +148,17 @@
                 </div>
                 <div class="middle-box">
                 {{header_button(nome="Página Inicial", click_function="window.location.href='/usuario/feed'", icone="bi bi-house")}}
-                {{header_button(nome="Pesquisar", click_function="window.location.href='#'", icone="bi bi-search", id="pequisarPerfilButton")}}
+                {{header_button(nome="Pesquisar", click_function="window.location.href='#'", icone="bi bi-search", id="pesquisarPerfilButton")}}
                 {{header_button(nome="Perfil", click_function="window.location.href='/usuario/perfil'", icone="bi bi-person")}}
                 {{header_button(nome="Mensagens", click_function="window.location.href='/usuario/mensagens_principal'", icone="bi bi-envelope")}}
                 {{header_button(nome="Notificações", click_function="window.location.href='/usuario/notificacoes'", icone="bi bi-bell")}}
                 {{header_button(nome="Cupons", click_function="window.location.href='/usuario/cupons_ativos'", icone="bi bi-tag")}}
-                {{header_button(nome="Nova Publicação", click_function="$('#novaPubModal').modal('show');", icone="bi bi-plus-circle", id="NovaPubBtn")}}
+                {%- if usuario.tipo_perfil == 2 %} {{header_button(nome="Nova Publicação", click_function="$('#novaPubModal').modal('show');", icone="bi bi-plus-circle", id="NovaPubBtn")}} {%- endif %}
                 {{header_button(nome="Configurações", click_function="window.location.href='/usuario/configuracoes'", icone="bi bi-gear")}}
                 </div>
                 
                 <div class="bottom-box">
+                    {%- if usuario.tipo_perfil == 1 %} {{header_button(nome="Fazer Upgrade do Plano", click_function="window.location.href='#'", icone="bi bi-stars", id="FazerUpgradeButton")}} {%- endif %}
                     {{header_button(nome="Mais", click_function="window.location.href='#'", icone="bi bi-text-left", id="mais")}}
                 </div>
             </nav>
@@ -362,26 +363,26 @@
     </div>
 
     <script>
-        const btnSerch = document.getElementById('pesquisarPerfilButton');
-        const searchProfileBox = document.getElementById('pesquisarPerfil');
+        const btnPesquisarPerfil = document.getElementById('pesquisarPerfilButton');
+        const menuPesquisarPerfil = document.getElementById('pesquisarPerfilMenu');
 
-        function showMenuAboveButton() {
-        const btnRect = btnSerch.getBoundingClientRect(); 
-        
-        
-        searchProfileBox.style.left = `${btnRect.left}px`;  
-        searchProfileBox.style.bottom = `${window.innerHeight - btnRect.top +10}px`;  
+        function showMenuLeftOfButton() {
+            const btnRect = btnPesquisarPerfil.getBoundingClientRect();
 
-        
-        searchProfileBox.style.display = 'block';
+            // Ajusta a posição da aba ao lado esquerdo do botão
+            menuPesquisarPerfil.style.left = `${btnRect.left - menuPesquisarPerfil.offsetWidth}px`;
+            menuPesquisarPerfil.style.top = `${btnRect.top}px`;
+
+            // Mostra a aba
+            menuPesquisarPerfil.style.display = 'block';
         }
 
-        btnSerch.addEventListener('click', function() {
-        if (searchProfileBox.style.display === 'block') {
-            searchProfileBox.style.display = 'none';  
-        } else {
-            showMenuAboveButton();  
-        }
+        btnPesquisarPerfil.addEventListener('click', function () {
+            if (menuPesquisarPerfil.style.display === 'block') {
+                menuPesquisarPerfil.style.display = 'none'; // Oculta a aba se já estiver visível
+            } else {
+                showMenuLeftOfButton(); // Exibe a aba ao lado esquerdo
+            }
         });
     </script>
 

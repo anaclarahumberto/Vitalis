@@ -50,7 +50,7 @@ SQL_ATUALIZAR_DATA = """
 """
 
 SQL_OBTER_DADOS_PERFIL = """
-    SELECT id, nome, nome_perfil, email, telefone, bio_perfil, categoria_perfil, genero, foto_perfil
+    SELECT id, nome, nome_perfil, email, telefone, bio_perfil, categoria_perfil, genero, foto_perfil, tipo_perfil
     FROM usuario
     WHERE id = ?
 """
