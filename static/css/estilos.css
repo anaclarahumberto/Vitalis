@@ -91,10 +91,10 @@ main {
 
 @media (max-width: 768px) {
     main {
-        margin-left: 13%; 
+        margin-left: 10%; 
     }
 
-    #paginaContainer {
-        width: 90%;
+    #conteudoContainer {
+        padding: 0px 50px;
     }
 }

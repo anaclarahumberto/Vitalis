@@ -147,7 +147,8 @@
                     </a>
                 </div>
                 <div class="middle-box">
-                    {{header_button(nome="Página Inicial", click_function="window.location.href='/usuario/feed'", icone="bi bi-house")}}
+                {{header_button(nome="Página Inicial", click_function="window.location.href='/usuario/feed'", icone="bi bi-house")}}
+                {{header_button(nome="Pesquisar", click_function="window.location.href='#'", icone="bi bi-search", id="pequisarPerfilButton")}}
                 {{header_button(nome="Perfil", click_function="window.location.href='/usuario/perfil'", icone="bi bi-person")}}
                 {{header_button(nome="Mensagens", click_function="window.location.href='/usuario/mensagens_principal'", icone="bi bi-envelope")}}
                 {{header_button(nome="Notificações", click_function="window.location.href='/usuario/notificacoes'", icone="bi bi-bell")}}
@@ -157,7 +158,7 @@
                 </div>
                 
                 <div class="bottom-box">
-                    {{header_button(nome="Mais", click_function="window.location.href='#", icone="bi bi-text-left", id="mais")}}
+                    {{header_button(nome="Mais", click_function="window.location.href='#'", icone="bi bi-text-left", id="mais")}}
                 </div>
             </nav>
         </div>
@@ -359,6 +360,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const btnSerch = document.getElementById('pesquisarPerfilButton');
+        const searchProfileBox = document.getElementById('pesquisarPerfil');
+
+        function showMenuAboveButton() {
+        const btnRect = btnSerch.getBoundingClientRect(); 
+        
+        
+        searchProfileBox.style.left = `${btnRect.left}px`;  
+        searchProfileBox.style.bottom = `${window.innerHeight - btnRect.top +10}px`;  
+
+        
+        searchProfileBox.style.display = 'block';
+        }
+
+        btnSerch.addEventListener('click', function() {
+        if (searchProfileBox.style.display === 'block') {
+            searchProfileBox.style.display = 'none';  
+        } else {
+            showMenuAboveButton();  
+        }
+        });
+    </script>
 
     <script>
         const btnMore = document.getElementById('mais');
