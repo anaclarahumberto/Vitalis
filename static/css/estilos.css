@@ -16,6 +16,8 @@ main {
 #paginaContainer {
     display: flex;
     position: relative;
+    height: 100%;
+    width: 85%;
     padding: 0;
     padding-left: 2%;
     border-top-left-radius: 20px;
@@ -85,4 +87,14 @@ main {
     width: 100%;
     border-radius: 5px; 
     margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 13%; 
+    }
+
+    #paginaContainer {
+        width: 90%;
+    }
 }

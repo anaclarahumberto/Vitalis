@@ -91,7 +91,7 @@
     }
 
     /* Isso pode ocultar o texto diretamente */
-    .cor-menu .text-white {
+    .header-button span {
         display: none;
     }
 }
