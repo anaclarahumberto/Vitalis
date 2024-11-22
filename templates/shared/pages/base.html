@@ -16,7 +16,17 @@
 
 <body class="d-flex flex-column min-vh-100" style="background-color: #007eb3">
     {%- set usuario = request.state.usuario -%}
+    {% from 'shared/macros.html' import mais_menu_button %}
     <div class="container-fluid">
+        <div class="mais-menu-box" id="maisMenu">
+            {{mais_menu_button(nome="Sua Atividade", click_function="window.location.href='#'", icone="bi bi-bar-chart-line")}}
+            {{mais_menu_button(nome="Salvos", click_function="window.location.href='#'", icone="bi bi-flag")}}
+            {{mais_menu_button(nome="Alternar Exibição", click_function="window.location.href='#'", icone="bi bi-sun")}}
+            {{mais_menu_button(nome="Relatar um Problema", click_function="window.location.href='#'", icone="bi bi-cloud")}}
+            <div class="divider"></div>
+            {{mais_menu_button(nome="Trocar de Conta", click_function="window.location.href='#'", icone="bi bi-arrow-repeat")}}
+            {{mais_menu_button(nome="Sair", click_function="window.location.href='#'", icone="bi bi-box-arrow-right")}}
+        </div>
         <div class="row">
             {% include "shared/includes/header.html" %}
             <main class="col w-80 min-vh-100" id="paginaContainer">

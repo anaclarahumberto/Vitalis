@@ -30,62 +30,6 @@
     align-items: flex-end;
 }
 
-
-/* Estilos para a caixa de mensagem */
-.mais-menu-box {
-    display: none; /* Inicialmente escondida */
-    position: absolute;
-    align-items: left;
-    background-color: #07A8F0; /* Cor da caixa */
-    color: white;
-    padding: 20px; /* Aumentado o padding */
-    border-radius: 10px; /* Bordas mais arredondadas */
-    z-index: 1000;
-    white-space: nowrap; /* Para evitar quebra de linha dentro da caixa */
-    width: 80%; /* Largura mínima aumentada */
-    height: auto; /* Altura mínima aumentada para tornar a caixa mais retangular */
-    font-size: 18px; /* Aumentado o tamanho da fonte */
-}
-
-.mais-menu-button {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    border-radius: 10px;
-    align-items: flex-start;
-    border: none; 
-    box-shadow: none; 
-    background-color: transparent;
-    font-size: 1.05rem; 
-    padding: 10px;
-    margin: 0;
-    height: 50px;
-    width: 100%;
-}
-
-.mais-menu-button:hover{
-    background-color: #0099E1;
-}
-
-.mais-menu-box .button:last-child {
-    margin-bottom: 0; /* Remove margem inferior do último botão */
-}
-
-.mais-menu-button i {
-    font-size: 1.2rem; 
-    margin-right: 10px; 
-}
-
-.mais-menu-box .divider {
-    height: 2px; /* Aumentado a espessura da linha */
-    background-color: #0087CD; /* Cor da linha */
-    opacity: 48%;
-    width: 100%;
-    border-radius: 5px; 
-    margin: 10px 0;
-}
-
 /* Estilos adicionais */
 .header-button {
     display: flex;
