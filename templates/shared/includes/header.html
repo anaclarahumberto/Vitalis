@@ -139,47 +139,37 @@
 <body>
     {% from 'shared/macros.html' import header_button, mais_menu_button %}
     <header class="cor-menu">
-        <div class="row h-100">
-            <div class="d-inline-block col-10 min-vh-100" styles="padding: 0;">
-                <nav class="d-flex flex-column min-vh-100 h-100">
-                    <div class="top-box">
-                        <a href="/" class="text-decoration-none">
-                            <img src="/static/img/logo.svg" alt="Logo" class="logo"> 
-                        </a>
-                    </div>
-                    <div class="middle-box">
-                        {{header_button(nome="Página Inicial", click_function="window.location.href='/usuario/feed'", icone="bi bi-house")}}
-                    {{header_button(nome="Perfil", click_function="window.location.href='/usuario/perfil'", icone="bi bi-person")}}
-                    {{header_button(nome="Mensagens", click_function="window.location.href='/usuario/mensagens_principal'", icone="bi bi-envelope")}}
-                    {{header_button(nome="Notificações", click_function="window.location.href='/usuario/notificacoes'", icone="bi bi-bell")}}
-                    {{header_button(nome="Cupons", click_function="window.location.href='/usuario/cupons_ativos'", icone="bi bi-tag")}}
-                    {{header_button(nome="Nova Publicação", click_function="$('#novaPubModal').modal('show');", icone="bi bi-plus-circle", id="NovaPubBtn")}}
-                    {{header_button(nome="Configurações", click_function="window.location.href='/usuario/configuracoes'", icone="bi bi-gear")}}
-                    </div>
-                    
-                    <div class="bottom-box">
-                        {{header_button(nome="Mais", click_function="window.location.href='#", icone="bi bi-text-left", id="mais")}}
-                    </div>
-
-                    <div class="mais-menu-box" id="maisMenu">
-                        {{mais_menu_button(nome="Sua Atividade", click_function="window.location.href='#'", icone="bi bi-bar-chart-line")}}
-                        {{mais_menu_button(nome="Salvos", click_function="window.location.href='#'", icone="bi bi-flag")}}
-                        {{mais_menu_button(nome="Alternar Exibição", click_function="window.location.href='#'", icone="bi bi-sun")}}
-                        {{mais_menu_button(nome="Relatar um Problema", click_function="window.location.href='#'", icone="bi bi-cloud")}}
-                        <div class="divider"></div>
-                        {{mais_menu_button(nome="Trocar de Conta", click_function="window.location.href='#'", icone="bi bi-arrow-repeat")}}
-                        {{mais_menu_button(nome="Sair", click_function="window.location.href='#'", icone="bi bi-box-arrow-right")}}
-                    </div>
-                </nav>
-            </div>
-            <div class="d-inline-block col-2 h-100">
-                <div class="row h-100">
-                    <div class="col-6 min-vh-100 bg-black bg-opacity-10 rounded-5 rounded-end-0 h-100"></div>
-                    <div class="col-6 min-vh-100 bg-black bg-opacity-10 p-0 h-100">
-                        <div class="min-vh-100 bg-white rounded-5 rounded-end-0 h-100"></div>
-                    </div>
+        <div class="d-inline-block col-10 min-vh-100 w-100" styles="padding: 0;">
+            <nav class="d-flex flex-column min-vh-100 h-100">
+                <div class="top-box">
+                    <a href="/" class="text-decoration-none">
+                        <img src="/static/img/logo.svg" alt="Logo" class="logo"> 
+                    </a>
                 </div>
-            </div>
+                <div class="middle-box">
+                    {{header_button(nome="Página Inicial", click_function="window.location.href='/usuario/feed'", icone="bi bi-house")}}
+                {{header_button(nome="Perfil", click_function="window.location.href='/usuario/perfil'", icone="bi bi-person")}}
+                {{header_button(nome="Mensagens", click_function="window.location.href='/usuario/mensagens_principal'", icone="bi bi-envelope")}}
+                {{header_button(nome="Notificações", click_function="window.location.href='/usuario/notificacoes'", icone="bi bi-bell")}}
+                {{header_button(nome="Cupons", click_function="window.location.href='/usuario/cupons_ativos'", icone="bi bi-tag")}}
+                {{header_button(nome="Nova Publicação", click_function="$('#novaPubModal').modal('show');", icone="bi bi-plus-circle", id="NovaPubBtn")}}
+                {{header_button(nome="Configurações", click_function="window.location.href='/usuario/configuracoes'", icone="bi bi-gear")}}
+                </div>
+                
+                <div class="bottom-box">
+                    {{header_button(nome="Mais", click_function="window.location.href='#", icone="bi bi-text-left", id="mais")}}
+                </div>
+
+                <div class="mais-menu-box" id="maisMenu">
+                    {{mais_menu_button(nome="Sua Atividade", click_function="window.location.href='#'", icone="bi bi-bar-chart-line")}}
+                    {{mais_menu_button(nome="Salvos", click_function="window.location.href='#'", icone="bi bi-flag")}}
+                    {{mais_menu_button(nome="Alternar Exibição", click_function="window.location.href='#'", icone="bi bi-sun")}}
+                    {{mais_menu_button(nome="Relatar um Problema", click_function="window.location.href='#'", icone="bi bi-cloud")}}
+                    <div class="divider"></div>
+                    {{mais_menu_button(nome="Trocar de Conta", click_function="window.location.href='#'", icone="bi bi-arrow-repeat")}}
+                    {{mais_menu_button(nome="Sair", click_function="window.location.href='#'", icone="bi bi-box-arrow-right")}}
+                </div>
+            </nav>
         </div>
     </header>
     <div class="modal" id="confirmCloseModal" tabindex="-1" role="dialog" aria-labelledby="confirmCloseModalLabel" aria-hidden="true" style="z-index: 10000000;">
