@@ -3,6 +3,7 @@ import dotenv
 from fastapi import Depends, FastAPI
 from fastapi.staticfiles import StaticFiles
 from repositories.publicacao_repo import PublicacaoRepo
+from repositories.seguidor_repo import SeguidorRepo
 from repositories.usuario_repo import UsuarioRepo
 from routes.main_routes import router as main_router
 from routes.usuario_routes import router as usuario_router
@@ -12,6 +13,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 UsuarioRepo.criar_tabela()
 PublicacaoRepo.criar_tabela()
+SeguidorRepo.criar_tabela()
 dotenv.load_dotenv()
 
 app = FastAPI(dependencies=[Depends(checar_autorizacao)])

@@ -6,10 +6,11 @@
     height: 100vh; /* Faz com que a altura seja igual à da tela */
     overflow: hidden; 
     position: fixed;
+    z-index: 600;
 }
 
 .top-box {
-    flex: 0.2;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +22,7 @@
 }
 
 .middle-box {
-    flex: 0.7;
+    flex: 0.6;
     align-items: flex-start;
 }
 
@@ -82,15 +83,80 @@
     margin-bottom: 0px; /* Ajuste para controlar o espaçamento inferior */
 }
 
+@keyframes slideInFromLeft {
+    0% {
+        left: -100%; /* Fora da tela à esquerda */
+    }
+    100% {
+        left: 5%; /* Posição final do dropdown */
+    }
+}
+
+/* Animação para sair (da direita para a esquerda) */
+@keyframes slideOutToLeft {
+    0% {
+        left: 5%; 
+    }
+    100% {
+        left: -100%; 
+    }
+}
+
+.search-dropdown {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 5%; 
+    width: 400px; /* Largura fixa */
+    height: 100%;
+    background-color: white; /* Sem fundo */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-right: 1px #ccc solid;
+    display: none; /* Escondido inicialmente */
+    z-index: 500; /* Para ficar acima de outros elementos */
+    box-shadow: 6px 0 16px rgba(0, 0, 0, 0.1);
+    transition: left 0.5s ease-out;
+}
+
+.search-dropdown .divider {
+    height: 1px; /* Aumentado a espessura da linha */
+    background-color: #ccc; /* Cor da linha */
+    width: 100%;
+    border-radius: 5px; 
+}
+
+.search-top-box {
+    flex: 0.25;
+    width: 100%; 
+    padding: 30px 25px 0 25px; 
+}
+
+.search-top-box h5 {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.search-top-box .form-control {
+    background-color: #e7e7e7;
+    height: 45px;
+    margin-bottom: 25px;
+}
+
+.search-bottom-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; 
+    padding: 30px 25px; 
+}
+
 @media (max-width: 768px) {
     .cor-menu {
         width: 10%;
         height: 100%;
-    }
-
-    /* Oculta o texto */
-    .cor-menu {
-        text-align: center; /* Centraliza o ícone */
+        text-align: center;
     }
 
     .top-box img{
@@ -110,4 +176,29 @@
     .header-button span {
         display: none;
     }
+}
+
+.dropdown-active .cor-menu {
+    width: 5%;
+    height: 100%;
+    text-align: center;
+}
+
+.dropdown-active .top-box img{
+    height: 50px;
+    width: auto;
+}
+
+.dropdown-active .header-button {
+    display: flex;                
+    align-items: center;          
+    justify-content: center;
+    padding: 0 0 0 8px; 
+    text-align: center;
+    justify-content: center;
+}
+
+/* Isso pode ocultar o texto diretamente */
+.dropdown-active .header-button span {
+    display: none;
 }

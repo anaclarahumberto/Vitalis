@@ -82,6 +82,21 @@ class UsuarioRepo:
                     tipo_perfil= resultado[9],
                 )
             return None  
+        
+    @classmethod
+    def obter_dados_perfil_seguido(cls, id: int):
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_DADOS_PERFIL_SEGUIDO, (id,))
+            resultado = cursor.fetchone()
+            if resultado:
+                return UsuarioAutenticado(
+                    id = resultado[0],
+                    nome_perfil = resultado[1],
+                    foto_perfil= resultado[2],
+                    tipo_perfil= resultado[3],
+                )
+            return None
 
         
          
@@ -165,4 +180,24 @@ class UsuarioRepo:
         with obter_conexao() as db:
             cursor = db.cursor()
             cursor.execute(SQL_CHECAR_NOME_PERFIL_UNICO, (username,))
-            return cursor.fetchone() is None    
+            return cursor.fetchone() is None  
+
+    @classmethod
+    def pesquisar_perfil(cls, nome_perfil: str) -> list:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            parametro = f"%{nome_perfil}%"
+            cursor.execute(SQL_PESQUISAR_USUARIOS, (parametro,))
+            registros = cursor.fetchall()
+            usuarios_correspondentes  = []
+            for registro in registros:
+                foto_perfil = registro[3]  
+                foto_url = f"/static/img/{registro[0]}.jpeg" if foto_perfil else "/static/img/usuario.jpg"
+                usuario_correspondente = Usuario(
+                    id= registro[0],
+                    nome= registro[1],
+                    nome_perfil= registro[2],
+                    foto_url= foto_url
+                )
+                usuarios_correspondentes.append(usuario_correspondente)
+            return usuarios_correspondentes   

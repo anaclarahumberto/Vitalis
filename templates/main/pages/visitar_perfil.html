@@ -8,17 +8,17 @@
     <!-- Perfil Header -->
     <div class="row">
         <div class="col-md-3" id="fotoPerfilContainer">
-            <img src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="profile-img">
+            <img src="{% if perfil_visitado.foto_perfil %}/static/img/{{ perfil_visitado.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="profile-img">
         </div>
         <div class="col-md-9">
             <div class="flex-row" id="nomePerfilRow">
                 <div class="title-container">
-                    <h4>{{ usuario.nome_perfil }}{%- if usuario.tipo_perfil == 2 %}<i class="bi bi-heart-pulse ms-2" style="color: #4AE4D6;">{%- endif %}{%- if usuario.tipo_perfil == 1 and usuario.tipo_paciente == 2%}<i class="bi bi-stars ms-2" style="color: #4AE4D6;">{%- endif %}</i></h4>
+                    <h4>{{ perfil_visitado.nome_perfil }}{%- if perfil_visitado.tipo_perfil == 2 %}<i class="bi bi-heart-pulse ms-2" style="color: #4AE4D6;">{%- endif %}{%- if perfil_visitado.tipo_perfil == 1 and perfil_visitado.tipo_paciente == 2%}<i class="bi bi-stars ms-2" style="color: #4AE4D6;">{%- endif %}</i></h4>
                 </div>
-                <button class="btn-editar" onclick="window.location.href='editar_perfil'">Editar Perfil</button>
-                <button class="btn-config" onclick="window.location.href='configuracoes'">
-                    <i class="bi bi-gear"></i>
+                <button class="btn-editar" id="seguirButton">
+                    Carregando...
                 </button>
+                <button class="btn-editar" onclick="window.location.href='#'">Enviar mensagem</button>
             </div> 
             <div class="flex-row" id="numerosPerfilRow">
                 <div class="d-flex" id="numerosPerfil">
@@ -33,9 +33,9 @@
             </div>                                
 
             <div id="dadosPerfilContainer">    
-                <p id="nomePerfilText">{{ usuario.nome }}</p>
-                <p style="color: gray;">{{ usuario.categoria_perfil or '' }}</p> 
-                <div id="bioPerfilBox"><p id="bioPerfilText">{{ usuario.bio_perfil or '' }}</p></div>
+                <p id="nomePerfilText">{{ perfil_visitado.nome }}</p>
+                <p style="color: gray;">{{ perfil_visitado.categoria_perfil or '' }}</p> 
+                <div id="bioPerfilBox"><p id="bioPerfilText">{{ perfil_visitado.bio_perfil or '' }}</p></div>
             </div>  
         </div>
     </div>
@@ -59,11 +59,6 @@
         <li class="nav-item">
             <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
                 <i class="bi bi-grid-3x3"></i> PUBLICAÇÕES
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="videos-tab" data-bs-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false">
-                <i class="bi bi-play-circle"></i> SALVOS
             </a>
         </li>
         <li class="nav-item">
@@ -139,7 +134,7 @@
             {% if publicacoes %}
                 <div class="container-pai">
                     {% for publicacao in publicacoes %}
-                        <div class="container-coluna" data-publicacao='{"imagem": "{{ publicacao.imagem | e }}", "data_criacao": "{{ publicacao.data_criacao | e }}", "descricao": "{{ publicacao.descricao | e }}", "id_perfil": "{{ usuario.id | e }}", "nome_perfil": "{{ usuario.nome_perfil | e }}"}'
+                        <div class="container-coluna" data-publicacao='{"imagem": "{{ publicacao.imagem | e }}", "data_criacao": "{{ publicacao.data_criacao | e }}", "descricao": "{{ publicacao.descricao | e }}", "id_perfil": "{{ perfil_visitado.id | e }}", "nome_perfil": "{{ perfil_visitado.nome_perfil | e }}"}'
                         onclick="abrirPubModal(this)">
                             <img src="/static/img/publicacoes/{{ publicacao.imagem }}" alt="Imagem da Publicação">
                         </div>
@@ -147,37 +142,11 @@
                 </div>
             {% else %}
                 <div id="publicacoesContainer">
-                    <div id="circle">
-                        <i id="cameraIcon" class="bi bi-camera"></i> 
-                    </div>
-                    <h1 id="compartilharTexto">Compartilhar fotos</h1>
-                    <p id="descricaoTexto">Quando você compartilha fotos, elas aparecerão no seu perfil.</p>
-                    <button id="compartilharButton" type="button" onclick="$('#novaPubModal').modal('show');">Compartilhar sua primeira foto</button>
+                    <h1 id="compartilharTexto" style="margin-top: 100px;">Ainda não há nenhuma publicação</h1>
                 </div>
             {% endif %}
                      
             
-        </div>
-        
-        <!-- Vídeos -->
-        <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <a href="#">
-                        <img src="/static/img/vdo2.png" alt="Video 1" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <a href="#">
-                        <img src="/static/img/vdo1.png" alt="Video 2" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <a href="#">
-                        <img src="/static/img/vdo3.png" alt="Video 3" class="img-fluid">
-                    </a>
-                </div>
-            </div>
         </div>
 
         <!-- Marcados -->
@@ -226,6 +195,91 @@
     function fecharPubModal() {
         $('#pubModal').modal('hide');
     }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const idUsuarioSeguido = "{{ perfil_visitado.id }}"; 
+        const idUsuarioSeguidor = "{{ request.state.usuario.id }}"; 
+        
+        fetch(`/usuario/verificar_seguindo?id_usuario_seguido=${idUsuarioSeguido}`)
+        .then(response => response.json())
+        .then(data => {
+            const seguirButton = document.querySelector(".btn-editar");
+    
+            if (data.is_seguidor) {
+                seguirButton.textContent = "Seguindo"; // Usuário já está seguindo
+                seguirButton.setAttribute("onclick", "deixarDeSeguir()"); // Troca a função para "deixar de seguir"
+            } else {
+                seguirButton.textContent = "Seguir"; // Usuário não está seguindo
+                seguirButton.setAttribute("onclick", "seguirUsuario()"); // Troca a função para "seguir"
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao verificar seguimento:", error);
+            alert("Houve um erro ao verificar se você está seguindo este usuário.");
+        });
+    });
+    
+    function seguirUsuario() {
+        const idUsuarioSeguido = "{{ perfil_visitado.id }}"; // ID do perfil visitado
+        const idUsuarioSeguidor = "{{ request.state.usuario.id }}"; // ID do usuário logado
+    
+        fetch("/usuario/seguir_usuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                seguidor_id: idUsuarioSeguidor,
+                seguido_id: idUsuarioSeguido
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "sucesso") {
+                alert("Você agora está seguindo este usuário!");
+                document.querySelector(".btn-editar").textContent = "Deixar de seguir"; // Atualiza o botão
+                document.querySelector(".btn-editar").setAttribute("onclick", "deixarDeSeguir()");
+            } else {
+                alert("Houve um erro ao tentar seguir o usuário.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao tentar seguir o usuário:", error);
+            alert("Houve um erro ao tentar seguir o usuário.");
+        });
+    }
+
+    function deixarDeSeguir() {
+        const idUsuarioSeguido = "{{ perfil_visitado.id }}"; // ID do perfil visitado
+        const idUsuarioSeguidor = "{{ request.state.usuario.id }}"; // ID do usuário logado
+    
+        fetch("/usuario/deixar_de_seguir", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                seguidor_id: idUsuarioSeguidor,
+                seguido_id: idUsuarioSeguido
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "sucesso") {
+                alert("Você deixou de seguir este usuário!");
+                document.querySelector(".btn-editar").textContent = "Seguir"; // Atualiza o botão
+                document.querySelector(".btn-editar").setAttribute("onclick", "seguirUsuario()");
+            } else {
+                alert("Houve um erro ao tentar deixar de seguir o usuário.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao tentar deixar de seguir o usuário:", error);
+            alert("Houve um erro ao tentar deixar de seguir o usuário.");
+        });
+    }    
 </script>
 
 {% endblock %}

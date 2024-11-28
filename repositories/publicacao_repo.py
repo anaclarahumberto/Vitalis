@@ -20,6 +20,14 @@ class PublicacaoRepo:
             return resultado.rowcount > 0    
         
     @classmethod
+    def obter_numero_publicacoes(cls, id_usuario: int) -> int:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_NUMERO_PUBLICACOES, (id_usuario,))
+            numero_publicacoes = cursor.fetchone()[0]  
+            return numero_publicacoes
+        
+    @classmethod
     def obter_publicacoes_por_usuario(cls, id_usuario: int) -> list:
         with obter_conexao() as db:
             cursor = db.cursor()

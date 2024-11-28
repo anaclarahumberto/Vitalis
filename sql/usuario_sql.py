@@ -55,6 +55,12 @@ SQL_OBTER_DADOS_PERFIL = """
     WHERE id = ?
 """
 
+SQL_OBTER_DADOS_PERFIL_SEGUIDO = """
+    SELECT id, nome_perfil, foto_perfil, tipo_perfil
+    FROM usuario
+    WHERE id = ?
+"""
+
 SQL_ATUALIZAR_CATEGORIA_PERFIL = """
     UPDATE usuario
     SET categoria_perfil = ?
@@ -109,4 +115,10 @@ SQL_ATUALIZAR_SENHA = """
 SQL_EXCLUIR_USUARIO = """
     DELETE FROM usuario
     WHERE email = ?
+"""
+
+SQL_PESQUISAR_USUARIOS = """
+    SELECT id, nome, nome_perfil, foto_perfil 
+    FROM usuario 
+    WHERE nome_perfil LIKE ?
 """

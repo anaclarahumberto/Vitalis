@@ -52,11 +52,12 @@
     </div>
 
     <!-- Publicação -->
+    {% for publicacao in publicacoes %}
     <div class="post bg-white p-3 rounded mb-4 mx-auto" style="width: fit-content;">
         <!-- Seta no canto superior direito -->
         <div class="d-flex align-items-center mb-3">
-            <img src="/static/img/{{usuario.id}}.jpeg" alt="Profile" class="rounded-circle me-2" style="width: 50px;">
-            <a href="/usuario/perfil" style="text-decoration: none;" class="font-weight-bold text-dark">{{usuario.nome_perfil}}
+            <img src="{{publicacao.usuario_foto}}" alt="Profile" class="rounded-circle me-2" style="width: 50px;">
+            <a href="/usuario/perfil" style="text-decoration: none;" class="font-weight-bold text-dark">{{publicacao.usuario_nome}}
             <i class="bi bi-award ms-2" style="color: #4AE4D6;"></i></a>
             <div class="position-relative ms-auto">
                 <a href="#" class="flag-icon">
@@ -67,7 +68,7 @@
 
         <!-- Container da Imagem de Publicação -->
         <div class="post-image">
-            <img src="/static/img/gravida 1.jpg" alt="Post Image" class="img-fluid"> <!-- Adicione img-fluid para responsividade -->
+            <img src="/static/img/publicacoes/{{publicacao.imagem}}" alt="Post Image" class="img-fluid">
         </div>
 
         <!-- Ícones de ações -->
@@ -85,6 +86,8 @@
             </div>
         </div>
     </div>
+    {% endfor %}
+
 
 
 

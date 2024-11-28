@@ -211,8 +211,8 @@
 #publicacoesContainer {
     width: 100%; /* 100% da largura */
     display: flex;
-    flex-direction: column; /* organiza verticalmente */
-    align-items: center; /* centraliza horizontalmente */
+    flex-direction: column; 
+    align-items: center; 
     padding: 20px; /* espaço interno */
     box-sizing: border-box; /* inclui padding na largura total */
 }

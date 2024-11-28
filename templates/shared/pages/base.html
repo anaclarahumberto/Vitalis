@@ -18,6 +18,18 @@
     {%- set usuario = request.state.usuario -%}
     {% from 'shared/macros.html' import mais_menu_button %}
     <div class="container-fluid">
+        <!-- Dropdown -->
+        <div id="searchDropdown" class="search-dropdown">
+            <div class="search-top-box">
+                <h5>Pesquisa</h5>
+                <input type="text" class="form-control" id="inputPesquisaPerfil" placeholder="Pesquisar" aria-label="Pesquisa">
+            </div>
+            <div class="divider"></div>
+            <div class="search-bottom-box">
+                <div id="resultadosPesquisaPerfil"></div> <!-- Resultados serão inseridos aqui -->
+            </div>
+        </div>
+
         <div class="mais-menu-box" id="maisMenu">
             {{mais_menu_button(nome="Sua Atividade", click_function="window.location.href='#'", icone="bi bi-bar-chart-line")}}
             {{mais_menu_button(nome="Salvos", click_function="window.location.href='#'", icone="bi bi-flag")}}

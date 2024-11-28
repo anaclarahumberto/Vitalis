@@ -1,16 +1,19 @@
 import base64
 from datetime import date, datetime, timedelta
 import locale
+from typing import List
 import uuid
-from fastapi import APIRouter, Depends, File, Form, Request, UploadFile, status
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Request, UploadFile, status
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi import APIRouter, Form
 import os
 
 import jwt
+from pydantic import BaseModel
 from models.publicacao_model import Publicacao
 from models.usuario_model import Usuario
 from repositories.publicacao_repo import PublicacaoRepo
+from repositories.seguidor_repo import SeguidorRepo
 from repositories.usuario_repo import UsuarioRepo
 from util.mensagens import adicionar_mensagem_erro
 from util.templates import obter_jinja_templates
@@ -53,11 +56,39 @@ async def finalizar_perfil(
     
     return RedirectResponse("/feed", status_code=303)
 
+def obter_publicacoes_feed(usuario_logado: Usuario):
+    usuarios_seguidos = SeguidorRepo.obter_seguindo(usuario_logado.id)
+    
+    publicacoes_feed = []
+    
+    for usuario_id in usuarios_seguidos:
+        usuario = UsuarioRepo.obter_dados_perfil_seguido(usuario_id)
+        
+        foto_perfil = usuario.foto_perfil if hasattr(usuario, 'foto_perfil') else None
+        
+        usuario_foto = f"/static/img/{usuario.id}.jpeg" if foto_perfil else "/static/img/usuario.jpg"
+        
+        publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(usuario_id)
+        
+        for publicacao in publicacoes:
+            publicacao['usuario_nome'] = usuario.nome_perfil
+            publicacao['usuario_foto'] = usuario_foto
+            publicacao['usuario_id'] = usuario.id 
+            publicacoes_feed.append(publicacao)
+
+    
+    return sorted(publicacoes_feed, key=lambda x: x['data_criacao'], reverse=True)
+
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request):
     request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
-    print(request.state.usuario)
-    return templates.TemplateResponse("main/pages/index.html", {"request": request})
+    publicacoes = obter_publicacoes_feed(request.state.usuario)
+    return templates.TemplateResponse("main/pages/index.html", {"request": request, "publicacoes": publicacoes})
+
+@router.get("/pesquisar_perfil", response_model=List[Usuario])
+async def pesquisar_perfil_endpoint(nome_perfil: str = Query(..., min_length=3)):
+    usuarios = UsuarioRepo.pesquisar_perfil(nome_perfil)
+    return usuarios
 
 @router.post("/compartilhar_publicacao")
 async def post_compartilhar_publicação(
@@ -212,14 +243,73 @@ async def get_feedback(request: Request):
 @router.get("/perfil", response_class=HTMLResponse)
 async def get_perfil(request: Request):
     usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
-    
-    publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(request.state.usuario.id)
+    publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(usuario.id)
+    numero_publicacoes = PublicacaoRepo.obter_numero_publicacoes(usuario.id)
+    numero_seguidores = SeguidorRepo.obter_numero_seguidores(usuario.id)
+    numero_seguindo = SeguidorRepo.obter_numero_seguindo(usuario.id)
 
     return templates.TemplateResponse("main/pages/perfil.html", {
         "request": request,
         "usuario": usuario,
-        "publicacoes": publicacoes
+        "publicacoes": publicacoes,
+        'numero_publicacoes': numero_publicacoes,
+        'numero_seguidores': numero_seguidores,
+        'numero_seguindo': numero_seguindo,
     })
+
+@router.get("/visitar_perfil", response_class=HTMLResponse)
+async def get_visitar_perfil(request: Request, usuario_id: int):
+    perfil_visitado = UsuarioRepo.obter_dados_perfil(usuario_id)
+    publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(usuario_id)
+    numero_publicacoes = PublicacaoRepo.obter_numero_publicacoes(usuario_id)
+    numero_seguidores = SeguidorRepo.obter_numero_seguidores(usuario_id)
+    numero_seguindo = SeguidorRepo.obter_numero_seguindo(usuario_id)
+
+    return templates.TemplateResponse("main/pages/visitar_perfil.html", {
+        "request": request,
+        "perfil_visitado": perfil_visitado,
+        "publicacoes": publicacoes,
+        'numero_publicacoes': numero_publicacoes,
+        'numero_seguidores': numero_seguidores,
+        'numero_seguindo': numero_seguindo,
+    })
+
+class SeguirRequest(BaseModel):
+    seguidor_id: int
+    seguido_id: int
+
+@router.get("/verificar_seguindo")
+async def verificar_seguindo(request: Request):
+    id_usuario_seguidor = request.state.usuario.id  
+    id_usuario_seguido = int(request.query_params["id_usuario_seguido"])  
+    
+    try:
+        is_seguidor = SeguidorRepo.verificar_seguindo(id_usuario_seguidor, id_usuario_seguido)
+        return {"is_seguidor": is_seguidor}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro: {str(e)}")
+
+@router.post("/seguir_usuario")
+async def seguir_usuario(request: SeguirRequest):
+    try:
+        sucesso = SeguidorRepo.seguir_usuario(request.seguidor_id, request.seguido_id)
+        if sucesso:
+            return {"status": "sucesso", "message": "Você agora segue este usuário."}
+        else:
+            raise HTTPException(status_code=400, detail="Não foi possível seguir o usuário.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro: {str(e)}")
+    
+@router.post("/deixar_de_seguir")
+async def deixar_de_seguir(request: SeguirRequest):
+    try:
+        sucesso = SeguidorRepo.deixar_de_seguir(request.seguidor_id, request.seguido_id)
+        if sucesso:
+            return {"status": "sucesso", "message": "Você deixou de seguir este usuário."}
+        else:
+            raise HTTPException(status_code=400, detail="Não foi possível deixar de seguir o usuário.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro: {str(e)}")
 
 
 @router.get("/entrarMaroquio", response_class=HTMLResponse)

@@ -5,7 +5,7 @@ from typing import Optional
 
 @dataclass
 class Usuario:
-    id: Optional[str] = None
+    id: Optional[int] = None
     nome: Optional[str] = None
     data_nascimento: Optional[date] = None
     email: Optional[str] = None
@@ -15,6 +15,7 @@ class Usuario:
     tipo_perfil: Optional[int] = None
     nome_perfil: Optional[str] = None
     foto_perfil: Optional[bool] = None
+    foto_url: Optional[str] = None
     bio_perfil: Optional[str] = None
     genero: Optional[str] = None
     tipo_paciente: Optional[int] = None
