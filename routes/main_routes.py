@@ -87,7 +87,7 @@ async def post_cadastrar_paciente(request: Request, registro_profissional: Uploa
     data_nascimento = datetime.strptime(dados.get("data_nascimento"), "%d/%m/%Y").date()
     print(data_nascimento)
     dados["data_nascimento"] = data_nascimento
-    response = RedirectResponse(f"/cadastro?tipo_perfil={dados["tipo_perfil"]}", status_code=status.HTTP_303_SEE_OTHER)
+    response = RedirectResponse(f"/cadastro?tipo_perfil={dados['tipo_perfil']}", status_code=status.HTTP_303_SEE_OTHER)
     if not is_password(dados["senha"]):
         adicionar_mensagem_erro(response, "As senhas devem ter no mínimo 6 caracteres, letras maiúsculas e minúsculas, números e caracteres especiais."),
         return response

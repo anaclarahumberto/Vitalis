@@ -1,6 +1,10 @@
 SQL_APAGAR_TABELA = """
     DROP TABLE IF EXISTS usuario
 """
+SQL_APAGAR_USUARIO = """
+    DELETE FROM usuario WHERE id = 5
+
+"""
 
 SQL_CRIAR_TABELA = """
     CREATE TABLE IF NOT EXISTS usuario (

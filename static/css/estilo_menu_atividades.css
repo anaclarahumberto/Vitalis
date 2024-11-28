@@ -10,7 +10,9 @@
 }
 
 .top-box {
-    height: 200px;
+
+    flex:1;
+    min-height: 175px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,13 +24,17 @@
 }
 
 .middle-box {
-    flex: 0.6;
+    flex:1;
     align-items: flex-start;
+    
 }
 
 .bottom-box {
-    flex: 0.1;
+    flex:1;
     align-items: flex-end;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Estilos adicionais */
@@ -39,8 +45,9 @@
     border: none; 
     box-shadow: none; 
     background-color: transparent;
-    font-size: 1.05rem; 
-    height: 50px;
+    font-size: 1rem; 
+    height: 1rem;
+    min-height: 40px;
     padding: 15px; 
     margin: 0;
     width: 100%
