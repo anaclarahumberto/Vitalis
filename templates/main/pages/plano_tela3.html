@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conta Criada com Sucesso</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #88aacf; /* Fundo azul */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #eaf4fc; /* Fundo do cartão */
+      border-radius: 20px;
+      width: 90%;
+      max-width: 450px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      position: relative;
+      text-align: center;
+    }
+
+    .wave-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #eaf4fc 60%, #88aacf);
+      z-index: -1;
+    }
+
+    .content {
+      padding: 40px 20px;
+    }
+
+    .robot {
+      width: 150px;
+      margin: 0 auto 20px;
+    }
+
+    .message {
+      font-size: 24px;
+      color: #364c6b;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #005f8a; /* Cor do botão */
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #004c70;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 18px;
+      color: #005f8a;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 30px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="wave-background"></div>
+    <div class="content">
+      <img src="/static/img/mascote.png" alt="Robô" class="robot">
+      <div class="message">Conta criada com sucesso!</div>
+      <a href="#" class="button">Fazer Login</a>
+    </div>
+    <div class="logo">
+      <img src="/static/img/logo.png" alt="Vitalis">
+      <span>Vitalis</span>
+    </div>
+  </div>
+</body>
+</html>
