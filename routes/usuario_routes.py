@@ -138,6 +138,11 @@ async def post_compartilhar_publicação(
     return JSONResponse({"message": "Publicação compartilhada com sucesso!"}, status_code=200)
 
 
+@router.get("/plano", response_class=HTMLResponse)
+async def get_plano(request: Request):
+    return templates.TemplateResponse("main/pages/plano.html", {"request": request})
+
+
 @router.get("/mensagens_principal", response_class=HTMLResponse)
 async def get_mensagens(request: Request):
     return templates.TemplateResponse("main/pages/mensagens_principal.html", {"request": request})
