@@ -63,10 +63,10 @@ class UsuarioRepo:
             return resultado.rowcount > 0
         
     @classmethod
-    def obter_dados_perfil(cls, id: int):
+    def obter_dados_perfil(cls, email: str):
         with obter_conexao() as db:
             cursor = db.cursor()
-            cursor.execute(SQL_OBTER_DADOS_PERFIL, (id,))
+            cursor.execute(SQL_OBTER_DADOS_PERFIL, (email,))
             resultado = cursor.fetchone()
             if resultado:
                 return UsuarioAutenticado(

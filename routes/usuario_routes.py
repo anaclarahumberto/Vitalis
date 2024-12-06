@@ -56,8 +56,8 @@ async def finalizar_perfil(
     
     return RedirectResponse("/feed", status_code=303)
 
-def obter_publicacoes_feed(usuario_logado: Usuario):
-    usuarios_seguidos = SeguidorRepo.obter_seguindo(usuario_logado.id)
+def obter_publicacoes_feed(usuario_logado_id: int):
+    usuarios_seguidos = SeguidorRepo.obter_seguindo(usuario_logado_id)
     
     publicacoes_feed = []
     
@@ -79,11 +79,33 @@ def obter_publicacoes_feed(usuario_logado: Usuario):
     
     return sorted(publicacoes_feed, key=lambda x: x['data_criacao'], reverse=True)
 
+def obter_stories_feed(usuario_logado_id: int):
+    usuarios_seguidos = SeguidorRepo.obter_seguindo(usuario_logado_id)
+
+    stories_feed = []
+
+    for usuario_id in usuarios_seguidos:
+        usuario = UsuarioRepo.obter_dados_perfil_seguido(usuario_id)
+        
+        foto_perfil = usuario.foto_perfil if hasattr(usuario, 'foto_perfil') else None
+        
+        usuario_foto = f"/static/img/{usuario.id}.jpeg" if foto_perfil else "/static/img/usuario.jpg"
+        
+        story = {
+            'usuario_nome': usuario.nome_perfil,
+            'usuario_foto': usuario_foto
+        }
+        
+        stories_feed.append(story)
+
+
+    return stories_feed
+
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request):
-    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
-    publicacoes = obter_publicacoes_feed(request.state.usuario)
-    return templates.TemplateResponse("main/pages/index.html", {"request": request, "publicacoes": publicacoes})
+    stories = obter_stories_feed(request.state.usuario.id)
+    publicacoes = obter_publicacoes_feed(request.state.usuario.id)
+    return templates.TemplateResponse("main/pages/index.html", {"request": request, "publicacoes": publicacoes, "stories": stories,})
 
 @router.get("/pesquisar_perfil", response_model=List[Usuario])
 async def pesquisar_perfil_endpoint(nome_perfil: str = Query(..., min_length=3)):

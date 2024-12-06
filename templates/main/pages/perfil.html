@@ -8,7 +8,7 @@
     <!-- Perfil Header -->
     <div class="row">
         <div class="col-md-3" id="fotoPerfilContainer">
-            <img src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="profile-img">
+            <img src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg?{{range(0, 10000) | random}}}{% else %}/static/img/usuario.jpg{% endif %}" alt="Foto de Perfil" class="profile-img">
         </div>
         <div class="col-md-9">
             <div class="flex-row" id="nomePerfilRow">

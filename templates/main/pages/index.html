@@ -10,7 +10,7 @@
         <!-- Bolinha com ícone de + no canto inferior direito -->
         <div class="story-circle text-center position-relative">
             <a href="#" style="text-decoration: none;">
-                <img src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg{% else %}/static/img/usuario.jpg{% endif %}" alt="Story 1" class="rounded-circle" style="border-color:#47A9FF">
+                <img src="{% if usuario.foto_perfil %}/static/img/{{ usuario.id }}.jpeg?{{range(0, 10000) | random}}}{% else %}/static/img/usuario.jpg{% endif %}" alt="Story 1" class="rounded-circle" style="border-color:#47A9FF">
             </a>            
                         <a href="#" class="position-absolute plus-icon" style="top: 8px; right: -5px;">
                 <span class="badge translate-middle">
@@ -19,7 +19,13 @@
             </a>            
             <a href="#" style="text-decoration: none;"><p class="mt-2 text-dark">My Daily</p></a>
         </div>
-        <div class="story-circle text-center">
+        {% for story in stories %}
+            <div class="story-circle text-center">
+                <a href="/usuario/daily1" style="text-decoration: none;"><img src="{{story.usuario_foto}}" alt="Story 2" class="rounded-circle" style="border-color:#47A9FF"></a>
+                <a href="/usuario/daily1" style="text-decoration: none;"><p class="mt-2 text-dark">{{story.usuario_nome}}</p></a>
+            </div>
+        {% endfor %}
+        <!-- <div class="story-circle text-center">
             <a href="/usuario/daily1" style="text-decoration: none;"><img src="/static/img/dr.gabrielbelmonte.jpg" alt="Story 2" class="rounded-circle" style="border-color:#47A9FF"></a>
             <a href="/usuario/daily1" style="text-decoration: none;"><p class="mt-2 text-dark">dr.gabrielbel...</p></a>
         </div>
@@ -38,7 +44,7 @@
         <div class="story-circle text-center">
             <a href="/usuario/daily5" style="text-decoration: none;"><img src="/static/img/fisiolivia.jpg" alt="Story 6" class="rounded-circle" style="border-color:#47A9FF"></a>
             <a href="/usuario/daily5" style="text-decoration: none;"><p class="mt-2 text-dark">fisioliviaare...</p></a>
-        </div>
+        </div> -->
     </div>
     <hr>
     <!-- Hashtags -->

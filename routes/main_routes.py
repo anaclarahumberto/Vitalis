@@ -18,17 +18,6 @@ router = APIRouter()
 
 templates = obter_jinja_templates("templates")
 
-# @router.get("/")
-# async def get_root(request: Request):
-#     usuario = request.state.usuario if hasattr(request.state, "usuario") else None
-#     
-#     if not usuario or not usuario.email:
-#         return templates.TemplateResponse("pages/entrar.html", {"request": request})
-#     if usuario.perfil == 1:
-#         return RedirectResponse("/aluno", status_code=status.HTTP_303_SEE_OTHER)
-#     if usuario.perfil == 2:
-#         return RedirectResponse("/professor", status_code=status.HTTP_303_SEE_OTHER)
-
 @router.get("/", response_class=HTMLResponse)
 async def get_bem_vindo(request: Request):
     return RedirectResponse("/login", status.HTTP_303_SEE_OTHER)
