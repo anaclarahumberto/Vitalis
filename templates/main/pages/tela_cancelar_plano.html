@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmação de Cancelamento</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #6B98BF; /* Fundo azul */
+    }
+
+    .container {
+      border-radius: 15px;
+      padding: 200px 200px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+
+      background-color: rgba(255, 255, 255, 0.78);
+      border: 0.2cm solid #FFFFFF;
+      border-radius: 20px;
+      justify-content: flex-start;
+  
+    }
+
+    .robot {
+      width: 120px; /* Tamanho maior da imagem */
+      margin: 0 auto 20px;
+    }
+
+    .message {
+      color: #333333;
+      font-size: 50px; /* Texto maior */
+      font-weight: bold;
+      margin-bottom: 70px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px; 
+    }
+
+    .button {
+      background-color: #90caf9;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 25px; /* Botões maiores */
+      font-size: 18px; /* Texto dos botões maior */
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #64b5f6;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 180px;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Imagem do robô -->
+    <img src="/static/img/mascote_triste.png" alt="Robô simpático" class="robot">
+    
+    <!-- Mensagem -->
+    <p class="message">Você tem certeza que deseja cancelar o seu plano?</p>
+    
+    <!-- Botões -->
+    <div class="buttons">
+      <a href="#" class="button">Cancele meu plano</a>
+      <a href="#" class="button">Mantenha meu plano</a>
+    </div>
+    
+  </div>
+  <!-- Logo -->
+  <img src="/static/img/logo.png" alt="Logo" class="logo">
+</body>
+</html>

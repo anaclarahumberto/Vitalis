@@ -181,6 +181,13 @@ class UsuarioRepo:
             cursor = db.cursor()
             cursor.execute(SQL_CHECAR_NOME_PERFIL_UNICO, (username,))
             return cursor.fetchone() is None  
+        
+    @classmethod
+    def fazer_upgrade_plano(cls, tipo_paciente: int, email: str) -> bool:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_FAZER_UPGRADE_PLANO, (tipo_paciente, email))
+            return cursor.fetchone() is None  
 
     @classmethod
     def pesquisar_perfil(cls, nome_perfil: str) -> list:

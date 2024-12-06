@@ -142,6 +142,15 @@ async def post_compartilhar_publicação(
 async def get_plano(request: Request):
     return templates.TemplateResponse("main/pages/plano.html", {"request": request})
 
+@router.get("/fazer_upgrade_plano", response_class=HTMLResponse)
+async def get_fazer_upgrade_plano(request: Request):
+    print(request.state.usuario.email)
+    UsuarioRepo.fazer_upgrade_plano(2, request.state.usuario.email)
+    return templates.TemplateResponse("main/pages/plano_notificacao.html", {"request": request})
+
+@router.get("/tela_cancelar_plano", response_class=HTMLResponse)
+async def get_cancelar_plano(request: Request):
+    return templates.TemplateResponse("main/pages/tela_cancelar_plano.html", {"request": request})
 
 @router.get("/mensagens_principal", response_class=HTMLResponse)
 async def get_mensagens(request: Request):
@@ -320,10 +329,6 @@ async def deixar_de_seguir(request: SeguirRequest):
 @router.get("/entrarMaroquio", response_class=HTMLResponse)
 async def get_perfil(request: Request):
     return templates.TemplateResponse("main/pages/entrar.html", {"request": request})
-
-@router.get("/plano", response_class=HTMLResponse)
-async def get_root(request: Request):
-    return templates.TemplateResponse("main/pages/plano.html", {"request": request})
 
 @router.get("/daily1", response_class=HTMLResponse)
 async def get_daily(request: Request):

@@ -6,6 +6,8 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #6B98BF;
     text-align: center;
 }
@@ -42,6 +44,7 @@ header {
 /* Planos ficam separados agora */
 .planos {
     display: flex;
+    height: 100%;
     justify-content: space-between;
     width: 800px;
     margin: 40px auto; /* Espaço entre o header e os planos */
@@ -51,6 +54,7 @@ header {
     background-color: rgba(255, 255, 255, 0.78);
     border: 0.2cm solid #FFFFFF;
     border-radius: 20px;
+    height: 100%;
     width: 350px;
     padding: 80px;
     text-align: left;

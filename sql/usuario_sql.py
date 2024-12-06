@@ -116,6 +116,12 @@ SQL_ATUALIZAR_SENHA = """
     WHERE email = ?
 """
 
+SQL_FAZER_UPGRADE_PLANO = """
+    UPDATE usuario
+    SET tipo_paciente = ?
+    WHERE email = ?
+"""
+
 SQL_EXCLUIR_USUARIO = """
     DELETE FROM usuario
     WHERE email = ?
