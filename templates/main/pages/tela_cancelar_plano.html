@@ -17,10 +17,10 @@
 
     .container {
       border-radius: 15px;
-      padding: 200px 200px;
+      padding: 100px 100px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
+      max-width: 800px;
 
       background-color: rgba(255, 255, 255, 0.78);
       border: 0.2cm solid #FFFFFF;
@@ -36,23 +36,26 @@
 
     .message {
       color: #333333;
-      font-size: 50px; /* Texto maior */
+      font-size: 50px; /* Mantém o tamanho do texto */
       font-weight: bold;
       margin-bottom: 70px;
+      max-width: 600px; /* Controla a largura para criar a quebra de linha */
+      margin: 0 auto 70px; /* Centraliza o texto */
+      /*word-wrap: break-word;  Garante que o texto não ultrapasse a largura */
     }
 
     .buttons {
       display: flex;
       justify-content: space-between;
-      gap: 15px; 
+      gap: 5px; 
     }
 
     .button {
-      background-color: #90caf9;
+      background-color: #539bd5;
       color: #ffffff;
       border: none;
       border-radius: 8px;
-      padding: 10px 25px; /* Botões maiores */
+      padding: 25px 40px; /* Botões maiores */
       font-size: 18px; /* Texto dos botões maior */
       cursor: pointer;
       text-decoration: none;
