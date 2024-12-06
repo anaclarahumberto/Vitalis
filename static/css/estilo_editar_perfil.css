@@ -56,3 +56,34 @@
     margin-top: 10px;
 }
 
+.input-box {
+    background-color: #EBEAE9;
+    padding: 0 20px;
+    min-height: 60px;
+    border-radius: 10px;
+}
+
+.middle-box {
+    padding-top: 60px;
+}
+
+.btn-next {
+    width: 200px;
+    border-radius: 20px;
+    padding: 10px 0;
+    background-color: #006994;
+}
+
+.trocar-foto-btn {
+    border-radius: 20px;
+    color: #0076AA;
+    font-size: 18px;
+    background-color: transparent;
+    border: none;
+}
+
+.trocar-foto-btn:hover{
+    color: #0076AA;
+    background-color: transparent;
+}
+
