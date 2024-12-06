@@ -1,6 +1,7 @@
 import base64
 from datetime import date, datetime, timedelta
 import locale
+import random
 from typing import List
 import uuid
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Request, UploadFile, status
@@ -107,6 +108,7 @@ def obter_stories_feed(usuario_logado_id: int):
 async def get_root(request: Request):
     stories = obter_stories_feed(request.state.usuario.id)
     publicacoes = obter_publicacoes_feed(request.state.usuario.id)
+    random.shuffle(publicacoes)
     return templates.TemplateResponse("main/pages/index.html", {"request": request, "publicacoes": publicacoes, "stories": stories,})
 
 @router.post("/curtir_publicacao")
