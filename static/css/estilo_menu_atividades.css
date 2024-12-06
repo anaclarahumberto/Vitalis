@@ -2,7 +2,7 @@
 
 .cor-menu {
     background-color: #007eb3; /* Cor de fundo */
-    width: 15%; /* Fixa a header no canto esquerdo */
+    width: 12%; /* Fixa a header no canto esquerdo */
     height: 100vh; /* Faz com que a altura seja igual à da tela */
     overflow: hidden; 
     position: fixed;
@@ -10,9 +10,8 @@
 }
 
 .top-box {
-
-    flex:1;
-    min-height: 175px;
+    flex: 1;
+    min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,9 +30,9 @@
 
 .bottom-box {
     flex:1;
+    display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    display: flex;
     flex-direction: column;
 }
 

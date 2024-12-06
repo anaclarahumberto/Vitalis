@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/estilo_menu_atividades.css">
     <link rel="stylesheet" href="/static/css/estilo_emojis.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- Versão completa -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
@@ -26,14 +26,13 @@
             display: inline-block;
             font-family: 'Ubuntu', sans-serif;
             cursor: pointer;
-            width: 50%; /* O botão agora usa toda a largura do formulário */
+            width: 50%; 
         }
 
         #modal-body-pub {
             padding: 0px;
         }
         
-        /* Área de corte fixa no quadrado */
         #crop-container-pub {
             width: 100%;
             overflow: visible;
@@ -42,21 +41,20 @@
             background-color: #f0f0f0;
         }
         
-        /* Ajuste da imagem para preencher o quadrado */
         #imagemPub {
             max-width: 100%;
             display: block;
             position: absolute;
-            cursor: grab; /* Indica que a imagem pode ser arrastada */
+            cursor: grab; 
         }
         
         #imagemPub:active {
-            cursor: grabbing; /* Indica que a imagem está sendo arrastada */
+            cursor: grabbing; /
         }
 
         #imagemSharePub {
-            max-width: 70%; /* Para que a imagem não ultrapasse a largura da modal */
-            height: auto; /* Para manter a proporção */
+            max-width: 70%; 
+            height: auto; 
         }
 
         .content-container {
@@ -80,19 +78,19 @@
         }
 
         .textarea-pub::-webkit-scrollbar {
-            display: none; /* Para navegadores baseados em WebKit (Chrome, Safari) */
+            display: none; 
         }
 
         #novaPubModal {
-            z-index: 1040 !important; /* Z-index da modal principal */
+            z-index: 1040 !important; 
         }
         
         #confirmCloseModal {
-            z-index: 1050 !important; /* Z-index do modal de confirmação */
+            z-index: 1050 !important; 
         }
         
         .modal-backdrop {
-            z-index: 1030 !important; /* Z-index do backdrop padrão */
+            z-index: 1030 !important; 
             opacity: 0.6 !important;
         }
         
@@ -102,8 +100,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Cor e transparência (mais escuro) */
-            z-index: 1045; /* Z-index que fica entre o modal principal e o de confirmação */
+            background: rgba(0, 0, 0, 0.5); 
+            z-index: 1045; 
         }
 
         .btn-descartar:focus {
@@ -158,7 +156,7 @@
                 </div>
                 
                 <div class="bottom-box">
-                    {%- if usuario.tipo_perfil == 1 %} {{header_button(nome="Fazer Upgrade do Plano", click_function="window.location.href='#'", icone="bi bi-stars", id="FazerUpgradeButton")}} {%- endif %}
+                    {%- if usuario.tipo_perfil == 1 %} {{header_button(nome="Fazer Upgrade do Plano", click_function="window.location.href='/usuario/plano'", icone="bi bi-stars", id="FazerUpgradeButton")}} {%- endif %}
                     {{header_button(nome="Mais", click_function="window.location.href='#'", icone="bi bi-text-left", id="mais")}}
                 </div>
             </nav>
@@ -393,7 +391,8 @@
             const dropdown = document.getElementById('searchDropdown');
             const button = document.getElementById('pesquisarPerfilButton');
             const body = document.body; // ou outro elemento pai que faça sentido
-        
+            const corMenu = document.querySelector('.cor-menu'); // Seleciona o elemento .cor-menu
+            
             if (!button.contains(event.target) && !dropdown.contains(event.target)) {
                 // Remover animação e esconder o dropdown
                 dropdown.style.animation = 'slideOutToLeft 0.5s ease-out forwards';

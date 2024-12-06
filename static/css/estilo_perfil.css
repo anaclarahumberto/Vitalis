@@ -270,6 +270,7 @@
 .container-coluna {
     background-color: #f0f0f0; /* Cor de fundo opcional para destacar as colunas */
     overflow: hidden; /* Garantir que a imagem não saia dos limites */
+    cursor: pointer;
 }
 
 /* Imagem dentro de cada coluna */

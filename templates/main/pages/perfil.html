@@ -139,10 +139,9 @@
             {% if publicacoes %}
                 <div class="container-pai">
                     {% for publicacao in publicacoes %}
-                        <div class="container-coluna" data-publicacao='{"imagem": "{{ publicacao.imagem | e }}", "data_criacao": "{{ publicacao.data_criacao | e }}", "descricao": "{{ publicacao.descricao | e }}", "id_perfil": "{{ usuario.id | e }}", "nome_perfil": "{{ usuario.nome_perfil | e }}"}'
-                        onclick="abrirPubModal(this)">
+                        <div class="container-coluna" dados-publicacao='{"imagem": "{{ publicacao.imagem | e }}", "data_criacao": "{{ publicacao.data_criacao | e }}", "descricao": "{{ publicacao.descricao | e }}", "id_perfil": "{{ usuario.id | e }}", "nome_perfil": "{{ usuario.nome_perfil | e }}"}'>
                             <img src="/static/img/publicacoes/{{ publicacao.imagem }}" alt="Imagem da Publicação">
-                        </div>
+                        </div>                    
                     {% endfor %}
                 </div>
             {% else %}
@@ -204,8 +203,19 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Delegação de eventos para capturar o clique nas publicações
+        document.querySelector('.container-pai').addEventListener('click', function(event) {
+            const containerColuna = event.target.closest('.container-coluna');
+            if (containerColuna) {
+                abrirPubModal(containerColuna);
+            }
+        });
+    });
+    
     function abrirPubModal(element) {
-        const dadosPublicacao = JSON.parse(element.getAttribute('data-publicacao'));
+        const elemento = element.getAttribute('dados-publicacao');
+        const dadosPublicacao = JSON.parse(elemento);
         
         // Acessa a modal
         const modal = document.getElementById('pubModal');
@@ -218,14 +228,15 @@
         modal.querySelector('.nome-perfil-descricao').textContent = dadosPublicacao.nome_perfil;
         modal.querySelector('#descricao-publicacao').textContent = dadosPublicacao.descricao;
         modal.querySelector('#data-publicacao').textContent = dadosPublicacao.data_criacao;
-    
+        
         // Exibe a modal
         $(modal).modal('show'); // Usando jQuery para abrir a modal
     }
     
     function fecharPubModal() {
         $('#pubModal').modal('hide');
-    }
+    }     
+    
 </script>
 
 {% endblock %}

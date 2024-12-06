@@ -3,7 +3,7 @@ body {
 }
 
 main {
-    margin-left: 15%; /* Largura da header */
+    margin-left: 12%; /* Largura da header */
     padding: 20px;
 }
 
@@ -19,7 +19,7 @@ main {
     height: 100%;
     width: 85%;
     padding: 0;
-    padding-left: 2%;
+    padding-left: 3vh;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px; 
     background-color: rgba(0, 106, 153, 0.6)
