@@ -1,4 +1,9 @@
 /* Modal */
+.content {
+    width: 100%;
+    padding-bottom: 40px;
+}
+
 #modalCortar .modal-dialog {
     max-width: 400px;
     margin: auto;

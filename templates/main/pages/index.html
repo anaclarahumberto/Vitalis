@@ -80,9 +80,32 @@
         <!-- Ícones de ações -->
         <div class="post-actions mt-3 d-flex justify-content-between align-items-center">
             <div class="d-flex">
-                <a href="#" class="me-3"><i class="bi bi-heart fs-4"></i></a>
-                <a href="#" class="me-3"><i class="bi bi-chat fs-4"></i></a>
-                <a href="#"><i class="bi bi-send fs-4"></i></a>
+                <button 
+                    type="button" 
+                    id="curtir-btn" 
+                    class="pub-actions-btn" 
+                    aria-label="Curtir publicação"
+                    data-publicacao-id="{{ publicacao.id_publicacao }}">
+                    <i 
+                        class="{% if publicacao.curtido %}bi bi-heart-fill{% else %}bi bi-heart{% endif %}" >
+                    </i>
+                </button>
+                <button 
+                    type="button" 
+                    class="pub-actions-btn" 
+                    aria-label="Comentar">
+                    <i 
+                        class="bi bi-chat" >
+                    </i>
+                </button>
+                <button 
+                    type="button" 
+                    class="pub-actions-btn" 
+                    aria-label="Comentar">
+                    <i 
+                        class="bi bi-send" >
+                    </i>
+                </button>
             </div>
             <!-- Ícone de bandeira no canto inferior direito -->
             <div class="position-relative">
@@ -98,4 +121,78 @@
 
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("#curtir-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            const publicacaoId = this.getAttribute("data-publicacao-id");
+            const usuarioId = "{{ request.state.usuario.id }}";
+            const curtirIcon = this.querySelector("i");
+
+            if (curtirIcon.classList.contains("bi-heart-fill")) {
+                descurtirPublicacao(publicacaoId, usuarioId, curtirIcon);
+            } else {
+                curtirPublicacao(publicacaoId, usuarioId, curtirIcon);
+            }
+        });
+    });
+});
+
+function curtirPublicacao(publicacaoId, usuarioId, icon) {
+    fetch("/usuario/curtir_publicacao", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id_publicacao: publicacaoId,
+            id_usuario: usuarioId,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "sucesso") {
+                icon.classList.remove("bi-heart"); // Remove o ícone de "não curtido"
+                icon.classList.add("bi-heart-fill"); // Adiciona o ícone de "curtido"
+                icon.style.color = "red"; // Altera a cor para vermelho
+            } else {
+                alert("Erro ao curtir a publicação.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao curtir publicação:", error);
+            alert("Erro ao curtir a publicação.");
+        });
+}
+
+function descurtirPublicacao(publicacaoId, usuarioId, icon) {
+    fetch("/usuario/descurtir_publicacao", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id_publicacao: publicacaoId,
+            id_usuario: usuarioId,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "sucesso") {
+                icon.classList.remove("bi-heart-fill"); // Remove o ícone de "curtido"
+                icon.classList.add("bi-heart"); // Adiciona o ícone de "não curtido"
+                icon.style.color = ""; // Reseta a cor para a cor original
+            } else {
+                alert("Erro ao descurtir a publicação.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao descurtir publicação:", error);
+            alert("Erro ao descurtir a publicação.");
+        });
+}
+
+</script>
+
 {% endblock %}

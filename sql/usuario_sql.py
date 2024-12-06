@@ -54,9 +54,15 @@ SQL_ATUALIZAR_DATA = """
 """
 
 SQL_OBTER_DADOS_PERFIL = """
-    SELECT id, nome, nome_perfil, email, telefone, bio_perfil, categoria_perfil, genero, foto_perfil, tipo_perfil
+    SELECT telefone, bio_perfil, categoria_perfil, genero
     FROM usuario
-    WHERE email = ?
+    WHERE id = ?
+"""
+
+SQL_OBTER_DADOS_PERFIL_VISITADO = """
+    SELECT id, nome, nome_perfil, bio_perfil, categoria_perfil, foto_perfil, tipo_perfil
+    FROM usuario
+    WHERE id = ?
 """
 
 SQL_OBTER_DADOS_PERFIL_SEGUIDO = """

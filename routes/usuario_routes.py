@@ -12,6 +12,7 @@ import jwt
 from pydantic import BaseModel
 from models.publicacao_model import Publicacao
 from models.usuario_model import Usuario
+from repositories.curtida_repo import CurtidaRepo
 from repositories.publicacao_repo import PublicacaoRepo
 from repositories.seguidor_repo import SeguidorRepo
 from repositories.usuario_repo import UsuarioRepo
@@ -74,6 +75,7 @@ def obter_publicacoes_feed(usuario_logado_id: int):
             publicacao['usuario_nome'] = usuario.nome_perfil
             publicacao['usuario_foto'] = usuario_foto
             publicacao['usuario_id'] = usuario.id 
+            publicacao["curtido"] = CurtidaRepo.verificar_curtida(publicacao["id_publicacao"], usuario_logado_id)
             publicacoes_feed.append(publicacao)
 
     
@@ -106,6 +108,27 @@ async def get_root(request: Request):
     stories = obter_stories_feed(request.state.usuario.id)
     publicacoes = obter_publicacoes_feed(request.state.usuario.id)
     return templates.TemplateResponse("main/pages/index.html", {"request": request, "publicacoes": publicacoes, "stories": stories,})
+
+@router.post("/curtir_publicacao")
+async def curtir_publicacao(request: Request):
+    body = await request.json()
+    id_publicacao = body.get("id_publicacao")
+    id_usuario = body.get("id_usuario")
+    sucesso = CurtidaRepo.curtir_publicacao(id_publicacao, id_usuario)
+    if sucesso:
+        return JSONResponse({"status": "sucesso"})
+    return JSONResponse({"status": "erro"})
+
+@router.post("/descurtir_publicacao")
+async def descurtir_publicacao(request: Request):
+    body = await request.json()
+    id_publicacao = body.get("id_publicacao")
+    id_usuario = body.get("id_usuario")
+
+    sucesso = CurtidaRepo.remover_curtida_publicacao(id_publicacao, id_usuario)
+    if sucesso:
+        return JSONResponse({"status": "sucesso"})
+    return JSONResponse({"status": "erro"})
 
 @router.get("/pesquisar_perfil", response_model=List[Usuario])
 async def pesquisar_perfil_endpoint(nome_perfil: str = Query(..., min_length=3)):
@@ -202,10 +225,39 @@ async def get_anuncios(request: Request):
 async def get_anunciante(request: Request):
     return templates.TemplateResponse("main/pages/anunciante.html", {"request": request})
 
+@router.get("/cupons_ativos", response_class=HTMLResponse)
+async def get_cuponsativos(request: Request):
+    return templates.TemplateResponse("main/pages/cupons_ativos.html", {"request": request}) 
+
+@router.get("/cupons_indisponiveis", response_class=HTMLResponse)
+async def get_cuponsindisponiveis(request: Request):
+    return templates.TemplateResponse("main/pages/cupons_indisponiveis.html", {"request": request}) 
+
+@router.get("/feedback", response_class=HTMLResponse)
+async def get_feedback(request: Request):
+    return templates.TemplateResponse("main/pages/feedback.html", {"request": request})
+
+@router.get("/perfil", response_class=HTMLResponse)
+async def get_perfil(request: Request):
+    publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(request.state.usuario.id)
+    numero_publicacoes = PublicacaoRepo.obter_numero_publicacoes(request.state.usuario.id)
+    numero_seguidores = SeguidorRepo.obter_numero_seguidores(request.state.usuario.id)
+    numero_seguindo = SeguidorRepo.obter_numero_seguindo(request.state.usuario.id)
+    dados_perfil = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
+
+    return templates.TemplateResponse("main/pages/perfil.html", {
+        "request": request,
+        "dados_perfil": dados_perfil,
+        "publicacoes": publicacoes,
+        'numero_publicacoes': numero_publicacoes,
+        'numero_seguidores': numero_seguidores,
+        'numero_seguindo': numero_seguindo,
+    })
+
 @router.get("/editar_perfil", response_class=HTMLResponse)
 async def get_editar(request: Request):
-    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
-    return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request}) 
+    dados_perfil = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
+    return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request, "dados_perfil": dados_perfil,}) 
 
 @router.post("/atualizar_perfil")
 async def editar_perfil(request: Request):
@@ -262,40 +314,9 @@ async def editar_perfil(request: Request):
     
     return RedirectResponse("/usuario/perfil", status_code=303)
 
-
-
-@router.get("/cupons_ativos", response_class=HTMLResponse)
-async def get_cuponsativos(request: Request):
-    return templates.TemplateResponse("main/pages/cupons_ativos.html", {"request": request}) 
-
-@router.get("/cupons_indisponiveis", response_class=HTMLResponse)
-async def get_cuponsindisponiveis(request: Request):
-    return templates.TemplateResponse("main/pages/cupons_indisponiveis.html", {"request": request}) 
-
-@router.get("/feedback", response_class=HTMLResponse)
-async def get_feedback(request: Request):
-    return templates.TemplateResponse("main/pages/feedback.html", {"request": request})
-
-@router.get("/perfil", response_class=HTMLResponse)
-async def get_perfil(request: Request):
-    usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
-    publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(usuario.id)
-    numero_publicacoes = PublicacaoRepo.obter_numero_publicacoes(usuario.id)
-    numero_seguidores = SeguidorRepo.obter_numero_seguidores(usuario.id)
-    numero_seguindo = SeguidorRepo.obter_numero_seguindo(usuario.id)
-
-    return templates.TemplateResponse("main/pages/perfil.html", {
-        "request": request,
-        "usuario": usuario,
-        "publicacoes": publicacoes,
-        'numero_publicacoes': numero_publicacoes,
-        'numero_seguidores': numero_seguidores,
-        'numero_seguindo': numero_seguindo,
-    })
-
 @router.get("/visitar_perfil", response_class=HTMLResponse)
 async def get_visitar_perfil(request: Request, usuario_id: int):
-    perfil_visitado = UsuarioRepo.obter_dados_perfil(usuario_id)
+    perfil_visitado = UsuarioRepo.obter_dados_perfil_visitado(usuario_id)
     publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(usuario_id)
     numero_publicacoes = PublicacaoRepo.obter_numero_publicacoes(usuario_id)
     numero_seguidores = SeguidorRepo.obter_numero_seguidores(usuario_id)

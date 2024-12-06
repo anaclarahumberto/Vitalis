@@ -63,23 +63,35 @@ class UsuarioRepo:
             return resultado.rowcount > 0
         
     @classmethod
-    def obter_dados_perfil(cls, email: str):
+    def obter_dados_perfil(cls, id: int):
         with obter_conexao() as db:
             cursor = db.cursor()
-            cursor.execute(SQL_OBTER_DADOS_PERFIL, (email,))
+            cursor.execute(SQL_OBTER_DADOS_PERFIL, (id,))
+            resultado = cursor.fetchone()
+            if resultado:
+                return UsuarioAutenticado(
+                    telefone = resultado[0],
+                    bio_perfil = resultado[1],
+                    categoria_perfil = resultado[2],
+                    genero = resultado[3],
+                )
+            return None  
+        
+    @classmethod
+    def obter_dados_perfil_visitado(cls, id: int):
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            cursor.execute(SQL_OBTER_DADOS_PERFIL_VISITADO, (id,))
             resultado = cursor.fetchone()
             if resultado:
                 return UsuarioAutenticado(
                     id = resultado[0],
                     nome = resultado[1],
                     nome_perfil = resultado[2],
-                    email = resultado[3],
-                    telefone = resultado[4],
-                    bio_perfil = resultado[5],
-                    categoria_perfil = resultado[6],
-                    genero = resultado[7],
-                    foto_perfil= resultado[8],
-                    tipo_perfil= resultado[9],
+                    bio_perfil = resultado[3],
+                    categoria_perfil = resultado[4],
+                    foto_perfil= resultado[5],
+                    tipo_perfil= resultado[6]
                 )
             return None  
         
