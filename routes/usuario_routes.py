@@ -263,7 +263,7 @@ async def get_editar(request: Request):
 
 @router.post("/atualizar_perfil")
 async def editar_perfil(request: Request):
-    request.state.usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
+    dados_usuario = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
     dados = dict(await request.form())
     foto_perfil_blob = dados["foto_perfil_blob"]
     dados.pop("foto_perfil_blob")
@@ -284,7 +284,7 @@ async def editar_perfil(request: Request):
         if not UsuarioRepo.is_username_unique(dados["nome_perfil"]):
             adicionar_mensagem_erro(response, "Esse nome de usuário não está disponível. Tente outro nome..")
             return response
-    if dados["telefone"] != request.state.usuario.telefone:
+    if dados["telefone"] != dados_usuario.telefone:
         if not is_phone_number(dados["telefone"]):
             adicionar_mensagem_erro(response, "Esse não é um telefone valido. Confira-o")
             return response
@@ -294,7 +294,7 @@ async def editar_perfil(request: Request):
 
     # Atualiza os dados do usuário
     atualizacao_sucesso = UsuarioRepo.atualizar_dados_perfil(
-        foto_perfil = True,
+        foto_perfil = bool(foto_perfil_blob),
         nome=dados["nome"],
         nome_perfil=dados["nome_perfil"],
         telefone=dados["telefone"],
