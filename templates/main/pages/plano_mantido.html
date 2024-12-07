@@ -6,6 +6,8 @@
   <title>Tela de Confirmação</title>
   <!-- Link do Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Link para ícones do Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     body {
       background-color: #6b98bf; /* Fundo azul suave */
@@ -14,64 +16,79 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      position: relative; /* Necessário para posicionar a logo fora do card */
+      position: relative; /* Necessário para posicionar elementos fora do card */
     }
     .card {
       background-color: #dbe9f5; /* Fundo do card */
       border-radius: 15px;
       padding: 30px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center; /* Centraliza conteúdo no card */
-      width: 900px; /* Retângulo maior */
-      height: 500px;
-      position: relative;
+      justify-content: center;
+      width: 700px; /* Card mais estreito */
+      height: 600px; /* Card mais alto */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
       border: 4px solid white; /* Borda branca */
     }
     .content-container {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: left;
-      gap: 20px; /* Espaço entre o robô e o texto */
+      text-align: center;
+      gap: 20px; /* Espaço entre os elementos */
     }
     .robot-icon {
       width: 150px; /* Tamanho da imagem do robô */
-      flex-shrink: 0;
     }
-    .content {
-      flex-grow: 1;
+    .content h3 {
+      font-size: 24px; /* Texto maior */
+      font-weight: bold;
+      margin: 0;
+      line-height: 1.5; /* Maior espaçamento entre linhas */
+      color: #333; /* Cor do texto */
     }
     .btn-custom {
       background-color: #4682b4; /* Cor do botão */
-      color: white;
+      color: white; /* Texto permanece branco */
       border: none;
       border-radius: 20px;
-      padding: 10px 30px;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
+      padding: 12px 40px;
+      font-size: 18px; /* Texto do botão maior */
       margin-top: 20px;
+      transition: background-color 0.3s ease; /* Transição suave */
     }
     .btn-custom:hover {
-      background-color: #316a92; /* Cor ao passar o mouse */
+      background-color: #316a92; /* Apenas o fundo muda */
+      color: white; /* Garante que o texto continue branco */
     }
     .footer-logo {
       position: absolute;
       bottom: 20px;
       right: 20px;
-      width: 100px; /* Aumentado o tamanho da logo */
+      width: 120px; /* Logo maior */
+    }
+    .voltar {
+      position: absolute;
+      top: 20px;
+      right: 20px; /* Posicionada à direita */
+      font-size: 36px;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .voltar:hover {
+      color: #dbe9f5; /* Mudança de cor ao passar o mouse */
     }
     @media (max-width: 768px) {
       .card {
         width: 90%; /* Ajuste responsivo para telas menores */
         height: auto;
-        flex-direction: column;
         padding: 20px;
       }
       .content-container {
         flex-direction: column; /* Alinhar verticalmente em telas menores */
-        text-align: center;
       }
       .robot-icon {
         margin-bottom: 20px;
@@ -80,12 +97,22 @@
         bottom: 10px;
         right: 50%;
         transform: translateX(50%);
-        width: 80px; /* Reduzir tamanho em telas menores */
+        width: 100px; /* Reduzir tamanho em telas menores */
+      }
+      .voltar {
+        top: 10px;
+        right: 10px;
+        font-size: 28px; /* Reduzir tamanho da seta */
       }
     }
   </style>
 </head>
 <body>
+  <!-- Ícone de voltar -->
+  <a href="/usuario/tela_cancelar_plano" class="voltar">
+    <i class="bi bi-arrow-left-circle-fill"></i>
+  </a>
+
   <!-- Card principal -->
   <div class="card">
     <div class="content-container">
@@ -93,13 +120,18 @@
       <img src="/static/img/Vitalette_coracao.png" alt="Ícone do robô" class="robot-icon">
       <!-- Texto e botão -->
       <div class="content">
-        <h3>Obrigada por escolher continuar conosco! Tenho certeza que não irá se arrepender! 
-            Se estiver tendo algum problema, relate-o para nós:</h3>
-        <a href="/usuario/feedback"><button class="btn btn-custom">Relatar um problema</button></a>
+        <h3>
+          Obrigada por escolher continuar conosco! 
+          Tenho certeza que não irá se arrepender! 
+          Se estiver tendo algum problema, relate-o para nós:
+        </h3>
+        <a href="/usuario/configuracao/feedback">
+          <button class="btn btn-custom">Relatar um problema</button>
+        </a>
       </div>
     </div>
   </div>
-  
+
   <!-- Logo fora do card -->
   <img src="/static/img/logo.png" alt="Logo Vitalis" class="footer-logo">
   
