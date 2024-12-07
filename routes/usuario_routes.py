@@ -291,10 +291,13 @@ async def editar_perfil(request: Request):
         if not UsuarioRepo.is_phone_unique(dados["telefone"]):
             adicionar_mensagem_erro(response, "Outra conta está usando o mesmo telefone.")
             return response
+        
+        if not request.state.usuario.foto_perfil:
+            foto_perfil = bool(foto_perfil_blob)
 
     # Atualiza os dados do usuário
     atualizacao_sucesso = UsuarioRepo.atualizar_dados_perfil(
-        foto_perfil = bool(foto_perfil_blob),
+        foto_perfil = foto_perfil,
         nome=dados["nome"],
         nome_perfil=dados["nome_perfil"],
         telefone=dados["telefone"],
