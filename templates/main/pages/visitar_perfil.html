@@ -56,11 +56,13 @@
 
     <!-- Publicações, Vídeos e Marcados -->
     <ul class="nav nav-tabs my-4 d-flex justify-content-around" id="profileTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
-                <i class="bi bi-grid-3x3"></i> PUBLICAÇÕES
-            </a>
-        </li>
+        {% if perfil_visitado.tipo_perfil == 2 %}
+            <li class="nav-item">
+                <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
+                    <i class="bi bi-grid-3x3"></i> PUBLICAÇÕES
+                </a>
+            </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link" id="tagged-tab" data-bs-toggle="tab" href="#tagged" role="tab" aria-controls="tagged" aria-selected="false">
                 <i class="bi bi-person-square"></i> MARCADOS
@@ -130,6 +132,7 @@
     
     <div class="tab-content" id="profileTabContent">
         <!-- Publicações -->
+        {% if perfil_visitado == 2 %}
         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
             {% if publicacoes %}
                 <div class="container-pai">
@@ -148,6 +151,7 @@
                      
             
         </div>
+        {% endif %}
 
         <!-- Marcados -->
         <div class="tab-pane fade" id="tagged" role="tabpanel" aria-labelledby="tagged-tab">

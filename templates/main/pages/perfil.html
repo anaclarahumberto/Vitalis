@@ -56,11 +56,13 @@
 
     <!-- Publicações, Vídeos e Marcados -->
     <ul class="nav nav-tabs my-4 d-flex justify-content-around" id="profileTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
-                <i class="bi bi-grid-3x3"></i> PUBLICAÇÕES
-            </a>
-        </li>
+        {% if usuario.tipo_perfil == 2 %}
+            <li class="nav-item">
+                <a class="nav-link active" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
+                    <i class="bi bi-grid-3x3"></i> PUBLICAÇÕES
+                </a>
+            </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link" id="videos-tab" data-bs-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false">
                 <i class="bi bi-play-circle"></i> SALVOS
@@ -135,28 +137,30 @@
     
     <div class="tab-content" id="profileTabContent">
         <!-- Publicações -->
-        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-            {% if publicacoes %}
-                <div class="container-pai">
-                    {% for publicacao in publicacoes %}
-                        <div class="container-coluna" dados-publicacao='{"imagem": "{{ publicacao.imagem | e }}", "data_criacao": "{{ publicacao.data_criacao | e }}", "descricao": "{{ publicacao.descricao | e }}", "id_perfil": "{{ usuario.id | e }}", "nome_perfil": "{{ usuario.nome_perfil | e }}"}'>
-                            <img src="/static/img/publicacoes/{{ publicacao.imagem }}" alt="Imagem da Publicação">
-                        </div>                    
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div id="publicacoesContainer">
-                    <div id="circle">
-                        <i id="cameraIcon" class="bi bi-camera"></i> 
+        {% if usuario.tipo_perfil == 2 %}
+            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                {% if publicacoes %}
+                    <div class="container-pai">
+                        {% for publicacao in publicacoes %}
+                            <div class="container-coluna" dados-publicacao='{"imagem": "{{ publicacao.imagem | e }}", "data_criacao": "{{ publicacao.data_criacao | e }}", "descricao": "{{ publicacao.descricao | e }}", "id_perfil": "{{ usuario.id | e }}", "nome_perfil": "{{ usuario.nome_perfil | e }}"}'>
+                                <img src="/static/img/publicacoes/{{ publicacao.imagem }}" alt="Imagem da Publicação">
+                            </div>                    
+                        {% endfor %}
                     </div>
-                    <h1 id="compartilharTexto">Compartilhar fotos</h1>
-                    <p id="descricaoTexto">Quando você compartilha fotos, elas aparecerão no seu perfil.</p>
-                    <button id="compartilharButton" type="button" onclick="$('#novaPubModal').modal('show');">Compartilhar sua primeira foto</button>
-                </div>
-            {% endif %}
+                {% else %}
+                    <div id="publicacoesContainer">
+                        <div id="circle">
+                            <i id="cameraIcon" class="bi bi-camera"></i> 
+                        </div>
+                        <h1 id="compartilharTexto">Compartilhar fotos</h1>
+                        <p id="descricaoTexto">Quando você compartilha fotos, elas aparecerão no seu perfil.</p>
+                        <button id="compartilharButton" type="button" onclick="$('#novaPubModal').modal('show');">Compartilhar sua primeira foto</button>
+                    </div>
+                {% endif %}
                      
             
-        </div>
+            </div>
+        {% endif %}
         
         <!-- Vídeos -->
         <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
