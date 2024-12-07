@@ -411,3 +411,7 @@ async def get_cancelar_plano(request: Request):
 @router.get("/plano_mantido", response_class=HTMLResponse)
 async def get_manter_plano(request: Request):
     return templates.TemplateResponse("main/pages/plano_mantido.html", {"request": request})
+
+@router.get("/plano_2", response_class=HTMLResponse)
+async def get_conta_criada_com_sucesso(request: Request):
+    return templates.TemplateResponse("main/pages/plano_2.html", {"request": request})

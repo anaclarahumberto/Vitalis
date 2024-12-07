@@ -16,63 +16,59 @@
     }
 
     .container {
-      border-radius: 15px;
-      padding: 100px 100px;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-
-      background-color: rgba(255, 255, 255, 0.78);
-      border: 0.2cm solid #FFFFFF;
+      background-color: #dbe9f5; 
+      border: 5px solid #ffffff; /* Borda branca */
       border-radius: 20px;
-      justify-content: flex-start;
-  
+      padding: 40px 60px; /* Ajuste do espaçamento interno */
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+      width: 600px; /* Largura ajustada */
     }
 
     .robot {
-      width: 120px; /* Tamanho maior da imagem */
-      margin: 0 auto 20px;
+      width: 150px; /* Tamanho da imagem maior */
+      margin-bottom: 20px;
     }
 
     .message {
-      color: #333333;
-      font-size: 50px; /* Mantém o tamanho do texto */
+      color: #364c6b;
+      font-size: 28px; /* Tamanho do texto ajustado */
       font-weight: bold;
-      margin-bottom: 70px;
-      max-width: 600px; /* Controla a largura para criar a quebra de linha */
-      margin: 0 auto 70px; /* Centraliza o texto */
-      /*word-wrap: break-word;  Garante que o texto não ultrapasse a largura */
+      margin-bottom: 40px;
+      line-height: 1.5; /* Melhor espaçamento entre linhas */
     }
 
     .buttons {
       display: flex;
-      justify-content: space-between;
-      gap: 5px; 
+      justify-content: center;
+      gap: 20px; /* Espaçamento entre os botões */
+      margin-top: 20px;
     }
 
     .button {
-      background-color: #539bd5;
-      color: #ffffff;
-      border: none;
-      border-radius: 8px;
-      padding: 25px 40px; /* Botões maiores */
-      font-size: 18px; /* Texto dos botões maior */
-      cursor: pointer;
+      display: inline-block;
+      background-color: #88aacf; /* Cor de fundo do botão */
+      color: white;
+      font-size: 18px; /* Tamanho do texto do botão */
+      padding: 15px 30px; /* Espaçamento interno do botão */
+      border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      transition: background-color 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+      transition: background-color 0.3s, transform 0.2s;
     }
 
     .button:hover {
-      background-color: #64b5f6;
+      background-color: #6d91b1; /* Cor ao passar o mouse */
+      transform: scale(1.05); /* Leve aumento ao passar o mouse */
     }
 
     .logo {
       position: absolute;
       bottom: 20px;
       right: 20px;
-      width: 180px;
-  }
+      width: 120px; /* Tamanho ajustado da logo */
+    }
   </style>
 </head>
 <body>
@@ -88,9 +84,8 @@
       <a href="/usuario/tela_cancelar_plano_efetivo" class="button">Cancele meu plano</a>
       <a href="/usuario/plano_mantido" class="button">Mantenha meu plano</a>
     </div>
-    
   </div>
   <!-- Logo -->
-  <img src="/static/img/logo.png" alt="Logo" class="logo">
+  <img src="/static/img/logo.png" alt="Logo Vitalis" class="logo">
 </body>
 </html>

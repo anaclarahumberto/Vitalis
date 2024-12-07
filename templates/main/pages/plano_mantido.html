@@ -26,21 +26,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 700px; /* Card mais estreito */
-      height: 600px; /* Card mais alto */
+      width: 600px; /* Card mais estreito */
+      height: 500px; /* Card mais alto */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
       border: 4px solid white; /* Borda branca */
-    }
-    .content-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       text-align: center;
-      gap: 20px; /* Espaço entre os elementos */
     }
     .robot-icon {
-      width: 150px; /* Tamanho da imagem do robô */
+      width: 150px; /* Tamanho da imagem do mascote */
+      margin-bottom: 20px; /* Espaço abaixo do mascote */
     }
     .content h3 {
       font-size: 24px; /* Texto maior */
@@ -49,19 +43,27 @@
       line-height: 1.5; /* Maior espaçamento entre linhas */
       color: #333; /* Cor do texto */
     }
-    .btn-custom {
-      background-color: #4682b4; /* Cor do botão */
-      color: white; /* Texto permanece branco */
-      border: none;
-      border-radius: 20px;
-      padding: 12px 40px;
-      font-size: 18px; /* Texto do botão maior */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* Espaçamento entre os botões */
       margin-top: 20px;
-      transition: background-color 0.3s ease; /* Transição suave */
     }
-    .btn-custom:hover {
-      background-color: #316a92; /* Apenas o fundo muda */
-      color: white; /* Garante que o texto continue branco */
+    .button {
+      display: inline-block;
+      background-color: #88aacf; /* Cor de fundo do botão */
+      color: white;
+      font-size: 18px; /* Tamanho do texto do botão */
+      padding: 15px 30px; /* Espaçamento interno do botão */
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .button:hover {
+      background-color: #6d91b1; /* Cor ao passar o mouse */
+      transform: scale(1.05); /* Leve aumento ao passar o mouse */
     }
     .footer-logo {
       position: absolute;
@@ -72,36 +74,34 @@
     .voltar {
       position: absolute;
       top: 20px;
-      right: 20px; /* Posicionada à direita */
+      right: 20px; /* Ícone alinhado à direita */
       font-size: 36px;
       color: white;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, transform 0.2s ease; /* Suavidade */
     }
     .voltar:hover {
-      color: #dbe9f5; /* Mudança de cor ao passar o mouse */
+      color: #dbe9f5; /* Mudança de cor no hover */
+      transform: scale(1.1); /* Leve aumento no hover */
     }
     @media (max-width: 768px) {
       .card {
-        width: 90%; /* Ajuste responsivo para telas menores */
+        width: 90%; /* Ajuste responsivo */
         height: auto;
         padding: 20px;
       }
-      .content-container {
-        flex-direction: column; /* Alinhar verticalmente em telas menores */
-      }
       .robot-icon {
-        margin-bottom: 20px;
+        width: 120px; /* Reduzir mascote */
       }
       .footer-logo {
         bottom: 10px;
         right: 50%;
         transform: translateX(50%);
-        width: 100px; /* Reduzir tamanho em telas menores */
+        width: 100px; /* Reduzir tamanho */
       }
       .voltar {
         top: 10px;
-        right: 10px;
+        right: 10px; /* Ajustar seta em telas menores */
         font-size: 28px; /* Reduzir tamanho da seta */
       }
     }
@@ -115,19 +115,18 @@
 
   <!-- Card principal -->
   <div class="card">
-    <div class="content-container">
-      <!-- Imagem do robô -->
-      <img src="/static/img/Vitalette_coracao.png" alt="Ícone do robô" class="robot-icon">
-      <!-- Texto e botão -->
-      <div class="content">
-        <h3>
-          Obrigada por escolher continuar conosco! 
-          Tenho certeza que não irá se arrepender! 
-          Se estiver tendo algum problema, relate-o para nós:
-        </h3>
-        <a href="/usuario/configuracao/feedback">
-          <button class="btn btn-custom">Relatar um problema</button>
-        </a>
+    <!-- Mascote no centro -->
+    <img src="/static/img/Vitalette_coracao.png" alt="Ícone do robô" class="robot-icon">
+    
+    <!-- Texto e botão -->
+    <div class="content">
+      <h3>
+        Obrigada por escolher continuar conosco! 
+        Tenho certeza que não irá se arrepender! 
+        Se estiver tendo algum problema, relate-o para nós:
+      </h3>
+      <div class="buttons">
+        <a href="/usuario/configuracoes/feedback" class="button">Relatar um problema</a>
       </div>
     </div>
   </div>
