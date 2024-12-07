@@ -399,5 +399,11 @@ async def get_daily(request: Request):
 async def get_escolha(request: Request):
     return templates.TemplateResponse("main/pages/anunciante_escolha.html", {"request": request})
 
+@router.get("/tela_cancelar_plano_efetivo", response_class=HTMLResponse)
+async def get_cancelou_plano(request: Request):
+    return templates.TemplateResponse("main/pages/tela_cancelar_plano_efetivo.html", {"request": request})
 
+@router.get("/tela_cancelar_plano", response_class=HTMLResponse)
+async def get_cancelar_plano(request: Request):
+    return templates.TemplateResponse("main/pages/tela_cancelar_plano_.html", {"request": request})
 
