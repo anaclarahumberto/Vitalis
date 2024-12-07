@@ -407,3 +407,7 @@ async def get_cancelou_plano(request: Request):
 async def get_cancelar_plano(request: Request):
     return templates.TemplateResponse("main/pages/tela_cancelar_plano_.html", {"request": request})
 
+
+@router.get("/plano_mantido", response_class=HTMLResponse)
+async def get_manter_plano(request: Request):
+    return templates.TemplateResponse("main/pages/plano_mantido.html", {"request": request})
