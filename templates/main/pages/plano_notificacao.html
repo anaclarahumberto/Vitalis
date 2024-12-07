@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bem-vindo à Família Vitalis!</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Biblioteca de ícones -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,39 +14,35 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      position: relative;
     }
 
     .container {
       background-color: #d9e5f2; /* Fundo do cartão */
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 400px;
-      padding: 20px;
+      border-radius: 20px;
+      border: 4px solid white; /* Borda branca */
+      width: 600px;
+      height: 400px;
+      padding: 40px;
       text-align: center;
+      position: relative;
     }
 
     .container h1 {
-      font-size: 24px;
+      font-size: 22px;
       color: #364c6b;
       margin-bottom: 20px;
-    }
-
-    .container p {
-      font-size: 14px;
-      color: #4a4a4a;
-      margin: 10px 0;
-      text-align: left;
     }
 
     .container ul {
       list-style: none;
       padding: 0;
       text-align: left;
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
 
     .container ul li {
-      font-size: 14px;
+      font-size: 16px;
       color: #4a4a4a;
       margin: 8px 0;
       display: flex;
@@ -58,13 +55,19 @@
       margin-right: 10px;
     }
 
+    .container p {
+      font-size: 16px;
+      color: #4a4a4a;
+      margin: 20px 0;
+    }
+
     .button {
       display: inline-block;
       background-color: #88aacf;
       color: white;
-      font-size: 14px;
-      padding: 10px 20px;
-      border-radius: 5px;
+      font-size: 16px;
+      padding: 12px 24px;
+      border-radius: 8px;
       text-decoration: none;
       transition: background-color 0.3s;
     }
@@ -74,12 +77,37 @@
     }
 
     .mascot {
-      width: 100px;
-      margin: 0 auto 20px;
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      position: absolute;
+      bottom: -60px; /* Fora do retângulo */
+      right: 40px;
+      width: 150px; /* Aumentado para maior visibilidade */
+    }
+
+    .arrow-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px; /* Aumenta o tamanho da seta */
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .arrow-icon:hover {
+      transform: scale(1.1); /* Efeito de hover */
     }
   </style>
 </head>
 <body>
+  <a href="usuario/plano">
+  <i class="bi bi-arrow-left-circle-fill arrow-icon"></i></a>
+
+  <!-- Retângulo central com conteúdo -->
   <div class="container">
     <img src="/static/img/mascote.png" alt="Mascote" class="mascot">
     <h1>Agora você faz parte da Família Vitalis!</h1>
@@ -90,7 +118,10 @@
       <li>Encontre profissionais qualificados e verificados por nós</li>
     </ul>
     <p>Aqui sua saúde é em primeiro lugar!</p>
-    <a href="#" class="button">Avançar</a>
+    <a href="/usuario/plano_2" class="button">Avançar</a>
   </div>
+
+  <!-- Logo no canto inferior direito -->
+  <img src="/static/img/logo.png" alt="Logo" class="logo">
 </body>
 </html>
