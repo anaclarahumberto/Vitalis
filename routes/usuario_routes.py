@@ -106,6 +106,7 @@ def obter_stories_feed(usuario_logado_id: int):
 
 @router.get("/feed", response_class=HTMLResponse)
 async def get_root(request: Request):
+    request.state.usuario.foto_perfil = UsuarioRepo.verificar_foto_perfil(request.state.usuario.id)
     stories = obter_stories_feed(request.state.usuario.id)
     publicacoes = obter_publicacoes_feed(request.state.usuario.id)
     random.shuffle(publicacoes)
@@ -241,6 +242,7 @@ async def get_feedback(request: Request):
 
 @router.get("/perfil", response_class=HTMLResponse)
 async def get_perfil(request: Request):
+    request.state.usuario.foto_perfil = UsuarioRepo.verificar_foto_perfil(request.state.usuario.id)
     publicacoes = PublicacaoRepo.obter_publicacoes_por_usuario(request.state.usuario.id)
     numero_publicacoes = PublicacaoRepo.obter_numero_publicacoes(request.state.usuario.id)
     numero_seguidores = SeguidorRepo.obter_numero_seguidores(request.state.usuario.id)
@@ -258,6 +260,7 @@ async def get_perfil(request: Request):
 
 @router.get("/editar_perfil", response_class=HTMLResponse)
 async def get_editar(request: Request):
+    request.state.usuario.foto_perfil = UsuarioRepo.verificar_foto_perfil(request.state.usuario.id)
     dados_perfil = UsuarioRepo.obter_dados_perfil(request.state.usuario.id)
     return templates.TemplateResponse("main/pages/editar_perfil.html", {"request": request, "dados_perfil": dados_perfil,}) 
 
