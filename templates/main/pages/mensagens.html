@@ -4,22 +4,15 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-        }
 
         /* Sidebar */
         .sidebar {
+            display: flex;
+            flex-direction: column;
             width: 20%;
             background-color: #fff;
             border-right: 1px solid #ddd;
-            padding: 10px;
-            overflow-y: auto;
+            padding: 100px;
         }
 
         .sidebar .user {
@@ -138,82 +131,89 @@
             cursor: pointer;
         }
 
+        #TelaMensagens {
+            display: flex;
+            height: 100%;
+        }
+
     </style>
 </head>
 <body>
+    <div id="TelaMensagens">
+            <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Mensagens</h3>
+            <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
+                <img src="/static/img/mae1.jpeg" alt="User">
+                <span>alexandrappinheiros</span>
+            </div>
+            <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
+                <img src="/static/img/mae2.jpeg" alt="User">
+                <span>leandracostalonga</span>
+            </div>
+            <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
+                <img src="/static/img/mae3.jpeg" alt="User">
+                <span>liviaribeirofb</span>
+            </div>
+            <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
+                <img src="/static/img/mae4.jpeg" alt="User">
+                <span>louzada.vivianne</span>
+            </div>
+            <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
+                <img src="/static/img/mae5.jpeg" alt="User">
+                <span>beatriz_silva</span>
+            </div>
+            <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
+                <img src="/static/img/mae6.jpeg" alt="User">
+                <span>vanessacardosolima</span>
+            </div>
+        </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h3>Mensagens</h3>
-        <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
-            <img src="/static/img/mae1.jpeg" alt="User">
-            <span>alexandrappinheiros</span>
-        </div>
-        <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
-            <img src="/static/img/mae2.jpeg" alt="User">
-            <span>leandracostalonga</span>
-        </div>
-        <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
-            <img src="/static/img/mae3.jpeg" alt="User">
-            <span>liviaribeirofb</span>
-        </div>
-        <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
-            <img src="/static/img/mae4.jpeg" alt="User">
-            <span>louzada.vivianne</span>
-        </div>
-        <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
-            <img src="/static/img/mae5.jpeg" alt="User">
-            <span>beatriz_silva</span>
-        </div>
-        <div class="user text-decoration-none text-dark d-flex align-items-center btn btn-light p-2 w-100">
-            <img src="/static/img/mae6.jpeg" alt="User">
-            <span>vanessacardosolima</span>
+        <!-- Chat Window -->
+        <div class="chat-window">
+            
+            <div class="chat-header">
+                <img src="/static/img/mae1.jpeg" alt="User">
+                <h2>alexandrappinheiros</h2>
+            </div>
+
+            <div class="messages">
+                <div class="message received">
+                    <div class="bubble">
+                        <p>Boa tarde.</p>
+                    </div>
+                </div>
+                <div class="message received">
+                    <div class="bubble">
+                        <p>Teria algum horário por volta das 15h para essa semana?</p>
+                    </div>
+                </div>
+                <div class="message sent">
+                    <div class="bubble">
+                        <p>Me desculpe, mas essa semana não teria horário na agenda. Teria nesse horário na segunda que vem.</p>
+                    </div>
+                </div>
+                <div class="message received">
+                    <div class="bubble">
+                        <p>Ok! Pode deixar marcado então.</p>
+                    </div>
+                </div>
+                <div class="message sent">
+                    <div class="bubble">
+                        <p>Ok. Marcadinho.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="message-input">
+                <input type="text" placeholder="Digite uma mensagem...">
+                <button><i class="bi bi-arrow-right-circle-fill"></i></button>
+                <button>😊</button>
+            </div>
         </div>
     </div>
 
-    <!-- Chat Window -->
-    <div class="chat-window">
-        
-        <div class="chat-header">
-            <img src="/static/img/mae1.jpeg" alt="User">
-            <h2>alexandrappinheiros</h2>
-        </div>
-
-        <div class="messages">
-            <div class="message received">
-                <div class="bubble">
-                    <p>Boa tarde.</p>
-                </div>
-            </div>
-            <div class="message received">
-                <div class="bubble">
-                    <p>Teria algum horário por volta das 15h para essa semana?</p>
-                </div>
-            </div>
-            <div class="message sent">
-                <div class="bubble">
-                    <p>Me desculpe, mas essa semana não teria horário na agenda. Teria nesse horário na segunda que vem.</p>
-                </div>
-            </div>
-            <div class="message received">
-                <div class="bubble">
-                    <p>Ok! Pode deixar marcado então.</p>
-                </div>
-            </div>
-            <div class="message sent">
-                <div class="bubble">
-                    <p>Ok. Marcadinho.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Message Input -->
-        <div class="message-input">
-            <input type="text" placeholder="Digite uma mensagem...">
-            <button><i class="bi bi-arrow-right-circle-fill"></i></button>
-            <button>😊</button>
-        </div>
-    </div>
 
 </body>
 </html>

@@ -296,6 +296,8 @@ async def editar_perfil(request: Request):
     if not foto_perfil:
         foto_perfil = bool(foto_perfil_blob)
 
+    request.state.usuario.foto_perfil = foto_perfil
+
     # Atualiza os dados do usuário
     atualizacao_sucesso = UsuarioRepo.atualizar_dados_perfil(
         foto_perfil = foto_perfil,
